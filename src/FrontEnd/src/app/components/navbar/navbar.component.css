@@ -1,0 +1,9 @@
+.navbar {
+    background: linear-gradient(rgb(8, 0, 29), rgb(29, 29, 29));
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.nav-item {
+    padding-left: 15px;
+}

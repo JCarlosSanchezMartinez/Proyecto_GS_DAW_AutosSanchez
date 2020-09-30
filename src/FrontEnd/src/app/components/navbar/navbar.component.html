@@ -1,0 +1,59 @@
+<div class="row sticky-top">
+    <nav class="col-12 navbar  navbar-expand-lg navbar-dark bg-dark">
+        <a class="d-md-none navbar-brand" routerLink="/historia">
+            <img src="assets/img/header.png" width="200" class="img-fluid pl-3">
+
+        </a>
+        <button class="navbar-toggler collapsed" type="button" (click)="toggleState()">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="navbar-collapse" [ngClass]="{ 'collapse': isCollapse }">
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Inicio<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="historia">Historia</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="read">Listado Vehiculos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="add">addVehiculos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="contacto">Contacto</a>
+                </li>
+
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right" *ngIf="!loggedIn">
+                <li routerLinkActive="active" class="nav-item">
+                    <a class="nav-link" routerLink="/login">
+                        <i class="fa fa-lock" aria-hidden="true"></i> Login
+                    </a>
+                </li>
+                <li routerLinkActive="active" class="nav-item">
+                    <a class="nav-link" routerLink="/registro">
+                        <i class="fa fa-plus-square-o" aria-hidden="true"></i> Sign up</a>
+                </li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right" *ngIf="loggedIn">
+                <!-- <li *ngIf="loggedUser"><a>{{_autorizacionService.email}}</a></li> -->
+                <li *ngIf="loggedUser">
+                    <a class="nav-link disabled"><i class="fa fa-user-o" aria-hidden="true"></i>
+                {{loggedUser}}
+              </a>
+                </li>
+                <li>
+                    <a class="nav-link" (click)="logout()">Logout
+                <i class="fa fa-sign-out" aria-hidden="true"></i>
+              </a>
+                </li>
+            </ul>
+
+        </div>
+    </nav>
+</div>

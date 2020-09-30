@@ -1,0 +1,42 @@
+<div class="row p-3">
+
+    <div class="col-12">
+
+        <table class="table table-responsive-sm table-hover table-dark ">
+            <thead>
+                <tr>
+                    <th scope="col">Matricula</th>
+                    <th scope="col">Marca</th>
+                    <th scope="col">Modelo</th>
+                    <th scope="col">Motor</th>
+                    <th scope="col">Chasis</th>
+                    <th scope="col">Año</th>
+                    <th scope="col">Kms</th>
+                    <th scope="col">Color</th>
+                    <th scope="col">Precio</th>
+                    <th scope="col">Detalles</th>
+
+                </tr>
+            </thead>
+            <tbody class="tbody">
+
+
+
+                <tr *ngFor="let vehicle of vehicles">
+                    <th class="tabla">{{vehicle.number_plate}}</th>
+                    <td class="tabla">{{vehicle.brand}}</td>
+                    <td class="tabla">{{vehicle.model}}</td>
+                    <td class="tabla">{{vehicle.engine}}</td>
+                    <td class="tabla">{{vehicle.chasis}}</td>
+                    <td class="tabla">{{vehicle.year}}</td>
+                    <td class="tabla">{{vehicle.kms}}</td>
+                    <td class="tabla">{{vehicle.color}}</td>
+                    <td class="tabla">{{vehicle.price}}</td>
+
+
+
+
+            </tbody>
+        </table>
+    </div>
+</div>

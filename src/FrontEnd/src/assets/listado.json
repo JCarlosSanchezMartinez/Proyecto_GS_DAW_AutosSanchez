@@ -1,0 +1,41 @@
+[{
+        "matricula": "9999XXX",
+        "marca": "Peugeot",
+        "modelo": "308",
+        "motor": "1.6 HDI",
+        "chasis": "CC",
+        "anyo": "2019",
+        "kms": "10000",
+        "color": "Negro",
+        "precio": "18000€"
+
+    },
+
+    {
+        "matricula": "8888XXX",
+        "marca": "Peugeot",
+        "modelo": "508",
+        "motor": "2.0 HDI",
+        "chasis": "Berlina",
+        "anyo": "2019",
+        "kms": "500",
+        "color": "Negro",
+        "precio": "50000€"
+
+    },
+
+    {
+        "matricula": "7777XXX",
+        "marca": "Audi",
+        "modelo": "TT",
+        "motor": "1.6 HDI",
+        "chasis": "SUV",
+        "anyo": "2019",
+        "kms": "10000",
+        "color": "Negro",
+        "precio": "18000€"
+
+    }
+
+
+]
