@@ -1,18 +1,4 @@
-En este repositorio centralizaremos toda la información relativa a los **Proyectos de Desarrollo de Aplicaciones Web del I.E.S Alixar**.
-Al continuación encontraremos los **apellidos y nombre** del alumno/a junto al **título de su proyecto**. El enlace nos dará acceso al repositorio del proyecto (no a la página GitHub del usuario).
-
-En este repositorio se debe incluir la documentación especificada en [Requerimientos y criterios a seguir en el desarrollo de los proyectos](https://github.com/iesalixar/plantilla_proyecto_iesalixar/wiki/a.---Criterios-comunes-para-todos-los-proyectos), así como las indicaciones que el tutor haya podido ir a realizando a lo largo del desarrollo del mismo.
-
-El desarrollo de toda Aplicación Web requiere seguir un [proceso estructurado](https://github.com/iesalixar/plantilla_proyecto_iesalixar/wiki/w1.--PROCESO-ESTRUCTURADO-PARA-DESARROLLO-DE-APLICACIONES-WEB), este  de contenido de la wiki te puede ayudar.
-
-
----
-
-**Los párrafos anteriores son informativos y no deben aparecer en el reposotirio de los alumnos.**
-
----
-
-# Título del Proyecto
+# Aplicacion Web para Autos Sanchez
 
 #### Curso Escolar 2020/2021
 #### Autor: [Juan Carlos Sánchez Martínez](https://github.com/JCarlosSanchezMartinez/Proyecto_GS_DAW_AutosSanchez)
@@ -23,6 +9,19 @@ El desarrollo de toda Aplicación Web requiere seguir un [proceso estructurado](
 ## Descripción del proyecto
 
 Nuestra aplicación web pretende satisfacer las necesidades de gestión de concesionario de vehículos de ocasión poniendo al alcance del usuario una serie de herramientas con las cuales facilitar su trabajo diario en la recepción y venta de vehículos,la realizacion de campañas de captacion de clientes, gestión de clientes, gestión de vehículos, etc.
+
+## Stack Tecnologico
+- **Front End**
+*Angular 8
+*HTML/HTML5
+*CSS 
+*JQuery
+*Bootstrap 4
+- **Back End**
+*Java Spring Boot
+*Hibernate
+*Node.js
+*MySQL (DataBase)
 
 ## Objetivo de la aplicación
 
