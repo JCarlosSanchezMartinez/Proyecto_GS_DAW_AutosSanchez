@@ -11,7 +11,7 @@
 Nuestra aplicación web pretende satisfacer las necesidades de gestión de concesionario de vehículos de ocasión poniendo al alcance del usuario una serie de herramientas con las cuales facilitar su trabajo diario en la recepción y venta de vehículos,la realizacion de campañas de captacion de clientes, gestión de clientes, gestión de vehículos, etc.
 
 ## Stack Tecnologico
-- **Front End**
+- ***Front End***
 
 
 * Angular 8
@@ -40,6 +40,7 @@ Su capacidad para agrupar en una sola aplicación todas las tareas cotidianas de
 
 
 - **¿Qué problema concreto va a resolver?**
+
 Agilizar y potenciar la carga de trabajo de los operarios permitiendo ganar tiempo en tareas cotidianas gracias a la automatización de estas.
 
 
