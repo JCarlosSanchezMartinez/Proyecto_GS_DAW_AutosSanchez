@@ -1,0 +1,218 @@
+                @font-face {
+                    font-family: 'Peugeot Normal v2';
+                    src: url('Peugeot Normal v2.ttf') format('truetype');
+                    font-weight: normal;
+                    font-style: normal;
+                }
+                
+                * {
+                    font-family: Peugeot Normal v2, serif;
+                    color: white;
+                }
+                
+                .alert {
+                    color: rgb(13, 1, 43);
+                }
+                
+                body {
+                    background-image: url("../img/carbono2.jpg");
+                    background-position: center center;
+                    background-size: cover;
+                    overflow-x: hidden;
+                }
+                
+                .header,
+                .footer {
+                    background-image: url("../img/headerFoooter.jpg");
+                    background-position: center center;
+                    background-size: cover;
+                }
+                
+                .cuadricula {
+                    box-shadow: 0 6px 12px 0 rgba(253, 251, 251, 0.2), 0 6px 20px 0 rgba(223, 218, 218, 0.19);
+                    background-color: black;
+                }
+                
+                .navbar {
+                    background: linear-gradient(rgb(8, 0, 29), rgb(29, 29, 29))
+                }
+                
+                .sidenav {
+                    background-color: rgb(29, 29, 29);
+                }
+                
+                .textarea {
+                    height: 100px;
+                }
+                /* Small devices (Movil, 768px and up) */
+                
+                @media (max-width: 767px) {
+                    * {
+                        font-size: 20px;
+                    }
+                    .header {
+                        height: 15vh;
+                    }
+                    .body {
+                        height: 85vh;
+                    }
+                    .disp-4 {
+                        background-color: rgb(29, 29, 29);
+                        font-size: 20px;
+                        color: white;
+                        font-weight: bold;
+                        font-style: oblique;
+                        margin: 0px;
+                    }
+                    .disp-5 {
+                        font-size: 8px;
+                        color: white;
+                        margin: 0px;
+                    }
+                    .footer {
+                        background-color: black;
+                        height: 10vh;
+                        color: white;
+                        font-size: 8px;
+                    }
+                    .disp-3 {
+                        font-size: 14px;
+                        color: white;
+                        margin: 0px;
+                    }
+                    .disp-2 {
+                        font-size: 12px;
+                        color: white;
+                        margin: 0px;
+                    }
+                    .jumbotron {
+                        background-color: rgb(29, 29, 29);
+                        height: 65vh;
+                    }
+                    .detalles {
+                        height: 30vh;
+                    }
+                    .tabla {
+                        font-family: Peugeot Normal v2, serif;
+                        font-size: 14px;
+                    }
+                    .formu {
+                        height: 90vh;
+                        width: 60vw;
+                    }
+                }
+                /* Medium devices (tablets, 768px and up) */
+                
+                @media (min-width: 768px) and (max-width: 992px) {
+                    * {
+                        font-size: 16px;
+                    }
+                    .header {
+                        height: 15vh;
+                    }
+                    .body {
+                        height: 85vh;
+                    }
+                    .disp-4 {
+                        background-color: rgb(29, 29, 29);
+                        font-size: 12px;
+                        color: white;
+                        font-weight: bold;
+                        font-style: oblique;
+                        margin: 0px;
+                    }
+                    .disp-5 {
+                        font-size: 10px;
+                        color: white;
+                        margin: 0px;
+                    }
+                    .disp-3 {
+                        font-size: 14px;
+                        color: white;
+                        margin: 0px;
+                    }
+                    .disp-2 {
+                        font-size: 12px;
+                        color: white;
+                        margin: 0px;
+                    }
+                    .footer {
+                        background-color: black;
+                        height: 10vh;
+                        color: white;
+                        font-size: 8px;
+                    }
+                    .jumbotron {
+                        background-color: rgb(29, 29, 29);
+                        height: 75vh;
+                    }
+                    .detalles {
+                        height: 50vh;
+                    }
+                    .tabla {
+                        font-family: Peugeot Normal v2, serif;
+                        font-size: 16px;
+                    }
+                    .formu {
+                        height: 55vh;
+                        width: 60vw;
+                    }
+                }
+                /* Large devices (desktops, 992px and up) */
+                
+                @media (min-width: 993px) {
+                    * {
+                        font-size: 18px;
+                    }
+                    .header {
+                        height: 20vh;
+                    }
+                    .body {
+                        height: 90vh;
+                        overflow: hidden;
+                    }
+                    .disp-4 {
+                        background-color: rgb(29, 29, 29);
+                        font-size: 16px;
+                        color: white;
+                        font-weight: bold;
+                        font-style: oblique;
+                        margin: 0px;
+                    }
+                    .disp-5 {
+                        font-size: 12px;
+                        color: white;
+                        margin: 0px;
+                    }
+                    .disp-3 {
+                        font-size: 20px;
+                        color: white;
+                        margin: 0px;
+                    }
+                    .disp-2 {
+                        font-size: 14px;
+                        color: white;
+                        margin: 0px;
+                    }
+                    .footer {
+                        background-color: black;
+                        height: 12vh;
+                        color: white;
+                        font-size: 10px;
+                    }
+                    .jumbotron {
+                        background-color: rgb(29, 29, 29);
+                        height: 55vh;
+                    }
+                    .detalles {
+                        height: 50vh;
+                    }
+                    .tabla {
+                        font-family: Peugeot Normal v2, serif;
+                        font-size: 18px;
+                    }
+                    .formu {
+                        height: 65vh;
+                        width: 60vw;
+                    }
+                }

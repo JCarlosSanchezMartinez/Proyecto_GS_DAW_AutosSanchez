@@ -20,12 +20,11 @@ El desarrollo de toda Aplicación Web requiere seguir un [proceso estructurado](
 #### Fecha de Inicio: DD-MM-YYYY
 #### Fecha de Finalización: DD-MM-YYYY
 
-## Breve descripción del proyecto
+## Descripción del proyecto
 
 Nuestra aplicación web pretende satisfacer las necesidades de gestión de concesionario de vehículos de ocasión poniendo al alcance del usuario una serie de herramientas con las cuales facilitar su trabajo diario en la recepción y venta de vehículos,la realizacion de campañas de captacion de clientes, gestión de clientes, gestión de vehículos, etc.
 
-## Definir el objetivo de la aplicación
-**Tener una gran idea** o encontrar un punto del mercado al que no se esté dando un producto o servicio es el punto de partida en cada nuevo proyecto. Antes de comenzar debes **definir claramente el propósito y la misión de la aplicación web**:
+## Objetivo de la aplicación
 
 - **¿Qué va a hacer la aplicación?**
 Gestionar los datos personales de los clientes con la intención de facilitar las compras, ventas e información de vehículos, así como las posibles campañas que el concesionario decida emprender facilitando a esta una batería de herramientas que agilicen el contacto con el cliente y la selección del cliente objetivo del producto.

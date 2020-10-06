@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
+    <link rel="icon" type="image/png" href="../img/LOGO.png" />
+
+    <title>Autos Sanchez</title>
+
+
+
+</head>
+
+<body>
+
+    <div class="container-fluid m-0 p-0">
+        <!--HEADER-->
+        <div class="row justify-content-center text-center align-items-center header" style="background-color: #0e095e;">
+            <div class="d-none d-md-block col-md-2">
+                <img src="../img/LOGO.png" width="100" class="img-fluid">
+            </div>
+            <div class=" col-10 offset-md-0 col-md-8">
+                <img src="../img/header.png" class="img-fluid">
+            </div>
+
+        </div>
+        <!--SIDEBAR-->
+        <div id="mySidenav" class="sidenav">
+
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+            <p>Visualizacion:</p>
+            <div class="row">
+                <a href="../html/listadoLista.html"><i class="fas fa-list-alt fa-2x"></i></a>
+                <a href="../html/listado.html"><i class="fas fa-border-all  fa-2x "></i></a>
+            </div>
+            <form action="">
+                <p>Motorizacion:</p>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="motor" id="motor" value="option1" checked>
+                    <label class="form-check-label" for="exampleRadios1">
+                              Gasolina
+                            </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="motor" id="motor" value="option2">
+                    <label class="form-check-label" for="exampleRadios1">
+                                  Gasoil
+                                </label>
+                </div>
+                <p>Color:</p>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="motor" id="motor" value="option1" checked>
+                    <label class="form-check-label" for="exampleRadios1">
+                              Claros
+                            </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="motor" id="motor" value="option2">
+                    <label class="form-check-label" for="exampleRadios1">
+                                  Oscuros
+                                </label>
+                </div>
+                <p>Chasis:</p>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="motor" id="motor" value="option2">
+                    <label class="form-check-label" for="exampleRadios1">
+                                      Utilitario
+                                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="motor" id="motor" value="option1" checked>
+                    <label class="form-check-label" for="exampleRadios1">
+                              Berlina
+                            </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="motor" id="motor" value="option2">
+                    <label class="form-check-label" for="exampleRadios1">
+                                  Furgon
+                                </label>
+                </div>
+
+            </form>
+        </div>
+        <!--NAVBAR-->
+        <div class="row">
+            <div class="col-12 p-0">
+
+                <nav class="navbar navbar-expand-lg pl-4 navbar-dark navbar-fixed-top ">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+									  <span class="navbar-toggler-icon"></span>
+									</button>
+                    <a class="navbar-brand" href="#"><img src="../img/LOGO.png" width="50" class="img-fluid pl-3"></a>
+
+                    <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+                        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                            <li class="nav-item ">
+                                <a class="nav-link" href="../index.html">Home <span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="../html/historia.html">Historia</a>
+                            </li>
+                            <li class="nav-item active">
+                                <a class="nav-link" href="../html/listado.html">Listado Vehiculos</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="../html/contacto.html">Contacto</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link disabled" href="../html/login.html" tabindex="-1" aria-disabled="true">Base de datos</a>
+                            </li>
+                        </ul>
+
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <!--CAROUSEL-->
+
+        <div class="row align-items-center  pb-5">
+            <div class="col-1  sidebar">
+                <i class="fas fa-chevron-right fa-3x flecha" onclick="openNav()"></i>
+            </div>
+
+            <div class="col-10 pl-5 p-3 body overflow-auto">
+
+                <table class="table table-hover table-dark ">
+                    <thead>
+                        <tr>
+                            <th scope="col">Matricula</th>
+                            <th scope="col">Marca</th>
+                            <th scope="col">Modelo</th>
+                            <th scope="col">Motor</th>
+                            <th scope="col">Chasis</th>
+                            <th scope="col">Año</th>
+                            <th scope="col">Kms</th>
+                            <th scope="col">Color</th>
+                            <th scope="col">Precio</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th class="tabla" scope="row">9999 XXX</th>
+                            <td class="tabla">Peugeot</td>
+                            <td class="tabla">2008</td>
+                            <td class="tabla">1.6 HDI</td>
+                            <td class="tabla">SUV</td>
+                            <td class="tabla">2016</td>
+                            <td class="tabla">58.325</td>
+                            <td class="tabla">Gris Acero</td>
+                            <td class="tabla">8900€</td>
+
+                        </tr>
+                        <tr>
+                            <th class="tabla" scope="row">9999 XXX</th>
+                            <td class="tabla">Nissan</td>
+                            <td class="tabla">Qashqai</td>
+                            <td class="tabla">1.6 HDI</td>
+                            <td class="tabla">SUV</td>
+                            <td class="tabla">2015</td>
+                            <td class="tabla">22.687</td>
+                            <td class="tabla">Gris Acero</td>
+                            <td class="tabla">18900€</td>
+
+                        </tr>
+                        <tr>
+                            <th class="tabla" scope="row">9999 XXX</th>
+                            <td class="tabla">Nissan</td>
+                            <td class="tabla">Juke</td>
+                            <td class="tabla">2.6 HDI</td>
+                            <td class="tabla">SUV</td>
+                            <td class="tabla">2016</td>
+                            <td class="tabla">38.325</td>
+                            <td class="tabla">Rojo</td>
+                            <td class="tabla">7900€</td>
+
+                        </tr>
+                        <tr>
+                            <th class="tabla" scope="row">9999 XXX</th>
+                            <td class="tabla">Peugeot</td>
+                            <td class="tabla">208</td>
+                            <td class="tabla">1.8 HDI</td>
+                            <td class="tabla">Turismo</td>
+                            <td class="tabla">2016</td>
+                            <td class="tabla">58.325</td>
+                            <td class="tabla">Blanco</td>
+                            <td class="tabla">10900€</td>
+
+                        </tr>
+                        <tr>
+                            <th class="tabla" scope="row">9999 XXX</th>
+                            <td class="tabla">Peugeot</td>
+                            <td class="tabla">508</td>
+                            <td class="tabla">2.0 HDI</td>
+                            <td class="tabla">SUV</td>
+                            <td class="tabla">2016</td>
+                            <td class="tabla">58.325</td>
+                            <td class="tabla">Gris Acero</td>
+                            <td class="tabla">8900€</td>
+
+                        </tr>
+                        <tr>
+                            <th class="tabla" scope="row">9999 XXX</th>
+                            <td class="tabla">Peugeot</td>
+                            <td class="tabla">2008</td>
+                            <td class="tabla">1.6 HDI</td>
+                            <td class="tabla">SUV</td>
+                            <td class="tabla">2016</td>
+                            <td class="tabla">58.325</td>
+                            <td class="tabla">Gris Acero</td>
+                            <td class="tabla">8900€</td>
+
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+
+
+
+
+
+            <!--Footer-->
+
+            <div class="row ">
+                <DIV class="col-12  text-white text-center fixed-bottom">
+                    <div class="row justify-content-around footer">
+                        <div class="col-5 ">
+                            <a href="https://www.facebook.com "> <img src="../img/face.png " width="30 " class="img-fluid mt-3 " alt=" "></a>
+                            <a href="https://twitter.com/?lang=es"> <img src="../img/twi.png " width="30 " class="img-fluid mt-3 " alt=" "></a>
+                            <a href="https://www.whatsapp.com/"> <img src="../img/what.png " width="30 " class="img-fluid mt-3 " alt=" "></a>
+
+                        </div>
+                        <div class="col-5 pt-2">
+                            <p class="disp-5">Autos Sanchez Martinez S.L.</p>
+                            <p class="disp-5">Calle el Río, 1, 41120 Gelves, Sevilla</p>
+                            <p class="disp-5">Telefono: 664 40 22 41</p>
+                        </div>
+                    </div>
+                </DIV>
+            </div>
+
+        </div>
+
+</body>
+<script src="https://kit.fontawesome.com/c4b65c33af.js" crossorigin="anonymous"></script>
+<script type="text/javascript" src="../js/sidebar.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+
+</html>
