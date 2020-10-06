@@ -23,15 +23,15 @@ export class UserCrudService {
     return this.http.post(this.Url + "/addUser", user);  
   } 
 
-  getUser(id: any): Observable<any>{
+  getUser(id: number): Observable<any>{
     return this.http.get(this.Url + "/getUser/" + id); 
   }
 
-  updateUser(id: any,user: User): Observable<any> {  
+  updateUser(id: number,user: User): Observable<any> {  
     return this.http.put(this.Url + "/updateUser/" + id , user);  
   }
 
-  deleteUser(id: any): Observable<any> {
+  deleteUser(id: number): Observable<any> {
     return this.http.delete(this.Url + "/deleteUser/" + id);  
   }
 }

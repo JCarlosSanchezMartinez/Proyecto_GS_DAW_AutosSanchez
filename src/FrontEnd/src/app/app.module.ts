@@ -18,6 +18,8 @@ import { DeleteComponent } from './components/Vehicle/delete/delete.component';
 import { VehicleCRUDService } from './services/vehicle-crud.service';
 import { ManagementComponent } from './components/management/management.component';
 import { UserCrudService } from './services/user-crud.service';
+import { VehiculeManagementComponent } from './components/vehicule-management/vehicule-management.component';
+import { ClientManagementComponent } from './components/client-management/client-management.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +36,8 @@ import { UserCrudService } from './services/user-crud.service';
     EditComponent,
     DeleteComponent,
     ManagementComponent,
+    VehiculeManagementComponent,
+    ClientManagementComponent,
  
     
  

@@ -14,23 +14,28 @@ export class VehicleCRUDService {
 
   Url='http://localhost:8080';
 
-  readVehicleALL(): Observable<any>{
 
+// Devuelve todos los vehiculos
+  readVehicleALL(): Observable<any>{
     return this.http.get(this.Url + "/readVehicleALL");
   }
-
-  addVehicle(vehicle: Vehicle): Observable<any> {  
-    return this.http.post(this.Url + "/addVehicle", vehicle);  
-  } 
-
+// Devuelve el Vehiculo por su ID
   getVehicle(id: any): Observable<any>{
     return this.http.get(this.Url + "/getVehicle/" + id); 
   }
-
+// Devuelve un Vehiculo por su NUMBER_PLATE
+  getVehicleNumberPlate(number_plate: string): Observable<any>{
+    return this.http.get(this.Url + "/getVehicleNumberPlate/" + number_plate); 
+  }
+// Añade un Vehiculo
+  addVehicle(vehicle: Vehicle): Observable<any> {  
+    return this.http.post(this.Url + "/addVehicle", vehicle);  
+  }  
+// Modifica un Vehiculo
   updateVehicle(id: any,vehicle: Vehicle): Observable<any> {  
     return this.http.put(this.Url + "/updateVehicle/" + id , vehicle);  
   }
-
+// Borra un Vehiculo
   deleteVehicle(id: any): Observable<any> {
     return this.http.delete(this.Url + "/deleteVehicle/" + id);  
   }

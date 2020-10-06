@@ -6,6 +6,8 @@ import { ReadComponent } from './components/Vehicle/read/read.component';
 import { AddComponent } from './components/Vehicle/add/add.component';
 import { EditComponent } from './components/Vehicle/edit/edit.component';
 import { ManagementComponent } from './components/management/management.component';
+import { ClientManagementComponent } from './components/client-management/client-management.component';
+import { VehiculeManagementComponent } from './components/vehicule-management/vehicule-management.component';
 
 
 const routes: Routes = [ 
@@ -27,12 +29,12 @@ const routes: Routes = [
         component: ReadComponent
       },
       {
-        path: 'add',
-        component: AddComponent
+        path: 'vehiculo',
+        component: VehiculeManagementComponent
       },
       {
-        path: 'edit',
-        component: EditComponent
+        path: 'cliente',
+        component: ClientManagementComponent
       }    
   
 ];

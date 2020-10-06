@@ -1,0 +1,58 @@
+<div class="jumbotron bg-dark m-3">
+    <div class="row p-2">
+        <form name="formClient" [formGroup]="formClient">
+            <p class="display-4">
+                Datos Cliente</p>
+            <div class="col-12 p-2 border border-info rounded ">
+                <div class="row ">
+                    <div class="form-group col-12 col-lg-2">
+                        <label>Dni</label>
+                        <input type=" " name="dni" class="form-control " id="dni " value="{{vehicle.user_id.dni}}">
+                    </div>
+                    <div class="form-group col-12 col-lg-5 ">
+                        <label>Nombre</label>
+                        <input type=" " name="first_name " class="form-control " id="firstName " value="{{vehicle.user_id.first_name}}">
+                    </div>
+                    <div class="form-group col-12 col-lg-5">
+                        <label>Apellidos</label>
+                        <input type=" " name="last_name " class="form-control " id="last_name " value="{{vehicle.user_id.email}}">
+                    </div>
+                    <div class="form-group col-12 ">
+                        <label>Direccion</label>
+                        <input type=" " name="last_name " class="form-control " id="last_name " value="{{vehicle.user_id.email}}">
+                    </div>
+                    <div class="form-group col-8 ">
+                        <label>Email</label>
+                        <input type=" " name="email " class="form-control " id="email " value="{{vehicle.user_id.email}}">
+                    </div>
+                    <div class="form-group col-4 ">
+                        <label>Telefono</label>
+                        <input type=" " name="phone " class="form-control " id="phone " value="{{vehicle.user_id.phone}}">
+                    </div>
+                    <div class="form-group col-6 col-lg-12">
+                        <label>Username</label>
+                        <input type=" " name="username " class="form-control " id="username " value="{{vehicle.user_id.username}}">
+                    </div>
+                    <div class="form-group col-6 col-lg-12">
+                        <label>Password</label>
+                        <input type="password" name="password " class="form-control " id="password " value="{{vehicle.user_id.password}}">
+                    </div>
+
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="row p-3 justify-content-center">
+        <div class="btn-group" role="group" aria-label="Basic example">
+            <button class="text-dark" (click)="searchID()" type="submit" id="button">Nuevo</button>
+        </div>
+        <div class="btn-group" role="group" aria-label="Basic example">
+            <button class="text-dark" (click)="searchID()" type="submit" id="button">Editar</button>
+        </div>
+        <div class="btn-group" role="group" aria-label="Basic example">
+            <button class="text-dark" (click)="searchID()" type="submit" id="button">Borrar</button>
+        </div>
+    </div>
+
+</div>

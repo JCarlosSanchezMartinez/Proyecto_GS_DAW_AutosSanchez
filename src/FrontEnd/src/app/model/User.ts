@@ -1,8 +1,8 @@
 export class User {
     id:number;
     dni:String;
-    fistrName:String;
-    lastName:String;
+    first_name:String;
+    last_name:String;
     address:String;
     email:String;
     phone:number;
