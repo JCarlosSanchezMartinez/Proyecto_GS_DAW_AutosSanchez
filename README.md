@@ -12,26 +12,36 @@ Nuestra aplicación web pretende satisfacer las necesidades de gestión de conce
 
 ## Stack Tecnologico
 - **Front End**
-*Angular 8
-*HTML/HTML5
-*CSS 
-*JQuery
-*Bootstrap 4
+
+
+* Angular 8
+* HTML/HTML5
+* CSS 
+* JQuery
+* Bootstrap 4
 - **Back End**
-*Java Spring Boot
-*Hibernate
-*Node.js
-*MySQL (DataBase)
+
+
+* Java Spring Boot
+* Hibernate
+* Node.js
+* MySQL (DataBase)
 
 ## Objetivo de la aplicación
 
 - **¿Qué va a hacer la aplicación?**
+
 Gestionar los datos personales de los clientes con la intención de facilitar las compras, ventas e información de vehículos, así como las posibles campañas que el concesionario decida emprender facilitando a esta una batería de herramientas que agilicen el contacto con el cliente y la selección del cliente objetivo del producto.
 
+
 - **¿Cuál es su atractivo principal?**
+
 Su capacidad para agrupar en una sola aplicación todas las tareas cotidianas del concesionario facilitando y agilizando así el trabajo del usuario.
+
+
 - **¿Qué problema concreto va a resolver?**
 Agilizar y potenciar la carga de trabajo de los operarios permitiendo ganar tiempo en tareas cotidianas gracias a la automatización de estas.
+
 
 - **¿Qué necesidad va a cubrir?**
 
