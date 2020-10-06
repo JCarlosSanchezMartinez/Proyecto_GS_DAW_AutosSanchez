@@ -29,7 +29,7 @@ public class UserController {
 	/**
 	 * Obtenemos todos los Users
 	 * 
-	 * @return
+	 * @return Null si no encuentra el User
 	 */
 	@GetMapping("/readUserALL")
 	public ResponseEntity<Object> obtenerTodos() {
