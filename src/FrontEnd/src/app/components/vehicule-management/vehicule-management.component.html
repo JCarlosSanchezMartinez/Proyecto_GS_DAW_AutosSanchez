@@ -4,76 +4,76 @@
         <form name="formVehicle" [formGroup]="formVehicle">
             <div class="col-12 p-3 m-1 border border-info rounded">
 
-
                 <div class="col-12">
                     <div class="row">
-                        <div class="form-group  col-lg-4">
-                            <label>Matricula</label>
-                            <input type="" name="number_plate" class="form-control" id="number_Plate" value="{{vehicle.number_plate}}">
-                        </div>
-                        <div class="form-group  col-lg-8">
-                            <label>Bastidor</label>
-                            <input type="" name="vin" class="form-control" id="vin" value="{{vehicle.vin}}">
-                        </div>
-                        <div class=" form-group  col-lg-3 ">
-                            <label>Marca</label>
-                            <input type=" " name="brand " class="form-control " id="brand " value="{{vehicle.brand}}">
-                        </div>
 
-                        <div class="form-group  col-lg-3 ">
+                        <div class="form-group col-lg-4">
+                            <label>Matricula</label>
+                            <input type="" formControlName="number_plate" name="number_plate" class="form-control">
+                        </div>
+                        <div class="form-group col-lg-8">
+                            <label>Bastidor</label>
+                            <input type="" formControlName="vin" name="vin" class="form-control">
+                        </div>
+                        <div class="form-group col-lg-3">
+                            <label>Marca</label>
+                            <input type="" formControlName="brand" name="brand" class="form-control">
+                        </div>
+                        <div class="form-group col-lg-3">
                             <label>Modelo</label>
-                            <input type=" " name="model " class="form-control " id="model " value="{{vehicle.model}}">
+                            <input type="" formControlName="model" name="model" class="form-control">
                         </div>
-                        <div class="form-group   col-lg-3 ">
+                        <div class="form-group col-lg-3">
                             <label>Año</label>
-                            <input type=" " name="year " class="form-control " id="year " value="{{vehicle.year}}">
+                            <input type="" formControlName="years" name="years" class="form-control">
                         </div>
-                        <div class="form-group  col-lg-3 ">
+                        <div class="form-group col-lg-3">
                             <label>Motor</label>
-                            <input type=" " name="engine " class="form-control " id="engine " value="{{vehicle.engine}}">
+                            <input type="" formControlName="engine" name="engine" class="form-control">
                         </div>
                         <div class="form-group  col-lg-3 ">
                             <label for="inputState ">Combustible</label>
-                            <select id="inputState " class="form-control ">
-                                  <option selected>Diesel</option>
+                            <select name="fuel" fromControlName="fuel" id="inputState " class="form-control ">
+                                  <option>Diesel</option>
                                   <option>Gasolina</option>
                                   <option>Hybrid</option>
                                   <option>Electrico</option>
                                 </select>
                         </div>
-                        <div class="form-group  col-lg-3 ">
+                        <div class="form-group col-lg-3">
                             <label>Kms</label>
-                            <input type=" " name="kms " class="form-control " id="kms " value="{{vehicle.kms}}">
+                            <input type="" formControlName="kms" name="kms" class="form-control">
                         </div>
-                        <div class="form-group  col-lg-3 ">
+                        <div class="form-group col-lg-3">
                             <label>Color</label>
-                            <input type=" " name="color " class="form-control " id="color " value="{{vehicle.color}}">
+                            <input type="" formControlName="color" name="color" class="form-control">
                         </div>
-                        <div class="form-group  col-lg-3">
+                        <div class="form-group col-lg-3">
                             <label>Precio</label>
-                            <input type="price" name="price " class="form-control " id="price " value="{{vehicle.price}}">
+                            <input type="" formControlName="price" name="price" class="form-control">
                         </div>
                         <div class="form-group col-12 ">
                             <label>Extras</label>
-                            <textarea rows="5" type="textArea" name="extra " class="form-control " id="extra " value="{{vehicle.extra}}">
+                            <textarea rows="5" type="textArea" fromControlName="extra" name="extra " class="form-control">
                             </textarea>
                         </div>
                     </div>
+                </div>
+            </div>
+            <div class="row p-3 justify-content-center ">
+                <div class="btn-group " role="group " aria-label="Basic example ">
+                    <button type="submit " class="text-dark " (click)="create() " [disabled]="formVehicle.invalid " id="button ">Nuevo</button>
+                </div>
+                <div class="btn-group " role="group " aria-label="Basic example ">
+                    <button class="text-dark " (click)="searchID() " type="submit " id="button ">Editar</button>
+                </div>
+                <div class="btn-group " role="group " aria-label="Basic example ">
+                    <button class="text-dark " (click)="searchID() " type="submit " id="button ">Borrar</button>
                 </div>
             </div>
         </form>
 
     </div>
 
-    <div class="row p-3 justify-content-center">
-        <div class="btn-group" role="group" aria-label="Basic example">
-            <button class="text-dark" (click)="searchID()" type="submit" id="button">Nuevo</button>
-        </div>
-        <div class="btn-group" role="group" aria-label="Basic example">
-            <button class="text-dark" (click)="searchID()" type="submit" id="button">Editar</button>
-        </div>
-        <div class="btn-group" role="group" aria-label="Basic example">
-            <button class="text-dark" (click)="searchID()" type="submit" id="button">Borrar</button>
-        </div>
-    </div>
+
 </div>

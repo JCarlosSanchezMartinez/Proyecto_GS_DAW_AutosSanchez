@@ -2,12 +2,10 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
 import { HistoriaComponent } from './components/historia/historia.component';
-import { ReadComponent } from './components/Vehicle/read/read.component';
-import { AddComponent } from './components/Vehicle/add/add.component';
-import { EditComponent } from './components/Vehicle/edit/edit.component';
 import { ManagementComponent } from './components/management/management.component';
 import { ClientManagementComponent } from './components/client-management/client-management.component';
 import { VehiculeManagementComponent } from './components/vehicule-management/vehicule-management.component';
+import { GalleryManagementComponent } from './components/gallery-management/gallery-management.component';
 
 
 const routes: Routes = [ 
@@ -23,11 +21,6 @@ const routes: Routes = [
         path: 'login',
         component: LoginComponent
       },
-
-      {
-        path: 'read',
-        component: ReadComponent
-      },
       {
         path: 'vehiculo',
         component: VehiculeManagementComponent
@@ -35,7 +28,11 @@ const routes: Routes = [
       {
         path: 'cliente',
         component: ClientManagementComponent
-      }    
+      },
+      {
+        path: 'gallery',
+        component: GalleryManagementComponent
+      }  
   
 ];
 
