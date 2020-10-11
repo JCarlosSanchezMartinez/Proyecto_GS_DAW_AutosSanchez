@@ -1,9 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { User } from 'src/app/model/User';
 import { VehicleCRUDService } from 'src/app/services/vehicle-crud.service';
-import { Vehicle } from '../Vehicle/model/Vehicle';
-import { VehiculeManagementComponent } from '../vehicule-management/vehicule-management.component';
+import { Vehicle } from '../../model/Vehicle';
+
 
 
 @Component({
@@ -18,14 +18,13 @@ export class ManagementComponent implements OnInit {
 
   public formSearch : FormGroup;
   public vehicle: Vehicle = new Vehicle();
-  public vehiculeMana : VehiculeManagementComponent;
   public client : User =  new User();
   
 
   private buildFrom(){
     this.formSearch = this.formBuilder.group({
     id:new FormControl(''),
-    number_plate:new FormControl(''),
+    number_plate:['',Validators.required],
     vin:new FormControl(''),
     
 
@@ -40,8 +39,11 @@ export class ManagementComponent implements OnInit {
 
   searchID(){
     var search = this.formSearch.value;
-    this.service.getVehicle(search.id).subscribe((data:any)=>{this.vehicle=data});    
+    this.service.getVehicle(search.id).subscribe((data:any)=>{this.vehicle=data},err=> console.log(alert));    
+
+
   }
+
   searchNumber_Plate(){
     var search = this.formSearch.value;
     this.service.getVehicleNumberPlate(search.number_plate).subscribe((data:any)=>{this.vehicle=data});    

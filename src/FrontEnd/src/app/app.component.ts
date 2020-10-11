@@ -14,15 +14,7 @@ export class AppComponent {
 
   ngOnInit() {
     
-    this.read();
+    
   }
-  read(){
-    this.router.navigate(["read"]);
-  }
-  add(){
-    this.router.navigate(["add"]);
-  }
-  edit(){
-    this.router.navigate(["edit"]);
-  }
+  
 }

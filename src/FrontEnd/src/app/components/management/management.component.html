@@ -14,6 +14,10 @@
                             <input type="" formControlName="vin" name="vin" class="form-control" id="number_Plate">
                         </div>
                         <div class="form-group">
+                            <label>DNI</label>
+                            <input type="" formControlName="dni" name="dni" class="form-control" id="dni">
+                        </div>
+                        <div class="form-group">
                             <label>Cliente</label>
                             <input type="" formControlName="number_plate" name="number_plate" class="form-control" id="number_Plate">
                         </div>
@@ -24,7 +28,7 @@
             <div class="row justify-content-center">
 
                 <div class="btn-group " role="group" aria-label="Basic example">
-                    <button class="text-dark" (click)="searchNumber_Plate()" type="submit" id="button">Buscar</button>
+                    <button class="text-dark" [disabled]="formSearch.invalid" (click)="searchNumber_Plate()" type="submit" id="button">Buscar</button>
                 </div>
             </div>
 
@@ -106,19 +110,19 @@
                         <div class="row ">
                             <div class="form-group col-4 col-lg-12">
                                 <label>Dni</label>
-                                <input type=" " name="dni" class="form-control " id="dni " value="{{vehicle.user_id.dni}}">
+                                <input type="" name="dni" class="form-control " id="dni " value="{{vehicle.user_id.dni}}">
                             </div>
                             <div class="form-group col-8 col-lg-12 ">
                                 <label>Nombre</label>
-                                <input type=" " name="first_name " class="form-control " id="firstName " value="{{vehicle.user_id.first_name}}">
+                                <input type="" name="first_name " class="form-control " id="firstName " value="{{vehicle.user_id.first_name}}">
                             </div>
                             <div class="form-group col-8 col-lg-12">
                                 <label>Email</label>
-                                <input type=" " name="email " class="form-control " id="email " value="{{vehicle.user_id.email}}">
+                                <input type="" name="email " class="form-control " id="email " value="{{vehicle.user_id.email}}">
                             </div>
                             <div class="form-group col-4 col-lg-12">
                                 <label>Telefono</label>
-                                <input type=" " name="phone " class="form-control " id="phone " value="{{vehicle.user_id.phone}}">
+                                <input type="" name="phone " class="form-control " id="phone " value="{{vehicle.user_id.phone}}">
                             </div>
                         </div>
 

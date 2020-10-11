@@ -1,51 +1,65 @@
-En este repositorio centralizaremos toda la información relativa a los **Proyectos de Desarrollo de Aplicaciones Web del I.E.S Alixar**.
-Al continuación encontraremos los **apellidos y nombre** del alumno/a junto al **título de su proyecto**. El enlace nos dará acceso al repositorio del proyecto (no a la página GitHub del usuario).
+# Aplicacion Web para Autos Sanchez
 
-En este repositorio se debe incluir la documentación especificada en [Requerimientos y criterios a seguir en el desarrollo de los proyectos](https://github.com/iesalixar/plantilla_proyecto_iesalixar/wiki/a.---Criterios-comunes-para-todos-los-proyectos), así como las indicaciones que el tutor haya podido ir a realizando a lo largo del desarrollo del mismo.
-
-El desarrollo de toda Aplicación Web requiere seguir un [proceso estructurado](https://github.com/iesalixar/plantilla_proyecto_iesalixar/wiki/w1.--PROCESO-ESTRUCTURADO-PARA-DESARROLLO-DE-APLICACIONES-WEB), este  de contenido de la wiki te puede ayudar.
-
-
----
-
-**Los párrafos anteriores son informativos y no deben aparecer en el reposotirio de los alumnos.**
-
----
-
-# Título del Proyecto
-
-#### Curso Escolar 20XX-20XX
-#### Autor: [Nombre del alumno autor](Enlace a su cuenta de gitHub)
+#### Curso Escolar 2020/2021
+#### Autor: [Juan Carlos Sánchez Martínez](https://github.com/JCarlosSanchezMartinez/Proyecto_GS_DAW_AutosSanchez)
 #### Tutor: [Nombre del profesor tutor](Enlace a su cuenta de gitHub)
-#### Fecha de Inicio: DD-MM-YYYY
-#### Fecha de Finalización: DD-MM-YYYY
+#### Fecha de Inicio: 01-03-2020
+#### Fecha de Finalización: 15-12-2020
 
-## Breve descripción del proyecto
+## Descripción del proyecto
 
-Si ya tienes una idea para tu aplicación, explícala brevemente. Si no es así, lo que realmente necesitas es **buscar un problema o necesidad a la que darle solución**, y estos **están por todas partes**. Así que trata de buscar problemas o necesidades en tu vida diaria y realiza una lista. Una vez que tengas una lista exhaustiva, ya puedes empezar a pensar en **cómo puedes resolverlos**.
+Nuestra aplicación web pretende satisfacer las necesidades de gestión de concesionario de vehículos de ocasión poniendo al alcance del usuario una serie de herramientas con las cuales facilitar su trabajo diario en la recepción y venta de vehículos,la realizacion de campañas de captacion de clientes, gestión de clientes, gestión de vehículos, etc.
 
-En este apartado el alumno debe hacer una breve descripción del proyecto que vaya a realizar. Esta descripción no será ua descripción detallada, será una presentación general con no más de 10 líneas.
+## Stack Tecnologico
+### Front End
 
-## Definir el objetivo de la aplicación
-**Tener una gran idea** o encontrar un punto del mercado al que no se esté dando un producto o servicio es el punto de partida en cada nuevo proyecto. Antes de comenzar debes **definir claramente el propósito y la misión de la aplicación web**:
+* Angular 8
+* HTML/HTML5
+* CSS 
+* JQuery
+* Bootstrap 4
+
+### Back End
+
+* Java Spring Boot
+* Hibernate
+* Node.js
+* MySQL (DataBase)
+
+## Objetivo de la aplicación
 
 - **¿Qué va a hacer la aplicación?**
-- **¿Cuál es su atractivo principal?** 
-- **¿Qué problema concreto va a resolver?** 
+
+Gestionar los datos personales de los clientes con la intención de facilitar las compras, ventas e información de vehículos, así como las posibles campañas que el concesionario decida emprender facilitando a esta una batería de herramientas que agilicen el contacto con el cliente y la selección del cliente objetivo del producto.
+
+
+- **¿Cuál es su atractivo principal?**
+
+Su capacidad para agrupar en una sola aplicación todas las tareas cotidianas del concesionario facilitando y agilizando así el trabajo del usuario.
+
+
+- **¿Qué problema concreto va a resolver?**
+
+Agilizar y potenciar la carga de trabajo de los operarios permitiendo ganar tiempo en tareas cotidianas gracias a la automatización de estas.
+
+
 - **¿Qué necesidad va a cubrir?**
 
 ## Prototipo de la Interfaz del proyecto
 
-En este apartado el alumno insertará la documentación del prototipo del proyecto (sketch, wireframe, mockup y un prototipo HTML y CSS)  que permite al cliente previsualizar el resultado final del producto que se está desarrollando.
-
-....
-....
-....
+[MockUp]https://github.com/JCarlosSanchezMartinez/Proyecto_GS_DAW_AutosSanchez/tree/develop/docs/Planificacion_Inicial/MockUp)
+[Sketch](https://github.com/JCarlosSanchezMartinez/Proyecto_GS_DAW_AutosSanchez/tree/develop/docs/Planificacion_Inicial/Sketch)
 
 ## Estructura del Proyecto
+[Casos de Usos](https://github.com/JCarlosSanchezMartinez/Proyecto_GS_DAW_AutosSanchez/blob/develop/docs/Casos%20de%20Uso.md)
 
-En este apartado el alumno explicará el contenido del repositorio y de todas las carpetas relevantes del mismo.
+[Alcance](https://github.com/JCarlosSanchezMartinez/Proyecto_GS_DAW_AutosSanchez/blob/develop/docs/Alcance.md)
+
+[Mapa del Sitio WEB](https://github.com/JCarlosSanchezMartinez/Proyecto_GS_DAW_AutosSanchez/blob/develop/docs/Mapa_Web.png)
+
+
+[Base de Datos](https://github.com/JCarlosSanchezMartinez/Proyecto_GS_DAW_AutosSanchez/blob/develop/docs/BasedeDatos.JPG)
 
 ## Demostración del proyecto
 
-Vídeo demostrativo que contenga una pequeña demostración de la apariencia del proyecto y de aquello que el proyecto puede hacer. (No más de 2 minutos).
+Proximamente

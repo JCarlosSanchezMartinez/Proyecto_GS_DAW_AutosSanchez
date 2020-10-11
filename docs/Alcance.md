@@ -1,20 +1,30 @@
 ### Introducción
-Esta aplicación pretende gestionar los datos de colaboradores, beneficiarios y talleres que organiza una asociación. Será una herramienta útil para conocer la demanda de los beneficiaros y la disponibilidad de colaboradores que puedan atender esa demanda.
+
+
+Nuestra aplicación es un conjunto de herramientas destinada a concesionarios de vehículos para la correcta gestión y mejora del rendimiento de las labores de los operarios.
+
+Pretende facilitar el trabajo a los operarios para así mejorar su rendimiento y productividad al ofrecer acceso a la creación, modificación y eliminación tanto de clientes como de vehículos desde nuestra aplicación en un entorno de trabajo más amigable, también nos permitirá realizar campañas publicitarias facilitando nuestra aplicación los datos ya filtrados y seleccionados por tipo de clientes.
+
 
 ### Alcance del proyectos
+
+
 # Tareas que mi proyecto llevará a cabo:
-- Permite logarse a los beneficiarios y consultar los talleres disponibles, plazas, horarios, etc.
-- Los beneficiarios podrán solicitar la matriculación en alguno de los talleres.
-- Los colaboradores podrán logarse y cambiar sus características, nuevas habilidades, modificar su disponibilidad, etc
-- Remitirá correo electrónico a los beneficiarios con los datos de la reserva que han hecho.
-- Se podrán sacar listas de los alumnos de cada taller.
-- Se podrá sacar un listado de los colaboradores que pueden impartir un taller en un horario determinado.
-- Añadir nuevos talleres, modificar los existentes.
-- Imprimirá diplomas con los datos de los alumnos.
-- Permitirá enviar correos masivos con ofertas de nuevos talleres.
-- Permitirá que los alumnos valoren cada uno de los talleres.
-* Se habilitará un blog para que los usuarios puedan realizar comentarios.
-- Se generará una memoria anual de todos los talleres realizados.
-- Permitirá establecer los recursos necesarios para cada taller
-- Controlará la preferencia de asignación de talleres en función del número de veces que ya ha disfrutado del servicio.
-- .....
+- Permite logarse a los usuarios y acceder a su apartado personal.
+- Permite a los usuarios activar alarmas con sus productos deseados.
+- Permite la Creación, modificación y eliminación de clientes
+- Permite la Creación. Modificación y eliminación de vehículos
+- Gestiónara el portal de ventas de vehículos permitiendo su actualizacion
+- Gestiónara el carrousel de la portada para mostrar noticias
+- Actualizara automaticamente los vehiculos mas deseados en la portada
+- Generara Informes de Vehículos dependiendo de distintos filtros
+- Generara Informes de Clientes dependiendo de distintos filtros
+- Habilitara un via de comunicacion directa con el concesionario para los clientes.
+- Permitira Vínculo con redes sociales
+- Datos de contactos del concesionario (Ubicación,Telefonos, etc.)
+
+
+### Extensiones Furutas
+- Implementacion de un Almacen y Articulos
+- Implementacion de Ordenes de trabajo
+- App con sistema nativo en Android

@@ -1,0 +1,21 @@
+# Con esto permitimos al robot de google acceder a toda nuestra pagina (Allow)
+# y bloquearemos (Disallow) que indexe la carpeta del css por ejemplo.
+
+User-agent: Googlebot
+Allow: /
+Disallow: /Css
+Disallow: /js
+
+# Con esto evitamos que Google Imagenes rastre nuestra imagenes para evitar problemas
+# de copyright y derechos de autor
+
+User-agent: Googlebot-Image
+Disallow: /
+
+# Con esto bloqueamos a cualquier otro robot acceder a directorios o subdirectorios 
+# indicados a continuacion, y permitiendo el acceso a los demas.
+
+User-agent : *
+Disallow: /Css
+Disallow: /img
+Disallow: /js

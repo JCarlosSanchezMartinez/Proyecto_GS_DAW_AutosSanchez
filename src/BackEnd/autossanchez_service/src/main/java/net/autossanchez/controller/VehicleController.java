@@ -66,7 +66,7 @@ public class VehicleController  {
 	}
 	
 	/**
-	 * Obtenemos un Vehicle en base a su ID
+	 * Obtenemos un Vehicle en base a su number_plate
 	 * 
 	 * @param number_plate
 	 * @return Null si no encuentra el Vehicle
@@ -83,9 +83,9 @@ public class VehicleController  {
 				if (data.get(i).getNumber_plate().equals(number_plate)) {
 					rest = data.get(i);
 				}
-			}
+			}	
 			
-
+			//Si es null devuelve una excepcion
 			if (rest == null) {
 
 				return ResponseEntity.notFound().build();
