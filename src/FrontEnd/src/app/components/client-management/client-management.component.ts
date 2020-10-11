@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { User } from 'src/app/model/User';
 import { UserCrudService } from 'src/app/services/user-crud.service';
 
@@ -18,15 +18,15 @@ export class ClientManagementComponent implements OnInit {
 
   private buildFrom(){
     this.formClient = this.formBuilder.group({
-    id:new FormControl(''),
-    dni:new FormControl(''),
-    first_name:new FormControl(''),
-    last_name:new FormControl(''),
-    address:new FormControl(''),
-    email:new FormControl(''),
-    phone:new FormControl(''),
-    username:new FormControl(''),
-    password:new FormControl(''),
+    id:[''],
+    dni: ['',Validators.required],
+    first_name :['',Validators.required],
+    last_name: ['',Validators.required],
+    address: ['',Validators.required],
+    email: ['',Validators.required],
+    phone: ['',Validators.required],
+    username: ['',Validators.required],
+    password: ['',Validators.required], 
    
 
     })
@@ -45,7 +45,10 @@ readID(id: number){
 readUser(id: number){
   this.serviceUser.getUser(id).subscribe((data:any)=>{this.client=data})  
 }
-
+create(){
+  console.log(this.formClient.value)
+  //this.service.addVehicle(this.vehicle).subscribe((data:any)=>{this.vehicle=data})
+}
 
 update(client: User){  
  

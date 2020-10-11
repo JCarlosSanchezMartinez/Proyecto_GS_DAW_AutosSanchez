@@ -2,7 +2,7 @@
 
     <div class="col-12">
 
-        <table class="table table-responsive-sm table-hover table-dark ">
+        <table *ngIf="showTable" class="table table-responsive-sm table-hover table-dark ">
             <thead>
                 <tr>
                     <th scope="col">Matricula</th>
@@ -38,5 +38,28 @@
 
             </tbody>
         </table>
+    </div>
+</div>
+<div class="contenedor" *ngFor="let vehicle of vehicles">
+    <div class="contenedor_tarjeta">
+        <a href="http://www.falconmasters.com">
+            <figure id="tarjeta">
+                <img src="../../../assets/img/preuba1.jpeg" class="frontal" alt="">
+                <figcaption class="trasera">
+                    <h2 class="titulo">{{vehicle.brand}} {{vehicle.model}}</h2>
+                    <hr>
+                    <p>Motor:{{vehicle.engine}}</p>
+                    <p>Año:{{vehicle.year}}</p>
+                    <p>Kilometros:{{vehicle.kms}}</p>
+                </figcaption>
+            </figure>
+        </a>
+    </div>
+
+
+</div>
+<div class="row p-3 justify-content-center">
+    <div class="btn-group" role="group" aria-label="Basic example">
+        <button class="text-dark" (click)="gallery()" type="submit" id="button">Nuevo</button>
     </div>
 </div>

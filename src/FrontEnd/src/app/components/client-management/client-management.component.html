@@ -7,35 +7,35 @@
                 <div class="row ">
                     <div class="form-group col-12 col-lg-2">
                         <label>Dni</label>
-                        <input type=" " name="dni" class="form-control " id="dni " value="{{vehicle.user_id.dni}}" required>
+                        <input type="" name="dni" formControlName="dni" class="form-control ">
                     </div>
                     <div class="form-group col-12 col-lg-5 ">
                         <label>Nombre</label>
-                        <input type=" " name="first_name " class="form-control " id="firstName " value="{{vehicle.user_id.first_name}}" required>
+                        <input type="" name="first_name" formControlName="first_name" class="form-control ">
                     </div>
                     <div class="form-group col-12 col-lg-5">
                         <label>Apellidos</label>
-                        <input type=" " name="last_name " class="form-control " id="last_name " value="{{vehicle.user_id.email}}" required>
+                        <input type="" name="last_name" formControlName="last_name" class="form-control ">
                     </div>
                     <div class="form-group col-12 ">
                         <label>Direccion</label>
-                        <input type=" " name="last_name " class="form-control " id="last_name " value="{{vehicle.user_id.email}}">
+                        <input type="" name="address " formControlName="address" class="form-control ">
                     </div>
                     <div class="form-group col-8 ">
                         <label>Email</label>
-                        <input type=" " name="email " class="form-control " id="email " value="{{vehicle.user_id.email}}">
+                        <input type="" name="email " formControlName="email" class="form-control ">
                     </div>
                     <div class="form-group col-4 ">
                         <label>Telefono</label>
-                        <input type=" " name="phone " class="form-control " id="phone " value="{{vehicle.user_id.phone}}">
+                        <input type="" name="phone " formControlName="phone" class="form-control ">
                     </div>
                     <div class="form-group col-6 col-lg-12">
                         <label>Username</label>
-                        <input type=" " name="username " class="form-control " id="username " value="{{vehicle.user_id.username}}">
+                        <input type="" name="username " formControlName="username" class="form-control ">
                     </div>
                     <div class="form-group col-6 col-lg-12">
                         <label>Password</label>
-                        <input type="password" name="password " class="form-control " id="password " value="{{vehicle.user_id.password}}">
+                        <input type="" name="password " formControlName="password" class="form-control ">
                     </div>
 
                 </div>
@@ -45,7 +45,7 @@
 
     <div class="row p-3 justify-content-center">
         <div class="btn-group" role="group" aria-label="Basic example">
-            <button class="text-dark" (click)="searchID()" type="submit" id="button">Nuevo</button>
+            <button class="text-dark" (click)="create()" [disabled]="formClient.invalid " type="submit" id="button">Nuevo</button>
         </div>
         <div class="btn-group" role="group" aria-label="Basic example">
             <button class="text-dark" (click)="searchID()" type="submit" id="button">Editar</button>
