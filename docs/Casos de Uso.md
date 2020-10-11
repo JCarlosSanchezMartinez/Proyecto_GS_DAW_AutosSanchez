@@ -1,8 +1,6 @@
 
 # Requisitos Funcionales
 
-
-## Tareas que mi proyecto llevará a cabo:
 - RF 1: Login
 - RF 2: Logout
 - RF 3: Gestion de USUARIO
