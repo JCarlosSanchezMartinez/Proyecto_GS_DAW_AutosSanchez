@@ -24,6 +24,7 @@ Pretende facilitar el trabajo a los operarios para así mejorar su rendimiento y
 - Datos de contactos del concesionario (Ubicación,Telefonos, etc.)
 
 
-
-- 
-
+### Extensiones Furutas
+- Implementacion de un Almacen y Articulos
+- Implementacion de Ordenes de trabajo
+- App con sistema nativo en Android

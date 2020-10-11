@@ -3,8 +3,8 @@
 #### Curso Escolar 2020/2021
 #### Autor: [Juan Carlos Sánchez Martínez](https://github.com/JCarlosSanchezMartinez/Proyecto_GS_DAW_AutosSanchez)
 #### Tutor: [Nombre del profesor tutor](Enlace a su cuenta de gitHub)
-#### Fecha de Inicio: DD-MM-YYYY
-#### Fecha de Finalización: DD-MM-YYYY
+#### Fecha de Inicio: 01-03-2020
+#### Fecha de Finalización: 15-12-2020
 
 ## Descripción del proyecto
 
@@ -47,16 +47,19 @@ Agilizar y potenciar la carga de trabajo de los operarios permitiendo ganar tiem
 
 ## Prototipo de la Interfaz del proyecto
 
-En este apartado el alumno insertará la documentación del prototipo del proyecto (sketch, wireframe, mockup y un prototipo HTML y CSS)  que permite al cliente previsualizar el resultado final del producto que se está desarrollando.
-
-....
-....
-....
+[MockUp]https://github.com/JCarlosSanchezMartinez/Proyecto_GS_DAW_AutosSanchez/tree/develop/docs/Planificacion_Inicial/MockUp)
+[Sketch](https://github.com/JCarlosSanchezMartinez/Proyecto_GS_DAW_AutosSanchez/tree/develop/docs/Planificacion_Inicial/Sketch)
 
 ## Estructura del Proyecto
+[Casos de Usos](https://github.com/JCarlosSanchezMartinez/Proyecto_GS_DAW_AutosSanchez/blob/develop/docs/Casos%20de%20Uso.md)
 
-En este apartado el alumno explicará el contenido del repositorio y de todas las carpetas relevantes del mismo.
+[Alcance](https://github.com/JCarlosSanchezMartinez/Proyecto_GS_DAW_AutosSanchez/blob/develop/docs/Alcance.md)
+
+[Mapa del Sitio WEB](https://github.com/JCarlosSanchezMartinez/Proyecto_GS_DAW_AutosSanchez/blob/develop/docs/Mapa_Web.png)
+
+
+[Base de Datos](https://github.com/JCarlosSanchezMartinez/Proyecto_GS_DAW_AutosSanchez/blob/develop/docs/BasedeDatos.JPG)
 
 ## Demostración del proyecto
 
-Vídeo demostrativo que contenga una pequeña demostración de la apariencia del proyecto y de aquello que el proyecto puede hacer. (No más de 2 minutos).
+Proximamente
