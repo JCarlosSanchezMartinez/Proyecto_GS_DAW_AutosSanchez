@@ -1,9 +1,16 @@
 ### Introducción
 
 
-Nuestra aplicación es un conjunto de herramientas destinada a concesionarios de vehículos para la correcta gestión y mejora del rendimiento de las labores de los operarios.
+Nuestra aplicación es un conjunto de herramientas destinada a concesionarios de vehículos de ocasión para la correcta gestión y mejora del rendimiento de las labores de los operarios.
+El usuario de nuestra aplicación podrá visualizar todos los vehículos en stock y crear avisos para ser avisados cuando entren nuevas unidades, como la posibilidad de contactar directamente con el concesionario de una manera fácil e intuitiva.
 
-Pretende facilitar el trabajo a los operarios para así mejorar su rendimiento y productividad al ofrecer acceso a la creación, modificación y eliminación tanto de clientes como de vehículos desde nuestra aplicación en un entorno de trabajo más amigable, también nos permitirá realizar campañas publicitarias facilitando nuestra aplicación los datos ya filtrados y seleccionados por tipo de clientes.
+
+Los operarios del concesionario también ser verán beneficiados al contar con herramientas que le permitirán la gestión de los vehículos así como su presentación y subida en la web.
+
+
+Nuestra aplicación también permite gestionar las avisos de los clientes para poder crear determinadas campañas de publicidad directamente enfocada a los avisos que los usuarios hayan solicitado o bien prefijados por el administrador, por otra lado también permite la generación de informes para el seguimiento de clientes.
+En definitiva, nuestra aplicación no es solo un conjunto de herramientas que nos facilitaran el trabajo diario, sino que reducirá los tiempos de trabajos y por lo tanto una mejor gestión de estos al poder realizar campañas selectivas enfocadas a determinados clientes. 
+
 
 
 ### Alcance del proyectos
@@ -24,7 +31,7 @@ Pretende facilitar el trabajo a los operarios para así mejorar su rendimiento y
 - Datos de contactos del concesionario (Ubicación,Telefonos, etc.)
 
 
-### Extensiones Furutas
+### Extensiones Futuras
 - Implementacion de un Almacen y Articulos
 - Implementacion de Ordenes de trabajo
 - App con sistema nativo en Android

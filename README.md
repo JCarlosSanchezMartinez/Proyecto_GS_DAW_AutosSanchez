@@ -10,22 +10,6 @@
 
 Nuestra aplicación web pretende satisfacer las necesidades de gestión de concesionario de vehículos de ocasión poniendo al alcance del usuario una serie de herramientas con las cuales facilitar su trabajo diario en la recepción y venta de vehículos,la realizacion de campañas de captacion de clientes, gestión de clientes, gestión de vehículos, etc.
 
-## Stack Tecnologico
-### Front End
-
-* Angular 8
-* HTML/HTML5
-* CSS 
-* JQuery
-* Bootstrap 4
-
-### Back End
-
-* Java Spring Boot
-* Hibernate
-* Node.js
-* MySQL (DataBase)
-
 ## Objetivo de la aplicación
 
 - **¿Qué va a hacer la aplicación?**
