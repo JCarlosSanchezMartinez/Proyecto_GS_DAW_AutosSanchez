@@ -1,7 +1,8 @@
 import { Component, OnInit} from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Vehicle } from 'src/app/model/Vehicle';
 import { VehicleCRUDService } from 'src/app/services/vehicle-crud.service';
-import { Vehicle } from '../../model/Vehicle';
+
 
 @Component({
   selector: 'app-vehicule-management',

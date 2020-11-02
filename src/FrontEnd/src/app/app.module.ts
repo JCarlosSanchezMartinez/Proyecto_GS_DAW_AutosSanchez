@@ -7,14 +7,17 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { HistoriaComponent } from './components/historia/historia.component';
-import { LoginComponent } from './components/login/login.component';
 import { HttpClientModule } from '@angular/common/http';
 import { VehicleCRUDService } from './services/vehicle-crud.service';
 import { ManagementComponent } from './components/management/management.component';
 import { UserCrudService } from './services/user-crud.service';
-import { VehiculeManagementComponent } from './components/vehicule-management/vehicule-management.component';
 import { ClientManagementComponent } from './components/client-management/client-management.component';
 import { GalleryManagementComponent } from './components/gallery-management/gallery-management.component';
+import { RegisterComponent } from './auth/register/register.component';
+import { LoginComponent } from './auth/login/login.component';
+import { interceptorProvider } from './interceptors/vehicle-interceptor.service';
+import { VehiculeManagementComponent } from './components/management/vehicule-management/vehicule-management.component';
+
 
 @NgModule({
   declarations: [
@@ -28,6 +31,8 @@ import { GalleryManagementComponent } from './components/gallery-management/gall
     VehiculeManagementComponent,
     ClientManagementComponent,
     GalleryManagementComponent,
+    RegisterComponent,
+   
  
     
  
@@ -40,7 +45,7 @@ import { GalleryManagementComponent } from './components/gallery-management/gall
     FormsModule
    
   ],
-  providers: [VehicleCRUDService,UserCrudService],
+  providers: [VehicleCRUDService,UserCrudService,interceptorProvider],
   bootstrap: [AppComponent]
 
 })

@@ -17,7 +17,8 @@ export class VehicleCRUDService {
 
 // Devuelve todos los vehiculos
   readVehicleALL(): Observable<any>{
-    return this.http.get(this.Url + "/readVehicleALL");
+    return this.http.get<Vehicle[]>(this.Url + "/vehicle/readVehicleALL");
+   
   }
 // Devuelve el Vehiculo por su ID
   getVehicle(id: any): Observable<any>{

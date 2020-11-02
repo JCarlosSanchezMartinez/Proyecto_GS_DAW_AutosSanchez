@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Vehicle } from 'src/app/model/Vehicle';
+import { TokenService } from 'src/app/services/token.service';
 import { VehicleCRUDService } from 'src/app/services/vehicle-crud.service';
 
 @Component({
@@ -13,12 +14,23 @@ export class GalleryManagementComponent implements OnInit {
   
   showTable: boolean;
   vehicles:Vehicle[];
-  constructor (private service:VehicleCRUDService) { }
+  isLogged = false;
+  
+  constructor (private service:VehicleCRUDService, private seriveToken: TokenService) { }
 
   
   ngOnInit() {
 
-    this.service.readVehicleALL().subscribe((data:any)=>{this.vehicles=data})
+    if(this.seriveToken.getToken()){
+      this.isLogged = true;
+      console.log(this.seriveToken)
+      this.service.readVehicleALL().subscribe((data:any)=>{this.vehicles=data})
+    }else {
+      this.isLogged = false;
+    }
+    
+
+    
   }
 
   listar(){
@@ -28,5 +40,7 @@ export class GalleryManagementComponent implements OnInit {
   gallery(){
     this.showTable = true;
   }
+
+
 
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { User } from 'src/app/model/User';
+import { TokenService } from 'src/app/services/token.service';
 import { VehicleCRUDService } from 'src/app/services/vehicle-crud.service';
 import { Vehicle } from '../../model/Vehicle';
 
@@ -18,20 +19,15 @@ export class ManagementComponent implements OnInit {
 
   public formSearch : FormGroup;
   public vehicle: Vehicle = new Vehicle();
+  public vehicles: Vehicle[] = [];
   public client : User =  new User();
-  
+  isLogged = false;
 
   private buildFrom(){
-    this.formSearch = this.formBuilder.group({
-    id:new FormControl(''),
-    number_plate:['',Validators.required],
-    vin:new FormControl(''),
-    
-
-    })
+    this.formSearch = this.formBuilder.group({})
   }
 
-  constructor(private formBuilder: FormBuilder,private service: VehicleCRUDService) { 
+  constructor(private formBuilder: FormBuilder,private service: VehicleCRUDService, private seriveToken: TokenService) { 
    
   }
 
@@ -65,6 +61,17 @@ export class ManagementComponent implements OnInit {
     
   ngOnInit() {
     this.buildFrom();
+
+    this.formSearch.addControl('number_plate', new FormControl('', Validators.required));
+    this.formSearch.addControl('vin', new FormControl('', Validators.required));
+    this.formSearch.addControl('dni', new FormControl('', Validators.required));
+
+    if(this.seriveToken.getToken()){
+      this.isLogged = true;
+      this.service.readVehicleALL().subscribe((data:any)=>{this.vehicles=data})
+    }else {
+      this.isLogged = false;
+    }
     
   }
   onSubmit(){

@@ -1,13 +1,15 @@
 export class User {
     id:number;
-    dni:String;
-    first_name:String;
-    last_name:String;
-    address:String;
-    email:String;
+    dni:string;
+    first_name:string;
+    last_name:string;
+    country:string;
+    address:string;
+    email:string;
     phone:number;
     username:string;
-    password:String;
+    password:string;
+    authorities: String[];
 
 
     
