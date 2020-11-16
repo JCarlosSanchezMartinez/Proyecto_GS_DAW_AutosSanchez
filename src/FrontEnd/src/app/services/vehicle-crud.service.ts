@@ -17,16 +17,16 @@ export class VehicleCRUDService {
 
 // Devuelve todos los vehiculos
   readVehicleALL(): Observable<any>{
-    return this.http.get<Vehicle[]>(this.Url + "/vehicle/readVehicleALL");
+    return this.http.get<Vehicle[]>(this.Url + "/vehicle/getVehicleList");
    
   }
 // Devuelve el Vehiculo por su ID
   getVehicle(id: any): Observable<any>{
-    return this.http.get(this.Url + "/getVehicle/" + id); 
+    return this.http.get(this.Url + "/vehicle/" + id); 
   }
 // Devuelve un Vehiculo por su NUMBER_PLATE
   getVehicleNumberPlate(number_plate: string): Observable<any>{
-    return this.http.get(this.Url + "/getVehicleNumberPlate/" + number_plate); 
+    return this.http.get(this.Url + "/details/" + number_plate); 
   }
 // Añade un Vehiculo
   addVehicle(vehicle: Vehicle): Observable<any> {  

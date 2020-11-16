@@ -7,7 +7,7 @@ import { GalleryManagementComponent } from './components/gallery-management/gall
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { VehicleGuardService as guard} from './interceptors/vehicle-guard.service';
-import { VehiculeManagementComponent } from './components/management/vehicule-management/vehicule-management.component';
+import { VehiculeManagementComponent } from './components/management/vehicle-management/vehicle-management.component';
 
 
 const routes: Routes = [ 

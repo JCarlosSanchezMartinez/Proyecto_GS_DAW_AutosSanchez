@@ -16,7 +16,10 @@ import { GalleryManagementComponent } from './components/gallery-management/gall
 import { RegisterComponent } from './auth/register/register.component';
 import { LoginComponent } from './auth/login/login.component';
 import { interceptorProvider } from './interceptors/vehicle-interceptor.service';
-import { VehiculeManagementComponent } from './components/management/vehicule-management/vehicule-management.component';
+import { SearchVehicleComponent } from './components/management/search-vehicle/search-vehicle.component';
+import { VehiculeManagementComponent } from './components/management/vehicle-management/vehicle-management.component';
+
+
 
 
 @NgModule({
@@ -32,8 +35,8 @@ import { VehiculeManagementComponent } from './components/management/vehicule-ma
     ClientManagementComponent,
     GalleryManagementComponent,
     RegisterComponent,
-   
- 
+    SearchVehicleComponent,
+
     
  
   ],
@@ -42,7 +45,9 @@ import { VehiculeManagementComponent } from './components/management/vehicule-ma
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+
+
    
   ],
   providers: [VehicleCRUDService,UserCrudService,interceptorProvider],

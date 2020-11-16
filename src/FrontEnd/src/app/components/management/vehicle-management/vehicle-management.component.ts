@@ -5,9 +5,9 @@ import { VehicleCRUDService } from 'src/app/services/vehicle-crud.service';
 
 
 @Component({
-  selector: 'app-vehicule-management',
-  templateUrl: './vehicule-management.component.html',
-  styleUrls: ['./vehicule-management.component.css']
+  selector: 'app-vehicle-management',
+  templateUrl: './vehicle-management.component.html',
+  styleUrls: ['./vehicle-management.component.css']
 })
 export class VehiculeManagementComponent implements OnInit {
 

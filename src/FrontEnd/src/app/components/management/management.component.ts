@@ -17,33 +17,24 @@ export class ManagementComponent implements OnInit {
 
   
 
-  public formSearch : FormGroup;
+
+  public columnsActionTable: any[];
+
+
+
   public vehicle: Vehicle = new Vehicle();
   public vehicles: Vehicle[] = [];
   public client : User =  new User();
   isLogged = false;
 
-  private buildFrom(){
-    this.formSearch = this.formBuilder.group({})
-  }
 
   constructor(private formBuilder: FormBuilder,private service: VehicleCRUDService, private seriveToken: TokenService) { 
-   
+  // this.columnsActionTable = [field: 'actionName', Header: ]
   }
 
   
 
-  searchID(){
-    var search = this.formSearch.value;
-    this.service.getVehicle(search.id).subscribe((data:any)=>{this.vehicle=data},err=> console.log(alert));    
 
-
-  }
-
-  searchNumber_Plate(){
-    var search = this.formSearch.value;
-    this.service.getVehicleNumberPlate(search.number_plate).subscribe((data:any)=>{this.vehicle=data});    
-  }
   
   readID(id: number){ 
    this.service.getVehicle(id).subscribe((data:any)=>{this.vehicle=data});
@@ -60,15 +51,13 @@ export class ManagementComponent implements OnInit {
   }
     
   ngOnInit() {
-    this.buildFrom();
-
-    this.formSearch.addControl('number_plate', new FormControl('', Validators.required));
-    this.formSearch.addControl('vin', new FormControl('', Validators.required));
-    this.formSearch.addControl('dni', new FormControl('', Validators.required));
+  
+    this.service.readVehicleALL().subscribe((data:any)=>{this.vehicles=data})
+  
 
     if(this.seriveToken.getToken()){
       this.isLogged = true;
-      this.service.readVehicleALL().subscribe((data:any)=>{this.vehicles=data})
+      
     }else {
       this.isLogged = false;
     }
