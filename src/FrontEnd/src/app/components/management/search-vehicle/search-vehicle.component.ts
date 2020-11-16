@@ -47,6 +47,7 @@ export class SearchVehicleComponent implements OnInit {
 
   ngOnInit(): void {
     this.buildFrom();
+    this.service.readVehicleALL().subscribe((data:any)=>{this.vehicleList=data})
   }
 
   cleanAllControls(event:any){

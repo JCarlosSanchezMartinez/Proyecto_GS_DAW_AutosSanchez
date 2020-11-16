@@ -18,8 +18,8 @@ import { LoginComponent } from './auth/login/login.component';
 import { interceptorProvider } from './interceptors/vehicle-interceptor.service';
 import { SearchVehicleComponent } from './components/management/search-vehicle/search-vehicle.component';
 import { VehiculeManagementComponent } from './components/management/vehicle-management/vehicle-management.component';
+import {ButtonModule} from 'primeng/button';
 import {TableModule} from 'primeng/table';
-
 
 
 @NgModule({
@@ -36,7 +36,9 @@ import {TableModule} from 'primeng/table';
     GalleryManagementComponent,
     RegisterComponent,
     SearchVehicleComponent,
-    TableModule
+ 
+
+
     
     
 
@@ -49,7 +51,12 @@ import {TableModule} from 'primeng/table';
     ReactiveFormsModule,
     HttpClientModule,
     FormsModule,
-    TableModule,
+    ButtonModule,
+    TableModule
+
+
+
+
 
 
    
