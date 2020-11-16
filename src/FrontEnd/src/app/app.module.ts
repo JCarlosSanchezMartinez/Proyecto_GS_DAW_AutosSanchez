@@ -36,6 +36,8 @@ import { VehiculeManagementComponent } from './components/management/vehicle-man
     GalleryManagementComponent,
     RegisterComponent,
     SearchVehicleComponent,
+    
+    
 
     
  
