@@ -18,7 +18,7 @@ import { LoginComponent } from './auth/login/login.component';
 import { interceptorProvider } from './interceptors/vehicle-interceptor.service';
 import { SearchVehicleComponent } from './components/management/search-vehicle/search-vehicle.component';
 import { VehiculeManagementComponent } from './components/management/vehicle-management/vehicle-management.component';
-
+import {TableModule} from 'primeng/table';
 
 
 
@@ -36,6 +36,7 @@ import { VehiculeManagementComponent } from './components/management/vehicle-man
     GalleryManagementComponent,
     RegisterComponent,
     SearchVehicleComponent,
+    TableModule
     
     
 
@@ -48,6 +49,7 @@ import { VehiculeManagementComponent } from './components/management/vehicle-man
     ReactiveFormsModule,
     HttpClientModule,
     FormsModule,
+    TableModule,
 
 
    
