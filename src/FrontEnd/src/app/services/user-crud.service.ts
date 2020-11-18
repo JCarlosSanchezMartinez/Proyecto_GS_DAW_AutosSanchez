@@ -16,7 +16,7 @@ export class UserCrudService {
 
   readUserALL(): Observable<any>{
 
-    return this.http.get(this.Url + "/readUserALL");
+    return this.http.get(this.Url + "/getVehicleList");
   }
 
   addUser(user: User): Observable<any> {  
@@ -24,7 +24,7 @@ export class UserCrudService {
   } 
 
   getUser(id: number): Observable<any>{
-    return this.http.get(this.Url + "/getUser/" + id); 
+    return this.http.get(this.Url + "/user/" + id); 
   }
 
   updateUser(id: number,user: User): Observable<any> {  

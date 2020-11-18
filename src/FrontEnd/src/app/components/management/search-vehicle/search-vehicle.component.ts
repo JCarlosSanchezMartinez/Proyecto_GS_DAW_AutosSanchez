@@ -5,12 +5,14 @@ import { SortEvent } from 'primeng/api';
 import { User } from 'src/app/model/User';
 import { Vehicle } from 'src/app/model/Vehicle';
 import { VehicleCRUDService } from 'src/app/services/vehicle-crud.service';
-
+import {ConfirmationService} from 'primeng/api';
+import {Message} from 'primeng/api';
 
 @Component({
   selector: 'app-search-vehicle',
   templateUrl: './search-vehicle.component.html',
-  styleUrls: ['./search-vehicle.component.scss']
+  styleUrls: ['./search-vehicle.component.scss'],
+  providers: [ConfirmationService]
 })
 export class SearchVehicleComponent implements OnInit {
 
@@ -18,12 +20,15 @@ export class SearchVehicleComponent implements OnInit {
   public columnsTableResult: any[]; // array de columnas
 
   public vehicle: Vehicle = new Vehicle();
+ 
   public vehicleList: Vehicle[] = [];
+
+  public chkActiveStatus = true;
 
   public client : User =  new User();
   isLogged = false;
 
-  constructor(private service: VehicleCRUDService, private router: Router) {
+  constructor(private serviceVehicle: VehicleCRUDService, private router: Router,private confirmationService: ConfirmationService) {
     this.columnsTableResult = [
       { field: 'numberPlate', header: 'Matricula' },
       { field: 'imagen', header: 'Imagen' },
@@ -41,6 +46,7 @@ export class SearchVehicleComponent implements OnInit {
     this.formSearchVehicle = new FormGroup({});
     this.formSearchVehicle.addControl('inputNumberPlate', new FormControl('', Validators.required));
     this.formSearchVehicle.addControl('inputVin', new FormControl('', Validators.required));
+    this.formSearchVehicle.addControl('chkActiveStatus', new FormControl(''));
     
     
   }
@@ -49,7 +55,7 @@ export class SearchVehicleComponent implements OnInit {
 
   ngOnInit(): void {
     this.buildFrom();
-    this.service.readVehicleALL().subscribe((data:any)=>{this.vehicleList=data})
+    this.serviceVehicle.readVehicleALL().subscribe((data:any)=>{this.vehicleList=data})
 
   }
 
@@ -59,14 +65,14 @@ export class SearchVehicleComponent implements OnInit {
 
   }
 
-  searchID(){
-    var search = this.formSearchVehicle.value;
-    this.service.getVehicle(search.id).subscribe((data:any)=>{this.vehicle=data},err=> console.log(alert));    
-  }
 
   searchNumber_Plate(){
     var search = this.formSearchVehicle.value;
-    this.service.getVehicleNumberPlate(search.inputNumberPlate).subscribe((data:any)=>{this.vehicleList=data});    
+    this.serviceVehicle.getVehicleNumberPlate(search.inputNumberPlate).subscribe((data:any)=>{this.vehicleList=data});    
+      
+   /* this.serviceVehicle.getVehicleNumberPlate(event.query).subscribe(data => {
+      this.vehicleList = data;});*/  
+ 
   }
 
   getParamsSearchCompanies() {
@@ -82,8 +88,25 @@ export class SearchVehicleComponent implements OnInit {
   onClickEditVehicle(vehicleId: number){
     this.router.navigate(['/vehicle',vehicleId]);
   }
+  
+  showModalConfirmDelete(id: number) {
+    this.confirmationService.confirm({
+      message: 'Delete Confirmation2',
+      header: 'Delete Confirmation',
+      icon: 'fas fa-question-circle',
+      accept: () => { this.confirm(); }
+    });
+  }
 
-
+  confirm() {
+    this.confirmationService.confirm({
+        message: 'Are you sure that you want to perform this action?',
+        accept: () => {
+            //Actual logic to perform a confirmation
+        }
+    });
+}
+  // ORDENACION DE COLUMNAS
   customSort(event: SortEvent) {
     event.data.sort((data1, data2) => {
         let value1 = data1[event.field];

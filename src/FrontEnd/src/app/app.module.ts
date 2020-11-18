@@ -20,6 +20,14 @@ import { SearchVehicleComponent } from './components/management/search-vehicle/s
 import { VehiculeManagementComponent } from './components/management/vehicle-management/vehicle-management.component';
 import {ButtonModule} from 'primeng/button';
 import {TableModule} from 'primeng/table';
+import {TooltipModule} from 'primeng/tooltip';
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {CheckboxModule} from 'primeng/checkbox';
+import {AutoCompleteModule} from 'primeng/autocomplete';
+
+
+
 
 
 
@@ -53,7 +61,13 @@ import {TableModule} from 'primeng/table';
     HttpClientModule,
     FormsModule,
     ButtonModule,
-    TableModule
+    TableModule,
+    TooltipModule,
+    ConfirmDialogModule,
+    BrowserAnimationsModule,
+    CheckboxModule,
+    AutoCompleteModule
+
 
 
 

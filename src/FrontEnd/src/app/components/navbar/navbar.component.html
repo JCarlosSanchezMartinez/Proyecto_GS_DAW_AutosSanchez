@@ -19,14 +19,14 @@
                 <li class="nav-item">
                     <a class="nav-link" routerLink="gallery">Listado Vehiculos</a>
                 </li>
+                <li class="nav-item" *ngIf="isLogged">
+                    <a class="nav-link" routerLink="cliente">Clientes</a>
+                </li>
+                <li class="nav-item" *ngIf="isLogged">
+                    <a class="nav-link" routerLink="vehicle">Vehiculos</a>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" routerLink="contacto">Contacto</a>
-                </li>
-                <li class="nav-item" *ngIf="isLogged">
-                    <a class="nav-link" routerLink="cliente">Cliente</a>
-                </li>
-                <li class="nav-item" *ngIf="isLogged">
-                    <a class="nav-link" routerLink="vehiculo">Vehiculo</a>
                 </li>
             </ul>
 
