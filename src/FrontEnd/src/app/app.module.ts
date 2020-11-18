@@ -22,6 +22,7 @@ import {ButtonModule} from 'primeng/button';
 import {TableModule} from 'primeng/table';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,

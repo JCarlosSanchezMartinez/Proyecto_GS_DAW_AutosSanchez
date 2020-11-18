@@ -6,11 +6,13 @@ export class Vehicle {
     numberPlate:String;
     brand:String;
     model:String;
+    imagen:String;
     years:number;
     engine:String;
     price:number;
     fuel:String;
     kms:number;
+    chasis:string;
     color:String;
     extra:String;
     user_id:User;

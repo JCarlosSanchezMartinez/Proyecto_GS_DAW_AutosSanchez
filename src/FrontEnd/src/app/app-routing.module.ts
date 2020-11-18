@@ -14,7 +14,8 @@ const routes: Routes = [
       {path: 'historia', component: HistoriaComponent},
       {path: 'contacto', component: ManagementComponent ,canActivate: [guard], data: { expectedRol: ['admin', 'user'] } },
       {path: 'login', component: LoginComponent},
-      {path: 'vehiculo', component: VehiculeManagementComponent},
+      {path: 'vehicle', component: VehiculeManagementComponent},
+      {path: 'vehicle/:id', component: VehiculeManagementComponent},
       {path: 'cliente',component: ClientManagementComponent},
       {path: 'registro',component: RegisterComponent},
       {path: 'gallery',component: GalleryManagementComponent}  
