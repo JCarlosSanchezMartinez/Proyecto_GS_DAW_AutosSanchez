@@ -24,9 +24,17 @@ export class VehicleCRUDService {
   getVehicle(id: any): Observable<any>{
     return this.http.get(this.Url + "/vehicle/" + id); 
   }
+  // Devuelve el Vehiculo por su ID
+  getVehicleCarrousel(): Observable<any>{
+    return this.http.get(this.Url + "/carrosuel/"); 
+  }
 // Devuelve un Vehiculo por su NUMBER_PLATE
   getVehicleNumberPlate(number_plate: string): Observable<any>{
     return this.http.get(this.Url + "/vehicle/details/" + number_plate); 
+  }
+// Devuelve un Vehiculos por su USER_ID
+  getVehicleForUserId(id: number): Observable<any>{
+    return this.http.get(this.Url + "/vehicle/vehicle/" + id); 
   }
 // Añade un Vehiculo
   addVehicle(vehicle: Vehicle): Observable<any> {  

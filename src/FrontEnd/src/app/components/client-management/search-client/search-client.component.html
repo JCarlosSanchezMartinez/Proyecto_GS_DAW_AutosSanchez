@@ -1,0 +1,85 @@
+<div class="row jumbotron m-3 bg-dark align-content-center">
+    <div class="row border border-info rounded">
+        <p class="title m-2 pl-1">Buscador</p>
+        <div class="col-12">
+            <div class="row">
+                <div class="col-12">
+                    <form [formGroup]="formSearchUser">
+
+                        <div class="row">
+                            <div class="col-12 col-md-3 form-group">
+                                <label>DNI</label>
+                                <input type="text" pTooltip="Insertar Dni del Cliente" formControlName="inputDni" class="form-control">
+                            </div>
+                            <div class="col-12 col-md-3 form-group">
+                                <label>Nombre</label>
+                                <input type="text" pTooltip="Insertar Nombre del cliente" formControlName="inputName" class="form-control">
+                            </div>
+                            <div class="col-12 col-md-3 form-group">
+                                <label>Matricula - Bastidor</label>
+                                <input type="text" pTooltip="Insertar Matricula o Bastidor del Vehiculo" class="form-control">
+                            </div>
+
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12">
+                                <p-checkbox class="p-1" [(ngModel)]="chkActiveStatus" formControlName="chkActiveStatus" label="Registros Activos" [binary]="true"></p-checkbox>
+                                <p-checkbox class="p-1" [(ngModel)]="chkActiveStatus" formControlName="chkActiveStatus" label="Registros Activos" [binary]="true"></p-checkbox>
+                            </div>
+                        </div>
+
+                        <div class="row mt-4">
+                            <div class="col-12 col-sm-auto">
+                                <div class="form-row">
+                                    <div class="col">
+                                        <button pButton icon="fas fa-search" type="button" label="Buscar" (click)="searchDni()" class="p-button-outlined m-1"></button>
+                                        <button pButton icon="fas fa-broom" type="button" label="Limpiar" class="p-button-outlined m-1"></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-row">
+                                    <div class="col-12 text-sm-right">
+                                        <button pButton icon="fas fa-plus" type="button" label="Nuevo" class="p-button-outlined m-1"></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 p-3">
+                    <p-table [value]="userList" styleClass="p-datatable-responsive-demo" [columns]="columnsTableResult" [paginator]="true" [rows]="5" [showCurrentPageReport]="true" currentPageReportTemplate="Mostrando {last}/{totalRecords} Clientes" [rowsPerPageOptions]="[10,25,50]">
+                        <ng-template pTemplate="header" let-columns>
+                            <tr>
+                                <ng-container *ngFor="let col of columns">
+                                    <ng-container [ngSwitch]="col.field">
+                                        <th pSortableColumn={{col.field}}>{{col.header}}
+                                            <p-sortIcon field={{col.field}}></p-sortIcon>
+                                    </ng-container>
+                                </ng-container>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-user>
+                            <tr>
+                                <td pTooltip="{{user.dni}}">{{user.dni}}</td>
+                                <td pTooltip="{{user.firstName}} {{user.lastName}}">{{user.firstName}} {{user.lastName}}</td>
+                                <td pTooltip="{{user.address}}">{{user.address}}</td>
+                                <td pTooltip="{{user.phone}}">{{user.phone}}</td>
+                                <td pTooltip="{{user.email}}">{{user.email}}</td>
+                                <td>
+                                    <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-outlined m-1" (click)="onClickEditUser(user.id)"></button>
+                                    <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-outlined m-1" (click)="showModalConfirmDelete(user.id)"></button>
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+            </div>
+        </div>
+        <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>

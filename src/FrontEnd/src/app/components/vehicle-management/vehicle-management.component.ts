@@ -1,6 +1,7 @@
 import { Component, Input, OnInit} from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { Fuel } from 'src/app/interfaces/fuel';
 import { User } from 'src/app/model/User';
 import { Vehicle } from 'src/app/model/Vehicle';
 import { UserCrudService } from 'src/app/services/user-crud.service';
@@ -20,6 +21,8 @@ export class VehiculeManagementComponent implements OnInit {
   public vehicle: Vehicle = new Vehicle();
   public user: User = new User();
   public chkActiveStatus = true;
+  public listFuel = [];
+  public selectFuel: Fuel;
 
 
   constructor(private formBuilder: FormBuilder,
@@ -27,6 +30,13 @@ export class VehiculeManagementComponent implements OnInit {
     private route: ActivatedRoute,
     private serviceUser: UserCrudService,
     private router: Router) { 
+      this.listFuel = [
+        {name: 'Diesel', code: 'D'},
+        {name: 'Gasolina', code: 'G'},
+        {name: 'Hybrido', code: 'H'},
+        {name: 'Electrico', code: 'E'},
+  
+    ];
    
   }
  
@@ -49,10 +59,7 @@ export class VehiculeManagementComponent implements OnInit {
     
   }
    
-    create(){
-      console.log(this.formVehicle.value)
-      //this.service.addVehicle(this.vehicle).subscribe((data:any)=>{this.vehicle=data})
-    }
+
 
     update(vehicle: Vehicle){
       this.serviceVehicle.updateVehicle(this.vehicle.id,this.vehicle).subscribe((data:any)=>{this.vehicle=data})  
@@ -80,13 +87,9 @@ export class VehiculeManagementComponent implements OnInit {
             this.formEditVehicle.controls.inputPrice.setValue(resp.price);
             this.formEditVehicle.controls.inputExtra.setValue(resp.extra);
             this.formEditVehicle.controls.chkActiveStatus.setValue(true);
-            this.formEditVehicle.controls.inputClient.setValue( resp.user_id.dni + " - " + 
-              resp.user_id.firstName +" "+ resp.user_id.lastName);
-
-
+            this.formEditVehicle.controls.inputClient.setValue( resp.userId.dni + " - " + 
+              resp.userId.firstName +" "+ resp.userId.lastName);
           });
-         
-
         }
       }
     );

@@ -16,8 +16,6 @@ import { GalleryManagementComponent } from './components/gallery-management/gall
 import { RegisterComponent } from './auth/register/register.component';
 import { LoginComponent } from './auth/login/login.component';
 import { interceptorProvider } from './interceptors/vehicle-interceptor.service';
-import { SearchVehicleComponent } from './components/management/search-vehicle/search-vehicle.component';
-import { VehiculeManagementComponent } from './components/management/vehicle-management/vehicle-management.component';
 import {ButtonModule} from 'primeng/button';
 import {TableModule} from 'primeng/table';
 import {TooltipModule} from 'primeng/tooltip';
@@ -25,9 +23,14 @@ import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {CheckboxModule} from 'primeng/checkbox';
 import {AutoCompleteModule} from 'primeng/autocomplete';
-
-
-
+import { VehiculeManagementComponent } from './components/vehicle-management/vehicle-management.component';
+import { SearchVehicleComponent } from './components/vehicle-management/search-vehicle/search-vehicle.component';
+import { SearchClientComponent } from './components/client-management/search-client/search-client.component';
+import { NewVehicleComponent } from './components/vehicle-management/new-vehicle/new-vehicle.component';
+import { HomeComponent } from './components/home/home.component';
+import { CarouselModule } from 'primeng/carousel';
+import {FileUploadModule} from 'primeng/fileupload';
+import { DropdownModule } from 'primeng/dropdown';
 
 
 
@@ -45,6 +48,9 @@ import {AutoCompleteModule} from 'primeng/autocomplete';
     GalleryManagementComponent,
     RegisterComponent,
     SearchVehicleComponent,
+    SearchClientComponent,
+    NewVehicleComponent,
+    HomeComponent,
  
 
 
@@ -66,7 +72,10 @@ import {AutoCompleteModule} from 'primeng/autocomplete';
     ConfirmDialogModule,
     BrowserAnimationsModule,
     CheckboxModule,
-    AutoCompleteModule
+    AutoCompleteModule,
+    CarouselModule,
+    FileUploadModule,
+    DropdownModule
 
 
 

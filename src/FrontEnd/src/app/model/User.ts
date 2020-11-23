@@ -3,14 +3,13 @@ export class User {
     dni:string;
     first_name:string;
     last_name:string;
-    country:string;
     address:string;
-    email:string;
+    city:string;
     phone:number;
+    email:string;
     username:string;
     password:string;
+    codeStatus:boolean;
     authorities: String[];
-
-
-    
+	
 }

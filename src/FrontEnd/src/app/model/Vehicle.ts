@@ -15,5 +15,5 @@ export class Vehicle {
     chasis:string;
     color:String;
     extra:String;
-    user_id:User;
+    userId:User;
 }

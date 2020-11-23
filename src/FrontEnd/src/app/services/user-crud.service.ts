@@ -12,25 +12,29 @@ export class UserCrudService {
   user:User[];
   constructor(private http:HttpClient) { }
 
-  Url='http://localhost:8080';
+  Url='http://localhost:8080/user';
 
-  readUserALL(): Observable<any>{
+  getUserList(): Observable<any>{
 
-    return this.http.get(this.Url + "/getVehicleList");
+    return this.http.get(this.Url + "/getUserList");
   }
 
   addUser(user: User): Observable<any> {  
     return this.http.post(this.Url + "/addUser", user);  
   } 
 
-  getUser(id: number): Observable<any>{
-    return this.http.get(this.Url + "/user/" + id); 
+  getUserId(id: number): Observable<any>{
+    return this.http.get(this.Url + "/" + id); 
+  }
+ 
+  getUserDni(dni: string): Observable<any>{
+    return this.http.get(this.Url + "/details/" + dni); 
   }
 
   updateUser(id: number,user: User): Observable<any> {  
     return this.http.put(this.Url + "/updateUser/" + id , user);  
   }
-
+  
   deleteUser(id: number): Observable<any> {
     return this.http.delete(this.Url + "/deleteUser/" + id);  
   }
