@@ -33,7 +33,7 @@ public class User {
 	private String city;
 	
 	@NotNull	
-	private int phone;
+	private long phone;
 	
 	@NotNull
 	private String email;

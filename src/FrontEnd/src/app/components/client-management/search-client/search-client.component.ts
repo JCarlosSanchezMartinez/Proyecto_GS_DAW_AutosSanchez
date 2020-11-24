@@ -22,8 +22,9 @@ export class SearchClientComponent implements OnInit {
   public vehicleList: Vehicle[] = [];
   public user: User = new User(); 
   public userList: User[] = [];
+  public loading = null;
 
-  public chkActiveStatus = true;
+  public chkActiveStatus;
 
   isLogged = false;
 
@@ -43,14 +44,24 @@ export class SearchClientComponent implements OnInit {
     this.formSearchUser = new FormGroup({});
     this.formSearchUser.addControl('inputDni', new FormControl('', Validators.required));
     this.formSearchUser.addControl('inputName', new FormControl('', Validators.required));
-    this.formSearchUser.addControl('chkActiveStatus', new FormControl(''));
-    
-    
+    this.formSearchUser.addControl('chkActiveStatus', new FormControl(true));    
   }
 
-  
+  delete(id: number) {
+    this.serviceUser.deleteUser(id).subscribe(
+      data => {alert('Usuario Desactivado');  }
+      );
+  }
+
+  reactivate(id: number) {
+    this.serviceUser.reactivateUser(id).subscribe(
+      data => {alert('Usuario Reactivado');  }
+      );    
+
+  }
 
   ngOnInit(): void {
+
     this.buildFrom();
     this.serviceUser.getUserList().subscribe((data:any)=>{this.userList=data})
 
@@ -84,11 +95,22 @@ export class SearchClientComponent implements OnInit {
   }
   
   showModalConfirmDelete(id: number) {
+  
     this.confirmationService.confirm({
-      message: 'Delete Confirmation2',
-      header: 'Delete Confirmation',
+      message: '¿Desea Borrar el Usuario?',
+      header: 'Confirmacion Reactivacion',
       icon: 'fas fa-question-circle',
-      accept: () => { this.confirm(); }
+      accept: () => { this.delete(id);  this.showLoadingSpinner(); }
+    });
+    this.hideLoadingSpinner();
+  }
+
+  showModalConfirmReactivate(id: number) {
+    this.confirmationService.confirm({
+      message: '¿Desea Reactivar el Usuario?',
+      header: 'Confirmacion Eliminar',
+      icon: 'fas fa-question-circle',
+      accept: () => { this.reactivate(id); window.onload; }
     });
   }
 
@@ -121,4 +143,13 @@ export class SearchClientComponent implements OnInit {
         return (event.order * result);
     });
 }
+
+showLoadingSpinner() {
+  this.loading = true;
+}
+
+hideLoadingSpinner() {
+  this.loading = false;
+}
+
 }

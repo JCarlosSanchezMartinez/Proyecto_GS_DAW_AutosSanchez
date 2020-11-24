@@ -26,7 +26,7 @@
                         <div class="row">
                             <div class="col-12">
                                 <p-checkbox class="p-1" [(ngModel)]="chkActiveStatus" formControlName="chkActiveStatus" label="Registros Activos" [binary]="true"></p-checkbox>
-                                <p-checkbox class="p-1" [(ngModel)]="chkActiveStatus" formControlName="chkActiveStatus" label="Registros Activos" [binary]="true"></p-checkbox>
+
                             </div>
                         </div>
 
@@ -42,7 +42,7 @@
                             <div class="col">
                                 <div class="form-row">
                                     <div class="col-12 text-sm-right">
-                                        <button pButton icon="fas fa-plus" type="button" label="Nuevo" class="p-button-outlined m-1"></button>
+                                        <button pButton icon="fas fa-plus" type="button" label="Nuevo" routerLink="/newUser" class="p-button-outlined m-1"></button>
                                     </div>
                                 </div>
                             </div>
@@ -73,8 +73,11 @@
                                 <td pTooltip="{{user.phone}}">{{user.phone}}</td>
                                 <td pTooltip="{{user.email}}">{{user.email}}</td>
                                 <td>
-                                    <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-outlined m-1" (click)="onClickEditUser(user.id)"></button>
-                                    <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-outlined m-1" (click)="showModalConfirmDelete(user.id)"></button>
+                                    <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-outlined m-1" *ngIf="user.codeStatus == true" (click)="onClickEditUser(user.id)"></button>
+                                    <button pButton pRipple icon="fas fa-trash" class="p-button-rounded p-button-outlined m-1" *ngIf="user.codeStatus == true" (click)="showModalConfirmDelete(user.id)"></button>
+                                    <button pButton pRipple icon="pi pi-eye" class="p-button-rounded p-button-outlined m-1" *ngIf="user.codeStatus == false" (click)="delete(user.id)"></button>
+                                    <button pButton pRipple icon="fas fa-trash-restore" class="p-button-rounded p-button-outlined m-1" *ngIf="user.codeStatus == false" (click)="showModalConfirmReactivate(user.id)"></button>
+
                                 </td>
                             </tr>
                         </ng-template>
@@ -83,3 +86,5 @@
             </div>
         </div>
         <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+
+        <p-progressSpinner *ngIf="loading"></p-progressSpinner>

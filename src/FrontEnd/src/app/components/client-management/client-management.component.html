@@ -5,11 +5,11 @@
                 Datos Cliente</p>
             <div class="col-12 p-2 border border-info rounded ">
                 <div class="row">
-                    <div class="col-6 ">
+                    <div class="col-6">
                         <div class="row">
                             <div class="form-group col-12">
                                 <label>Dni</label>
-                                <input type="text" name="dni" formControlName="inputDni" class="form-control ">
+                                <input type="text" formControlName="inputDni" class="form-control ">
                             </div>
                             <div class="form-group col-12">
                                 <label>Nombre</label>
@@ -40,8 +40,8 @@
                                 <input type="text" formControlName="inputUserName" class="form-control ">
                             </div>
                             <div class="form-group col-6">
-                                <label>Password</label>
-                                <input type="text" formControlName="inputPassWord" class="form-control ">
+                                <p-checkbox class="pt-3" [(ngModel)]="chkActiveStatus" formControlName="chkActiveStatus" label="Registros Activos" [binary]="true"></p-checkbox>
+
                             </div>
                         </div>
 
@@ -71,6 +71,24 @@
                     </div>
                 </div>
             </div>
+            <div class="row mt-4">
+                <div class="col-12 col-sm-auto">
+                    <div class="form-row">
+                        <div class="col">
+                            <button pButton icon="fas fa-save" type="button" label="Guardar" (click)="updateUser()" class="p-button m-1"></button>
+                            <button pButton icon="fas fa-broom" type="button" label="Limpiar" (click)="cleanAllControls()" class="p-button-outlined m-1"></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-row">
+                        <div class="col-12 text-sm-right">
+                            <button pButton icon="fas fa-backward" type="button" label="Cancelar" routerLink="/user" class="p-button-outlined m-1"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </form>
+
     </div>
 </div>

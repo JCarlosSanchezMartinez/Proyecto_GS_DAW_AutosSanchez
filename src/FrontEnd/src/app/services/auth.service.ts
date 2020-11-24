@@ -17,7 +17,9 @@ export class AuthService {
   // Añade un Usuario
   public addUser(user: User): Observable<any> {  
     return this.http.post(this.authURL + "/addUser", user);  
-  } 
+  }
+
+
 
   // Login Usuario
   public login(loginUser: LoginUser): Observable<JwtDTO> {  

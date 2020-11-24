@@ -59,13 +59,30 @@ export class ClientManagementComponent implements OnInit {
     //this.service.addVehicle(this.vehicle).subscribe((data:any)=>{this.vehicle=data})
   }
 
-  update(client: User){  
-  
-  }
-  delete(){
 
+  updateUser(){
+        this.user.dni = this.formEditUser.controls.inputDni.value
+        this.user.firstName = this.formEditUser.controls.inputFirstName.value
+        this.user.lastName = this.formEditUser.controls.inputLastName.value
+        this.user.address = this.formEditUser.controls.inputAddress.value
+        this.user.city = this.formEditUser.controls.inputCity.value
+        this.user.phone = this.formEditUser.controls.inputPhone.value
+        this.user.email = this.formEditUser.controls.inputEmail.value
+        this.user.username = this.formEditUser.controls.inputUserName.value
+        this.user.password = this.formEditUser.controls.inputPassWord.value
+        this.user.codeStatus = this.formEditUser.controls.chkActiveStatus.value
+           
+    this.route.params.subscribe(
+      (params: Params) => {
+        this.serviceUser.updateUser(params.id,this.user).subscribe(
+          data => {alert('Usuario Creado');  }
+          );
+      });
+ 
     
+
   }
+  
     
   ngOnInit() {
 
@@ -84,7 +101,7 @@ export class ClientManagementComponent implements OnInit {
             this.formEditUser.controls.inputEmail.setValue(resp.email);
             this.formEditUser.controls.inputUserName.setValue(resp.username);
             this.formEditUser.controls.inputPassWord.setValue(resp.password);
-            this.formEditUser.controls.chkActiveStatus.setValue(true);
+            this.formEditUser.controls.chkActiveStatus.setValue(resp.codeStatus);
           });
         }
       }   
@@ -93,6 +110,22 @@ export class ClientManagementComponent implements OnInit {
   
   }
   
+  cleanAllControls() {
+    this.formEditUser.controls.inputDni.setValue(null);
+    this.formEditUser.controls.inputFirstName.setValue(null);
+    this.formEditUser.controls.inputLastName.setValue(null);
+    this.formEditUser.controls.inputAddress.setValue(null);
+    this.formEditUser.controls.inputCity.setValue(null);
+    this.formEditUser.controls.inputPhone.setValue(null);
+    this.formEditUser.controls.inputEmail.setValue(null);
+    this.formEditUser.controls.inputUserName.setValue(null);
+    this.formEditUser.controls.inputPassWord.setValue(null);
+    this.formEditUser.controls.chkActiveStatus.setValue(true);
+
+  }
+
+
+
   onSubmit(){
   
   } 

@@ -38,4 +38,8 @@ export class UserCrudService {
   deleteUser(id: number): Observable<any> {
     return this.http.delete(this.Url + "/deleteUser/" + id);  
   }
+
+  reactivateUser(id: number): Observable<any> {
+    return this.http.delete(this.Url + "/reactivateUser/" + id);  
+  }
 }

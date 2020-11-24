@@ -69,7 +69,7 @@ export class NewVehicleComponent implements OnInit {
 
   create(){
     
-    this.vehicle.id =  this.formNewVehicle.controls.inputNumberPlate.value
+   
     this.vehicle.vin  =  this.formNewVehicle.controls.inputVin.value
     this.vehicle.brand  =  this.formNewVehicle.controls.inputBrand.value
     this.vehicle.model  =  this.formNewVehicle.controls.inputModel.value

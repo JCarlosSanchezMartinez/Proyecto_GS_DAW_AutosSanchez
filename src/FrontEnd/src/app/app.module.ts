@@ -29,9 +29,10 @@ import { SearchClientComponent } from './components/client-management/search-cli
 import { NewVehicleComponent } from './components/vehicle-management/new-vehicle/new-vehicle.component';
 import { HomeComponent } from './components/home/home.component';
 import { CarouselModule } from 'primeng/carousel';
-import {FileUploadModule} from 'primeng/fileupload';
+import { FileUploadModule } from 'primeng/fileupload';
 import { DropdownModule } from 'primeng/dropdown';
-
+import { NewUserComponent } from './components/client-management/new-client/new-client.component';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 
 @NgModule({
@@ -51,6 +52,7 @@ import { DropdownModule } from 'primeng/dropdown';
     SearchClientComponent,
     NewVehicleComponent,
     HomeComponent,
+    NewUserComponent,
  
 
 
@@ -75,7 +77,8 @@ import { DropdownModule } from 'primeng/dropdown';
     AutoCompleteModule,
     CarouselModule,
     FileUploadModule,
-    DropdownModule
+    DropdownModule,
+    ProgressSpinnerModule
 
 
 
