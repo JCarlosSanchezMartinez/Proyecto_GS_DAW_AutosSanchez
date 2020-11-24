@@ -89,14 +89,6 @@ export class SearchVehicleComponent implements OnInit {
     this.router.navigate(['/vehicle',vehicleId]);
   }
   
-  showModalConfirmDelete(id: number) {
-    this.confirmationService.confirm({
-      message: 'Delete Confirmation2',
-      header: 'Delete Confirmation',
-      icon: 'fas fa-question-circle',
-      accept: () => { this.confirm(); }
-    });
-  }
 
   confirm() {
     this.confirmationService.confirm({
@@ -127,4 +119,37 @@ export class SearchVehicleComponent implements OnInit {
         return (event.order * result);
     });
 }
+delete(id: number) {
+  this.serviceVehicle.deleteVehicle(id).subscribe(
+    data => {alert('Usuario Desactivado');  }
+    );
+}
+
+reactivate(id: number) {
+  this.serviceVehicle.reactivateVehicle(id).subscribe(
+    data => {alert('Usuario Reactivado');  }
+    );    
+
+}
+
+showModalConfirmDelete(id: number) {
+  
+  this.confirmationService.confirm({
+    message: '¿Desea Borrar el Vehiculo?',
+    header: 'Confirmacion Reactivacion',
+    icon: 'fas fa-question-circle',
+    accept: () => { this.delete(id);}
+  });
+  
+}
+
+showModalConfirmReactivate(id: number) {
+  this.confirmationService.confirm({
+    message: '¿Desea Reactivar el Vehiculo?',
+    header: 'Confirmacion Eliminar',
+    icon: 'fas fa-question-circle',
+    accept: () => { this.reactivate(id);}
+  });
+}
+
 }

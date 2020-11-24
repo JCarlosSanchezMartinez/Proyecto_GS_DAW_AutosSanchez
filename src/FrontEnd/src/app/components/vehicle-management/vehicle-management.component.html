@@ -82,7 +82,7 @@
                         <div class="col-6">
                             <div class="col-12 pt-3">
                                 <p-checkbox class="p-1" [(ngModel)]="chkActiveStatus" formControlName="chkActiveStatus" label="Mostrar en Carrusel" [binary]="true"></p-checkbox>
-                                <p-checkbox class="p-1" [(ngModel)]="chkActiveStatus" formControlName="chkActiveStatus" label="Mostrar en Listado" [binary]="true"></p-checkbox>
+                                <p-checkbox class="p-1" [(ngModel)]="chkActiveCarrousel" formControlName="chkActiveCarrousel" label="Mostrar en Listado" [binary]="true"></p-checkbox>
                             </div>
                         </div>
                     </div>
@@ -98,7 +98,7 @@
         <div class="col-12 col-sm-auto">
             <div class="form-row">
                 <div class="col">
-                    <button pButton icon="fas fa-save" type="button" label="Guardar" (click)="update(vehicle)" class="p-button m-1"></button>
+                    <button pButton icon="fas fa-save" type="button" label="Guardar" (click)="updateVehicle(vehicle)" class="p-button m-1"></button>
                     <button pButton icon="fas fa-broom" type="button" label="Limpiar" (click)="cleanAllControls()" class="p-button-outlined m-1"></button>
                 </div>
             </div>

@@ -20,7 +20,9 @@ export class VehiculeManagementComponent implements OnInit {
   public formVehicle: FormGroup;
   public vehicle: Vehicle = new Vehicle();
   public user: User = new User();
-  public chkActiveStatus = true;
+  public userList: User[] = [];
+  public chkActiveStatus = null;
+  public chkActiveCarrousel = null;
   public listFuel = [];
   public selectFuel: Fuel;
 
@@ -55,20 +57,8 @@ export class VehiculeManagementComponent implements OnInit {
     this.formEditVehicle.addControl('inputPrice', new FormControl());
     this.formEditVehicle.addControl('inputExtra', new FormControl());
     this.formEditVehicle.addControl('chkActiveStatus', new FormControl());
-    
-    
   }
    
-
-
-    update(vehicle: Vehicle){
-      this.serviceVehicle.updateVehicle(this.vehicle.id,this.vehicle).subscribe((data:any)=>{this.vehicle=data})  
-    }
-
-    delete(){
-      this.serviceVehicle.deleteVehicle(this.vehicle.id).subscribe((data:any)=>{this.vehicle=data})      
-    }
-      
     ngOnInit() {
         
     this.route.params.subscribe(
@@ -109,10 +99,41 @@ export class VehiculeManagementComponent implements OnInit {
       this.formEditVehicle.controls.inputPrice.setValue(null);
       this.formEditVehicle.controls.inputExtra.setValue(null);
       this.formEditVehicle.controls.chkActiveStatus.setValue(true);
+      this.formEditVehicle.controls.chkActiveCarrousel.setValue(true);
     }
     onSubmit(){
       
     }    
 
+    updateVehicle(vehicle: Vehicle){
+      this.vehicle.numberPlate = this.formEditVehicle.controls.inputNumberPlate.value
+      this.vehicle.vin = this.formEditVehicle.controls.inputVin.value
+      this.vehicle.brand = this.formEditVehicle.controls.inputBrand.value
+      this.vehicle.model = this.formEditVehicle.controls.inputModel.value
+      this.vehicle.years = this.formEditVehicle.controls.inputYears.value
+      this.vehicle.engine = this.formEditVehicle.controls.inputEngine.value    
+      this.vehicle.fuel = this.formEditVehicle.controls.inputFuel.value
+      this.vehicle.kms = this.formEditVehicle.controls.inputKms.value
+      this.vehicle.color = this.formEditVehicle.controls.inputColor.value
+      this.vehicle.price = this.formEditVehicle.controls.inputPrice.value
+      this.vehicle.extra = this.formEditVehicle.controls.inputExtra.value      
+      this.vehicle.carrousel = this.formEditVehicle.controls.inputExtra.value
+      this.vehicle.codeStatus = this.formEditVehicle.controls.chkActiveStatus.value
+
+      this.serviceUser.getUserDni(this.formEditVehicle.controls.inputClient.value).subscribe(data => {this.userList=data});
+
+      this.vehicle.userId = this.userList[0];
+
+      this.route.params.subscribe(
+        (params: Params) => {
+          this.serviceVehicle.updateVehicle(params.id,this.vehicle).subscribe(
+            data => {alert('Vehiculo Actualizado');  }
+            );
+        });
+    }
+
+    delete(){
+      this.serviceVehicle.deleteVehicle(this.vehicle.id).subscribe((data:any)=>{this.vehicle=data})      
+    }
 }
 

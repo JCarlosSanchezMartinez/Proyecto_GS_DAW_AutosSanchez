@@ -79,7 +79,7 @@ public class UserController {
 
 	}
 
-	/* Actualizamos VEHICULO */
+	/* Actualizamos USUARIO */
 	@PreAuthorize("hasRole('USER')")
 	@PutMapping("/updateUser/{id}")
 	public ResponseEntity<?> update(@PathVariable("id") int id, @RequestBody User user) {
@@ -103,7 +103,7 @@ public class UserController {
 		return (ResponseEntity<Object>) ResponseEntity.notFound();
 	}
 
-	/* Eliminamos VEHICULO */
+	/* Eliminamos USUARIO */
 	@PreAuthorize("hasRole('USER')")
 	@DeleteMapping("/deleteUser/{id}")
 	public ResponseEntity<?> delete(@PathVariable int id) {
@@ -121,7 +121,7 @@ public class UserController {
 
 	}
 	
-	/* Reactivamos VEHICULO */
+	/* Reactivamos USUARIO */
 	@PreAuthorize("hasRole('USER')")
 	@DeleteMapping("/reactivateUser/{id}")
 	public ResponseEntity<?> reactivate(@PathVariable int id) {

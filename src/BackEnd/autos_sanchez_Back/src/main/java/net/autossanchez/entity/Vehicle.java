@@ -21,34 +21,34 @@ public class Vehicle {
 	@Id
 	@GeneratedValue
 	private Long id;
-	@NotNull
+	
 	private String vin;
-	@NotNull
+
 	private String numberPlate;
-	@NotNull
+	
 	private String brand;
-	@NotNull
+	
 	private String model;
-	@NotNull
+	
 	private String imagen;
-	@NotNull
+	
 	private int years;
-	@NotNull
+	
 	private String engine;
-	@NotNull
+	
 	private int price;
-	@NotNull
+	
 	private String fuel;
-	@NotNull
+	
 	private String color;
-	@NotNull
+	
 	private int kms;
-	@NotNull
+	
 	private String chasis;
-	@NotNull
+	
 	private String extra;
 	@NotNull
-	private boolean cassousel;
+	private boolean carrousel;
 	@NotNull
 	private boolean codeStatus;
 	

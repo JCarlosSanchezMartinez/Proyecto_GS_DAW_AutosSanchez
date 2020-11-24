@@ -16,4 +16,6 @@ export class Vehicle {
     color:String;
     extra:String;
     userId:User;
+    carrousel:boolean;
+    codeStatus:boolean;
 }

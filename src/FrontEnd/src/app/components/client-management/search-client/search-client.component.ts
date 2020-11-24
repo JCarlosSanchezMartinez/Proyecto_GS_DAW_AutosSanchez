@@ -114,14 +114,6 @@ export class SearchClientComponent implements OnInit {
     });
   }
 
-  confirm() {
-    this.confirmationService.confirm({
-        message: 'Are you sure that you want to perform this action?',
-        accept: () => {
-            //Actual logic to perform a confirmation
-        }
-    });
-}
   // ORDENACION DE COLUMNAS
   customSort(event: SortEvent) {
     event.data.sort((data1, data2) => {

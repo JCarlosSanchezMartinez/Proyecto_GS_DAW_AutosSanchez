@@ -17,7 +17,8 @@ export class NewVehicleComponent implements OnInit {
   public vehicle: Vehicle = new Vehicle();
   public user: User = new User(); 
   public userList: User[] = [];
-  public chkActiveStatus = true;
+  public chkActiveStatus = null;
+  public chkActiveCarrousel = null;
 
   public listFuel = [];
   public selectFuel: Fuel;
@@ -49,6 +50,7 @@ export class NewVehicleComponent implements OnInit {
     this.formNewVehicle.addControl('inputPrice', new FormControl());
     this.formNewVehicle.addControl('inputExtra', new FormControl());
     this.formNewVehicle.addControl('chkActiveStatus', new FormControl());
+    this.formNewVehicle.addControl('chkActiveCarrousel', new FormControl());
     
     
   }
@@ -69,7 +71,7 @@ export class NewVehicleComponent implements OnInit {
 
   create(){
     
-   
+    this.vehicle.numberPlate  =  this.formNewVehicle.controls.inputNumberPlate.value
     this.vehicle.vin  =  this.formNewVehicle.controls.inputVin.value
     this.vehicle.brand  =  this.formNewVehicle.controls.inputBrand.value
     this.vehicle.model  =  this.formNewVehicle.controls.inputModel.value
@@ -80,6 +82,8 @@ export class NewVehicleComponent implements OnInit {
     this.vehicle.color  =  this.formNewVehicle.controls.inputColor.value
     this.vehicle.price  =  this.formNewVehicle.controls.inputPrice.value
     this.vehicle.extra =  this.formNewVehicle.controls.inputExtra.value
+    this.vehicle.carrousel =  this.formNewVehicle.controls.chkActiveStatus.value
+    this.vehicle.codeStatus =  this.formNewVehicle.controls.chkActiveCarrousel.value
 
     this.serviceUser.getUserDni(this.formNewVehicle.controls.inputClient.value).subscribe((data:any)=>{this.userList=data})
     

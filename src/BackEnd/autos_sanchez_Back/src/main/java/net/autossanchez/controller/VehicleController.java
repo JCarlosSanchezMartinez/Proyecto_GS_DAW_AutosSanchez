@@ -62,7 +62,7 @@ public class VehicleController {
 			List<Vehicle> rest = null;
 
 			for (Vehicle vehicle : list) {
-				if (vehicle.isCassousel() == true) {
+				if (vehicle.isCarrousel() == true) {
 					rest.add(vehicle);
 				}
 			}
@@ -123,9 +123,9 @@ public class VehicleController {
 	}
 
 	/* Creamos VEHICULO */
-	@PreAuthorize("hasRole('USER')")
+	
 	@PostMapping("/addVehicle")
-	public ResponseEntity<Vehicle> create(@RequestBody Vehicle vehicle) {
+	public ResponseEntity<?> create(@RequestBody Vehicle vehicle) {
 
 		try {
 			Vehicle rest = vehicleService.save(vehicle);
@@ -155,7 +155,7 @@ public class VehicleController {
 			rest.setKms(vehicle.getKms());
 			rest.setChasis(vehicle.getChasis());
 			rest.setExtra(vehicle.getExtra());
-			rest.setCassousel(vehicle.isCassousel());
+			rest.setCarrousel(vehicle.isCarrousel());
 			rest.setCodeStatus(vehicle.isCodeStatus());
 			rest.setUserId(vehicle.getUserId());
 
@@ -167,10 +167,37 @@ public class VehicleController {
 	}
 
 	/* Eliminamos VEHICULO */
+	@PreAuthorize("hasRole('USER')")
 	@DeleteMapping("/deleteVehicle/{id}")
-	public ResponseEntity<?> borrarVehicle(@PathVariable Long id) {
+	public ResponseEntity<?> delete(@PathVariable long id) {
+		
+		try {
+			Vehicle vehicle = vehicleService.getByID(id).orElse(null);
+			vehicle.setCodeStatus(false);
+			vehicleService.save(vehicle);
+			
+		} catch (Exception e) {
+			return (ResponseEntity<Object>) ResponseEntity.notFound();
+		}
+		
+		return ResponseEntity.noContent().build();
 
-		vehicleService.delete(id);
+	}
+	
+	/* Reactivamos VEHICULO */
+	@PreAuthorize("hasRole('USER')")
+	@DeleteMapping("/reactivateVehicle/{id}")
+	public ResponseEntity<?> reactivate(@PathVariable long id) {
+		
+		try {
+			Vehicle vehicle = vehicleService.getByID(id).orElse(null);
+			vehicle.setCodeStatus(true);
+			vehicleService.save(vehicle);
+			
+		} catch (Exception e) {
+			return (ResponseEntity<Object>) ResponseEntity.notFound();
+		}
+		
 		return ResponseEntity.noContent().build();
 
 	}

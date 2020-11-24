@@ -75,8 +75,11 @@
                                 <td pTooltip="{{vehicle.userId.firstName}}">{{vehicle.userId.firstName}} {{vehicle.userId.lastName}}</td>
                                 <td pTooltip="{{vehicle.price}}">{{vehicle.price}}</td>
                                 <td>
-                                    <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-outlined m-1" (click)="onClickEditVehicle(vehicle.id)"></button>
-                                    <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-outlined m-1" (click)="showModalConfirmDelete(vehicle.id)"></button>
+                                    <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-outlined m-1" *ngIf="vehicle.codeStatus == true" (click)="onClickEditVehicle(vehicle.id)"></button>
+                                    <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-outlined m-1" *ngIf="vehicle.codeStatus == true" (click)="showModalConfirmDelete(vehicle.id)"></button>
+                                    <button pButton pRipple icon="pi pi-eye" class="p-button-rounded p-button-outlined m-1" *ngIf="vehicle.codeStatus == false"></button>
+                                    <button pButton pRipple icon="fas fa-trash-restore" class="p-button-rounded p-button-outlined m-1" *ngIf="vehicle.codeStatus == false" (click)="showModalConfirmReactivate(vehicle.id)"></button>
+
                                 </td>
                             </tr>
                         </ng-template>
