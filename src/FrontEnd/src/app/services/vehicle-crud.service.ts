@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Vehicle } from '../model/Vehicle';
 import { Observable } from 'rxjs';
+import { FilterVehicle } from '../interfaces/filter-vehicle.interface';
+
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +28,7 @@ export class VehicleCRUDService {
   }
   // Devuelve el Vehiculo por su ID
   getVehicleCarrousel(): Observable<any>{
-    return this.http.get(this.Url + "carrosuel/"); 
+    return this.http.get(this.Url + "carrousel/"); 
   }
 // Devuelve un Vehiculo por su NUMBER_PLATE
   getVehicleNumberPlate(number_plate: string): Observable<any>{
@@ -52,4 +54,9 @@ export class VehicleCRUDService {
   reactivateVehicle(id: number): Observable<any> {
     return this.http.delete(this.Url + "reactivateVehicle/" + id);  
   }
+// Borra un Vehiculo
+  getListVehicleByFilter(filter: FilterVehicle): Observable<any> {
+    return this.http.post(this.Url + "search", filter);  
+  }
+ 
 }

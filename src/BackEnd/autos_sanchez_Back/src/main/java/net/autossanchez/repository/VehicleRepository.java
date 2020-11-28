@@ -11,7 +11,11 @@ import net.autossanchez.entity.Vehicle;
 
 @Repository
 public interface VehicleRepository extends JpaRepository<Vehicle, Long> {
-	List<Vehicle> findByNumberPlate(String numberPlate);	
+	List<Vehicle> findByNumberPlate(String numberPlate);
+	List<Vehicle> findByVin(String vin);
+	List<Vehicle> findByBrand(String brand);
+	List<Vehicle> findByModel(String Model);
+	List<Vehicle> findByCodeStatus(boolean codeStatus);
 	List<Vehicle> findByUserId(User userOK);
 	boolean existsByUserId(User user);
 	boolean existsByNumberPlate(String numberPlate);

@@ -1,5 +1,6 @@
 package net.autossanchez.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,6 +27,7 @@ import net.autossanchez.dto.Message;
 import net.autossanchez.dto.VehicleDto;
 import net.autossanchez.entity.User;
 import net.autossanchez.entity.Vehicle;
+import net.autossanchez.filter.FilterVehicle;
 import net.autossanchez.repository.VehicleRepository;
 import net.autossanchez.service.UserService;
 import net.autossanchez.service.VehicleService;
@@ -59,13 +61,14 @@ public class VehicleController {
 	public ResponseEntity<Vehicle> getVehicleCarrousel() {
 		try {
 			List<Vehicle> list = vehicleService.getALL();
-			List<Vehicle> rest = null;
+			List<Vehicle> rest = new ArrayList<>();
 
 			for (Vehicle vehicle : list) {
 				if (vehicle.isCarrousel() == true) {
 					rest.add(vehicle);
 				}
 			}
+			
 			return new ResponseEntity(rest, HttpStatus.OK);
 		} catch (Exception e) {
 			return (ResponseEntity<Vehicle>) ResponseEntity.notFound();
@@ -158,7 +161,8 @@ public class VehicleController {
 			rest.setCarrousel(vehicle.isCarrousel());
 			rest.setCodeStatus(vehicle.isCodeStatus());
 			rest.setUserId(vehicle.getUserId());
-
+			
+			System.out.println(rest);
 			return ResponseEntity.ok(vehicleService.save(rest));
 		} catch (Exception e) {
 			return new ResponseEntity(new Message(e.toString()), HttpStatus.NOT_FOUND);
@@ -179,9 +183,7 @@ public class VehicleController {
 		} catch (Exception e) {
 			return (ResponseEntity<Object>) ResponseEntity.notFound();
 		}
-		
-		return ResponseEntity.noContent().build();
-
+			return ResponseEntity.noContent().build();
 	}
 	
 	/* Reactivamos VEHICULO */
@@ -197,9 +199,41 @@ public class VehicleController {
 		} catch (Exception e) {
 			return (ResponseEntity<Object>) ResponseEntity.notFound();
 		}
-		
-		return ResponseEntity.noContent().build();
-
+			return ResponseEntity.noContent().build();
 	}
+	
+	/* Buscamos VEHICULOS por FILTER */
+	@PostMapping("/search")
+	public ResponseEntity<?> searchVehicle(@RequestBody FilterVehicle filter) {
 
+		try {
+			List<Vehicle> rest =  vehicleService.getALL();
+
+			
+			if (filter.isCodeStatus()) {
+				rest = vehicleService.getByCodeStatus(filter.isCodeStatus());
+			}
+			if (filter.getNumberPlate() != null) {
+				rest = vehicleService.getByNumberPlate(filter.getNumberPlate());
+			}
+			if (filter.getBrand() != null) {
+				rest = vehicleService.getByBrand(filter.getBrand());
+			}
+			if (filter.getModel() != null) {
+				rest = vehicleService.getByModel(filter.getModel());
+			}
+			if (filter.getVin() != null) {
+				rest = vehicleService.getByVin(filter.getVin());
+			}
+
+			
+	
+						
+		
+			return ResponseEntity.status(HttpStatus.CREATED).body(rest);			
+			
+		} catch (Exception e) {
+			return new ResponseEntity(new Message(e.toString()), HttpStatus.NOT_FOUND);
+		}
+	}
 }

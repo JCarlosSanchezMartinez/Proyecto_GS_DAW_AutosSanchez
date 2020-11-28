@@ -1,0 +1,8 @@
+<form [formGroup]="parentFormGroup">
+    <span class="ui-fluid">
+
+<p-autoComplete  formControlName="inputClient" [suggestions]="listClient"  (completeMethod)="methodAutocomplete($event)"></p-autoComplete>
+    </span>
+
+
+</form>

@@ -7,6 +7,7 @@ import { Vehicle } from 'src/app/model/Vehicle';
 import { VehicleCRUDService } from 'src/app/services/vehicle-crud.service';
 import {ConfirmationService} from 'primeng/api';
 import {Message} from 'primeng/api';
+import { FilterVehicle } from 'src/app/interfaces/filter-vehicle.interface';
 
 @Component({
   selector: 'app-search-vehicle',
@@ -19,13 +20,18 @@ export class SearchVehicleComponent implements OnInit {
   public formSearchVehicle : FormGroup;
   public columnsTableResult: any[]; // array de columnas
 
-  public vehicle: Vehicle = new Vehicle();
- 
+  public vehicle: Vehicle = new Vehicle(); 
   public vehicleList: Vehicle[] = [];
+  public client : User =  new User();
+  public paramSearch: FilterVehicle;
 
   public chkActiveStatus = true;
-
-  public client : User =  new User();
+  public totalRecords: number;
+  public tableShow: boolean;
+  public headerModal: string;
+  public displayModal = false;
+  public messageModal: string;
+  
   isLogged = false;
 
   constructor(private serviceVehicle: VehicleCRUDService, private router: Router,private confirmationService: ConfirmationService) {
@@ -46,28 +52,55 @@ export class SearchVehicleComponent implements OnInit {
     this.formSearchVehicle = new FormGroup({});
     this.formSearchVehicle.addControl('inputNumberPlate', new FormControl('', Validators.required));
     this.formSearchVehicle.addControl('inputVin', new FormControl('', Validators.required));
-    this.formSearchVehicle.addControl('chkActiveStatus', new FormControl(''));
+    this.formSearchVehicle.addControl('inputBrand', new FormControl('', Validators.required));
+    this.formSearchVehicle.addControl('inputModel', new FormControl('', Validators.required));
+    this.formSearchVehicle.addControl('chkActiveStatus', new FormControl(true));
     
     
   }
 
-  
+  onChangeChkActiveStatus() {
+    this.chkActiveStatus === false ? this.chkActiveStatus = true : this.chkActiveStatus = false;
+  }
 
   ngOnInit(): void {
     this.buildFrom();
-    this.serviceVehicle.readVehicleALL().subscribe((data:any)=>{this.vehicleList=data})
+    this.searchVehicle();
 
   }
 
-  cleanAllControls(event:any){
+  cleanAllControls(){
     this.formSearchVehicle.controls.inputNumberPlate.setValue(null);
     this.formSearchVehicle.controls.inputVin.setValue(null);
+    this.formSearchVehicle.controls.inputBrand.setValue(null);
+    this.formSearchVehicle.controls.inputModel.setValue(null);
 
   }
 
 
-  searchNumber_Plate(){
-    var search = this.formSearchVehicle.value;
+  searchVehicle(){
+
+    this.paramSearch = this.getParamsSearchVehicle();
+    this.serviceVehicle.getListVehicleByFilter(this.paramSearch).subscribe(vehicleFilterList => {
+      if (vehicleFilterList === null ) {
+       this.vehicleList = [];
+       
+   
+      } else {  
+        vehicleFilterList.map(resultSearch => ({numberPlate: resultSearch.numberPlate,
+          vin: resultSearch.vin,
+          brand: resultSearch.brand,
+          model: resultSearch.model,
+          codeStatus: resultSearch.codeStatus}));
+        this.vehicleList = vehicleFilterList;
+
+      }
+    }, error => {
+     
+    });
+
+
+   /* var search = this.formSearchVehicle.value;
     this.serviceVehicle.getVehicleNumberPlate(search.inputNumberPlate).subscribe((data:any)=>{this.vehicleList=data});    
       
    /* this.serviceVehicle.getVehicleNumberPlate(event.query).subscribe(data => {
@@ -75,12 +108,21 @@ export class SearchVehicleComponent implements OnInit {
  
   }
 
-  getParamsSearchCompanies() {
+  getParamsSearchVehicle(): FilterVehicle {
     return {
-      NumberPlate : this.formSearchVehicle.controls.inputNumberPlate.value ?
-            this.formSearchVehicle.controls.inputNumberPlate.value : null,
-      Vin : this.formSearchVehicle.controls.inputVin.value ?
+      numberPlate : this.formSearchVehicle.controls.inputNumberPlate.value !== ''
+      && this.formSearchVehicle.controls.inputNumberPlate.value !==undefined ? 
+      this.formSearchVehicle.controls.inputNumberPlate.value : null,
+      vin : this.formSearchVehicle.controls.inputVin.value !== ''
+      && this.formSearchVehicle.controls.inputVin.value !==undefined ? 
       this.formSearchVehicle.controls.inputVin.value : null,
+      brand : this.formSearchVehicle.controls.inputBrand.value !== ''
+      && this.formSearchVehicle.controls.inputBrand.value !==undefined ? 
+      this.formSearchVehicle.controls.inputBrand.value : null,
+      model : this.formSearchVehicle.controls.inputModel.value !== ''
+      && this.formSearchVehicle.controls.inputModel.value !==undefined ? 
+      this.formSearchVehicle.controls.inputModel.value : null,
+      codeStatus : this.formSearchVehicle.controls.chkActiveStatus.value === true ? true : null,
       
     };
   }
@@ -151,5 +193,6 @@ showModalConfirmReactivate(id: number) {
     accept: () => { this.reactivate(id);}
   });
 }
+
 
 }

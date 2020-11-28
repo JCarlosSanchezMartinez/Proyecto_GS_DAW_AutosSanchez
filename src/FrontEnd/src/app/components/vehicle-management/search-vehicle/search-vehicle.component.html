@@ -7,17 +7,25 @@
                     <form [formGroup]="formSearchVehicle">
 
                         <div class="row">
-                            <div class="col-12 col-md-3 form-group">
+                            <div class="col-6 col-md-2 form-group">
                                 <label>Matricula</label>
-                                <input type="text" pTooltip="Insertar Matricula vehiculo" formControlName="inputNumberPlate" class="form-control">
+                                <input type="text" placeholder="Insertar Matricula" formControlName="inputNumberPlate" class="form-control">
                             </div>
-                            <div class="col-12 col-md-3 form-group">
+                            <div class="col-6 col-md-2 form-group">
                                 <label>Bastidor</label>
-                                <input type="text" pTooltip="Insertar Bastidor Vehiculo" formControlName="inputVin" class="form-control">
+                                <input type="text" placeholder="Insertar Bastidor" formControlName="inputVin" class="form-control">
                             </div>
-                            <div class="col-12 col-md-3 form-group">
+                            <div class="col-6 col-md-2 form-group">
+                                <label>Marca</label>
+                                <input type="text" placeholder="Insertar Marca" formControlName="inputBrand" name="brand" class="form-control">
+                            </div>
+                            <div class="col-6 col-md-2 form-group">
+                                <label>Modelo</label>
+                                <input type="" placeholder="Insertar Bastidor" formControlName="inputModel" name="model" class="form-control">
+                            </div>
+                            <div class="col-12 col-md-4 form-group">
                                 <label>Cliente</label>
-                                <input type="text" pTooltip="Insertar Nombre o Dni de Cliente" class="form-control">
+                                <input type="text" placeholder="Insertar DNI o Nombre Cliente" pTooltip="Insertar Nombre o Dni de Cliente" class="form-control">
                             </div>
 
 
@@ -26,7 +34,6 @@
                         <div class="row">
                             <div class="col-12">
                                 <p-checkbox class="p-1" [(ngModel)]="chkActiveStatus" formControlName="chkActiveStatus" label="Registros Activos" [binary]="true"></p-checkbox>
-                                <p-checkbox class="p-1" [(ngModel)]="chkActiveStatus" formControlName="chkActiveStatus" label="Registros Activos" [binary]="true"></p-checkbox>
                             </div>
                         </div>
 
@@ -34,8 +41,8 @@
                             <div class="col-12 col-sm-auto">
                                 <div class="form-row">
                                     <div class="col">
-                                        <button pButton icon="fas fa-search" type="button" label="Buscar" (click)="searchNumber_Plate()" class="p-button-outlined m-1"></button>
-                                        <button pButton icon="fas fa-broom" type="button" label="Limpiar" class="p-button-outlined m-1"></button>
+                                        <button pButton icon="fas fa-search" type="button" label="Buscar" (click)="searchVehicle()" (change)="onChangeChkActiveStatus()" class="p-button-outlined m-1"></button>
+                                        <button pButton icon="fas fa-broom" type="button" label="Limpiar" (click)="cleanAllControls()" class="p-button-outlined m-1"></button>
                                     </div>
                                 </div>
                             </div>

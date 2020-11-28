@@ -16,13 +16,13 @@ import { GalleryManagementComponent } from './components/gallery-management/gall
 import { RegisterComponent } from './auth/register/register.component';
 import { LoginComponent } from './auth/login/login.component';
 import { interceptorProvider } from './interceptors/vehicle-interceptor.service';
-import {ButtonModule} from 'primeng/button';
-import {TableModule} from 'primeng/table';
-import {TooltipModule} from 'primeng/tooltip';
-import {ConfirmDialogModule} from 'primeng/confirmdialog';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {CheckboxModule} from 'primeng/checkbox';
-import {AutoCompleteModule} from 'primeng/autocomplete';
+import { ButtonModule } from 'primeng/button';
+import { TableModule } from 'primeng/table';
+import { TooltipModule } from 'primeng/tooltip';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CheckboxModule } from 'primeng/checkbox';
+import { AutoCompleteModule } from 'primeng/autocomplete';
 import { VehiculeManagementComponent } from './components/vehicle-management/vehicle-management.component';
 import { SearchVehicleComponent } from './components/vehicle-management/search-vehicle/search-vehicle.component';
 import { SearchClientComponent } from './components/client-management/search-client/search-client.component';
@@ -33,6 +33,7 @@ import { FileUploadModule } from 'primeng/fileupload';
 import { DropdownModule } from 'primeng/dropdown';
 import { NewUserComponent } from './components/client-management/new-client/new-client.component';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { AutoUserComponent } from './components/vehicle-management/new-vehicle/auto-user/auto-user.component';
 
 
 @NgModule({
@@ -53,6 +54,7 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
     NewVehicleComponent,
     HomeComponent,
     NewUserComponent,
+    AutoUserComponent,
  
 
 

@@ -44,6 +44,8 @@ export class SearchClientComponent implements OnInit {
     this.formSearchUser = new FormGroup({});
     this.formSearchUser.addControl('inputDni', new FormControl('', Validators.required));
     this.formSearchUser.addControl('inputName', new FormControl('', Validators.required));
+    this.formSearchUser.addControl('inputVehicle', new FormControl('', Validators.required));
+    this.formSearchUser.addControl('inputCity', new FormControl('', Validators.required));
     this.formSearchUser.addControl('chkActiveStatus', new FormControl(true));    
   }
 
@@ -70,6 +72,8 @@ export class SearchClientComponent implements OnInit {
   cleanAllControls(event:any){
     this.formSearchUser.controls.inputDni.setValue(null);
     this.formSearchUser.controls.inputName.setValue(null);
+    this.formSearchUser.controls.inputVehicle.setValue(null);
+    this.formSearchUser.controls.inputCity.setValue(null);
 
   }
 

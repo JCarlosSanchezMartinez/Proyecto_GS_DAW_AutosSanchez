@@ -11,7 +11,10 @@ export class HomeComponent implements OnInit {
 
   public vehicleList: Vehicle[] = [];
 
-  constructor(private serviceVehicle: VehicleCRUDService) { }
+
+  constructor(private serviceVehicle: VehicleCRUDService) { 
+   
+  }
 
   ngOnInit(): void {
     this.serviceVehicle.getVehicleCarrousel().subscribe((data:any)=>{this.vehicleList=data})

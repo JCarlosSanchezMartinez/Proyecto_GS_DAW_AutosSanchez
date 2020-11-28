@@ -24,10 +24,12 @@
                             <label>Modelo</label>
                             <input type="" formControlName="inputModel" name="model" class="form-control">
                         </div>
-                        <div class="col-12 form-group">
+                        <!--<div class="col-12 form-group">
                             <label>Cliente</label>
                             <input type="text" formControlName="inputClient" name="model" class="form-control">
-                        </div>
+                        </div>-->
+                        <app-auto-user [parentFormGroup]="formNewVehicle" codeStatus="A"  [isMultiple]="false" >
+                        </app-auto-user>
                     </div>
 
                 </div>
@@ -76,8 +78,8 @@
                         </div>
                         <div class="col-6">
                             <div class="col-12 pt-3">
-                                <p-checkbox class="p-1" [(ngModel)]="chkActiveStatus" formControlName="chkActiveStatus" label="Mostrar en Carrusel" [binary]="true"></p-checkbox>
-                                <p-checkbox class="p-1" [(ngModel)]="chkActiveCarrousel" formControlName="chkActiveCarrousel" label="Mostrar en Listado" [binary]="true"></p-checkbox>
+                                <p-checkbox class="p-1" [(ngModel)]="chkActiveCarrousel" formControlName="chkActiveCarrousel" label="Mostrar en Carrusel" [binary]="true"></p-checkbox>
+                                <p-checkbox class="p-1" [(ngModel)]="chkActiveStatus" formControlName="chkActiveStatus" label="Registros Activos" [binary]="true"></p-checkbox>
                             </div>
                             <div class="col-12">
                                 <!--  <p-fileUpload name="demo[]" url="../../../assets/img/upload.php" (onUpload)="onUpload($event)" multiple="multiple" accept="image/*" maxFileSize="2000000">

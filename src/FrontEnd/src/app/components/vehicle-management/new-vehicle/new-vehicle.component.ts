@@ -67,6 +67,7 @@ export class NewVehicleComponent implements OnInit {
     this.formNewVehicle.controls.inputPrice.setValue(null);
     this.formNewVehicle.controls.inputExtra.setValue(null);
     this.formNewVehicle.controls.chkActiveStatus.setValue(true);
+    this.formNewVehicle.controls.chkActiveCarrousel.setValue(false);
   }
 
   create(){
@@ -93,10 +94,9 @@ export class NewVehicleComponent implements OnInit {
     this.serviceVehicle.addVehicle(this.vehicle).subscribe(data=>{alert("exito")});
   }
   searchDni(): any{
-    var search = this.formNewVehicle.value;   
-    
- 
+    var search = this.formNewVehicle.value;  
   }
+  
   
   ngOnInit(): void {
     this.buildFrom();

@@ -42,4 +42,8 @@ export class UserCrudService {
   reactivateUser(id: number): Observable<any> {
     return this.http.delete(this.Url + "/reactivateUser/" + id);  
   }
+  getClient(filter: string): Observable<any> {
+ 
+    return this.http.get(this.Url + `/details/${filter}`);
+  }
 }

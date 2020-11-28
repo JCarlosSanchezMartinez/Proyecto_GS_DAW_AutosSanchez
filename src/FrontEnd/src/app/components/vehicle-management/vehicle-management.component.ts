@@ -1,3 +1,4 @@
+import { UpperCasePipe } from '@angular/common';
 import { Component, Input, OnInit} from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
@@ -57,6 +58,7 @@ export class VehiculeManagementComponent implements OnInit {
     this.formEditVehicle.addControl('inputPrice', new FormControl());
     this.formEditVehicle.addControl('inputExtra', new FormControl());
     this.formEditVehicle.addControl('chkActiveStatus', new FormControl());
+    this.formEditVehicle.addControl('chkActiveCarrousel', new FormControl());
   }
    
     ngOnInit() {
@@ -76,7 +78,8 @@ export class VehiculeManagementComponent implements OnInit {
             this.formEditVehicle.controls.inputColor.setValue(resp.color);
             this.formEditVehicle.controls.inputPrice.setValue(resp.price);
             this.formEditVehicle.controls.inputExtra.setValue(resp.extra);
-            this.formEditVehicle.controls.chkActiveStatus.setValue(true);
+            this.formEditVehicle.controls.chkActiveStatus.setValue(resp.codeStatus);
+            this.formEditVehicle.controls.chkActiveCarrousel.setValue(resp.carrousel);
             this.formEditVehicle.controls.inputClient.setValue( resp.userId.dni + " - " + 
               resp.userId.firstName +" "+ resp.userId.lastName);
           });
@@ -99,22 +102,22 @@ export class VehiculeManagementComponent implements OnInit {
       this.formEditVehicle.controls.inputPrice.setValue(null);
       this.formEditVehicle.controls.inputExtra.setValue(null);
       this.formEditVehicle.controls.chkActiveStatus.setValue(true);
-      this.formEditVehicle.controls.chkActiveCarrousel.setValue(true);
+      this.formEditVehicle.controls.chkActiveCarrousel.setValue(false);
     }
-    onSubmit(){
-      
-    }    
+
+    
+   
 
     updateVehicle(vehicle: Vehicle){
-      this.vehicle.numberPlate = this.formEditVehicle.controls.inputNumberPlate.value
-      this.vehicle.vin = this.formEditVehicle.controls.inputVin.value
-      this.vehicle.brand = this.formEditVehicle.controls.inputBrand.value
-      this.vehicle.model = this.formEditVehicle.controls.inputModel.value
+      this.vehicle.numberPlate = this.formEditVehicle.controls.inputNumberPlate.value.toUpperCase()
+      this.vehicle.vin = this.formEditVehicle.controls.inputVin.value.toUpperCase()
+      this.vehicle.brand = this.formEditVehicle.controls.inputBrand.value.toUpperCase()
+      this.vehicle.model = this.formEditVehicle.controls.inputModel.value.toUpperCase()
       this.vehicle.years = this.formEditVehicle.controls.inputYears.value
       this.vehicle.engine = this.formEditVehicle.controls.inputEngine.value    
       this.vehicle.fuel = this.formEditVehicle.controls.inputFuel.value
       this.vehicle.kms = this.formEditVehicle.controls.inputKms.value
-      this.vehicle.color = this.formEditVehicle.controls.inputColor.value
+      this.vehicle.color =  this.titleCaseWord(this.formEditVehicle.controls.inputColor.value)
       this.vehicle.price = this.formEditVehicle.controls.inputPrice.value
       this.vehicle.extra = this.formEditVehicle.controls.inputExtra.value      
       this.vehicle.carrousel = this.formEditVehicle.controls.inputExtra.value
@@ -134,6 +137,15 @@ export class VehiculeManagementComponent implements OnInit {
 
     delete(){
       this.serviceVehicle.deleteVehicle(this.vehicle.id).subscribe((data:any)=>{this.vehicle=data})      
+    }
+
+    onSubmit(){
+      
+    } 
+
+    titleCaseWord(word: string) {
+      if (!word) return word;
+      return word[0].toUpperCase() + word.substr(1).toLowerCase();
     }
 }
 
