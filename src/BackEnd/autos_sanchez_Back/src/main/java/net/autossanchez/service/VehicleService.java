@@ -26,22 +26,6 @@ public class VehicleService  {
 		return vehicleRepository.findById(id);
 	}
 	
-	public List<Vehicle> getByNumberPlate(String numberPlate){
-		return vehicleRepository.findByNumberPlate(numberPlate);
-	}
-	public List<Vehicle> getByVin(String vin){
-		return vehicleRepository.findByVin(vin);
-	}
-	public List<Vehicle> getByBrand(String brand){
-		return vehicleRepository.findByBrand(brand);
-	}
-	public List<Vehicle> getByModel(String model){
-		return vehicleRepository.findByModel(model);
-	}
-	public List<Vehicle> getByCodeStatus(boolean codeStatus){
-		return vehicleRepository.findByCodeStatus(codeStatus);
-	}
-	
 	public List<Vehicle> getVehiclesByUserId(User userOK){
 		return vehicleRepository.findByUserId(userOK);
 	}
@@ -63,6 +47,23 @@ public class VehicleService  {
 	}
 	public boolean existByUser_Id(User user) {
 		return vehicleRepository.existsByUserId(user);
+	}
+	
+	// FILTRO
+	public List<Vehicle> getByNumberPlate(String numberPlate){
+		return vehicleRepository.findByNumberPlate(numberPlate);
+	}
+	public List<Vehicle> getByVin(String vin){
+		return vehicleRepository.findByVin(vin);
+	}
+	public List<Vehicle> getByBrand(String brand){
+		return vehicleRepository.findByBrand(brand);
+	}
+	public List<Vehicle> getByModel(String model){
+		return vehicleRepository.findByModel(model);
+	}
+	public List<Vehicle> getByCodeStatus(boolean codeStatus){
+		return vehicleRepository.findByCodeStatus(codeStatus);
 	}
 
 

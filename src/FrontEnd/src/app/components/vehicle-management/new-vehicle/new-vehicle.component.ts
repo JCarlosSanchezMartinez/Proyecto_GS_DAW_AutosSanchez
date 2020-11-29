@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { MessageService } from 'primeng/api';
 import { Fuel } from 'src/app/interfaces/fuel';
 import { User } from 'src/app/model/User';
 import { Vehicle } from 'src/app/model/Vehicle';
@@ -24,7 +25,8 @@ export class NewVehicleComponent implements OnInit {
   public selectFuel: Fuel;
 
   constructor( private serviceVehicle: VehicleCRUDService,
-    private serviceUser: UserCrudService) { 
+    private serviceUser: UserCrudService,
+    private messageService: MessageService) { 
     this.listFuel = [
       {name: 'Diesel', code: 'D'},
       {name: 'Gasolina', code: 'G'},
@@ -72,15 +74,15 @@ export class NewVehicleComponent implements OnInit {
 
   create(){
     
-    this.vehicle.numberPlate  =  this.formNewVehicle.controls.inputNumberPlate.value
-    this.vehicle.vin  =  this.formNewVehicle.controls.inputVin.value
-    this.vehicle.brand  =  this.formNewVehicle.controls.inputBrand.value
-    this.vehicle.model  =  this.formNewVehicle.controls.inputModel.value
+    this.vehicle.numberPlate  =  this.formNewVehicle.controls.inputNumberPlate.value.toUpperCase()
+    this.vehicle.vin  =  this.formNewVehicle.controls.inputVin.value.toUpperCase()
+    this.vehicle.brand  =  this.formNewVehicle.controls.inputBrand.value.toUpperCase()
+    this.vehicle.model  =  this.formNewVehicle.controls.inputModel.value.toUpperCase()
     this.vehicle.years  =  this.formNewVehicle.controls.inputYears.value
     this.vehicle.engine  =  this.formNewVehicle.controls.inputEngine.value
     this.vehicle.fuel  =  this.formNewVehicle.controls.inputFuel.value
     this.vehicle.kms  =  this.formNewVehicle.controls.inputKms.value
-    this.vehicle.color  =  this.formNewVehicle.controls.inputColor.value
+    this.vehicle.color  = this.titleCaseWord(this.formNewVehicle.controls.inputColor.value)
     this.vehicle.price  =  this.formNewVehicle.controls.inputPrice.value
     this.vehicle.extra =  this.formNewVehicle.controls.inputExtra.value
     this.vehicle.carrousel =  this.formNewVehicle.controls.chkActiveStatus.value
@@ -90,8 +92,14 @@ export class NewVehicleComponent implements OnInit {
     
     this.vehicle.userId =  this.userList[0];
 
-    console.log(this.vehicle)
-    this.serviceVehicle.addVehicle(this.vehicle).subscribe(data=>{alert("exito")});
+    
+    this.serviceVehicle.addVehicle(this.vehicle).subscribe(data=>{
+      if (data == null || data == undefined) {
+        this.messageService.add({severity:'error', summary:'Error!', detail:'Se ha producido un error.'});
+      } else {
+        this.messageService.add({severity:'success', summary:'Exito!', detail:'Se ha creado el Vehiculo correctamente.'});
+      }    
+    });
   }
   searchDni(): any{
     var search = this.formNewVehicle.value;  
@@ -100,6 +108,11 @@ export class NewVehicleComponent implements OnInit {
   
   ngOnInit(): void {
     this.buildFrom();
+  }
+
+  titleCaseWord(word: string) {
+    if (!word) return word;
+    return word[0].toUpperCase() + word.substr(1).toLowerCase();
   }
 
 }

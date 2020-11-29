@@ -50,11 +50,11 @@ export class VehicleCRUDService {
   deleteVehicle(id: any): Observable<any> {
     return this.http.delete(this.Url + "deleteVehicle/" + id);  
   }
-// Borra un Vehiculo
+// Reactiva un Vehiculo
   reactivateVehicle(id: number): Observable<any> {
     return this.http.delete(this.Url + "reactivateVehicle/" + id);  
   }
-// Borra un Vehiculo
+// Busca por filtro un Vehiculo
   getListVehicleByFilter(filter: FilterVehicle): Observable<any> {
     return this.http.post(this.Url + "search", filter);  
   }

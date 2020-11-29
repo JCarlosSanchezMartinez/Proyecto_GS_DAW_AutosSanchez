@@ -34,6 +34,13 @@ import { DropdownModule } from 'primeng/dropdown';
 import { NewUserComponent } from './components/client-management/new-client/new-client.component';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { AutoUserComponent } from './components/vehicle-management/new-vehicle/auto-user/auto-user.component';
+import { MessagesModule } from 'primeng/messages';
+import { MessageModule } from 'primeng/message';
+import { DialogModule } from 'primeng/dialog';
+import {ToastModule} from 'primeng/toast';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { GalleriaModule } from 'primeng/galleria';
+
 
 
 @NgModule({
@@ -80,7 +87,14 @@ import { AutoUserComponent } from './components/vehicle-management/new-vehicle/a
     CarouselModule,
     FileUploadModule,
     DropdownModule,
-    ProgressSpinnerModule
+    ProgressSpinnerModule,
+    MessagesModule,
+    MessageModule,
+    DialogModule,
+    ToastModule,
+    NgbModule,
+    GalleriaModule,
+    
 
 
 

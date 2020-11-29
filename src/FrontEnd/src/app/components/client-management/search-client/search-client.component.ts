@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ConfirmationService, SortEvent } from 'primeng/api';
+import { ConfirmationService, MessageService, SortEvent } from 'primeng/api';
+import { FilterUser } from 'src/app/interfaces/filter-user';
 import { User } from 'src/app/model/User';
 import { Vehicle } from 'src/app/model/Vehicle';
 import { UserCrudService } from 'src/app/services/user-crud.service';
@@ -10,7 +11,7 @@ import { UserCrudService } from 'src/app/services/user-crud.service';
 @Component({
   selector: 'app-search-client',
   templateUrl: './search-client.component.html',
-  styleUrls: ['./search-client.component.css'],
+  styleUrls: ['./search-client.component.scss'],
   providers: [ConfirmationService]
 })
 export class SearchClientComponent implements OnInit {
@@ -23,12 +24,17 @@ export class SearchClientComponent implements OnInit {
   public user: User = new User(); 
   public userList: User[] = [];
   public loading = null;
+  public paramSearch: FilterUser;
 
   public chkActiveStatus;
 
   isLogged = false;
 
-  constructor(private serviceUser: UserCrudService, private router: Router,private confirmationService: ConfirmationService) {
+  constructor(private serviceUser: UserCrudService,
+     private router: Router,
+     private confirmationService: ConfirmationService,
+     private messageService: MessageService
+     ) {
     this.columnsTableResult = [
       { field: 'dni', header: 'DNI' },
       { field: 'nameComplete', header: 'Nombre' },
@@ -43,8 +49,9 @@ export class SearchClientComponent implements OnInit {
   private buildFrom(){
     this.formSearchUser = new FormGroup({});
     this.formSearchUser.addControl('inputDni', new FormControl('', Validators.required));
-    this.formSearchUser.addControl('inputName', new FormControl('', Validators.required));
-    this.formSearchUser.addControl('inputVehicle', new FormControl('', Validators.required));
+    this.formSearchUser.addControl('inputFirstName', new FormControl('', Validators.required));
+    this.formSearchUser.addControl('inputLastName', new FormControl('', Validators.required));
+    this.formSearchUser.addControl('inputNumberPlate', new FormControl('', Validators.required));
     this.formSearchUser.addControl('inputCity', new FormControl('', Validators.required));
     this.formSearchUser.addControl('chkActiveStatus', new FormControl(true));    
   }
@@ -71,7 +78,8 @@ export class SearchClientComponent implements OnInit {
 
   cleanAllControls(event:any){
     this.formSearchUser.controls.inputDni.setValue(null);
-    this.formSearchUser.controls.inputName.setValue(null);
+    this.formSearchUser.controls.inputFirstName.setValue(null);
+    this.formSearchUser.controls.inputLastName.setValue(null);
     this.formSearchUser.controls.inputVehicle.setValue(null);
     this.formSearchUser.controls.inputCity.setValue(null);
 
@@ -79,20 +87,61 @@ export class SearchClientComponent implements OnInit {
 
 
   searchDni(){
-    var search = this.formSearchUser.value;   
-    this.serviceUser.getUserDni(search.inputDni).subscribe((data:any)=>{this.userList=data})
+    this.showLoadingSpinner();
+    this.paramSearch = this.getParamsSearchUser();
+    this.serviceUser.getListUserByFilter(this.paramSearch).subscribe(UserFilterList => {
+      if (UserFilterList === null  || UserFilterList.length === 0) {        
+        this.hideLoadingSpinner();
+        this.messageService.add({severity:'error', summary:'Error!', detail:'No data found.'});
+        this.userList = [];  
+      } else {  
+        UserFilterList.map(resultSearch => ({dni: resultSearch.dni,
+          firstName: resultSearch.firstName,
+          lastName: resultSearch.lastName,
+          city: resultSearch.city,
+          codeStatus: resultSearch.codeStatus}));
+        this.userList = UserFilterList;
+        this.hideLoadingSpinner();
+
+      }
+    }, error => {
+      if (error.status === 403) {
+        this.hideLoadingSpinner();
+        this.messageService.add({severity:'error', summary:'Error!', detail:'You have insufficient privileges to perform this action'});
+      } else if (error.status === 401) {
+        this.hideLoadingSpinner();
+        this.messageService.add({severity:'error', summary:'Error!', detail:'Access is denied'});
+      } else if (error.status === 404) {
+        this.hideLoadingSpinner();
+        this.messageService.add({severity:'error', summary:'Error!', detail:'No data found.'});
+      } else {
+        this.hideLoadingSpinner();
+        this.messageService.add({severity:'error', summary:'Error!', detail:'An error occurred, try again later and if the error persists contact the System Administrator'});
+      }
+    });
  
   }
-/*
-  getParamsSearchCompanies() {
+  getParamsSearchUser(): FilterUser {
     return {
-      NumberPlate : this.serviceUser.controls.inputNumberPlate.value ?
-            this.serviceUser.controls.inputNumberPlate.value : null,
-      Vin : this.serviceUser.controls.inputVin.value ?
-      this.serviceUser.controls.inputVin.value : null,
+      dni : this.formSearchUser.controls.inputDni.value !== ''
+      && this.formSearchUser.controls.inputDni.value !==undefined ? 
+      this.formSearchUser.controls.inputDni.value : null,
+      firstName : this.formSearchUser.controls.inputFirstName.value !== ''
+      && this.formSearchUser.controls.inputFirstName.value !==undefined ? 
+      this.formSearchUser.controls.inputFirstName.value : null,
+      lastName : this.formSearchUser.controls.inputLastName.value !== ''
+      && this.formSearchUser.controls.inputLastName.value !==undefined ? 
+      this.formSearchUser.controls.inputLastName.value : null,
+      numberPlate : this.formSearchUser.controls.inputNumberPlate.value !== ''
+      && this.formSearchUser.controls.inputNumberPlate.value !==undefined ? 
+      this.formSearchUser.controls.inputNumberPlate.value : null,
+      city : this.formSearchUser.controls.inputCity.value !== ''
+      && this.formSearchUser.controls.inputCity.value !==undefined ? 
+      this.formSearchUser.controls.inputCity.value : null,
+      codeStatus : this.formSearchUser.controls.chkActiveStatus.value === true ? true : null,
       
     };
-  }*/
+  }
 
   onClickEditUser(userId: number){
     this.router.navigate(['/user',userId]);

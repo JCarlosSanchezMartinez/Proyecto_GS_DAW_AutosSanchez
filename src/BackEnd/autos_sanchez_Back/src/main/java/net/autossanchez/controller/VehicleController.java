@@ -207,9 +207,7 @@ public class VehicleController {
 	public ResponseEntity<?> searchVehicle(@RequestBody FilterVehicle filter) {
 
 		try {
-			List<Vehicle> rest =  vehicleService.getALL();
-
-			
+			List<Vehicle> rest =  vehicleService.getALL();			
 			if (filter.isCodeStatus()) {
 				rest = vehicleService.getByCodeStatus(filter.isCodeStatus());
 			}
@@ -225,10 +223,6 @@ public class VehicleController {
 			if (filter.getVin() != null) {
 				rest = vehicleService.getByVin(filter.getVin());
 			}
-
-			
-	
-						
 		
 			return ResponseEntity.status(HttpStatus.CREATED).body(rest);			
 			

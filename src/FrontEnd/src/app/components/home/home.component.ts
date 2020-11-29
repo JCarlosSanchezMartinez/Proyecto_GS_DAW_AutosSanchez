@@ -10,10 +10,18 @@ import { VehicleCRUDService } from 'src/app/services/vehicle-crud.service';
 export class HomeComponent implements OnInit {
 
   public vehicleList: Vehicle[] = [];
+  responsiveOptions: any[];
 
 
   constructor(private serviceVehicle: VehicleCRUDService) { 
-   
+    this.responsiveOptions = [
+      
+      {
+          breakpoint: '560px',
+          numVisible: 1,
+          numScroll: 1
+      }
+  ];
   }
 
   ngOnInit(): void {

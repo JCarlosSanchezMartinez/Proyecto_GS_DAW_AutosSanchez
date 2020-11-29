@@ -94,4 +94,8 @@
                 </div>
             </div>
         </div>
+
+
         <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+        <p-progressSpinner class="spinner" *ngIf="loading"></p-progressSpinner>
+        <p-toast [hideTransitionOptions]="'0ms'" position="top-right"></p-toast>

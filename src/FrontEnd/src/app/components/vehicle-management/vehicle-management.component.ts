@@ -2,6 +2,7 @@ import { UpperCasePipe } from '@angular/common';
 import { Component, Input, OnInit} from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
 import { Fuel } from 'src/app/interfaces/fuel';
 import { User } from 'src/app/model/User';
 import { Vehicle } from 'src/app/model/Vehicle';
@@ -12,7 +13,8 @@ import { VehicleCRUDService } from 'src/app/services/vehicle-crud.service';
 @Component({
   selector: 'app-vehicle-management',
   templateUrl: './vehicle-management.component.html',
-  styleUrls: ['./vehicle-management.component.css']
+  styleUrls: ['./vehicle-management.component.css'],
+  providers: [MessageService]
 })
 export class VehiculeManagementComponent implements OnInit {
 
@@ -22,17 +24,19 @@ export class VehiculeManagementComponent implements OnInit {
   public vehicle: Vehicle = new Vehicle();
   public user: User = new User();
   public userList: User[] = [];
-  public chkActiveStatus = null;
-  public chkActiveCarrousel = null;
-  public listFuel = [];
+  public chkActiveStatus = false;
+  public chkActiveCarrousel = false;
+  public listFuel : Fuel[];
   public selectFuel: Fuel;
+
 
 
   constructor(private formBuilder: FormBuilder,
     private serviceVehicle: VehicleCRUDService , 
     private route: ActivatedRoute,
     private serviceUser: UserCrudService,
-    private router: Router) { 
+    private router: Router,
+    private messageService: MessageService) { 
       this.listFuel = [
         {name: 'Diesel', code: 'D'},
         {name: 'Gasolina', code: 'G'},
@@ -73,15 +77,18 @@ export class VehiculeManagementComponent implements OnInit {
             this.formEditVehicle.controls.inputModel.setValue(resp.model);
             this.formEditVehicle.controls.inputYears.setValue(resp.years);
             this.formEditVehicle.controls.inputEngine.setValue(resp.engine);
-            this.formEditVehicle.controls.inputFuel.setValue(resp.fuel);
+            this.selectFuel = resp.fuel;
+            
+
+            this.formEditVehicle.controls.inputFuel.setValue(this.selectFuel);
+            
             this.formEditVehicle.controls.inputKms.setValue(resp.kms);
             this.formEditVehicle.controls.inputColor.setValue(resp.color);
             this.formEditVehicle.controls.inputPrice.setValue(resp.price);
             this.formEditVehicle.controls.inputExtra.setValue(resp.extra);
             this.formEditVehicle.controls.chkActiveStatus.setValue(resp.codeStatus);
             this.formEditVehicle.controls.chkActiveCarrousel.setValue(resp.carrousel);
-            this.formEditVehicle.controls.inputClient.setValue( resp.userId.dni + " - " + 
-              resp.userId.firstName +" "+ resp.userId.lastName);
+            this.formEditVehicle.controls.inputClient.setValue( resp.userId.dni);
           });
         }
       }
@@ -114,13 +121,16 @@ export class VehiculeManagementComponent implements OnInit {
       this.vehicle.brand = this.formEditVehicle.controls.inputBrand.value.toUpperCase()
       this.vehicle.model = this.formEditVehicle.controls.inputModel.value.toUpperCase()
       this.vehicle.years = this.formEditVehicle.controls.inputYears.value
-      this.vehicle.engine = this.formEditVehicle.controls.inputEngine.value    
-      this.vehicle.fuel = this.formEditVehicle.controls.inputFuel.value
+      this.vehicle.engine = this.formEditVehicle.controls.inputEngine.value
+
+      this.selectFuel = this.formEditVehicle.controls.inputFuel.value 
+
+      this.vehicle.fuel = this.selectFuel.name
       this.vehicle.kms = this.formEditVehicle.controls.inputKms.value
       this.vehicle.color =  this.titleCaseWord(this.formEditVehicle.controls.inputColor.value)
       this.vehicle.price = this.formEditVehicle.controls.inputPrice.value
       this.vehicle.extra = this.formEditVehicle.controls.inputExtra.value      
-      this.vehicle.carrousel = this.formEditVehicle.controls.inputExtra.value
+      this.vehicle.carrousel = this.formEditVehicle.controls.chkActiveCarrousel.value
       this.vehicle.codeStatus = this.formEditVehicle.controls.chkActiveStatus.value
 
       this.serviceUser.getUserDni(this.formEditVehicle.controls.inputClient.value).subscribe(data => {this.userList=data});
@@ -130,7 +140,14 @@ export class VehiculeManagementComponent implements OnInit {
       this.route.params.subscribe(
         (params: Params) => {
           this.serviceVehicle.updateVehicle(params.id,this.vehicle).subscribe(
-            data => {alert('Vehiculo Actualizado');  }
+            data => {
+              if (data == null || data == undefined) {
+                this.messageService.add({severity:'error', summary:'Error!', detail:'Se ha producido un error.'});
+              } else {
+                this.messageService.add({severity:'success', summary:'Exito!', detail:'El Vehiculo se Actualizo correctamente.'});
+              }           
+             
+            }
             );
         });
     }
@@ -147,5 +164,9 @@ export class VehiculeManagementComponent implements OnInit {
       if (!word) return word;
       return word[0].toUpperCase() + word.substr(1).toLowerCase();
     }
+ 
+
+ 
 }
+
 

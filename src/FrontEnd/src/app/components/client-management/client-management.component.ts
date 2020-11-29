@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
 import { User } from 'src/app/model/User';
 import { Vehicle } from 'src/app/model/Vehicle';
 import { UserCrudService } from 'src/app/services/user-crud.service';
@@ -44,7 +45,8 @@ export class ClientManagementComponent implements OnInit {
     private serviceVehicle: VehicleCRUDService , 
     private route: ActivatedRoute,
     private serviceUser: UserCrudService,
-    private router: Router) { 
+    private router: Router,
+    private messageService: MessageService) { 
       
     this.columnsTableResult = [
       { field: 'numberPlate', header: 'Matricula' },
@@ -75,7 +77,13 @@ export class ClientManagementComponent implements OnInit {
     this.route.params.subscribe(
       (params: Params) => {
         this.serviceUser.updateUser(params.id,this.user).subscribe(
-          data => {alert('Usuario Creado');  }
+          data => {
+            if (data == null || data == undefined) {
+              this.messageService.add({severity:'error', summary:'Error!', detail:'Se ha producido un error.'});
+            } else {
+              this.messageService.add({severity:'success', summary:'Exito!', detail:'El Usuario se Actualizo correctamente.'});
+            }    
+            }
           );
       });
  

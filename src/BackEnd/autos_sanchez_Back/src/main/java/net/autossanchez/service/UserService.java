@@ -50,4 +50,21 @@ public class UserService {
 	    	UserRepository.delete(user);
 	    }
 
+		// FILTRO
+		/*public List<User> getByNumberPlate(String numberPlate){
+			return UserRepository.findByNumberPlate(numberPlate);
+		}*/	
+		public List<User> getByFirstName(String brand){
+			return UserRepository.findByFirstName(brand);
+		}
+		public List<User> getByLastName(String model){
+			return UserRepository.findByLastName(model);
+		}
+		public List<User> getByCity(String codeStatus){
+			return UserRepository.findByCity(codeStatus);
+		}
+		public List<User> getByCodeStatus(boolean codeStatus){
+			return UserRepository.findByCodeStatus(codeStatus);
+		}
+
 }

@@ -19,7 +19,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import net.autossanchez.dto.Message;
 import net.autossanchez.entity.User;
+import net.autossanchez.entity.Vehicle;
+import net.autossanchez.filter.FilterUser;
+import net.autossanchez.filter.FilterVehicle;
 import net.autossanchez.service.UserService;
+import net.autossanchez.service.VehicleService;
 
 @RestController
 
@@ -29,6 +33,9 @@ public class UserController {
 
 	@Autowired
 	UserService userService;
+
+	@Autowired
+	VehicleService vehicleService;
 
 	@Autowired
 	PasswordEncoder passwordEncoder;
@@ -49,7 +56,6 @@ public class UserController {
 			User rest = userService.getById(id).orElse(null);
 
 			if (rest == null) {
-
 				return ResponseEntity.notFound().build();
 			} else {
 				return ResponseEntity.ok(rest);
@@ -57,7 +63,6 @@ public class UserController {
 		} catch (Exception e) {
 			return (ResponseEntity<Object>) ResponseEntity.notFound();
 		}
-
 	}
 
 	/* Obtenemos todos los USUARIOS por DNI */
@@ -66,9 +71,7 @@ public class UserController {
 		try {
 
 			List<User> rest = userService.getByDni(dni);
-
 			if (rest == null) {
-
 				return ResponseEntity.notFound().build();
 			} else {
 				return ResponseEntity.ok(rest);
@@ -76,7 +79,6 @@ public class UserController {
 		} catch (Exception e) {
 			return (ResponseEntity<Object>) ResponseEntity.notFound();
 		}
-
 	}
 
 	/* Actualizamos USUARIO */
@@ -107,36 +109,61 @@ public class UserController {
 	@PreAuthorize("hasRole('USER')")
 	@DeleteMapping("/deleteUser/{id}")
 	public ResponseEntity<?> delete(@PathVariable int id) {
-		
+
 		try {
 			User user = userService.getById(id).orElse(null);
 			user.setCodeStatus(false);
 			userService.save(user);
-			
+
 		} catch (Exception e) {
 			return (ResponseEntity<Object>) ResponseEntity.notFound();
 		}
-		
 		return ResponseEntity.noContent().build();
-
 	}
-	
+
 	/* Reactivamos USUARIO */
 	@PreAuthorize("hasRole('USER')")
 	@DeleteMapping("/reactivateUser/{id}")
 	public ResponseEntity<?> reactivate(@PathVariable int id) {
-		
+
 		try {
 			User user = userService.getById(id).orElse(null);
 			user.setCodeStatus(true);
 			userService.save(user);
-			
+
 		} catch (Exception e) {
 			return (ResponseEntity<Object>) ResponseEntity.notFound();
 		}
-		
 		return ResponseEntity.noContent().build();
-
 	}
 
+	/* Buscamos USUARIOS por FILTER */
+	@PostMapping("/search")
+	public ResponseEntity<?> searchUser(@RequestBody FilterUser filter) {
+
+		try {
+			List<User> rest = userService.getALL();
+			if (filter.isCodeStatus()) {
+				rest = userService.getByCodeStatus(filter.isCodeStatus());
+			}
+//FALTA NUMBER PLATE
+			if (filter.getFirstName() != null) {
+				rest = userService.getByFirstName(filter.getFirstName());
+			}
+			if (filter.getLastName() != null) {
+				rest = userService.getByLastName(filter.getLastName());
+			}
+			if (filter.getDni() != null) {
+				rest = userService.getByDni(filter.getDni());
+			}
+			if (filter.getCity()!= null) {
+				rest = userService.getByCity(filter.getCity());
+			}
+
+			return ResponseEntity.status(HttpStatus.CREATED).body(rest);
+
+		} catch (Exception e) {
+			return new ResponseEntity(new Message(e.toString()), HttpStatus.NOT_FOUND);
+		}
+	}
 }

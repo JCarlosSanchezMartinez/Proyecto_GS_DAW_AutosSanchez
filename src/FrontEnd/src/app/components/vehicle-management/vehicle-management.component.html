@@ -45,14 +45,10 @@
                                 <input type="text" formControlName="inputEngine" name="engine" class="form-control">
                             </div>
                             <div class="form-group">
-                                <label for="inputState ">Combustible</label>
+                                <label>Combustible</label>
 
-                                <select fromControlName="inputFuel" class="form-control ">
-                                          <option>Diesel</option>
-                                          <option>Gasolina</option>
-                                          <option>Hybrid</option>
-                                          <option>Electrico</option>
-                                        </select>
+                                <p-dropdown [options]="listFuel" formControlName="inputFuel" optionLabel="name"></p-dropdown>
+
                             </div>
                         </div>
                         <div class="col-6">
@@ -81,8 +77,8 @@
                         </div>
                         <div class="col-6">
                             <div class="col-12 pt-3">
-                                <p-checkbox class="p-1" [(ngModel)]="chkActiveCarrousel" formControlName="chkActiveCarrousel" label="Mostrar en Carrusel" [binary]="true"></p-checkbox>
-                                <p-checkbox class="p-1" [(ngModel)]="chkActiveStatus" formControlName="chkActiveStatus" label="Registros Activos" [binary]="true"></p-checkbox>
+                                <p-checkbox class="p-1" formControlName="chkActiveCarrousel" label="Mostrar en Carrusel" [binary]="true"></p-checkbox>
+                                <p-checkbox class="p-1" formControlName="chkActiveStatus" label="Registros Activos" [binary]="true"></p-checkbox>
                             </div>
                         </div>
                     </div>
@@ -113,3 +109,5 @@
     </div>
 
 </div>
+
+<p-toast position="top-right"></p-toast>

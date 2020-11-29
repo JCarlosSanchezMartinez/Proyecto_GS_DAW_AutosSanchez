@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
 import { User } from 'src/app/model/User';
 import { Vehicle } from 'src/app/model/Vehicle';
 import { UserCrudService } from 'src/app/services/user-crud.service';
@@ -44,7 +45,8 @@ export class NewUserComponent implements OnInit {
     private serviceVehicle: VehicleCRUDService , 
     private route: ActivatedRoute,
     private serviceUser: UserCrudService,
-    private router: Router) { 
+    private router: Router,
+    private messageService: MessageService) { 
     
   }
   
@@ -64,17 +66,17 @@ export class NewUserComponent implements OnInit {
 
     console.log(this.formNewUser.value)
 
-    this.serviceUser.addUser(this.user).subscribe(data=>{alert("exito")});
+    this.serviceUser.addUser(this.user).subscribe(data=>{
+      if (data == null || data == undefined) {
+        this.messageService.add({severity:'error', summary:'Error!', detail:'Se ha producido un error.'});
+      } else {
+        this.messageService.add({severity:'success', summary:'Exito!', detail:'Se ha creado el Usuario correctamente.'});
+      }    
+    });
     
   }
 
-  update(client: User){  
-  
-  }
-  delete(){
-
-    
-  }
+ 
     
   ngOnInit() {
 

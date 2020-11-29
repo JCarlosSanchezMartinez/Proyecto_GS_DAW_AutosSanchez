@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { SortEvent } from 'primeng/api';
+import { MessageService, SortEvent } from 'primeng/api';
 import { User } from 'src/app/model/User';
 import { Vehicle } from 'src/app/model/Vehicle';
 import { VehicleCRUDService } from 'src/app/services/vehicle-crud.service';
@@ -31,10 +31,13 @@ export class SearchVehicleComponent implements OnInit {
   public headerModal: string;
   public displayModal = false;
   public messageModal: string;
-  
+  public loading = false;
   isLogged = false;
 
-  constructor(private serviceVehicle: VehicleCRUDService, private router: Router,private confirmationService: ConfirmationService) {
+  constructor(private serviceVehicle: VehicleCRUDService,
+     private router: Router,
+     private confirmationService: ConfirmationService,
+     private messageService: MessageService) {
     this.columnsTableResult = [
       { field: 'numberPlate', header: 'Matricula' },
       { field: 'imagen', header: 'Imagen' },
@@ -79,13 +82,13 @@ export class SearchVehicleComponent implements OnInit {
 
 
   searchVehicle(){
-
+    this.showLoadingSpinner();
     this.paramSearch = this.getParamsSearchVehicle();
     this.serviceVehicle.getListVehicleByFilter(this.paramSearch).subscribe(vehicleFilterList => {
-      if (vehicleFilterList === null ) {
-       this.vehicleList = [];
-       
-   
+      if (vehicleFilterList === null  || vehicleFilterList.length === 0) {        
+        this.hideLoadingSpinner();
+        this.messageService.add({severity:'error', summary:'Error!', detail:'No data found.'});
+        this.vehicleList = [];  
       } else {  
         vehicleFilterList.map(resultSearch => ({numberPlate: resultSearch.numberPlate,
           vin: resultSearch.vin,
@@ -93,10 +96,23 @@ export class SearchVehicleComponent implements OnInit {
           model: resultSearch.model,
           codeStatus: resultSearch.codeStatus}));
         this.vehicleList = vehicleFilterList;
+        this.hideLoadingSpinner();
 
       }
     }, error => {
-     
+      if (error.status === 403) {
+        this.hideLoadingSpinner();
+        this.messageService.add({severity:'error', summary:'Error!', detail:'You have insufficient privileges to perform this action'});
+      } else if (error.status === 401) {
+        this.hideLoadingSpinner();
+        this.messageService.add({severity:'error', summary:'Error!', detail:'Access is denied'});
+      } else if (error.status === 404) {
+        this.hideLoadingSpinner();
+        this.messageService.add({severity:'error', summary:'Error!', detail:'No data found.'});
+      } else {
+        this.hideLoadingSpinner();
+        this.messageService.add({severity:'error', summary:'Error!', detail:'An error occurred, try again later and if the error persists contact the System Administrator'});
+      }
     });
 
 
@@ -194,5 +210,12 @@ showModalConfirmReactivate(id: number) {
   });
 }
 
+showLoadingSpinner() {
+  this.loading = true;
+}
+
+hideLoadingSpinner() {
+  this.loading = false;
+}
 
 }

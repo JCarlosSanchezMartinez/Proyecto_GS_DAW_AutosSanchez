@@ -13,15 +13,16 @@
                             </div>
                             <div class="col-12 col-md-4 form-group">
                                 <label>Nombre</label>
-                                <input type="text" placeholder="Insertar Nombre del cliente" formControlName="inputName" class="form-control">
+                                <input type="text" placeholder="Insertar Nombre del cliente" formControlName="inputFirstName" class="form-control">
+                                <input type="text" placeholder="Insertar Nombre del cliente" formControlName="inputLastName" class="form-control">
                             </div>
                             <div class="col-12 col-md-4 form-group">
                                 <label>Matricula - Bastidor</label>
-                                <input type="text" placeholder="Insertar Matricula o Bastidor del Vehiculo" class="form-control">
+                                <input type="text" placeholder="Insertar Matricula o Bastidor del Vehiculo" formControlName="inputNumberPlate" class="form-control">
                             </div>
                             <div class="col-12 col-md-2 form-group">
                                 <label>Ciudad</label>
-                                <input type="text" placeholder="Insertar Ciudad" class="form-control">
+                                <input type="text" placeholder="Insertar Ciudad" formControlName="inputCity" class="form-control">
                             </div>
 
 
@@ -90,5 +91,5 @@
             </div>
         </div>
         <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
-
-        <p-progressSpinner *ngIf="loading"></p-progressSpinner>
+        <p-progressSpinner class="spinner" *ngIf="loading"></p-progressSpinner>
+        <p-toast [hideTransitionOptions]="'0ms'" position="top-right"></p-toast>

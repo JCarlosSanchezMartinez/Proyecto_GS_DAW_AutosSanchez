@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from 'src/app/model/User';
+import { FilterUser } from '../interfaces/filter-user';
 
 @Injectable({
   providedIn: 'root'
@@ -42,8 +43,11 @@ export class UserCrudService {
   reactivateUser(id: number): Observable<any> {
     return this.http.delete(this.Url + "/reactivateUser/" + id);  
   }
-  getClient(filter: string): Observable<any> {
- 
+  getClient(filter: string): Observable<any> { 
     return this.http.get(this.Url + `/details/${filter}`);
+  }
+  // Busca por filtro un Usuario
+  getListUserByFilter(filter: FilterUser): Observable<any> {
+    return this.http.post(this.Url + "/search/", filter);  
   }
 }
