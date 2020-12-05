@@ -38,7 +38,7 @@
                         <div class="col-6">
                             <div class="form-group">
                                 <label>Año</label>
-                                <p-calendar formControlName="selectSellDate" [showIcon]="true" inputId="icon"></p-calendar>
+                                <p-calendar [(ngModel)]="dateValue" dateFormat="dd/mm/yy" formControlName="selectSellDate" [showIcon]="true" inputId="icon"></p-calendar>
                             </div>
                             <div class="form-group">
                                 <label>Motor</label>
@@ -47,7 +47,7 @@
                             <div class="form-group">
                                 <label>Combustible</label>
 
-                                <p-dropdown [options]="listFuel" formControlName="inputFuel" optionLabel="name"></p-dropdown>
+                                <p-dropdown [(ngModel)]="selectFuel" [options]="listFuel" formControlName="inputFuel" optionLabel="name"></p-dropdown>
 
                             </div>
                         </div>

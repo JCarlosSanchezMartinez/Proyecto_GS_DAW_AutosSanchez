@@ -3,6 +3,7 @@ package net.autossanchez.filter;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import net.autossanchez.entity.User;
 
 
 @Data
@@ -13,6 +14,7 @@ public class FilterVehicle {
 	private String numberPlate;
 	private String brand;
 	private String model;
+	private User user;
 	private boolean codeStatus;
 
 }

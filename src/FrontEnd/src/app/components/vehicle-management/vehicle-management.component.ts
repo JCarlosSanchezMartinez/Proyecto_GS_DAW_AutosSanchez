@@ -4,6 +4,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { Fuel } from 'src/app/interfaces/fuel';
+import { PhotoVehicle } from 'src/app/model/PhotoVehicle';
 import { User } from 'src/app/model/User';
 import { Vehicle } from 'src/app/model/Vehicle';
 import { UserCrudService } from 'src/app/services/user-crud.service';
@@ -27,7 +28,9 @@ export class VehiculeManagementComponent implements OnInit {
   public chkActiveStatus = false;
   public chkActiveCarrousel = false;
   public listFuel : Fuel[];
+  public listPhone: PhotoVehicle;
   public selectFuel: Fuel;
+  public dateValue: Date;
 
 
 
@@ -44,6 +47,9 @@ export class VehiculeManagementComponent implements OnInit {
         {name: 'Electrico', code: 'E'},
   
     ];
+
+    this.listPhone = {id: 1, imagen: '1.jpeg'};
+
    
   }
  
@@ -75,13 +81,9 @@ export class VehiculeManagementComponent implements OnInit {
             this.formEditVehicle.controls.inputVin.setValue(resp.vin);
             this.formEditVehicle.controls.inputBrand.setValue(resp.brand);
             this.formEditVehicle.controls.inputModel.setValue(resp.model);
-            this.formEditVehicle.controls.inputSellDate.setValue(resp.sellDate);
+            this.selectDate(resp.sellDate);
             this.formEditVehicle.controls.inputEngine.setValue(resp.engine);
-            this.selectFuel = resp.fuel;
-            
-
-            this.formEditVehicle.controls.inputFuel.setValue(this.selectFuel);
-            
+            this.selectFuel = this.activeFuel(resp.fuel);          
             this.formEditVehicle.controls.inputKms.setValue(resp.kms);
             this.formEditVehicle.controls.inputColor.setValue(resp.color);
             this.formEditVehicle.controls.inputPrice.setValue(resp.price);
@@ -96,12 +98,28 @@ export class VehiculeManagementComponent implements OnInit {
     this.buildFrom();
     }
 
+
+    activeFuel(fuel: string){
+      var activeFuel: Fuel
+      for (let i = 0; i < this.listFuel.length; i++) {
+        if (this.listFuel[i].name == fuel) {
+          activeFuel = this.listFuel[i]
+        }
+      }
+      return activeFuel;
+    }
+
+    selectDate(date: string){
+      var mydate = new Date(date);
+      this.dateValue = mydate;
+ 
+    }
     cleanAllControls() {
       this.formEditVehicle.controls.inputNumberPlate.setValue(null);
       this.formEditVehicle.controls.inputVin.setValue(null);
       this.formEditVehicle.controls.inputBrand.setValue(null);
       this.formEditVehicle.controls.inputModel.setValue(null);
-      this.formEditVehicle.controls.inputSellDate.setValue(null);
+      this.formEditVehicle.controls.selectSellDate.setValue(null);
       this.formEditVehicle.controls.inputEngine.setValue(null);
       this.formEditVehicle.controls.inputFuel.setValue(null);
       this.formEditVehicle.controls.inputKms.setValue(null);
@@ -120,19 +138,19 @@ export class VehiculeManagementComponent implements OnInit {
       this.vehicle.vin = this.formEditVehicle.controls.inputVin.value.toUpperCase()
       this.vehicle.brand = this.formEditVehicle.controls.inputBrand.value.toUpperCase()
       this.vehicle.model = this.formEditVehicle.controls.inputModel.value.toUpperCase()
-      this.vehicle.sellDate = this.formEditVehicle.controls.inputYears.value
+      this.vehicle.sellDate = this.formEditVehicle.controls.selectSellDate.value
       this.vehicle.engine = this.formEditVehicle.controls.inputEngine.value
 
       this.selectFuel = this.formEditVehicle.controls.inputFuel.value 
 
-      this.vehicle.fuel = this.selectFuel.name
+      this.vehicle.fuel = this.selectFuel.name;
       this.vehicle.kms = this.formEditVehicle.controls.inputKms.value
       this.vehicle.color =  this.titleCaseWord(this.formEditVehicle.controls.inputColor.value)
       this.vehicle.price = this.formEditVehicle.controls.inputPrice.value
       this.vehicle.extra = this.formEditVehicle.controls.inputExtra.value      
       this.vehicle.carrousel = this.formEditVehicle.controls.chkActiveCarrousel.value
       this.vehicle.codeStatus = this.formEditVehicle.controls.chkActiveStatus.value
-
+      this.vehicle.photoId = this.listPhone;
       this.serviceUser.getUserDni(this.formEditVehicle.controls.inputClient.value).subscribe(data => {this.userList=data});
 
       this.vehicle.userId = this.userList[0];

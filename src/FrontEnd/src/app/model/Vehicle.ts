@@ -1,20 +1,21 @@
 import { User } from 'src/app/model/User';
+import { Fuel } from '../interfaces/fuel';
 import { PhotoVehicle } from './PhotoVehicle';
 
 export class Vehicle {
     id:number;
-    vin:String;
-    numberPlate:String;
-    brand:String;
-    model:String;    
+    vin:string;
+    numberPlate:string;
+    brand:string;
+    model:string;    
     sellDate:Date;
-    engine:String;
+    engine:string;
     price:number;
-    fuel:String;
+    fuel:string;
     kms:number;
     chasis:string;
-    color:String;
-    extra:String;
+    color:string;
+    extra:string;
     carrousel:boolean;
     codeStatus:boolean;
     photoId:PhotoVehicle;

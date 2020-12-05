@@ -94,6 +94,7 @@ export class SearchVehicleComponent implements OnInit {
           vin: resultSearch.vin,
           brand: resultSearch.brand,
           model: resultSearch.model,
+          user: resultSearch.user,
           codeStatus: resultSearch.codeStatus}));
         this.vehicleList = vehicleFilterList;
         this.hideLoadingSpinner();
