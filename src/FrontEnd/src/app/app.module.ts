@@ -37,9 +37,11 @@ import { AutoUserComponent } from './components/vehicle-management/new-vehicle/a
 import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
 import { DialogModule } from 'primeng/dialog';
-import {ToastModule} from 'primeng/toast';
+import { ToastModule } from 'primeng/toast';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { GalleriaModule } from 'primeng/galleria';
+import { CalendarModule } from 'primeng/calendar';
+
 
 
 
@@ -94,6 +96,7 @@ import { GalleriaModule } from 'primeng/galleria';
     ToastModule,
     NgbModule,
     GalleriaModule,
+    CalendarModule
     
 
 

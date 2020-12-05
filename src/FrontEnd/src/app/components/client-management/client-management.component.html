@@ -1,37 +1,49 @@
 <div class="jumbotron bg-dark m-3">
-    <div class="row p-2">
+    <div class="row">
         <form name="formClient" [formGroup]="formEditUser">
-            <p class="display-4">
+            <p class="title">
                 Datos Cliente</p>
             <div class="col-12 p-2 border border-info rounded ">
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-7">
                         <div class="row">
-                            <div class="form-group col-12">
+                            <div class="form-group col-12 col-md-4">
                                 <label>Dni</label>
                                 <input type="text" formControlName="inputDni" class="form-control ">
                             </div>
-                            <div class="form-group col-12">
+                            <div class="form-group col-12 col-md-8">
                                 <label>Nombre</label>
                                 <input type="text" formControlName="inputFirstName" class="form-control ">
                             </div>
-                            <div class="form-group col-12">
+                            <div class="form-group col-6">
                                 <label>Apellidos</label>
                                 <input type="text" formControlName="inputLastName" class="form-control ">
                             </div>
-                            <div class="form-group col-12 col-md-8">
+                            <div class="form-group col-12 col-md-6">
                                 <label>Direccion</label>
                                 <input type="text" formControlName="inputAddress" class="form-control ">
                             </div>
-                            <div class="form-group col-12 col-md-4">
-                                <label>Ciudad</label>
-                                <input type="text" formControlName="inputCity" class="form-control ">
+                            <div class="form-group px-0 col-12 col-md-6 ">
+                                <div class="col-12">
+                                    <label>Ciudad</label>
+                                </div>
+                                <div class="col-12">
+                                    <p-dropdown styleClass="p-dropdown-width" [options]="provincesList" [(ngModel)]="selectedActiveProvince" autoWidth="false" placeholder="Seleciona Ciudad" [showClear]="true" formControlName="selectProvince" optionLabel="province" (onChange)="onChangeProvinces(this)"></p-dropdown>
+                                </div>
                             </div>
-                            <div class="form-group col-8 ">
+                            <div class="form-group px-0 col-12 col-md-6">
+                                <div class="col-12">
+                                    <label>Municipio</label>
+                                </div>
+                                <div class="col-12">
+                                    <p-dropdown styleClass="p-dropdown-width" [options]="municipalityList" [(ngModel)]="selectedActiveMunicipality" placeholder="Seleciona Municipio" [showClear]="true" formControlName="selectMunicipality" optionLabel="municipio"></p-dropdown>
+                                </div>
+                            </div>
+                            <div class="form-group col-12 col-md-8">
                                 <label>Email</label>
                                 <input type="text" formControlName="inputEmail" class="form-control ">
                             </div>
-                            <div class="form-group col-4 ">
+                            <div class="form-group col-12 col-md-4">
                                 <label>Telefono</label>
                                 <input type="text" formControlName="inputPhone" class="form-control ">
                             </div>
@@ -39,14 +51,14 @@
                                 <label>Username</label>
                                 <input type="text" formControlName="inputUserName" class="form-control ">
                             </div>
-                            <div class="form-group col-6">
-                                <p-checkbox class="pt-3" [(ngModel)]="chkActiveStatus" formControlName="chkActiveStatus" label="Registros Activos" [binary]="true"></p-checkbox>
+                            <div class="form-group col-6 justify-content-center align-self-center">
+                                <p-checkbox class="mt-2" [(ngModel)]="chkActiveStatus" formControlName="chkActiveStatus" label="Registros Activos" [binary]="true"></p-checkbox>
 
                             </div>
                         </div>
 
                     </div>
-                    <div class="col-6">
+                    <div class="col-5">
                         <div class="col-12 p-3">
                             <p-table [value]="vehicleList" styleClass="p-datatable-responsive-demo" [columns]="columnsTableResult" [paginator]="true" [rows]="5" [showCurrentPageReport]="true" currentPageReportTemplate="Mostrando {last}/{totalRecords} Vehiculos" [rowsPerPageOptions]="[10,25,50]">
                                 <ng-template pTemplate="header" let-columns>

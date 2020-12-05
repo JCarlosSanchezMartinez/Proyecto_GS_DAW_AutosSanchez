@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import net.autossanchez.entity.Municipality;
 import net.autossanchez.entity.User;
 
 
@@ -19,7 +20,7 @@ public interface UserRepository extends JpaRepository<User, Integer>  {
 		//List<User> findByNumberPlate(String numberPlate);
 		List<User> findByFirstName(String brand);
 		List<User> findByLastName(String model);
-		List<User> findByCity(String codeStatus);
+		List<User> findByMunicipality(Municipality municipality);
 		List<User> findByCodeStatus(boolean codeStatus);
 
 

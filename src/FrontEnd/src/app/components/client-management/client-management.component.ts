@@ -2,8 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
+import { Municipality } from 'src/app/model/Municipality';
+import { Provinces } from 'src/app/model/Provinces';
 import { User } from 'src/app/model/User';
 import { Vehicle } from 'src/app/model/Vehicle';
+import { CommonCrudService } from 'src/app/services/common-crud.service';
 import { UserCrudService } from 'src/app/services/user-crud.service';
 import { VehicleCRUDService } from 'src/app/services/vehicle-crud.service';
 
@@ -21,6 +24,11 @@ export class ClientManagementComponent implements OnInit {
   public vehicle: Vehicle = new Vehicle();
  
   public vehicleList: Vehicle[] = [];
+  public provincesList: { id: string; province: string; }[];
+  public municipalityList: { id: string; municipio: string; }[];
+  public selectedActiveProvince: Provinces;
+  public selectedActiveMunicipality: Municipality;
+  
 
   public chkActiveStatus = true;
 
@@ -33,7 +41,8 @@ export class ClientManagementComponent implements OnInit {
     this.formEditUser.addControl('inputFirstName', new FormControl('', Validators.required));
     this.formEditUser.addControl('inputLastName', new FormControl('', Validators.required));
     this.formEditUser.addControl('inputAddress', new FormControl('', Validators.required));
-    this.formEditUser.addControl('inputCity', new FormControl('', Validators.required));
+    this.formEditUser.addControl('selectProvince', new FormControl());
+    this.formEditUser.addControl('selectMunicipality', new FormControl());
     this.formEditUser.addControl('inputPhone', new FormControl('', Validators.required));
     this.formEditUser.addControl('inputEmail', new FormControl('', Validators.required));
     this.formEditUser.addControl('inputUserName', new FormControl('', Validators.required));
@@ -46,19 +55,14 @@ export class ClientManagementComponent implements OnInit {
     private route: ActivatedRoute,
     private serviceUser: UserCrudService,
     private router: Router,
-    private messageService: MessageService) { 
+    private messageService: MessageService,
+    private common: CommonCrudService,) { 
       
     this.columnsTableResult = [
       { field: 'numberPlate', header: 'Matricula' },
       { field: 'brand', header: 'Marca' },
       { field: 'model', header: 'Modelo' },
     ];
-  }
-  
-
-  create(){
-    console.log(this.formEditUser.value)
-    //this.service.addVehicle(this.vehicle).subscribe((data:any)=>{this.vehicle=data})
   }
 
 
@@ -67,7 +71,7 @@ export class ClientManagementComponent implements OnInit {
         this.user.firstName = this.formEditUser.controls.inputFirstName.value
         this.user.lastName = this.formEditUser.controls.inputLastName.value
         this.user.address = this.formEditUser.controls.inputAddress.value
-        this.user.city = this.formEditUser.controls.inputCity.value
+        this.user.municipality = this.selectedActiveMunicipality
         this.user.phone = this.formEditUser.controls.inputPhone.value
         this.user.email = this.formEditUser.controls.inputEmail.value
         this.user.username = this.formEditUser.controls.inputUserName.value
@@ -83,17 +87,16 @@ export class ClientManagementComponent implements OnInit {
             } else {
               this.messageService.add({severity:'success', summary:'Exito!', detail:'El Usuario se Actualizo correctamente.'});
             }    
-            }
-          );
-      });
- 
-    
-
+          }
+        );
+    });
   }
   
     
   ngOnInit() {
-
+    
+    
+    this.buildFrom();
     this.route.params.subscribe(
       (params: Params) => {
         if (params.id !== undefined) {            
@@ -104,7 +107,8 @@ export class ClientManagementComponent implements OnInit {
             this.formEditUser.controls.inputFirstName.setValue(resp.firstName);
             this.formEditUser.controls.inputLastName.setValue(resp.lastName);
             this.formEditUser.controls.inputAddress.setValue(resp.address);
-            this.formEditUser.controls.inputCity.setValue(resp.city);
+            this.selectedActiveProvince = resp.municipality.provinceId
+            this.selectedActiveMunicipality = resp.municipality
             this.formEditUser.controls.inputPhone.setValue(resp.phone);
             this.formEditUser.controls.inputEmail.setValue(resp.email);
             this.formEditUser.controls.inputUserName.setValue(resp.username);
@@ -114,8 +118,8 @@ export class ClientManagementComponent implements OnInit {
         }
       }   
     );
-    this.buildFrom();
-  
+    this.loadCombos();
+    
   }
   
   cleanAllControls() {
@@ -123,7 +127,8 @@ export class ClientManagementComponent implements OnInit {
     this.formEditUser.controls.inputFirstName.setValue(null);
     this.formEditUser.controls.inputLastName.setValue(null);
     this.formEditUser.controls.inputAddress.setValue(null);
-    this.formEditUser.controls.inputCity.setValue(null);
+    this.formEditUser.controls.inputProvince.setValue(null);
+    this.formEditUser.controls.inputMunicipality.setValue(null);
     this.formEditUser.controls.inputPhone.setValue(null);
     this.formEditUser.controls.inputEmail.setValue(null);
     this.formEditUser.controls.inputUserName.setValue(null);
@@ -132,8 +137,27 @@ export class ClientManagementComponent implements OnInit {
 
   }
 
+  onChangeProvinces(event: any){
 
+    this.common.getMunicipalityProvince(this.formEditUser.controls.selectProvince.value.id)
+    .subscribe(municipality => {this.municipalityList = municipality.map(municipio =>
+       ({id: municipio.id,  municipio: municipio.municipio, }) )});
+      this.formEditUser.controls.selectMunicipality.setValue(this.municipalityList);
+  }
 
+  loadCombos(){
+    this.common.getProvinceList().subscribe(provinces => {
+      this.provincesList = provinces.map(province => ({id: province.id,  province: province.province}))
+      //this.formEditUser.controls.selectProvince.setValue(this.provincesList); 
+    
+      
+      console.log(this.selectedActiveProvince);
+      this.common.getMunicipalityProvince(this.selectedActiveProvince.id)
+    .subscribe(municipality => {this.municipalityList = municipality.map(municipio =>
+       ({id: municipio.id,  municipio: municipio.municipio, provinceId: municipio.provinceId}) )});
+      //this.formEditUser.controls.selectMunicipality.setValue(this.municipalityList);
+    });
+  }
   onSubmit(){
   
   } 

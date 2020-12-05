@@ -44,7 +44,7 @@ export class NewVehicleComponent implements OnInit {
     this.formNewVehicle.addControl('inputBrand', new FormControl());
     this.formNewVehicle.addControl('inputModel', new FormControl());
     this.formNewVehicle.addControl('inputClient', new FormControl());
-    this.formNewVehicle.addControl('inputYears', new FormControl());
+    this.formNewVehicle.addControl('selectSellDate', new FormControl());
     this.formNewVehicle.addControl('inputEngine', new FormControl());
     this.formNewVehicle.addControl('inputFuel', new FormControl());
     this.formNewVehicle.addControl('inputKms', new FormControl());
@@ -61,7 +61,7 @@ export class NewVehicleComponent implements OnInit {
     this.formNewVehicle.controls.inputVin.setValue(null);
     this.formNewVehicle.controls.inputBrand.setValue(null);
     this.formNewVehicle.controls.inputModel.setValue(null);
-    this.formNewVehicle.controls.inputYears.setValue(null);
+    this.formNewVehicle.controls.inputSellDate.setValue(null);
     this.formNewVehicle.controls.inputEngine.setValue(null);
     this.formNewVehicle.controls.inputFuel.setValue(null);
     this.formNewVehicle.controls.inputKms.setValue(null);
@@ -78,9 +78,9 @@ export class NewVehicleComponent implements OnInit {
     this.vehicle.vin  =  this.formNewVehicle.controls.inputVin.value.toUpperCase()
     this.vehicle.brand  =  this.formNewVehicle.controls.inputBrand.value.toUpperCase()
     this.vehicle.model  =  this.formNewVehicle.controls.inputModel.value.toUpperCase()
-    this.vehicle.years  =  this.formNewVehicle.controls.inputYears.value
+    this.vehicle.sellDate = this.formNewVehicle.controls.selectSellDate.value
     this.vehicle.engine  =  this.formNewVehicle.controls.inputEngine.value
-    this.vehicle.fuel  =  this.formNewVehicle.controls.inputFuel.value
+    this.vehicle.fuel  =  null
     this.vehicle.kms  =  this.formNewVehicle.controls.inputKms.value
     this.vehicle.color  = this.titleCaseWord(this.formNewVehicle.controls.inputColor.value)
     this.vehicle.price  =  this.formNewVehicle.controls.inputPrice.value
@@ -88,7 +88,7 @@ export class NewVehicleComponent implements OnInit {
     this.vehicle.carrousel =  this.formNewVehicle.controls.chkActiveStatus.value
     this.vehicle.codeStatus =  this.formNewVehicle.controls.chkActiveCarrousel.value
 
-    this.serviceUser.getUserDni(this.formNewVehicle.controls.inputClient.value).subscribe((data:any)=>{this.userList=data})
+    this.serviceUser.getUserDni(this.formNewVehicle.controls.inputClient.value).subscribe((data:any)=>{this.userList=data});
     
     this.vehicle.userId =  this.userList[0];
 

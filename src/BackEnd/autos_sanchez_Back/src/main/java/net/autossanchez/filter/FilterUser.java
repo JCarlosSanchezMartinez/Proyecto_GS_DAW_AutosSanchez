@@ -12,6 +12,6 @@ public class FilterUser {
 	private String firstName;
 	private String lastName;
 	private String numberPlate;
-	private String city;
+	private String municipality;
 	private boolean codeStatus;
 }

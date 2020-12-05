@@ -16,37 +16,38 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@NotNull
-	@Column(unique = true)
+	
+	@Column(columnDefinition = "varchar(9)")
 	private String dni;	
 	
-	@NotNull
+	@Column(nullable = false)
 	private String firstName;
 	
-	@NotNull
+
 	private String lastName;
 	
-	@NotNull
+
 	private String address;
 	
-	@NotNull
-	private String city;
 	
-	@NotNull	
 	private long phone;
 	
-	@NotNull
+	@Column(nullable = false)
 	private String email;
 	
-	@NotNull
-	@Column(unique = true)
+
+	@Column(unique = true,nullable = false, columnDefinition = "varchar(20)")
 	private String username;
 	
-	@NotNull
+	@Column(nullable = false)
 	private String password;
 	
-	@NotNull
+	@Column(nullable = false)
 	private boolean codeStatus;
+	
+	@ManyToOne(fetch = FetchType.EAGER,optional = false)
+	@JoinColumn(name = "municipality_id",nullable = false)
+	private Municipality municipality;
 
 	
 	@NotNull
@@ -54,11 +55,12 @@ public class User {
 	@JoinTable(name = "user_rol", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "rol_id"))
 	private Set<Rol> roles = new HashSet<>();
 	
-	 public User(@NotNull String firstName, @NotNull String username, @NotNull String email, @NotNull String password) {
+	 public User(@NotNull String firstName, @NotNull String username, @NotNull String email, @NotNull String password ,@NotNull Municipality municipality) {
 	        this.firstName = firstName;
 	        this.username = username;
 	        this.email = email;
 	        this.password = password;
+	        this.municipality = municipality;
 	    }
 
 }

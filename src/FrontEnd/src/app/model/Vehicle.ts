@@ -1,13 +1,13 @@
 import { User } from 'src/app/model/User';
+import { PhotoVehicle } from './PhotoVehicle';
 
 export class Vehicle {
     id:number;
     vin:String;
     numberPlate:String;
     brand:String;
-    model:String;
-    imagen:String;
-    years:number;
+    model:String;    
+    sellDate:Date;
     engine:String;
     price:number;
     fuel:String;
@@ -15,7 +15,9 @@ export class Vehicle {
     chasis:string;
     color:String;
     extra:String;
-    userId:User;
     carrousel:boolean;
     codeStatus:boolean;
+    photoId:PhotoVehicle;
+    userId:User;
+  
 }

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import net.autossanchez.entity.Municipality;
 import net.autossanchez.entity.User;
 import net.autossanchez.entity.Vehicle;
 import net.autossanchez.repository.UserRepository;
@@ -60,9 +61,10 @@ public class UserService {
 		public List<User> getByLastName(String model){
 			return UserRepository.findByLastName(model);
 		}
-		public List<User> getByCity(String codeStatus){
-			return UserRepository.findByCity(codeStatus);
+		public List<User> getByMunicipality(Municipality municipality){
+			return UserRepository.findByMunicipality(municipality);
 		}
+					
 		public List<User> getByCodeStatus(boolean codeStatus){
 			return UserRepository.findByCodeStatus(codeStatus);
 		}

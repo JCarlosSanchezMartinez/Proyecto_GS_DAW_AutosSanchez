@@ -54,7 +54,7 @@ export class VehiculeManagementComponent implements OnInit {
     this.formEditVehicle.addControl('inputBrand', new FormControl());
     this.formEditVehicle.addControl('inputModel', new FormControl());
     this.formEditVehicle.addControl('inputClient', new FormControl());
-    this.formEditVehicle.addControl('inputYears', new FormControl());
+    this.formEditVehicle.addControl('selectSellDate', new FormControl());
     this.formEditVehicle.addControl('inputEngine', new FormControl());
     this.formEditVehicle.addControl('inputFuel', new FormControl());
     this.formEditVehicle.addControl('inputKms', new FormControl());
@@ -75,7 +75,7 @@ export class VehiculeManagementComponent implements OnInit {
             this.formEditVehicle.controls.inputVin.setValue(resp.vin);
             this.formEditVehicle.controls.inputBrand.setValue(resp.brand);
             this.formEditVehicle.controls.inputModel.setValue(resp.model);
-            this.formEditVehicle.controls.inputYears.setValue(resp.years);
+            this.formEditVehicle.controls.inputSellDate.setValue(resp.sellDate);
             this.formEditVehicle.controls.inputEngine.setValue(resp.engine);
             this.selectFuel = resp.fuel;
             
@@ -101,7 +101,7 @@ export class VehiculeManagementComponent implements OnInit {
       this.formEditVehicle.controls.inputVin.setValue(null);
       this.formEditVehicle.controls.inputBrand.setValue(null);
       this.formEditVehicle.controls.inputModel.setValue(null);
-      this.formEditVehicle.controls.inputYears.setValue(null);
+      this.formEditVehicle.controls.inputSellDate.setValue(null);
       this.formEditVehicle.controls.inputEngine.setValue(null);
       this.formEditVehicle.controls.inputFuel.setValue(null);
       this.formEditVehicle.controls.inputKms.setValue(null);
@@ -120,7 +120,7 @@ export class VehiculeManagementComponent implements OnInit {
       this.vehicle.vin = this.formEditVehicle.controls.inputVin.value.toUpperCase()
       this.vehicle.brand = this.formEditVehicle.controls.inputBrand.value.toUpperCase()
       this.vehicle.model = this.formEditVehicle.controls.inputModel.value.toUpperCase()
-      this.vehicle.years = this.formEditVehicle.controls.inputYears.value
+      this.vehicle.sellDate = this.formEditVehicle.controls.inputYears.value
       this.vehicle.engine = this.formEditVehicle.controls.inputEngine.value
 
       this.selectFuel = this.formEditVehicle.controls.inputFuel.value 

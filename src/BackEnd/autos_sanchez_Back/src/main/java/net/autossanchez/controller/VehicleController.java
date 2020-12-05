@@ -1,6 +1,8 @@
 package net.autossanchez.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,6 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
 import lombok.RequiredArgsConstructor;
 import net.autossanchez.dto.Message;
 import net.autossanchez.dto.VehicleDto;
+import net.autossanchez.entity.PhotoVehicle;
 import net.autossanchez.entity.User;
 import net.autossanchez.entity.Vehicle;
 import net.autossanchez.filter.FilterVehicle;
@@ -128,10 +131,10 @@ public class VehicleController {
 	/* Creamos VEHICULO */
 	
 	@PostMapping("/addVehicle")
-	public ResponseEntity<?> create(@RequestBody Vehicle vehicle) {
-
-		try {
-			Vehicle rest = vehicleService.save(vehicle);
+	public ResponseEntity<?> create(@RequestBody Vehicle vehicle) {		
+		
+		try {		
+			Vehicle rest = vehicleService.save(vehicle);			
 			return ResponseEntity.status(HttpStatus.CREATED).body(rest);
 		} catch (Exception e) {
 			return new ResponseEntity(new Message(e.toString()), HttpStatus.NOT_FOUND);
@@ -151,6 +154,7 @@ public class VehicleController {
 			rest.setNumberPlate(vehicle.getNumberPlate());
 			rest.setBrand(vehicle.getBrand());
 			rest.setModel(vehicle.getModel());
+			rest.setSellDate(vehicle.getSellDate());
 			rest.setEngine(vehicle.getEngine());
 			rest.setPrice(vehicle.getPrice());
 			rest.setFuel(vehicle.getFuel());

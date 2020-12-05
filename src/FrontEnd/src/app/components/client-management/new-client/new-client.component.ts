@@ -33,7 +33,8 @@ export class NewUserComponent implements OnInit {
     this.formNewUser.addControl('inputFirstName', new FormControl('', Validators.required));
     this.formNewUser.addControl('inputLastName', new FormControl('', Validators.required));
     this.formNewUser.addControl('inputAddress', new FormControl('', Validators.required));
-    this.formNewUser.addControl('inputCity', new FormControl('', Validators.required));
+    this.formNewUser.addControl('inputProvince', new FormControl('', Validators.required));
+    this.formNewUser.addControl('inputMunicipality', new FormControl('', Validators.required));
     this.formNewUser.addControl('inputPhone', new FormControl('', Validators.required));
     this.formNewUser.addControl('inputEmail', new FormControl('', Validators.required));
     this.formNewUser.addControl('inputUserName', new FormControl('', Validators.required));
@@ -57,7 +58,7 @@ export class NewUserComponent implements OnInit {
     this.user.firstName =  this.formNewUser.controls.inputFirstName.value
     this.user.lastName =  this.formNewUser.controls.inputLastName.value
     this.user.address =  this.formNewUser.controls.inputAddress.value
-    this.user.city =  this.formNewUser.controls.inputCity.value
+    this.user.municipality =  this.formNewUser.controls.inputMunicipality.value
     this.user.phone =  this.formNewUser.controls.inputPhone.value
     this.user.email =  this.formNewUser.controls.inputEmail.value
     this.user.username =  this.formNewUser.controls.inputUserName.value
@@ -90,7 +91,8 @@ export class NewUserComponent implements OnInit {
     this.formNewUser.controls.inputFirstName.setValue(null);
     this.formNewUser.controls.inputLastName.setValue(null);
     this.formNewUser.controls.inputAddress.setValue(null);
-    this.formNewUser.controls.inputCity.setValue(null);
+    this.formNewUser.controls.inputMunicipality.setValue(null);
+    this.formNewUser.controls.inputProvince.setValue(null);
     this.formNewUser.controls.inputPhone.setValue(null);
     this.formNewUser.controls.inputEmail.setValue(null);
     this.formNewUser.controls.inputUserName.setValue(null);

@@ -3,6 +3,6 @@ export interface FilterUser {
     firstName?:string;
     lastName?:string;
     numberPlate?:string;
-    city?:string;
+    municipality?:string;
     codeStatus?:boolean;
 }

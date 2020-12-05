@@ -5,12 +5,13 @@ import { VehicleCRUDService } from 'src/app/services/vehicle-crud.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
 
   public vehicleList: Vehicle[] = [];
   responsiveOptions: any[];
+  public imagen: String[]
 
 
   constructor(private serviceVehicle: VehicleCRUDService) { 
@@ -25,7 +26,11 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.serviceVehicle.getVehicleCarrousel().subscribe((data:any)=>{this.vehicleList=data})
+    this.serviceVehicle.getVehicleCarrousel().subscribe((data:any)=>{this.vehicleList=data});
+    for (let index = 0; index < this.vehicleList.length; index++) {
+      this.imagen.push();
+      
+    }
   }
 
 }

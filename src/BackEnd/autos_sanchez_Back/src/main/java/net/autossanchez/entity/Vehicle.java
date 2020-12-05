@@ -1,12 +1,20 @@
 package net.autossanchez.entity;
 
+import java.util.Date;
+
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.validation.constraints.NotNull;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,7 +27,7 @@ import lombok.NoArgsConstructor;
 public class Vehicle {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	private String vin;
@@ -30,30 +38,33 @@ public class Vehicle {
 	
 	private String model;
 	
-	private String imagen;
-	
-	private int years;
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	private Date sellDate;
 	
 	private String engine;
 	
-	private int price;
+	private long price;
 	
 	private String fuel;
 	
 	private String color;
 	
-	private int kms;
+	private long kms;
 	
 	private String chasis;
 	
 	private String extra;
-	@NotNull
+
 	private boolean carrousel;
-	@NotNull
+
 	private boolean codeStatus;
 	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "photo_id")
+	private PhotoVehicle photoId;
 	
-	 @ManyToOne(fetch = FetchType.EAGER,optional = false)
-	 @JoinColumn(name = "user_id",nullable = false)
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "user_id")
 	private User userId;
 }

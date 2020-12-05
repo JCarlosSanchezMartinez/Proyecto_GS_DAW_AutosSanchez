@@ -8,6 +8,7 @@ import javax.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import net.autossanchez.entity.Municipality;
 
 @Data @NoArgsConstructor @AllArgsConstructor
 public class UserNew {
@@ -21,5 +22,7 @@ public class UserNew {
 	@NotBlank
 	private String password;	
 	private Set<String> roles = new HashSet<>();
-
+	
+	
+	private Municipality municipality;
 }

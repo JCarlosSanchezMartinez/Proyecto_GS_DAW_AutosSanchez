@@ -52,19 +52,20 @@ export class SearchClientComponent implements OnInit {
     this.formSearchUser.addControl('inputFirstName', new FormControl('', Validators.required));
     this.formSearchUser.addControl('inputLastName', new FormControl('', Validators.required));
     this.formSearchUser.addControl('inputNumberPlate', new FormControl('', Validators.required));
-    this.formSearchUser.addControl('inputCity', new FormControl('', Validators.required));
+    this.formSearchUser.addControl('inputProvince', new FormControl('', Validators.required));
+    this.formSearchUser.addControl('inputMunicipality', new FormControl('', Validators.required));
     this.formSearchUser.addControl('chkActiveStatus', new FormControl(true));    
   }
 
   delete(id: number) {
     this.serviceUser.deleteUser(id).subscribe(
-      data => {alert('Usuario Desactivado');  }
+      data => { this.messageService.add({severity:'success', summary:'Exito!', detail:'Se ha BORRADO el Usuario correctamente.'}); }
       );
   }
 
   reactivate(id: number) {
     this.serviceUser.reactivateUser(id).subscribe(
-      data => {alert('Usuario Reactivado');  }
+      data => {this.messageService.add({severity:'success', summary:'Exito!', detail:'Se ha ACTIVADO el Usuario correctamente.'}); }
       );    
 
   }
@@ -80,8 +81,10 @@ export class SearchClientComponent implements OnInit {
     this.formSearchUser.controls.inputDni.setValue(null);
     this.formSearchUser.controls.inputFirstName.setValue(null);
     this.formSearchUser.controls.inputLastName.setValue(null);
-    this.formSearchUser.controls.inputVehicle.setValue(null);
-    this.formSearchUser.controls.inputCity.setValue(null);
+    this.formSearchUser.controls.inputNumberPlate.setValue(null);
+    this.formSearchUser.controls.inputProvince.setValue(null);
+    this.formSearchUser.controls.inputMunicipality.setValue(null);
+    this.formSearchUser.controls.chkActiveStatus.setValue(true);
 
   }
 
@@ -135,9 +138,9 @@ export class SearchClientComponent implements OnInit {
       numberPlate : this.formSearchUser.controls.inputNumberPlate.value !== ''
       && this.formSearchUser.controls.inputNumberPlate.value !==undefined ? 
       this.formSearchUser.controls.inputNumberPlate.value : null,
-      city : this.formSearchUser.controls.inputCity.value !== ''
-      && this.formSearchUser.controls.inputCity.value !==undefined ? 
-      this.formSearchUser.controls.inputCity.value : null,
+      municipality : this.formSearchUser.controls.inputMunicipality.value !== ''
+      && this.formSearchUser.controls.inputMunicipality.value !==undefined ? 
+      this.formSearchUser.controls.inputMunicipality.value : null,
       codeStatus : this.formSearchUser.controls.chkActiveStatus.value === true ? true : null,
       
     };
@@ -148,23 +151,25 @@ export class SearchClientComponent implements OnInit {
   }
   
   showModalConfirmDelete(id: number) {
-  
+    this.showLoadingSpinner();
     this.confirmationService.confirm({
       message: '¿Desea Borrar el Usuario?',
       header: 'Confirmacion Reactivacion',
       icon: 'fas fa-question-circle',
-      accept: () => { this.delete(id);  this.showLoadingSpinner(); }
+      accept: () => { this.delete(id);/* window.location.reload();*/  }
     });
     this.hideLoadingSpinner();
   }
 
   showModalConfirmReactivate(id: number) {
+    this.showLoadingSpinner();
     this.confirmationService.confirm({
       message: '¿Desea Reactivar el Usuario?',
       header: 'Confirmacion Eliminar',
       icon: 'fas fa-question-circle',
-      accept: () => { this.reactivate(id); window.onload; }
+      accept: () => { this.reactivate(id);/* window.location.reload();*/ }
     });
+    this.hideLoadingSpinner();
   }
 
   // ORDENACION DE COLUMNAS

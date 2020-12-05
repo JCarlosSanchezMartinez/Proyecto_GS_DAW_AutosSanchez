@@ -19,9 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import net.autossanchez.dto.Message;
 import net.autossanchez.entity.User;
-import net.autossanchez.entity.Vehicle;
 import net.autossanchez.filter.FilterUser;
-import net.autossanchez.filter.FilterVehicle;
 import net.autossanchez.service.UserService;
 import net.autossanchez.service.VehicleService;
 
@@ -93,11 +91,10 @@ public class UserController {
 			rest.setFirstName(user.getFirstName());
 			rest.setLastName(user.getLastName());
 			rest.setAddress(user.getAddress());
-			rest.setCity(user.getCity());
+			rest.setMunicipality(user.getMunicipality());
 			rest.setPhone(user.getPhone());
 			rest.setEmail(user.getEmail());
 			rest.setUsername(user.getUsername());
-			rest.setPassword(passwordEncoder.encode(user.getPassword()));
 			rest.setCodeStatus(user.isCodeStatus());
 			userService.save(rest);
 			return ResponseEntity.ok(rest);
@@ -118,7 +115,7 @@ public class UserController {
 		} catch (Exception e) {
 			return (ResponseEntity<Object>) ResponseEntity.notFound();
 		}
-		return ResponseEntity.noContent().build();
+		return new ResponseEntity( HttpStatus.OK);
 	}
 
 	/* Reactivamos USUARIO */
@@ -134,7 +131,7 @@ public class UserController {
 		} catch (Exception e) {
 			return (ResponseEntity<Object>) ResponseEntity.notFound();
 		}
-		return ResponseEntity.noContent().build();
+		return new ResponseEntity( HttpStatus.OK);
 	}
 
 	/* Buscamos USUARIOS por FILTER */
@@ -155,9 +152,6 @@ public class UserController {
 			}
 			if (filter.getDni() != null) {
 				rest = userService.getByDni(filter.getDni());
-			}
-			if (filter.getCity()!= null) {
-				rest = userService.getByCity(filter.getCity());
 			}
 
 			return ResponseEntity.status(HttpStatus.CREATED).body(rest);
