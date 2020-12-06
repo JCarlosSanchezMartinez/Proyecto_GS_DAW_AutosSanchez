@@ -5,6 +5,7 @@ export class User {
     dni:string;
     firstName:string;
     lastName:string;
+    label:string;
     address:string;
     municipality:Municipality;
     phone:number;

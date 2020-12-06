@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormControlName, FormGroup } from '@angular/forms';
+import { FormControl, FormControlName, FormGroup } from '@angular/forms';
 import { User } from 'src/app/model/User';
 import { UserCrudService } from 'src/app/services/user-crud.service';
 
@@ -9,30 +9,50 @@ import { UserCrudService } from 'src/app/services/user-crud.service';
   styleUrls: ['./auto-user.component.css']
 })
 export class AutoUserComponent implements OnInit {
-
-
   @Input() parentFormGroup: FormGroup;
-  @Input() codeStatus: string;
-
-  @Input() isMultiple: boolean;
-  @Input() inputClient: FormControlName;
-  filteredElemnent: User[];
-  form: FormGroup;
+  @Input() controlName: FormControlName;
+  
   listClient: User[];
+  filteredElemnent: User[];
+
   init = false;
   minLength: number;
   notFoundMessage = 'No Data Found';
 
-  constructor(private commonService: UserCrudService) { }
+  constructor(private commonService: UserCrudService) {
+    
+    
+      
+   }
 
   ngOnInit() {
-    this.minLength = 1;
-  }
-  methodAutocomplete(event) {
-    this.commonService.getClient(event.query).subscribe(data => {
-        this.listClient = data;
 
+    
+
+    this.commonService.getUserList().subscribe(client => {
+      this.listClient = client;
     });
-}
+  }
+
+  filterCountry(event) {
+    let filtered : any[] = [];
+    let query = event.query;
+    const countQuery = query.length;
+   
+      for(let i = 0; i < this.listClient.length; i++) {
+        let client = this.listClient[i];
+        
+        if (client.dni.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+            filtered.push(client);            
+            this.filteredElemnent = filtered;
+        }
+        if (client.firstName.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+          filtered.push(client);
+          this.filteredElemnent = filtered;
+        }
+      }    
+    }
 
 }
+
+

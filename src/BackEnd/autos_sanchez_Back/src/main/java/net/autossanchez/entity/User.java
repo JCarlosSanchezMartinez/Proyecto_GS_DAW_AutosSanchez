@@ -23,18 +23,16 @@ public class User {
 	@Column(nullable = false)
 	private String firstName;
 	
-
 	private String lastName;
 	
+	private String label;	
 
-	private String address;
-	
+	private String address;	
 	
 	private long phone;
 	
 	@Column(nullable = false)
-	private String email;
-	
+	private String email;	
 
 	@Column(unique = true,nullable = false, columnDefinition = "varchar(20)")
 	private String username;
@@ -48,19 +46,24 @@ public class User {
 	@ManyToOne(fetch = FetchType.EAGER,optional = false)
 	@JoinColumn(name = "municipality_id",nullable = false)
 	private Municipality municipality;
-
 	
 	@NotNull
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "user_rol", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "rol_id"))
 	private Set<Rol> roles = new HashSet<>();
 	
-	 public User(@NotNull String firstName, @NotNull String username, @NotNull String email, @NotNull String password ,@NotNull Municipality municipality) {
+	public User(@NotNull String firstName, @NotNull String username, @NotNull String email, @NotNull String password ,@NotNull Municipality municipality) {
 	        this.firstName = firstName;
 	        this.username = username;
 	        this.email = email;
 	        this.password = password;
 	        this.municipality = municipality;
-	    }
+	}
+	
+	public String addLabel(User user) {
+		label = user.getDni() + " - " + user.getFirstName() + " " + user.getLastName();
+		return label;
+		
+	}
 
-}
+	};

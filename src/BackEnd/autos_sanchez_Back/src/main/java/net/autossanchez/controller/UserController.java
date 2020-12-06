@@ -90,6 +90,7 @@ public class UserController {
 			rest.setDni(user.getDni());
 			rest.setFirstName(user.getFirstName());
 			rest.setLastName(user.getLastName());
+			rest.setLabel(user.addLabel(user));
 			rest.setAddress(user.getAddress());
 			rest.setMunicipality(user.getMunicipality());
 			rest.setPhone(user.getPhone());

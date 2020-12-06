@@ -1,8 +1,6 @@
 <form [formGroup]="parentFormGroup">
-    <span class="ui-fluid">
 
-<p-autoComplete  formControlName="inputClient" [suggestions]="listClient"  (completeMethod)="methodAutocomplete($event)"></p-autoComplete>
-    </span>
-
+    <p-autoComplete [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}" [formControlName]="controlName" [suggestions]="filteredElemnent" field="label" (completeMethod)="filterCountry($event)" [minLength]="1" [emptyMessage]=notFoundMessage>
+    </p-autoComplete>
 
 </form>

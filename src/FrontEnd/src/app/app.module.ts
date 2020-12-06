@@ -41,6 +41,7 @@ import { ToastModule } from 'primeng/toast';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { GalleriaModule } from 'primeng/galleria';
 import { CalendarModule } from 'primeng/calendar';
+import { InputTextareaModule } from 'primeng/inputtextarea';
 
 
 
@@ -96,7 +97,8 @@ import { CalendarModule } from 'primeng/calendar';
     ToastModule,
     NgbModule,
     GalleriaModule,
-    CalendarModule
+    CalendarModule,
+    InputTextareaModule
     
 
 
