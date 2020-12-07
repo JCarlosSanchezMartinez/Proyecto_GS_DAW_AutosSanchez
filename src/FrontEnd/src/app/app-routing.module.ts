@@ -16,19 +16,22 @@ import { NewUserComponent } from './components/client-management/new-client/new-
 
 
 const routes: Routes = [ 
+      {path: '', component: HomeComponent},
+
       {path: 'home', component: HomeComponent},
       {path: 'historia', component: HistoriaComponent},
       {path: 'contacto', component: ManagementComponent ,canActivate: [guard], data: { expectedRol: ['admin', 'user'] } },
       {path: 'login', component: LoginComponent},
-      {path: 'vehicle', component: SearchVehicleComponent ,canActivate: [guard], data: { expectedRol: ['admin', 'user'] } },
-      {path: 'vehicle/:id', component: VehiculeManagementComponent},
-      {path: 'newVehicle' , component: NewVehicleComponent},
+      {path: 'vehicle', component: SearchVehicleComponent ,canActivate: [guard], data: { expectedRol: ['admin'] } },
+      {path: 'vehicle/:id', component: VehiculeManagementComponent,canActivate: [guard], data: { expectedRol: ['admin']}},
+      {path: 'newVehicle' , component: NewVehicleComponent,canActivate: [guard], data: { expectedRol: ['admin']}},
       {path: 'user', component: SearchClientComponent},
-      {path: 'newUser', component: NewUserComponent},
+      {path: 'newUser', component: NewUserComponent,canActivate: [guard], data: { expectedRol: ['admin']}},
       {path: 'user/:id', component: ClientManagementComponent},
-      {path: 'cliente',component: SearchClientComponent},
+      {path: 'cliente',component: SearchClientComponent,canActivate: [guard], data: { expectedRol: ['admin']}},
       {path: 'register',component: RegisterComponent},
-      {path: 'gallery',component: GalleryManagementComponent}  
+      {path: 'gallery',component: GalleryManagementComponent},
+      { path: '**', redirectTo: '', pathMatch: 'full' } 
 ];
 
 @NgModule({

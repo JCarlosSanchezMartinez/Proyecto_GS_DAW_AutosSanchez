@@ -1,34 +1,38 @@
-<div class="row jumbotron m-3 bg-dark align-content-center">
+<div class="row jumbotron m-3 pt-3 bg-dark align-content-center">
+    <p class="title">
+        Buscador</p>
     <div class="row border border-info rounded">
-        <p class="title m-2 pl-1">Buscador</p>
-        <div class="col-12">
+        <div class="col-12 pt-3">
             <div class="row">
                 <div class="col-12">
                     <form [formGroup]="formSearchUser">
 
                         <div class="row">
-                            <div class="col-12 col-md-2 form-group">
+                            <div class="col-12 col-md-5 form-group">
                                 <label>DNI</label>
-                                <input type="text" placeholder="Insertar Dni del Cliente" formControlName="inputDni" class="form-control">
+                                <app-auto-user [parentFormGroup]="formSearchUser" [controlName]='SearchClient'></app-auto-user>
                             </div>
-                            <div class="col-12 col-md-4 form-group">
-                                <label>Nombre</label>
-                                <input type="text" placeholder="Insertar Nombre del cliente" formControlName="inputFirstName" class="form-control">
-                                <input type="text" placeholder="Insertar Nombre del cliente" formControlName="inputLastName" class="form-control">
-                            </div>
-                            <div class="col-12 col-md-4 form-group">
+
+                            <div class="col-12 col-md-3 form-group">
                                 <label>Matricula - Bastidor</label>
                                 <input type="text" placeholder="Insertar Matricula o Bastidor del Vehiculo" formControlName="inputNumberPlate" class="form-control">
                             </div>
-                            <div class="col-12 col-md-2 form-group">
-                                <label>Ciudad</label>
-                                <input type="text" placeholder="Insertar Ciudad" formControlName="inputProvince" class="form-control">
+                            <div class="col-12 col-md-2 px-0 form-group">
+                                <div class="col-12">
+                                    <label>Ciudad</label>
+                                </div>
+                                <div class="col-12">
+                                    <p-dropdown styleClass="p-dropdown-width" [options]="provincesList" [(ngModel)]="selectedActiveProvince" autoWidth="false" placeholder="Seleciona Ciudad" [showClear]="true" formControlName="selectProvince" optionLabel="province" (onChange)="onChangeProvinces(this)"></p-dropdown>
+                                </div>
                             </div>
-                            <div class="col-12 col-md-2 form-group">
-                                <label>Municipio</label>
-                                <input type="text" placeholder="Insertar Ciudad" formControlName="inputMunicipality" class="form-control">
+                            <div class="col-12 col-md-2 px-0 form-group">
+                                <div class="col-12">
+                                    <label>Municipio</label>
+                                </div>
+                                <div class="col-12">
+                                    <p-dropdown styleClass="p-dropdown-width" [options]="municipalityList" [(ngModel)]="selectedActiveMunicipality" placeholder="Seleciona Municipio" [showClear]="true" formControlName="selectMunicipality" optionLabel="municipio"></p-dropdown>
+                                </div>
                             </div>
-
 
                         </div>
 

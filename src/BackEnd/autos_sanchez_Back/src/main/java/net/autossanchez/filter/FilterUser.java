@@ -3,15 +3,17 @@ package net.autossanchez.filter;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import net.autossanchez.entity.Municipality;
+import net.autossanchez.entity.Provinces;
+import net.autossanchez.entity.User;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class FilterUser {
-	private String dni;
-	private String firstName;
-	private String lastName;
+	private User dni;
 	private String numberPlate;
-	private String municipality;
+	private Municipality municipality;
+	private Provinces province;
 	private boolean codeStatus;
 }

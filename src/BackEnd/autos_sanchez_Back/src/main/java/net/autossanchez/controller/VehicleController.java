@@ -97,6 +97,7 @@ public class VehicleController {
 	}
 
 	/* Obtenemos todos los VEHICULOS por NUMBER PLATE */
+	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/details/{numberPlate}")
 	public ResponseEntity<Vehicle> getByNumberPlate(@PathVariable("numberPlate") String numberPlate) {
 		try {
@@ -111,6 +112,7 @@ public class VehicleController {
 	}
 
 	/* Obtenemos todos los VEHICULOS del USUARIO por USER_ID */
+	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/vehicle/{userId}")
 	public ResponseEntity<Vehicle> getVehicleByUserId(@PathVariable("userId") int userId) {
 		try {
@@ -129,7 +131,7 @@ public class VehicleController {
 	}
 
 	/* Creamos VEHICULO */
-	
+	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping("/addVehicle")
 	public ResponseEntity<?> create(@RequestBody Vehicle vehicle) {		
 		
@@ -142,7 +144,7 @@ public class VehicleController {
 	}
 
 	/* Actualizamos VEHICULO */
-	@PreAuthorize("hasRole('USER')")
+	@PreAuthorize("hasRole('ADMIN')")
 	@PutMapping("/updateVehicle/{id}")
 	public ResponseEntity<Vehicle> update(@PathVariable("id") int id, @RequestBody Vehicle vehicle) {
 
@@ -175,7 +177,7 @@ public class VehicleController {
 	}
 
 	/* Eliminamos VEHICULO */
-	@PreAuthorize("hasRole('USER')")
+	@PreAuthorize("hasRole('ADMIN')")
 	@DeleteMapping("/deleteVehicle/{id}")
 	public ResponseEntity<?> delete(@PathVariable long id) {
 		
@@ -191,7 +193,7 @@ public class VehicleController {
 	}
 	
 	/* Reactivamos VEHICULO */
-	@PreAuthorize("hasRole('USER')")
+	@PreAuthorize("hasRole('ADMIN')")
 	@DeleteMapping("/reactivateVehicle/{id}")
 	public ResponseEntity<?> reactivate(@PathVariable long id) {
 		
@@ -207,6 +209,7 @@ public class VehicleController {
 	}
 	
 	/* Buscamos VEHICULOS por FILTER */
+	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping("/search")
 	public ResponseEntity<?> searchVehicle(@RequestBody FilterVehicle filter) {
 

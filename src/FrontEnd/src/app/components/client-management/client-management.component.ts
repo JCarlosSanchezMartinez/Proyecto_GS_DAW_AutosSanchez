@@ -142,7 +142,7 @@ export class ClientManagementComponent implements OnInit {
     this.common.getMunicipalityProvince(this.formEditUser.controls.selectProvince.value.id)
     .subscribe(municipality => {this.municipalityList = municipality.map(municipio =>
        ({id: municipio.id,  municipio: municipio.municipio, }) )});
-      this.formEditUser.controls.selectMunicipality.setValue(this.municipalityList);
+     
   }
 
   loadCombos(){

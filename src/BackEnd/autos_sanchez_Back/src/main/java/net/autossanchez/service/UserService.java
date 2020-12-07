@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import net.autossanchez.entity.Municipality;
+import net.autossanchez.entity.Provinces;
 import net.autossanchez.entity.User;
 import net.autossanchez.entity.Vehicle;
 import net.autossanchez.repository.UserRepository;
@@ -52,18 +53,13 @@ public class UserService {
 	    }
 
 		// FILTRO
-		/*public List<User> getByNumberPlate(String numberPlate){
-			return UserRepository.findByNumberPlate(numberPlate);
-		}*/	
-		public List<User> getByFirstName(String brand){
-			return UserRepository.findByFirstName(brand);
-		}
-		public List<User> getByLastName(String model){
-			return UserRepository.findByLastName(model);
-		}
+		
+
+
 		public List<User> getByMunicipality(Municipality municipality){
 			return UserRepository.findByMunicipality(municipality);
 		}
+
 					
 		public List<User> getByCodeStatus(boolean codeStatus){
 			return UserRepository.findByCodeStatus(codeStatus);

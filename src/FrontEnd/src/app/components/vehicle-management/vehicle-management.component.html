@@ -49,7 +49,7 @@
                             <label>Extras</label>
                         </div>
                         <div class="col-12 form-group">
-                            <textarea [(ngModel)]="inputTextArea" [rows]="5" pInputTextarea></textarea>
+                            <textarea [rows]="5" pInputTextarea></textarea>
                         </div>
 
                     </div>
@@ -85,6 +85,18 @@
                         <div class="col-12 form-group pt-3">
                             <p-checkbox class="p-1" formControlName="chkActiveCarrousel" label="Mostrar en Carrusel" [binary]="true"></p-checkbox>
                             <p-checkbox class="p-1 pl-3" formControlName="chkActiveStatus" label="Registros Activos" [binary]="true"></p-checkbox>
+                        </div>
+                        <div class="col-12">
+                            <div class="card">
+                                <h5>Advanced</h5>
+                                <p-fileUpload name="demo[]" url="{{url}}" (onUpload)="onUpload($event)" multiple="multiple" accept="image/*" maxFileSize="1000000">
+                                    <ng-template pTemplate="content">
+                                        <ul *ngIf="uploadedFiles.length">
+                                            <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
+                                        </ul>
+                                    </ng-template>
+                                </p-fileUpload>
+                            </div>
                         </div>
                     </div>
                 </div>

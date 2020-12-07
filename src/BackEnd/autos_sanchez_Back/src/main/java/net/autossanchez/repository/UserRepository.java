@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import net.autossanchez.entity.Municipality;
+import net.autossanchez.entity.Provinces;
 import net.autossanchez.entity.User;
 
 
@@ -17,9 +18,6 @@ public interface UserRepository extends JpaRepository<User, Integer>  {
 	    boolean existsByUsername(String username);
 	    boolean existsByEmail(String email);
 	    public Optional<User> getByUsername(long id);
-		//List<User> findByNumberPlate(String numberPlate);
-		List<User> findByFirstName(String brand);
-		List<User> findByLastName(String model);
 		List<User> findByMunicipality(Municipality municipality);
 		List<User> findByCodeStatus(boolean codeStatus);
 

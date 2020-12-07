@@ -11,7 +11,7 @@
         <div class="navbar-collapse" [ngClass]="{ 'collapse': isCollapse }">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" routerLink="home">Inicio<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" routerLink="home">Inicio</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" routerLink="historia">Historia</a>
@@ -19,10 +19,10 @@
                 <li class="nav-item">
                     <a class="nav-link" routerLink="gallery">Listado Vehiculos</a>
                 </li>
-                <li class="nav-item" *ngIf="isLogged">
+                <li class="nav-item" *ngIf="isAdmin">
                     <a class="nav-link" routerLink="cliente">Clientes</a>
                 </li>
-                <li class="nav-item" *ngIf="isLogged">
+                <li class="nav-item" *ngIf="isAdmin">
                     <a class="nav-link" routerLink="vehicle">Vehiculos</a>
                 </li>
                 <li class="nav-item" *ngIf="isLogged">
@@ -35,16 +35,16 @@
 
             <ul class="nav navbar-nav navbar-right">
                 <li class="nav-item" *ngIf="!isLogged">
-                    <a class="nav-link" routerLink="/login">
+                    <a class="nav-link" (click)="showModalLogin()">
                         <i class="fas fa-home p-1"></i>Login
                     </a>
                 </li>
                 <li class="nav-item" *ngIf="!isLogged">
-                    <a class="nav-link" routerLink="/register">
+                    <a class="nav-link" (click)="showModalRegister()">
                         <i class="fas fa-user-plus p-1"></i>Registro</a>
                 </li>
                 <li class="nav-item" *ngIf="isLogged">
-                    <a class="nav-link" (click)="logout()">
+                    <a class="nav-link" (click)="showModalConfirmLogOut()">
                         <i class="fas fa-sign-out-alt p-1"></i>LogOut</a>
                 </li>
                 <li class="nav-item" *ngIf="isLogged">
@@ -56,3 +56,7 @@
         </div>
     </nav>
 </div>
+
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+<p-progressSpinner class="spinner" *ngIf="loading"></p-progressSpinner>
+<p-toast [hideTransitionOptions]="'0ms'" position="top-right"></p-toast>

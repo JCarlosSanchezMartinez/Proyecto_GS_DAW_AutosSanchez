@@ -29,16 +29,16 @@ export class NewUserComponent implements OnInit {
 
   private buildFrom(){
     this.formNewUser = new FormGroup({});
-    this.formNewUser.addControl('inputDni', new FormControl('', Validators.required));
-    this.formNewUser.addControl('inputFirstName', new FormControl('', Validators.required));
-    this.formNewUser.addControl('inputLastName', new FormControl('', Validators.required));
-    this.formNewUser.addControl('inputAddress', new FormControl('', Validators.required));
-    this.formNewUser.addControl('inputProvince', new FormControl('', Validators.required));
-    this.formNewUser.addControl('inputMunicipality', new FormControl('', Validators.required));
-    this.formNewUser.addControl('inputPhone', new FormControl('', Validators.required));
-    this.formNewUser.addControl('inputEmail', new FormControl('', Validators.required));
-    this.formNewUser.addControl('inputUserName', new FormControl('', Validators.required));
-    this.formNewUser.addControl('inputPassWord', new FormControl('', Validators.required));
+    this.formNewUser.addControl('inputDni', new FormControl('',[Validators.required,Validators.maxLength(9)]));
+    this.formNewUser.addControl('inputFirstName', new FormControl(''));
+    this.formNewUser.addControl('inputLastName', new FormControl(''));
+    this.formNewUser.addControl('inputAddress', new FormControl(''));
+    this.formNewUser.addControl('inputProvince', new FormControl(''));
+    this.formNewUser.addControl('inputMunicipality', new FormControl(''));
+    this.formNewUser.addControl('inputPhone', new FormControl(''));
+    this.formNewUser.addControl('inputEmail', new FormControl('', [Validators.required, Validators.email, Validators.maxLength(100)]));
+    this.formNewUser.addControl('inputUserName', new FormControl('',[Validators.required]));
+    this.formNewUser.addControl('inputPassWord', new FormControl('',[Validators.required]));
     this.formNewUser.addControl('chkActiveStatus', new FormControl(''));
   }
 

@@ -55,14 +55,23 @@ export class LoginComponent implements OnInit {
         window.location.reload();
         this.hideLoadingSpinner();
         this.messageService.add({severity:'success', summary:'Exito!', detail:'Se Inicio Sesion correctamente.'});
-      },
-      err => {
-        this.isLogged = false;
-        this.isLoginFail = true;
-        this.errMsj = err.error.messaje;
-        this.hideLoadingSpinner();
-        this.messageService.add({severity:'error', summary:'Error!', detail:"Error al Iniciar Sesion."});
-       
+      },error => {
+        if (error.status === 403) {
+          this.hideLoadingSpinner();
+          this.messageService.add({severity:'error', summary:'Error!', detail:'You have insufficient privileges to perform this action'});
+        } else if (error.status === 401) {
+          this.hideLoadingSpinner();
+          this.messageService.add({severity:'error', summary:'Error!', detail:'Access is denied'});
+        } else if (error.status === 400) {
+          this.hideLoadingSpinner();          
+          this.messageService.add({severity:'error', summary:'Error!', detail: error.error.message});
+        } else if (error.status === 404) {
+          this.hideLoadingSpinner();
+          this.messageService.add({severity:'error', summary:'Error!', detail:'No data found.'});
+        } else {
+          this.hideLoadingSpinner();
+          this.messageService.add({severity:'error', summary:'Error!', detail:'An error occurred, try again later and if the error persists contact the System Administrator'});
+        }
       }
     )
   }

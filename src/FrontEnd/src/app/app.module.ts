@@ -42,7 +42,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { GalleriaModule } from 'primeng/galleria';
 import { CalendarModule } from 'primeng/calendar';
 import { InputTextareaModule } from 'primeng/inputtextarea';
-
+import { DynamicDialogModule } from 'primeng/dynamicdialog';
 
 
 
@@ -98,7 +98,8 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
     NgbModule,
     GalleriaModule,
     CalendarModule,
-    InputTextareaModule
+    InputTextareaModule,
+    DynamicDialogModule
     
 
 

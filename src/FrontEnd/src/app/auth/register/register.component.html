@@ -1,40 +1,49 @@
-<div class="jumbotron bg-dark m-3">
-    <div class="row justify-content-center">
-        <div class="col-7">
-            <form [formGroup]="formNewUser">
-                <div class="row">
-                    <div class="col-4 form-group">
-                        <label for="nombre">Nombre</label>
-                        <input type="text" class="form-control" formControlName="inputFirstName">
+<div class="row justify-content-center">
+    <div class="col-12 px-5">
+        <form [formGroup]="formNewUser">
+            <div class="row pt-3">
+                <div class="col-12 col-md-6 px-0 form-group">
+                    <div class="col-12">
+                        <label>Ciudad <b class="text-danger">*</b></label>
                     </div>
-                    <div class="col-8 form-group">
-                        <label for="email">Correo Electrónico</label>
-                        <input type="text" class="form-control" formControlName="inputEmail">
-                    </div>
-                    <div class="col-6 form-group">
-                        <label for="nombreUsuario">Nombre de Usuario</label>
-                        <input type="text" class="form-control" formControlName="inputUserName">
-                    </div>
-                    <div class="col-6 form-group">
-                        <label for="password">Contraseña</label>
-                        <input type="password" class="form-control" formControlName="inputPassWord">
-                    </div>
-                    <div class="col-6 form-group">
-                        <label class="pr-2">Ciudad</label>
-                        <p-dropdown placeholder="Seleciona Ciudad" [options]="provincesList" [showClear]="true" formControlName="selectProvince" optionLabel="province" (onChange)="onChangeProvinces(this)"></p-dropdown>
-                    </div>
-                    <div class="col-6 form-group">
-                        <label class="pr-2">Municipio</label>
-                        <p-dropdown placeholder="Seleciona Municipio" [disabled]="countryActive" [options]="municipalityList" [showClear]="true" [disabled]="false" formControlName="selectMunicipality" optionLabel="municipio"></p-dropdown>
-                    </div>
-
-                    <div class="col-6 form-group">
-                        <button pButton icon="fas fa-save" type="button" label="Registrar" (click)="onRegister()" class="p-button m-1"></button>
-
+                    <div class="col-12">
+                        <p-dropdown styleClass="p-dropdown-width" [options]="provincesList" [(ngModel)]="selectedActiveProvince" autoWidth="false" placeholder="Seleciona Ciudad" [showClear]="true" formControlName="selectProvince" optionLabel="province" (onChange)="onChangeProvinces(this)"></p-dropdown>
                     </div>
                 </div>
-            </form>
-        </div>
+                <div class="col-12 col-md-6 px-0 form-group">
+                    <div class="col-12">
+                        <label>Municipio <b class="text-danger">*</b></label>
+                    </div>
+                    <div class="col-12">
+                        <p-dropdown styleClass="p-dropdown-width" [options]="municipalityList" [(ngModel)]="selectedActiveMunicipality" placeholder="Seleciona Municipio" [showClear]="true" formControlName="selectMunicipality" optionLabel="municipio"></p-dropdown>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4 form-group">
+                    <label for="nombre">Nombre <b class="text-danger">*</b></label>
+                    <input type="text" class="form-control" formControlName="inputFirstName">
+                </div>
+                <div class="col-8 form-group">
+                    <label for="email">Email <b class="text-danger">*</b></label>
+                    <input type="text" class="form-control" formControlName="inputEmail">
+                </div>
+                <div class="col-6 form-group">
+                    <label for="nombreUsuario">Nombre de Usuario <b class="text-danger">*</b></label>
+                    <input type="text" class="form-control" formControlName="inputUserName">
+                </div>
+                <div class="col-6 form-group">
+                    <label for="password">Contraseña <b class="text-danger">*</b></label>
+                    <input type="password" class="form-control" formControlName="inputPassWord">
+                </div>
+            </div>
 
+            <div class="row pt-3">
+                <div class="col-6 form-group">
+                    <button [disabled]="formNewUser.invalid" pButton icon="fas fa-save" type="button" label="Registrar" (click)="onRegister()" class="p-button m-1"></button>
+                </div>
+            </div>
+        </form>
     </div>
+
 </div>

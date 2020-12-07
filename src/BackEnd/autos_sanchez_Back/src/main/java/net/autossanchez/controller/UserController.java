@@ -1,6 +1,8 @@
 package net.autossanchez.controller;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,8 +20,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import net.autossanchez.dto.Message;
+import net.autossanchez.entity.Municipality;
 import net.autossanchez.entity.User;
+import net.autossanchez.entity.Vehicle;
 import net.autossanchez.filter.FilterUser;
+import net.autossanchez.service.MunicipalityService;
 import net.autossanchez.service.UserService;
 import net.autossanchez.service.VehicleService;
 
@@ -36,10 +41,13 @@ public class UserController {
 	VehicleService vehicleService;
 
 	@Autowired
+	MunicipalityService municipalityService;
+	
+	@Autowired
 	PasswordEncoder passwordEncoder;
 
 	/* Obtenemos todos los USUARIOS */
-
+	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/getUserList")
 	public ResponseEntity<User> getUserList() {
 		List<User> rest = userService.getALL();
@@ -48,6 +56,7 @@ public class UserController {
 	}
 
 	/* Obtenemos todos los USUARIOS por ID */
+	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/{id}")
 	public ResponseEntity<Object> getById(@PathVariable int id) {
 		try {
@@ -64,6 +73,7 @@ public class UserController {
 	}
 
 	/* Obtenemos todos los USUARIOS por DNI */
+	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/details/{dni}")
 	public ResponseEntity<Object> getById(@PathVariable String dni) {
 		try {
@@ -80,7 +90,7 @@ public class UserController {
 	}
 
 	/* Actualizamos USUARIO */
-	@PreAuthorize("hasRole('USER')")
+	@PreAuthorize("hasRole('ADMIN')")
 	@PutMapping("/updateUser/{id}")
 	public ResponseEntity<?> update(@PathVariable("id") int id, @RequestBody User user) {
 
@@ -104,7 +114,7 @@ public class UserController {
 	}
 
 	/* Eliminamos USUARIO */
-	@PreAuthorize("hasRole('USER')")
+	@PreAuthorize("hasRole('ADMIN')")
 	@DeleteMapping("/deleteUser/{id}")
 	public ResponseEntity<?> delete(@PathVariable int id) {
 
@@ -120,7 +130,7 @@ public class UserController {
 	}
 
 	/* Reactivamos USUARIO */
-	@PreAuthorize("hasRole('USER')")
+	@PreAuthorize("hasRole('ADMIN')")
 	@DeleteMapping("/reactivateUser/{id}")
 	public ResponseEntity<?> reactivate(@PathVariable int id) {
 
@@ -136,23 +146,40 @@ public class UserController {
 	}
 
 	/* Buscamos USUARIOS por FILTER */
+	@PreAuthorize("hasRole('ADMIN')")
+	@SuppressWarnings("null")
 	@PostMapping("/search")
 	public ResponseEntity<?> searchUser(@RequestBody FilterUser filter) {
 
 		try {
 			List<User> rest = userService.getALL();
+			
 			if (filter.isCodeStatus()) {
 				rest = userService.getByCodeStatus(filter.isCodeStatus());
 			}
-//FALTA NUMBER PLATE
-			if (filter.getFirstName() != null) {
-				rest = userService.getByFirstName(filter.getFirstName());
-			}
-			if (filter.getLastName() != null) {
-				rest = userService.getByLastName(filter.getLastName());
-			}
 			if (filter.getDni() != null) {
-				rest = userService.getByDni(filter.getDni());
+				rest.clear();;
+				rest.add(filter.getDni());
+			}
+			if (filter.getNumberPlate() != null) {
+				List<Vehicle> vehicleList = vehicleService.getByNumberPlate(filter.getNumberPlate());
+				Vehicle vehicle = vehicleList.get(0);
+				Optional<User> user = userService.getById(vehicle.getUserId().getId());
+				rest.contains(user);
+			}
+
+			if (filter.getMunicipality() != null) {								
+				rest = userService.getByMunicipality(filter.getMunicipality());
+			}
+			if (filter.getProvince() != null) {
+				List<User> userList = new ArrayList<>(); 
+				for (int i = 0; i < rest.size(); i++) {
+					if (rest.get(i).getMunicipality().getProvinceId().getId() == filter.getProvince().getId()) {
+						userList.add(rest.get(i));
+						System.out.println(rest.get(i));
+					}
+				}				
+				rest = userList;
 			}
 
 			return ResponseEntity.status(HttpStatus.CREATED).body(rest);

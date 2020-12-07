@@ -1,25 +1,25 @@
 <div class="jumbotron bg-dark m-3">
     <div class="row p-2">
-        <form name="formClient" [formGroup]="formNewUser">
+        <form [formGroup]="formNewUser">
             <p class="display-4">
                 Datos Cliente</p>
             <div class="col-12 p-2 border border-info rounded ">
                 <div class="row">
                     <div class="form-group col-12">
-                        <label>Dni</label>
-                        <input type="text" name="dni" formControlName="inputDni" class="form-control ">
+                        <label>Dni <b class="text-danger">*</b></label>
+                        <input maxlength="9" type="text" formControlName="inputDni" class="form-control ">
                     </div>
                     <div class="form-group col-12">
                         <label>Nombre</label>
-                        <input type="text" formControlName="inputFirstName" class="form-control ">
+                        <input maxlength="50" type="text" formControlName="inputFirstName" class="form-control ">
                     </div>
                     <div class="form-group col-12">
                         <label>Apellidos</label>
-                        <input type="text" formControlName="inputLastName" class="form-control ">
+                        <input maxlength="50" type="text" formControlName="inputLastName" class="form-control ">
                     </div>
                     <div class="form-group col-12 col-md-8">
                         <label>Direccion</label>
-                        <input type="text" formControlName="inputAddress" class="form-control ">
+                        <input maxlength="100" type="text" formControlName="inputAddress" class="form-control ">
                     </div>
                     <!--   <div class="form-group col-12 col-md-4">
                         <label>Ciudad</label>
@@ -30,20 +30,20 @@
                         <p-dropdown [options]="listFuel" formControlName="inputMunicipality" optionLabel="name"></p-dropdown>
                     </div>-->
                     <div class="form-group col-8 ">
-                        <label>Email</label>
-                        <input type="text" formControlName="inputEmail" class="form-control ">
+                        <label>Email <b class="text-danger">*</b></label>
+                        <input maxlength="100" type="text" formControlName="inputEmail" class="form-control ">
                     </div>
                     <div class="form-group col-4 ">
                         <label>Telefono</label>
-                        <input type="text" formControlName="inputPhone" class="form-control ">
+                        <input maxlength="10" type="text" formControlName="inputPhone" class="form-control ">
                     </div>
                     <div class="form-group col-6 ">
-                        <label>Username</label>
-                        <input type="text" formControlName="inputUserName" class="form-control ">
+                        <label>Username <b class="text-danger">*</b></label>
+                        <input maxlength="50" type="text" formControlName="inputUserName" class="form-control ">
                     </div>
                     <div class="form-group col-6">
-                        <label>Password</label>
-                        <input type="text" formControlName="inputPassWord" class="form-control ">
+                        <label>Password <b class="text-danger">*</b></label>
+                        <input maxlength="50" type="password" formControlName="inputPassWord" class="form-control ">
                     </div>
                 </div>
             </div>
@@ -52,7 +52,7 @@
                 <div class="col-12 col-sm-auto">
                     <div class="form-row">
                         <div class="col">
-                            <button pButton icon="fas fa-save" type="button" label="Guardar" (click)="create()" class="p-button m-1"></button>
+                            <button [disabled]="formNewUser.invalid" pButton icon="fas fa-save" type="button" label="Guardar" (click)="create()" class="p-button m-1"></button>
                             <button pButton icon="fas fa-broom" type="button" label="Limpiar" (click)="cleanAllControls()" class="p-button-outlined m-1"></button>
                         </div>
                     </div>

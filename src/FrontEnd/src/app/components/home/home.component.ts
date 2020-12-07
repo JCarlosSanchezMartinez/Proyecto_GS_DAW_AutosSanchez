@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { DialogService } from 'primeng/dynamicdialog';
+import { RegisterComponent } from 'src/app/auth/register/register.component';
 import { Vehicle } from 'src/app/model/Vehicle';
 import { VehicleCRUDService } from 'src/app/services/vehicle-crud.service';
 
@@ -32,5 +34,6 @@ export class HomeComponent implements OnInit {
       
     }
   }
+
 
 }

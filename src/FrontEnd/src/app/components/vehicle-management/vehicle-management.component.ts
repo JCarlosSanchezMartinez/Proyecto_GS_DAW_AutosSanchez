@@ -32,6 +32,11 @@ export class VehiculeManagementComponent implements OnInit {
   public selectFuel: Fuel;
   public dateValue: Date;
   public SearchClient = 'SearchClient';
+
+  public uploadedFiles: any[] = [];
+  url = "src/assets/img/";
+
+
   public inputTextArea: string;
 
 
@@ -189,6 +194,15 @@ export class VehiculeManagementComponent implements OnInit {
       return word[0].toUpperCase() + word.substr(1).toLowerCase();
     }
  
+    onUpload(event) {
+      for(let file of event.files) {
+          this.uploadedFiles.push(file);
+          console.log(file)
+
+      }
+
+      this.messageService.add({severity: 'info', summary: 'File Uploaded', detail: ''});
+  }
 
  
 }

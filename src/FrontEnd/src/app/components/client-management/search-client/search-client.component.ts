@@ -3,8 +3,11 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ConfirmationService, MessageService, SortEvent } from 'primeng/api';
 import { FilterUser } from 'src/app/interfaces/filter-user';
+import { Municipality } from 'src/app/model/Municipality';
+import { Provinces } from 'src/app/model/Provinces';
 import { User } from 'src/app/model/User';
 import { Vehicle } from 'src/app/model/Vehicle';
+import { CommonCrudService } from 'src/app/services/common-crud.service';
 import { UserCrudService } from 'src/app/services/user-crud.service';
 
 
@@ -25,7 +28,12 @@ export class SearchClientComponent implements OnInit {
   public userList: User[] = [];
   public loading = null;
   public paramSearch: FilterUser;
-
+  public provincesList: { id: string; province: string; }[];
+  public municipalityList: { id: string; municipio: string; }[];
+  public selectedActiveProvince: Provinces;
+  public selectedActiveMunicipality: Municipality;
+  public countryActive = false;
+  public SearchClient = 'SearchClient';
   public chkActiveStatus;
 
   isLogged = false;
@@ -33,7 +41,9 @@ export class SearchClientComponent implements OnInit {
   constructor(private serviceUser: UserCrudService,
      private router: Router,
      private confirmationService: ConfirmationService,
-     private messageService: MessageService
+     private messageService: MessageService,
+     private common: CommonCrudService,
+
      ) {
     this.columnsTableResult = [
       { field: 'dni', header: 'DNI' },
@@ -48,13 +58,12 @@ export class SearchClientComponent implements OnInit {
 
   private buildFrom(){
     this.formSearchUser = new FormGroup({});
-    this.formSearchUser.addControl('inputDni', new FormControl('', Validators.required));
-    this.formSearchUser.addControl('inputFirstName', new FormControl('', Validators.required));
-    this.formSearchUser.addControl('inputLastName', new FormControl('', Validators.required));
-    this.formSearchUser.addControl('inputNumberPlate', new FormControl('', Validators.required));
-    this.formSearchUser.addControl('inputProvince', new FormControl('', Validators.required));
-    this.formSearchUser.addControl('inputMunicipality', new FormControl('', Validators.required));
-    this.formSearchUser.addControl('chkActiveStatus', new FormControl(true));    
+    this.formSearchUser.addControl('SearchClient', new FormControl()); 
+    this.formSearchUser.addControl('inputNumberPlate', new FormControl(''));
+    this.formSearchUser.addControl('selectProvince', new FormControl(''));
+    this.formSearchUser.addControl('selectMunicipality', new FormControl(''));
+    this.formSearchUser.addControl('chkActiveStatus', new FormControl(true));
+     
   }
 
   delete(id: number) {
@@ -73,17 +82,16 @@ export class SearchClientComponent implements OnInit {
   ngOnInit(): void {
 
     this.buildFrom();
+    this.loadCombos();
     this.serviceUser.getUserList().subscribe((data:any)=>{this.userList=data})
 
   }
 
   cleanAllControls(event:any){
-    this.formSearchUser.controls.inputDni.setValue(null);
-    this.formSearchUser.controls.inputFirstName.setValue(null);
-    this.formSearchUser.controls.inputLastName.setValue(null);
+    this.formSearchUser.controls.inputFullName.setValue(null);
     this.formSearchUser.controls.inputNumberPlate.setValue(null);
-    this.formSearchUser.controls.inputProvince.setValue(null);
-    this.formSearchUser.controls.inputMunicipality.setValue(null);
+    this.formSearchUser.controls.selectProvince.setValue(null);
+    this.formSearchUser.controls.selectMunicipality.setValue(null);
     this.formSearchUser.controls.chkActiveStatus.setValue(true);
 
   }
@@ -92,6 +100,7 @@ export class SearchClientComponent implements OnInit {
   searchDni(){
     this.showLoadingSpinner();
     this.paramSearch = this.getParamsSearchUser();
+    console.log( this.getParamsSearchUser())
     this.serviceUser.getListUserByFilter(this.paramSearch).subscribe(UserFilterList => {
       if (UserFilterList === null  || UserFilterList.length === 0) {        
         this.hideLoadingSpinner();
@@ -125,22 +134,21 @@ export class SearchClientComponent implements OnInit {
  
   }
   getParamsSearchUser(): FilterUser {
+   
     return {
-      dni : this.formSearchUser.controls.inputDni.value !== ''
-      && this.formSearchUser.controls.inputDni.value !==undefined ? 
-      this.formSearchUser.controls.inputDni.value : null,
-      firstName : this.formSearchUser.controls.inputFirstName.value !== ''
-      && this.formSearchUser.controls.inputFirstName.value !==undefined ? 
-      this.formSearchUser.controls.inputFirstName.value : null,
-      lastName : this.formSearchUser.controls.inputLastName.value !== ''
-      && this.formSearchUser.controls.inputLastName.value !==undefined ? 
-      this.formSearchUser.controls.inputLastName.value : null,
+      
+      dni : this.formSearchUser.controls.SearchClient.value !== ''
+      && this.formSearchUser.controls.SearchClient.value !==undefined ? 
+      this.formSearchUser.controls.SearchClient.value : null,
       numberPlate : this.formSearchUser.controls.inputNumberPlate.value !== ''
       && this.formSearchUser.controls.inputNumberPlate.value !==undefined ? 
       this.formSearchUser.controls.inputNumberPlate.value : null,
-      municipality : this.formSearchUser.controls.inputMunicipality.value !== ''
-      && this.formSearchUser.controls.inputMunicipality.value !==undefined ? 
-      this.formSearchUser.controls.inputMunicipality.value : null,
+      province : this.formSearchUser.controls.selectProvince.value !== ''
+      && this.formSearchUser.controls.selectProvince.value !==undefined ? 
+      this.formSearchUser.controls.selectProvince.value : null,
+      municipality : this.formSearchUser.controls.selectMunicipality.value !== ''
+      && this.formSearchUser.controls.selectMunicipality.value !==undefined ? 
+      this.formSearchUser.controls.selectMunicipality.value : null,
       codeStatus : this.formSearchUser.controls.chkActiveStatus.value === true ? true : null,
       
     };
@@ -194,12 +202,28 @@ export class SearchClientComponent implements OnInit {
     });
 }
 
-showLoadingSpinner() {
-  this.loading = true;
-}
+  showLoadingSpinner() {
+    this.loading = true;
+  }
 
-hideLoadingSpinner() {
-  this.loading = false;
-}
+  hideLoadingSpinner() {
+    this.loading = false;
+  }
+  onChangeProvinces(event: any){
+
+    this.common.getMunicipalityProvince(this.formSearchUser.controls.selectProvince.value.id)
+    .subscribe(municipality => {this.municipalityList = municipality.map(municipio =>
+       ({id: municipio.id,  municipio: municipio.municipio}) )});
+     
+  }
+
+  loadCombos(){
+    this.common.getProvinceList().subscribe(provinces => {
+      this.provincesList = provinces.map(province => ({id: province.id,  province: province.province}));
+      
+    
+     
+    });
+  }
 
 }
