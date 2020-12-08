@@ -32,6 +32,7 @@ import net.autossanchez.entity.User;
 import net.autossanchez.entity.Vehicle;
 import net.autossanchez.filter.FilterVehicle;
 import net.autossanchez.repository.VehicleRepository;
+import net.autossanchez.service.PhotoVehicleService;
 import net.autossanchez.service.UserService;
 import net.autossanchez.service.VehicleService;
 
@@ -46,6 +47,10 @@ public class VehicleController {
 
 	@Autowired
 	UserService userService;
+
+	@Autowired
+	PhotoVehicleService photoVehicleService;
+	
 
 	/* Obtenemos todos los VEHICULOS */
 	@GetMapping("/getVehicleList")
@@ -218,8 +223,9 @@ public class VehicleController {
 			if (filter.isCodeStatus()) {
 				rest = vehicleService.getByCodeStatus(filter.isCodeStatus());
 			}
-			if (filter.getNumberPlate() != null) {
-				rest = vehicleService.getByNumberPlate(filter.getNumberPlate());
+			if (filter.getVehicle() != null) {
+				rest.clear();
+				rest.add(filter.getVehicle());
 			}
 			if (filter.getBrand() != null) {
 				rest = vehicleService.getByBrand(filter.getBrand());
@@ -227,8 +233,8 @@ public class VehicleController {
 			if (filter.getModel() != null) {
 				rest = vehicleService.getByModel(filter.getModel());
 			}
-			if (filter.getVin() != null) {
-				rest = vehicleService.getByVin(filter.getVin());
+			if (filter.getUser() != null) {
+				rest = vehicleService.getVehiclesByUserId(filter.getUser());
 			}
 		
 			return ResponseEntity.status(HttpStatus.CREATED).body(rest);			
@@ -237,4 +243,5 @@ public class VehicleController {
 			return new ResponseEntity(new Message(e.toString()), HttpStatus.NOT_FOUND);
 		}
 	}
+
 }

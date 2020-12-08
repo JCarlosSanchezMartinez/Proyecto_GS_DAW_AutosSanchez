@@ -1,0 +1,42 @@
+h2 {
+    color: rgb(0, 0, 50);
+    font-weight: bold;
+    font-style: italic;
+}
+
+h4 {
+    color: rgb(0, 0, 50);
+    font-weight: bold;
+    font-size: 2em;
+}
+
+h5 {
+    color: rgb(0, 0, 50);
+    font-weight: bold;
+}
+
+h6 {
+    color: rgb(0, 0, 50);
+    font-weight: bold;
+}
+
+.textWhite {
+    color: rgb(55, 55, 55);
+    font-weight: bold;
+}
+
+p {
+    color: white;
+}
+
+.globo {
+    background-color: #0678c4;
+}
+
+.whatsapp {
+    background-color: #00bb2d;
+}
+
+.mail {
+    background-color: red;
+}

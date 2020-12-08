@@ -1,65 +1,47 @@
-<div class="row p-3">
-
-    <div class="col-12">
-
-        <table *ngIf="showTable" class="table table-responsive-sm table-hover table-dark ">
-            <thead>
-                <tr>
-                    <th scope="col">Matricula</th>
-                    <th scope="col">Marca</th>
-                    <th scope="col">Modelo</th>
-                    <th scope="col">Motor</th>
-                    <th scope="col">Chasis</th>
-                    <th scope="col">Año</th>
-                    <th scope="col">Kms</th>
-                    <th scope="col">Color</th>
-                    <th scope="col">Precio</th>
-                    <th scope="col">Detalles</th>
-
-                </tr>
-            </thead>
-            <tbody class="tbody">
-
-
-
-                <tr *ngFor="let vehicle of vehicles">
-                    <th class="tabla">{{vehicle.number_plate}}</th>
-                    <td class="tabla">{{vehicle.brand}}</td>
-                    <td class="tabla">{{vehicle.model}}</td>
-                    <td class="tabla">{{vehicle.engine}}</td>
-                    <td class="tabla">{{vehicle.chasis}}</td>
-                    <td class="tabla">{{vehicle.year}}</td>
-                    <td class="tabla">{{vehicle.kms}}</td>
-                    <td class="tabla">{{vehicle.color}}</td>
-                    <td class="tabla">{{vehicle.price}}</td>
+<p-sidebar [style]="{width:'30em'}" [(visible)]="visibleSidebar">
+    <h1 style="font-weight:normal">Left Sidebar</h1>
+    <p-button type="button" (click)="visibleSidebar = false" label="Save" styleClass="p-button-success"></p-button>
+    <p-button type="button" (click)="visibleSidebar = false" label="Cancel" styleClass="p-button-secondary"></p-button>
+</p-sidebar>
 
 
 
 
-            </tbody>
-        </table>
-    </div>
-</div>
-<div class="contenedor" *ngFor="let vehicle of vehicles">
-    <div class="contenedor_tarjeta">
-        <a href="http://www.falconmasters.com">
-            <figure id="tarjeta">
-                <img src="../../../assets/img/preuba1.jpeg" class="frontal" alt="">
-                <figcaption class="trasera">
-                    <h2 class="titulo">{{vehicle.brand}} {{vehicle.model}}</h2>
-                    <hr>
-                    <p>Motor:{{vehicle.engine}}</p>
-                    <p>Año:{{vehicle.year}}</p>
-                    <p>Kilometros:{{vehicle.kms}}</p>
-                </figcaption>
-            </figure>
-        </a>
-    </div>
 
+<p-button type="button" (click)="visibleSidebar = true" icon="pi pi-arrow-right"></p-button>
+<div class="jumbotron bg-dark pt-0 m-3">
+    <div id="cards_landscape_wrap-2">
+        <div class="row p-0 m-0">
+            <div class="col-12 col-md-4 col-lg-3" *ngFor="let vehicle of vehiclesDto">
+                <a (click)="onClickVehicleDetails(vehicle.id)">
+                    <div class="card-flyer">
+                        <div class="text-box">
+                            <div class="image-box">
+                                <img src="{{vehicle.photoId.imagen}}" class="card-img-top" alt="..." />
+                            </div>
+                            <div class="text-container">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <h5 class="text-left">{{vehicle.brand}} {{vehicle.model}}</h5>
+                                        <hr class="line">
+                                        <h4 class="text-right pt-3">{{vehicle.price | currency : 'EUR' : 'symbol' : '1.0-0' }}</h4>
+                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
 
-</div>
-<div class="row p-3 justify-content-center">
-    <div class="btn-group" role="group" aria-label="Basic example">
-        <button class="text-dark" (click)="gallery()" type="submit" id="button">Nuevo</button>
+                                    </div>
+                                    <div class="col-6 p-2">
+                                        <p class="globo p-0 m-0 rounded"><i class="fas fa-gas-pump pr-2"></i>{{vehicle.fuel}}</p>
+                                    </div>
+                                    <div class="col-6 p-2">
+                                        <p class="globo p-0 m-0 rounded"><i class="far fa-calendar-alt pr-2"></i>{{vehicle.sellDate | date:'yyyy'}}</p>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
     </div>
 </div>

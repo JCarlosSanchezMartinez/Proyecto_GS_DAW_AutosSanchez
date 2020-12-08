@@ -8,14 +8,11 @@
                     <form [formGroup]="formSearchVehicle">
 
                         <div class="row">
-                            <div class="col-6 col-md-2 form-group">
-                                <label>Matricula</label>
-                                <input type="text" placeholder="Insertar Matricula" formControlName="inputNumberPlate" class="form-control">
+                            <div class="col-6 col-md-4 form-group">
+                                <label>Matricula o Bastidor</label>
+                                <app-auto-vehicle [parentFormGroup]="formSearchVehicle" [controlName]='SearchVehicle'></app-auto-vehicle>
                             </div>
-                            <div class="col-6 col-md-2 form-group">
-                                <label>Bastidor</label>
-                                <input type="text" placeholder="Insertar Bastidor" formControlName="inputVin" class="form-control">
-                            </div>
+
                             <div class="col-6 col-md-2 form-group">
                                 <label>Marca</label>
                                 <input type="text" placeholder="Insertar Marca" formControlName="inputBrand" name="brand" class="form-control">
@@ -26,7 +23,7 @@
                             </div>
                             <div class="col-12 col-md-4 form-group">
                                 <label>Cliente</label>
-                                <input type="text" placeholder="Insertar DNI o Nombre Cliente" pTooltip="Insertar Nombre o Dni de Cliente" class="form-control">
+                                <app-auto-user [parentFormGroup]="formSearchVehicle" [controlName]='SearchClient'></app-auto-user>
                             </div>
 
 
@@ -76,7 +73,7 @@
                         <ng-template pTemplate="body" let-vehicle>
                             <tr>
                                 <td pTooltip="{{vehicle.numberPlate}}">{{vehicle.numberPlate}}</td>
-                                <td><img [src]="'../../../assets/img/' + vehicle.imagen" [alt]="vehicle.name" width="100" class="p-shadow-4" /></td>
+                                <td><img [src]="'../../../assets/img/' + vehicle.photoId.imagen" [alt]="vehicle.name" width="100" class="p-shadow-4" /></td>
                                 <td pTooltip="{{vehicle.brand}}">{{vehicle.brand}}</td>
                                 <td pTooltip="{{vehicle.model}}">{{vehicle.model}}</td>
                                 <td pTooltip="{{vehicle.color}}">{{vehicle.color}}</td>

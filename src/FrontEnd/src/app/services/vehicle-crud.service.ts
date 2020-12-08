@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Vehicle } from '../model/Vehicle';
 import { Observable } from 'rxjs';
 import { FilterVehicle } from '../interfaces/filter-vehicle.interface';
+import { PhotoVehicle } from '../model/PhotoVehicle';
 
 
 @Injectable({
@@ -58,5 +59,6 @@ export class VehicleCRUDService {
   getListVehicleByFilter(filter: FilterVehicle): Observable<any> {
     return this.http.post(this.Url + "search", filter);  
   }
+
  
 }

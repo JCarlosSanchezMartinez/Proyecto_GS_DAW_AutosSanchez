@@ -4,7 +4,16 @@
             <p class="title m-2">Edicion Vehiculo</p>
             <div class="row">
                 <div class="col-12 col-md-5">
-                    <img [src]="'../../../assets/img/1.jpeg'" class="img-fluid" alt="">
+                    <p-galleria [value]="imagenList">
+                        <ng-template pTemplate="item" let-item>
+                            <img [src]="'../../../assets/img/' + item.imagen" style="width: 100%;" />
+                        </ng-template>
+                        <ng-template pTemplate="thumbnail" let-item>
+                            <div class="p-grid p-nogutter p-justify-center">
+                                <img [src]="item.id" />
+                            </div>
+                        </ng-template>
+                    </p-galleria>
                 </div>
                 <div class="col-12 col-md-7 pt-3 pt-md-0">
                     <div class="row">

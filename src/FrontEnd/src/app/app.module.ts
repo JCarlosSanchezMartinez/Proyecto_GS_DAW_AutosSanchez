@@ -33,7 +33,7 @@ import { FileUploadModule } from 'primeng/fileupload';
 import { DropdownModule } from 'primeng/dropdown';
 import { NewUserComponent } from './components/client-management/new-client/new-client.component';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
-import { AutoUserComponent } from './components/vehicle-management/new-vehicle/auto-user/auto-user.component';
+
 import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
 import { DialogModule } from 'primeng/dialog';
@@ -43,6 +43,11 @@ import { GalleriaModule } from 'primeng/galleria';
 import { CalendarModule } from 'primeng/calendar';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
+import { AutoUserComponent } from './shared/auto-user/auto-user.component';
+import { AutoVehicleComponent } from './shared/auto-vehicle/auto-vehicle.component';
+import { NoticeComponent } from './components/notice/notice.component';
+import { SidebarModule } from 'primeng/sidebar';
+import { GalleryVehicleComponent } from './components/gallery-management/gallery-vehicle/gallery-vehicle.component';
 
 
 
@@ -65,6 +70,9 @@ import { DynamicDialogModule } from 'primeng/dynamicdialog';
     HomeComponent,
     NewUserComponent,
     AutoUserComponent,
+    AutoVehicleComponent,
+    NoticeComponent,
+    GalleryVehicleComponent,
  
 
 
@@ -99,7 +107,8 @@ import { DynamicDialogModule } from 'primeng/dynamicdialog';
     GalleriaModule,
     CalendarModule,
     InputTextareaModule,
-    DynamicDialogModule
+    DynamicDialogModule,
+    SidebarModule
     
 
 

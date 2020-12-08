@@ -19,15 +19,9 @@ export class AutoUserComponent implements OnInit {
   minLength: number;
   notFoundMessage = 'No Data Found';
 
-  constructor(private commonService: UserCrudService) {
-    
-    
-      
+  constructor(private commonService: UserCrudService) {      
    }
-
   ngOnInit() {
-
-    
 
     this.commonService.getUserList().subscribe(client => {
       this.listClient = client;

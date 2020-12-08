@@ -1,8 +1,8 @@
 import { User } from '../model/User';
+import { Vehicle } from '../model/Vehicle';
 
 export interface FilterVehicle {
-    numberPlate?:string;
-    vin?:string;
+    vehicle?:Vehicle;
     brand?:string;
     model?:string;
     user?:User;

@@ -32,6 +32,7 @@ export class VehiculeManagementComponent implements OnInit {
   public selectFuel: Fuel;
   public dateValue: Date;
   public SearchClient = 'SearchClient';
+  public imagenList:any[];
 
   public uploadedFiles: any[] = [];
   url = "src/assets/img/";
@@ -55,7 +56,7 @@ export class VehiculeManagementComponent implements OnInit {
   
     ];
 
-    this.listPhone = {id: 1, imagen: '1.jpeg'};
+    this.listPhone = {id: 1, imagen: '1.jpeg',code: ""};
 
    
   }
@@ -101,6 +102,8 @@ export class VehiculeManagementComponent implements OnInit {
             this.formEditVehicle.controls.chkActiveStatus.setValue(resp.codeStatus);
             this.formEditVehicle.controls.chkActiveCarrousel.setValue(resp.carrousel);
             this.formEditVehicle.controls.SearchClient.setValue( resp.userId);
+            //this.imagenList.push(resp.photoId);
+            
           });
         }
       }
@@ -157,7 +160,7 @@ export class VehiculeManagementComponent implements OnInit {
       this.vehicle.color =  this.titleCaseWord(this.formEditVehicle.controls.inputColor.value)
       this.vehicle.chasis = this.formEditVehicle.controls.inputChasis.value.toUpperCase()
       this.vehicle.price = this.formEditVehicle.controls.inputPrice.value
-      this.vehicle.extra = JSON.parse(this.inputTextArea);
+      //this.vehicle.extra = JSON.parse(this.inputTextArea);
       this.vehicle.carrousel = this.formEditVehicle.controls.chkActiveCarrousel.value
       this.vehicle.codeStatus = this.formEditVehicle.controls.chkActiveStatus.value
       this.vehicle.photoId = this.listPhone;

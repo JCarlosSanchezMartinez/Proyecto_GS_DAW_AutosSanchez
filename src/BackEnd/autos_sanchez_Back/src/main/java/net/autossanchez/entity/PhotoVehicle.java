@@ -21,8 +21,12 @@ public class PhotoVehicle {
 	private int id;
 	
 	@NotNull
-	@Column(unique = true,columnDefinition = "varchar(10)")
+	@Column(unique = true,columnDefinition = "varchar(100)")
 	private String imagen;
+	
+	@NotNull
+	@Column(unique = true,columnDefinition = "varchar(100)")
+	private String code;
 
 
 }

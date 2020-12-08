@@ -1,0 +1,107 @@
+<div class="col-12 col-md-6 col-lg-4" *ngFor="let vehicle of images">
+    <h4>{{vehicle.model}}</h4>
+</div>
+
+<div class="jumbotron bg-dark m-3">
+    <div class="row p-0 jumbotron bg-light">
+        <div class="col-12 col-md-8 pr-0">
+            <p-galleria [(value)]="images" [autoPlay]="true" [transitionInterval]="6000" [containerStyle]="{'max-width': '800px'}" [numVisible]="5" [showThumbnails]="false" [showIndicators]="true" [changeItemOnIndicatorHover]="true" [showIndicatorsOnItem]="true">
+                <ng-template pTemplate="item" let-item>
+                    <img [src]="item.imagen" style="width: 100%; display: block;" />
+                </ng-template>
+            </p-galleria>
+        </div>
+        <div class="col-12 col-md-4 pt-3">
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="text-left">{{vehiclesDto.brand}} {{vehiclesDto.model}}</h2>
+                    <hr class="line">
+                </div>
+                <div class="col-12">
+                    <h4 class="m-2 py-3 text-right">{{vehiclesDto.price | currency : 'EUR' : 'symbol' : '1.0-0' }}</h4>
+                </div>
+                <div class="col-12">
+                    <h5 class="text-left">{{vehiclesDto.engine}}</h5>
+                </div>
+                <div class="col-8">
+                    <p class="textWhite text-right">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
+                </div>
+
+                <div class="col-12">
+                    <h4>Contactar</h4>
+                </div>
+                <div class="col-4 m-2 whatsapp rounded">
+                    <i class="far fa-2x fa-envelope"></i>
+                    <button type="button" class="btn"></button>
+                </div>
+                <div class="col-4 m-2 mail rounded">
+                    <i class="far fa-2x fa-envelope"></i>
+                    <button type="button" class="btn"></button>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="row text-center px-5 globo rounded-bottom">
+                <div class="col">
+                    <div class="row  align-items-center justify-content-center pt-3">
+                        <div class="col-12 col-lg-2">
+                            <i class="fas fa-2x fa-gas-pump"></i>
+                        </div>
+                        <div class="col-12 col-lg-10 pt-3">
+                            <h6>Combustible</h6>
+                            <p>{{vehiclesDto.fuel}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="row align-items-center  justify-content-center pt-3">
+                        <div class="col-12 col-lg-2">
+                            <i class="fas fa-2x fa-car-side"></i>
+
+                        </div>
+                        <div class="col-12 col-lg-10 pt-3">
+                            <h6>Carroceria</h6>
+                            <p>{{vehiclesDto.chasis}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="row align-items-center  justify-content-center pt-3">
+                        <div class="col-12 col-lg-2">
+                            <i class="fas fa-2x fa-palette"></i>
+                        </div>
+                        <div class="col-12 col-lg-10 pt-3">
+                            <h6>Color</h6>
+                            <p>{{vehiclesDto.color}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="row align-items-center  justify-content-center pt-3">
+                        <div class="col-12 col-lg-2">
+                            <i class="fas fa-2x fa-tachometer-alt"></i>
+                        </div>
+                        <div class="col-12 col-lg-10 pt-3">
+                            <h6>Kilometros</h6>
+                            <p>{{vehiclesDto.kms}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col ">
+                    <div class="row align-items-center justify-content-center pt-3 ">
+                        <div class="col-12 col-lg-2">
+                            <i class="far fa-2x fa-calendar-alt pr-2"></i>
+                        </div>
+                        <div class="col-12 col-lg-10 pt-3">
+                            <h6>Matriculacion</h6>
+                            <p>{{vehiclesDto.sellDate | date:'yyyy'}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>

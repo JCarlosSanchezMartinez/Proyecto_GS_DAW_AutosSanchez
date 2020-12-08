@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import net.autossanchez.entity.PhotoVehicle;
 import net.autossanchez.entity.User;
 import net.autossanchez.entity.Vehicle;
 
@@ -19,5 +20,6 @@ public interface VehicleRepository extends JpaRepository<Vehicle, Long> {
 	List<Vehicle> findByUserId(User userOK);
 	boolean existsByUserId(User user);
 	boolean existsByNumberPlate(String numberPlate);
+
 
 }

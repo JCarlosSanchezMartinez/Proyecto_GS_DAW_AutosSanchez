@@ -13,6 +13,7 @@ import { SearchClientComponent } from './components/client-management/search-cli
 import { NewVehicleComponent } from './components/vehicle-management/new-vehicle/new-vehicle.component';
 import { HomeComponent } from './components/home/home.component';
 import { NewUserComponent } from './components/client-management/new-client/new-client.component';
+import { GalleryVehicleComponent } from './components/gallery-management/gallery-vehicle/gallery-vehicle.component';
 
 
 const routes: Routes = [ 
@@ -22,6 +23,7 @@ const routes: Routes = [
       {path: 'historia', component: HistoriaComponent},
       {path: 'contacto', component: ManagementComponent ,canActivate: [guard], data: { expectedRol: ['admin', 'user'] } },
       {path: 'login', component: LoginComponent},
+      {path: 'vehicleDetails/:id', component: GalleryVehicleComponent},
       {path: 'vehicle', component: SearchVehicleComponent ,canActivate: [guard], data: { expectedRol: ['admin'] } },
       {path: 'vehicle/:id', component: VehiculeManagementComponent,canActivate: [guard], data: { expectedRol: ['admin']}},
       {path: 'newVehicle' , component: NewVehicleComponent,canActivate: [guard], data: { expectedRol: ['admin']}},

@@ -1,5 +1,7 @@
 package net.autossanchez.entity;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -25,6 +27,13 @@ public class Notice {
 	private int id;
 
 	private String comment;
+	@Column(nullable = false)
+	private Date dateIn;
+	
+	private Date dateOut;
+	
+	@Column(nullable = false)
+	private boolean codeStatus; 
 	
 	@ManyToOne(fetch = FetchType.EAGER,optional = false)
 	@JoinColumn(name = "vehicle_id",nullable = false)

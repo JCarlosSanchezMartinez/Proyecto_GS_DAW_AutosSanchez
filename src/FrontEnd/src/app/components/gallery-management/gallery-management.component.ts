@@ -1,6 +1,9 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { SearchVehicleDto } from 'src/app/model/search-vehicle-dto';
 import { Vehicle } from 'src/app/model/Vehicle';
+import { SearchVehicleDtoService } from 'src/app/services/search-vehicle-dto.service';
 import { TokenService } from 'src/app/services/token.service';
 import { VehicleCRUDService } from 'src/app/services/vehicle-crud.service';
 
@@ -13,29 +16,30 @@ import { VehicleCRUDService } from 'src/app/services/vehicle-crud.service';
 export class GalleryManagementComponent implements OnInit {
   
   showTable: boolean;
-  vehicles:Vehicle[];
+  vehiclesDto:SearchVehicleDto[];
+  public visibleSidebar= false;
   isLogged = false;
   
-  constructor (private service:VehicleCRUDService, private seriveToken: TokenService) { }
+  constructor (private service:SearchVehicleDtoService,
+     private seriveToken: TokenService,
+     private common: CommonModule,
+     private router: Router,) { }
 
   
   ngOnInit() {
 
     if(this.seriveToken.getToken()){
       this.isLogged = true;
-      console.log(this.seriveToken)
-      this.service.readVehicleALL().subscribe((data:any)=>{this.vehicles=data})
+      this.service.readVehicleALL().subscribe((data:any)=>{this.vehiclesDto=data})
     }else {
       this.isLogged = false;
-    }
-    
-
-    
+    }   
   }
 
-  listar(){
-   this.ngOnInit();
+  onClickVehicleDetails(vehicleId: number){
+    this.router.navigate(['/vehicleDetails',vehicleId]);
   }
+
 
   gallery(){
     this.showTable = true;

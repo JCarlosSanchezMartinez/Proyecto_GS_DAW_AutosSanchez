@@ -24,7 +24,8 @@ export class SearchVehicleComponent implements OnInit {
   public vehicleList: Vehicle[] = [];
   public client : User =  new User();
   public paramSearch: FilterVehicle;
-
+  public SearchVehicle = 'SearchVehicle';
+  public SearchClient = 'SearchClient';
   public chkActiveStatus = true;
   public totalRecords: number;
   public tableShow: boolean;
@@ -53,8 +54,8 @@ export class SearchVehicleComponent implements OnInit {
 
   private buildFrom(){
     this.formSearchVehicle = new FormGroup({});
-    this.formSearchVehicle.addControl('inputNumberPlate', new FormControl('', Validators.required));
-    this.formSearchVehicle.addControl('inputVin', new FormControl('', Validators.required));
+    this.formSearchVehicle.addControl('SearchVehicle', new FormControl());
+    this.formSearchVehicle.addControl('SearchClient', new FormControl()); 
     this.formSearchVehicle.addControl('inputBrand', new FormControl('', Validators.required));
     this.formSearchVehicle.addControl('inputModel', new FormControl('', Validators.required));
     this.formSearchVehicle.addControl('chkActiveStatus', new FormControl(true));
@@ -73,10 +74,10 @@ export class SearchVehicleComponent implements OnInit {
   }
 
   cleanAllControls(){
-    this.formSearchVehicle.controls.inputNumberPlate.setValue(null);
-    this.formSearchVehicle.controls.inputVin.setValue(null);
+    this.formSearchVehicle.controls.SearchVehicle.setValue(null);
     this.formSearchVehicle.controls.inputBrand.setValue(null);
     this.formSearchVehicle.controls.inputModel.setValue(null);
+    this.formSearchVehicle.controls.SearchClient.setValue(null);
 
   }
 
@@ -127,18 +128,18 @@ export class SearchVehicleComponent implements OnInit {
 
   getParamsSearchVehicle(): FilterVehicle {
     return {
-      numberPlate : this.formSearchVehicle.controls.inputNumberPlate.value !== ''
-      && this.formSearchVehicle.controls.inputNumberPlate.value !==undefined ? 
-      this.formSearchVehicle.controls.inputNumberPlate.value : null,
-      vin : this.formSearchVehicle.controls.inputVin.value !== ''
-      && this.formSearchVehicle.controls.inputVin.value !==undefined ? 
-      this.formSearchVehicle.controls.inputVin.value : null,
+      vehicle : this.formSearchVehicle.controls.SearchVehicle.value !== ''
+      && this.formSearchVehicle.controls.SearchVehicle.value !==undefined ? 
+      this.formSearchVehicle.controls.SearchVehicle.value : null,
       brand : this.formSearchVehicle.controls.inputBrand.value !== ''
       && this.formSearchVehicle.controls.inputBrand.value !==undefined ? 
       this.formSearchVehicle.controls.inputBrand.value : null,
       model : this.formSearchVehicle.controls.inputModel.value !== ''
       && this.formSearchVehicle.controls.inputModel.value !==undefined ? 
       this.formSearchVehicle.controls.inputModel.value : null,
+      user : this.formSearchVehicle.controls.SearchClient.value !== ''
+      && this.formSearchVehicle.controls.SearchClient.value !==undefined ? 
+      this.formSearchVehicle.controls.SearchClient.value : null,
       codeStatus : this.formSearchVehicle.controls.chkActiveStatus.value === true ? true : null,
       
     };

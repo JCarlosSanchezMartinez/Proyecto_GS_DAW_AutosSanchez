@@ -81,3 +81,9 @@
     z-index: 9999;
     opacity: 50%;
 }
+
+.line {
+    height: 0;
+    border: solid 1px #0678c4;
+    margin: 0;
+}

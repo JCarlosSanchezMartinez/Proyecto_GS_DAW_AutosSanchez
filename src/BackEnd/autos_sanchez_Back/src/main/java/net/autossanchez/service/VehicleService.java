@@ -29,6 +29,7 @@ public class VehicleService  {
 	public List<Vehicle> getVehiclesByUserId(User userOK){
 		return vehicleRepository.findByUserId(userOK);
 	}
+
 	
 	public Vehicle save(Vehicle vehicle) {
 		return vehicleRepository.save(vehicle);
