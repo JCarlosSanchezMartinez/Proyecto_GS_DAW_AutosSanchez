@@ -1,6 +1,7 @@
-export class PhotoVehicle{
-    code:string;
+import { Vehicle } from './Vehicle';
+
+export class PhotoVehicle{    
     id:number;
-    imagen:string;
-    
+    url:string;
+    vehicle:Vehicle;    
     }

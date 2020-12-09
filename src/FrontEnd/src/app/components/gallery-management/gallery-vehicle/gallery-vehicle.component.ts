@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { PhotoVehicle } from 'src/app/model/PhotoVehicle';
+import { PhotoVehicleDto } from 'src/app/model/photo-vehicle-dto';
 import { SearchVehicleDto } from 'src/app/model/search-vehicle-dto';
 import { SearchVehicleDtoService } from 'src/app/services/search-vehicle-dto.service';
 
@@ -12,7 +12,7 @@ import { SearchVehicleDtoService } from 'src/app/services/search-vehicle-dto.ser
 export class GalleryVehicleComponent implements OnInit {
 
   public vehiclesDto: SearchVehicleDto;
-  public images: PhotoVehicle[] = [new PhotoVehicle()];
+  public images: any[];
   
 
   constructor(private serviceVehicleDto: SearchVehicleDtoService,
@@ -24,14 +24,10 @@ export class GalleryVehicleComponent implements OnInit {
         if (params.id !== undefined) {
           this.serviceVehicleDto.getVehicle(params.id).subscribe((data:any)=>{ 
             this.vehiclesDto = data;
-         
-
-          this.images.push(this.vehiclesDto.photoId);
-          this.images.push(this.vehiclesDto.photoId);
-          this.images.push(this.vehiclesDto.photoId);
-          
+            this.images = this.vehiclesDto.photoVehicleDto;
           
           console.log(this.images)
+          console.log(this.vehiclesDto)
          
           })
           

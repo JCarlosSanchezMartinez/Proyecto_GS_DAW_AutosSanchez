@@ -18,7 +18,6 @@ export class Vehicle {
     extra:string;
     carrousel:boolean;
     codeStatus:boolean;
-    photoId:PhotoVehicle;
     userId:User;
   
 }

@@ -107,7 +107,7 @@ export class NewVehicleComponent implements OnInit {
     //this.vehicle.extra = JSON.parse(this.inputTextArea);
     this.vehicle.carrousel = this.formNewVehicle.controls.chkActiveCarrousel.value
     this.vehicle.codeStatus = this.formNewVehicle.controls.chkActiveStatus.value
-    this.vehicle.photoId = this.listPhone;
+    //this.vehicle.photoId = this.listPhone;
     this.serviceUser.getUserDni(this.formNewVehicle.controls.SearchClient.value.dni).subscribe(data => 
       {this.userList=data});
 

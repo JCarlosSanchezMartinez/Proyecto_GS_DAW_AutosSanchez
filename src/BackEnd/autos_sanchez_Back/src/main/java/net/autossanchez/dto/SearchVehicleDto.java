@@ -1,7 +1,7 @@
 package net.autossanchez.dto;
 
 import java.util.Date;
-
+import java.util.List;
 
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -48,5 +48,7 @@ public class SearchVehicleDto {
 
 	private boolean codeStatus;
 
-	private PhotoVehicle photoId;
+	private List<PhotoVehicleDto> photoVehicleDto;
+	
+	private String photoHead;
 }

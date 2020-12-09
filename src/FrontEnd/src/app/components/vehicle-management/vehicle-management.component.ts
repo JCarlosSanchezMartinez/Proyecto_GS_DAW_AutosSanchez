@@ -56,9 +56,6 @@ export class VehiculeManagementComponent implements OnInit {
   
     ];
 
-    this.listPhone = {id: 1, imagen: '1.jpeg',code: ""};
-
-   
   }
  
   private buildFrom(){
@@ -74,7 +71,7 @@ export class VehiculeManagementComponent implements OnInit {
     this.formEditVehicle.addControl('inputColor', new FormControl());
     this.formEditVehicle.addControl('inputChasis', new FormControl());
     this.formEditVehicle.addControl('inputPrice', new FormControl());
-   // this.formEditVehicle.addControl('inputExtra', new FormControl());
+    this.formEditVehicle.addControl('inputExtra', new FormControl());
     this.formEditVehicle.addControl('chkActiveStatus', new FormControl());
     this.formEditVehicle.addControl('chkActiveCarrousel', new FormControl());
     this.formEditVehicle.addControl('SearchClient', new FormControl());
@@ -98,7 +95,7 @@ export class VehiculeManagementComponent implements OnInit {
             this.formEditVehicle.controls.inputColor.setValue(resp.color);
             this.formEditVehicle.controls.inputChasis.setValue(resp.chasis);
             this.formEditVehicle.controls.inputPrice.setValue(resp.price);
-           // this.formEditVehicle.controls.inputExtra.setValue(resp.extra);
+            this.formEditVehicle.controls.inputExtra.setValue(resp.extra);
             this.formEditVehicle.controls.chkActiveStatus.setValue(resp.codeStatus);
             this.formEditVehicle.controls.chkActiveCarrousel.setValue(resp.carrousel);
             this.formEditVehicle.controls.SearchClient.setValue( resp.userId);
@@ -160,10 +157,10 @@ export class VehiculeManagementComponent implements OnInit {
       this.vehicle.color =  this.titleCaseWord(this.formEditVehicle.controls.inputColor.value)
       this.vehicle.chasis = this.formEditVehicle.controls.inputChasis.value.toUpperCase()
       this.vehicle.price = this.formEditVehicle.controls.inputPrice.value
-      //this.vehicle.extra = JSON.parse(this.inputTextArea);
+      this.vehicle.extra = this.formEditVehicle.controls.inputExtra.value
       this.vehicle.carrousel = this.formEditVehicle.controls.chkActiveCarrousel.value
       this.vehicle.codeStatus = this.formEditVehicle.controls.chkActiveStatus.value
-      this.vehicle.photoId = this.listPhone;
+      
       this.serviceUser.getUserDni(this.formEditVehicle.controls.SearchClient.value.dni).subscribe(data => 
         {this.userList=data});
 

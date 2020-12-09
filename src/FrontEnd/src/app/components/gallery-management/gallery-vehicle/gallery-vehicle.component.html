@@ -7,7 +7,7 @@
         <div class="col-12 col-md-8 pr-0">
             <p-galleria [(value)]="images" [autoPlay]="true" [transitionInterval]="6000" [containerStyle]="{'max-width': '800px'}" [numVisible]="5" [showThumbnails]="false" [showIndicators]="true" [changeItemOnIndicatorHover]="true" [showIndicatorsOnItem]="true">
                 <ng-template pTemplate="item" let-item>
-                    <img [src]="item.imagen" style="width: 100%; display: block;" />
+                    <img [src]="item.url" style="width: 100%; display: block;" />
                 </ng-template>
             </p-galleria>
         </div>

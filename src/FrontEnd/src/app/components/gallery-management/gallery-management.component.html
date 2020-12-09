@@ -17,7 +17,7 @@
                     <div class="card-flyer">
                         <div class="text-box">
                             <div class="image-box">
-                                <img src="{{vehicle.photoId.imagen}}" class="card-img-top" alt="..." />
+                                <img src="{{vehicle.photoHead}}" class="card-img-top" alt="{{vehicle.brand}}" />
                             </div>
                             <div class="text-container">
                                 <div class="row">
@@ -25,7 +25,7 @@
                                         <h5 class="text-left">{{vehicle.brand}} {{vehicle.model}}</h5>
                                         <hr class="line">
                                         <h4 class="text-right pt-3">{{vehicle.price | currency : 'EUR' : 'symbol' : '1.0-0' }}</h4>
-                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+                                        <p class="hidden">{{vehicle.extra}}</p>
 
                                     </div>
                                     <div class="col-6 p-2">

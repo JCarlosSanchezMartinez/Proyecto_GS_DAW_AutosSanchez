@@ -1,5 +1,4 @@
-import { PhotoVehicle } from './PhotoVehicle';
-
+import { PhotoVehicleDto } from './photo-vehicle-dto';
 export class SearchVehicleDto {
 
     id:number;   
@@ -15,6 +14,7 @@ export class SearchVehicleDto {
     extra:string;
     carrousel:boolean;
     codeStatus:boolean;
-    photoId:PhotoVehicle;
+    photoVehicleDto:PhotoVehicleDto[];
+    photoHead:string;
 
 }

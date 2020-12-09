@@ -61,10 +61,6 @@ public class Vehicle {
 	private boolean codeStatus;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "photo_id")
-	private PhotoVehicle photoId;
-	
-	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "user_id")
 	private User userId;
 }
