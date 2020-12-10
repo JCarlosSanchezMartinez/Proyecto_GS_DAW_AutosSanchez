@@ -48,7 +48,25 @@ import { AutoVehicleComponent } from './shared/auto-vehicle/auto-vehicle.compone
 import { NoticeComponent } from './components/notice/notice.component';
 import { SidebarModule } from 'primeng/sidebar';
 import { GalleryVehicleComponent } from './components/gallery-management/gallery-vehicle/gallery-vehicle.component';
+import { UploaderComponent } from './components/uploader/uploader.component'
 
+//FIREBASE
+import { AngularFireStorageModule} from '@angular/fire/storage'
+import { AngularFireModule} from '@angular/fire';
+import { AngularFireDatabaseModule} from '@angular/fire/database'
+
+
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyBViWYqeLrMa3eJNDw1i3JCtqGmhmz3zDk",
+  authDomain: "imagenesautos-d10c4.firebaseapp.com",
+  databaseURL: "gs://imagenesautos-d10c4.appspot.com",
+  projectId: "imagenesautos-d10c4",
+  storageBucket: "imagenesautos-d10c4.appspot.com",
+  messagingSenderId: "127456130752",
+  appId: "1:127456130752:web:1182c8b77b1eb1083e5f25",
+  measurementId: "G-53MHPTEDRD"
+};
 
 
 @NgModule({
@@ -73,14 +91,8 @@ import { GalleryVehicleComponent } from './components/gallery-management/gallery
     AutoVehicleComponent,
     NoticeComponent,
     GalleryVehicleComponent,
- 
-
-
-    
-    
-
-    
- 
+    UploaderComponent,
+  
   ],
   imports: [
     BrowserModule,
@@ -108,14 +120,12 @@ import { GalleryVehicleComponent } from './components/gallery-management/gallery
     CalendarModule,
     InputTextareaModule,
     DynamicDialogModule,
-    SidebarModule
+    SidebarModule,
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireStorageModule,
+    AngularFireDatabaseModule,
     
-
-
-
-
-
-
+    
 
    
   ],

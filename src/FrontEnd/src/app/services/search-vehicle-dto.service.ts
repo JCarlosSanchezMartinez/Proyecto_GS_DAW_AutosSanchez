@@ -25,7 +25,7 @@ export class SearchVehicleDtoService {
   getVehicle(id: any): Observable<any>{
     return this.http.get(this.Url + id); 
   }
-  // Devuelve el Vehiculo por su ID
+// Devuelve CARROUSEL
   getVehicleCarrousel(): Observable<any>{
     return this.http.get(this.Url + "carrouselDto/"); 
   }
@@ -33,10 +33,6 @@ export class SearchVehicleDtoService {
   getListVehicleByFilter(filter: FilterVehicle): Observable<any> {
     return this.http.post(this.Url + "search", filter);  
   }
-// Busca las imagenes de un Vehiculo
-readVehicleImagenList(id: any): Observable<any>{
-  return this.http.get<PhotoVehicle[]>(this.Url + "getVehicleImagenList" + id);
- 
-}
+
  
 }

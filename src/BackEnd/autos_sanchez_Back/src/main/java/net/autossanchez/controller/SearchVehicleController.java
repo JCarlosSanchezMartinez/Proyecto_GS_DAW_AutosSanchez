@@ -1,17 +1,25 @@
 package net.autossanchez.controller;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.tomcat.jni.File;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
+import net.autossanchez.dto.Message;
 import net.autossanchez.dto.PhotoVehicleDto;
 import net.autossanchez.dto.SearchVehicleDto;
 import net.autossanchez.entity.PhotoVehicle;
@@ -62,15 +70,15 @@ public class SearchVehicleController {
 				if (!photoListTemp.isEmpty()) {	
 					for (PhotoVehicle photoVehicle : photoListTemp) {
 						PhotoVehicleDto dtoTemp = new PhotoVehicleDto();
-						dtoTemp.setUrl(photoVehicle.getImagen());
+						dtoTemp.setImagen(photoVehicle.getImagen());
 						photoList.add(dtoTemp);
 					}
-					dto.setPhotoHead(photoList.get(0).url.toString());
+					dto.setPhotoHead(photoList.get(0).imagen.toString());
 					dto.setPhotoVehicleDto(photoList);
 				} else {
 					dto.setPhotoHead("assets/img/imgEmpty.jpg");
 					PhotoVehicleDto dtoTemp = new PhotoVehicleDto();
-					dtoTemp.setUrl(dto.getPhotoHead());
+					dtoTemp.setImagen(dto.getPhotoHead());
 					photoList.add(dtoTemp);
 					dto.setPhotoVehicleDto(photoList);
 				}
@@ -118,15 +126,15 @@ public class SearchVehicleController {
 				if (!photoListTemp.isEmpty()) {	
 					for (PhotoVehicle photoVehicle : photoListTemp) {
 						PhotoVehicleDto dtoTemp = new PhotoVehicleDto();
-						dtoTemp.setUrl(photoVehicle.getImagen());
+						dtoTemp.setImagen(photoVehicle.getImagen());
 						photoList.add(dtoTemp);
 					}
-					dto.setPhotoHead(photoList.get(0).url.toString());
+					dto.setPhotoHead(photoList.get(0).imagen.toString());
 					dto.setPhotoVehicleDto(photoList);
 				} else {
 					dto.setPhotoHead("assets/img/imgEmpty.jpg");
 					PhotoVehicleDto dtoTemp = new PhotoVehicleDto();
-					dtoTemp.setUrl(dto.getPhotoHead());
+					dtoTemp.setImagen(dto.getPhotoHead());
 					photoList.add(dtoTemp);
 					dto.setPhotoVehicleDto(photoList);
 				}
@@ -164,15 +172,15 @@ public class SearchVehicleController {
 			if (!photoListTemp.isEmpty()) {	
 				for (PhotoVehicle photoVehicle : photoListTemp) {
 					PhotoVehicleDto dtoTemp = new PhotoVehicleDto();
-					dtoTemp.setUrl(photoVehicle.getImagen());
+					dtoTemp.setImagen(photoVehicle.getImagen());
 					photoList.add(dtoTemp);
 				}
-				dto.setPhotoHead(photoList.get(0).url.toString());
+				dto.setPhotoHead(photoList.get(0).imagen.toString());
 				dto.setPhotoVehicleDto(photoList);
 			} else {
 				dto.setPhotoHead("assets/img/imgEmpty.jpg");
 				PhotoVehicleDto dtoTemp = new PhotoVehicleDto();
-				dtoTemp.setUrl(dto.getPhotoHead());
+				dtoTemp.setImagen(dto.getPhotoHead());
 				photoList.add(dtoTemp);
 				dto.setPhotoVehicleDto(photoList);
 			}
@@ -188,29 +196,6 @@ public class SearchVehicleController {
 			return (ResponseEntity<Object>) ResponseEntity.notFound();
 		}
 
-	}
-
-	/* Obtenemos todas las IMAGENES de un VEHICULO */
-
-	@GetMapping("/getVehicleImagenList/{id}")
-	public ResponseEntity<PhotoVehicleDto> getVehicleImagenList(@PathVariable Long id) {
-		try {
-
-			Vehicle vehicle = vehicleService.getByID(id).orElse(null);
-			;
-			List<PhotoVehicle> photoListTemp = photoVehicleService.getListByVehicle(vehicle);
-
-			List<PhotoVehicleDto> photoList = new ArrayList<>();
-			for (PhotoVehicle photoVehicle : photoListTemp) {
-				PhotoVehicleDto dto = new PhotoVehicleDto();
-				dto.setUrl(photoVehicle.getImagen());
-				photoList.add(dto);
-			}
-
-			return new ResponseEntity(photoList, HttpStatus.OK);
-		} catch (Exception e) {
-			return (ResponseEntity<PhotoVehicleDto>) ResponseEntity.notFound();
-		}
 	}
 
 }

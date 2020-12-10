@@ -65,6 +65,7 @@ public class MainSecurity extends WebSecurityConfigurerAdapter {
                 .antMatchers("/user/**").permitAll()
                 .antMatchers("/common/**").permitAll()
                 .antMatchers("/search/**").permitAll()
+                .antMatchers("/photoVehicle/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .exceptionHandling().authenticationEntryPoint(jwtEntryPoint)

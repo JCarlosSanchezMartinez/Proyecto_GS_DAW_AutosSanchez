@@ -7,7 +7,7 @@ export class Vehicle {
     vin:string;
     numberPlate:string;
     brand:string;
-    model:string;    
+    model:string;  
     sellDate:Date;
     engine:string;
     price:number;
@@ -16,6 +16,7 @@ export class Vehicle {
     chasis:string;
     color:string;
     extra:string;
+    photoHead:string;
     carrousel:boolean;
     codeStatus:boolean;
     userId:User;

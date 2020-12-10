@@ -12,6 +12,9 @@ import net.autossanchez.entity.Vehicle;
 public interface PhotoVehicleRepository extends JpaRepository<PhotoVehicle, Long> {
 
 	List<PhotoVehicle> getListByVehicle(Vehicle vehicle);
+	List<PhotoVehicle> getListByVehicleId(long vehicleId);
+	PhotoVehicle deleteById(long photoVehicleId);
+	
 
 
 }

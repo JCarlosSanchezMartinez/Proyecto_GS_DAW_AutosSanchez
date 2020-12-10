@@ -23,11 +23,21 @@ public class PhotoVehicleService {
 		return photoVehicleRepository.findAll();
 	}
 
-	public Optional<PhotoVehicle> getById(int id) {
-		return photoVehicleRepository.findById((long) id);
+	public Optional<PhotoVehicle> getById(long id) {
+		return photoVehicleRepository.findById( id);
 	}
 	public List<PhotoVehicle> getListByVehicle(Vehicle vehicle) {
 		return photoVehicleRepository.getListByVehicle(vehicle);
+	}
+	public List<PhotoVehicle> getListByVehicleId(long vehicleId) {
+		return photoVehicleRepository.getListByVehicleId(vehicleId);
+	}
+
+	public PhotoVehicle save(PhotoVehicle photoVehicle) {
+		return photoVehicleRepository.save(photoVehicle);
+	}
+	public PhotoVehicle deleteById(long id) {
+		return photoVehicleRepository.deleteById(id);
 	}
 
 }

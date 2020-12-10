@@ -55,6 +55,8 @@ public class Vehicle {
 	private String chasis;
 	
 	private String extra;
+	
+	private String photoHead;
 
 	private boolean carrousel;
 

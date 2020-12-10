@@ -4,14 +4,9 @@
             <p class="title m-2">Edicion Vehiculo</p>
             <div class="row">
                 <div class="col-12 col-md-5">
-                    <p-galleria [value]="imagenList">
+                    <p-galleria [(value)]="listPhotoVehicleTemp" [autoPlay]="true" [transitionInterval]="6000" [containerStyle]="{'max-width': '800px'}" [numVisible]="5" [showThumbnails]="false" [showIndicators]="true" [changeItemOnIndicatorHover]="true" [showIndicatorsOnItem]="true">
                         <ng-template pTemplate="item" let-item>
-                            <img [src]="'../../../assets/img/' + item.imagen" style="width: 100%;" />
-                        </ng-template>
-                        <ng-template pTemplate="thumbnail" let-item>
-                            <div class="p-grid p-nogutter p-justify-center">
-                                <img [src]="item.id" />
-                            </div>
+                            <img [src]="item.imagen" style="width: 100%; display: block;" />
                         </ng-template>
                     </p-galleria>
                 </div>
@@ -52,31 +47,7 @@
                 </div>
             </div>
             <div class="row pt-3">
-                <div class="col-12 col-md-6">
-                    <div class="row">
-                        <div class="col-12 mb-0 form-group">
-                            <label>Extras</label>
-                        </div>
-                        <div class="col-12 form-group">
-                            <input type="text" formControlName="inputExtra" name="color" class="form-control">
-
-                        </div>
-                        <div class="col-12">
-                            <div class="card">
-                                <h5>Advanced</h5>
-                                <p-fileUpload name="demo[]" url="{{url}}" (onUpload)="onUpload($event)" multiple="multiple" accept="image/*" maxFileSize="1000000">
-                                    <ng-template pTemplate="content">
-                                        <ul *ngIf="uploadedFiles.length">
-                                            <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
-                                        </ul>
-                                    </ng-template>
-                                </p-fileUpload>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="col-12 col-md-6">
+                <div class="col-12">
                     <div class="row">
                         <div class="col-5 form-group">
                             <label>Motor</label>
@@ -102,14 +73,22 @@
                             <label>Precio</label>
                             <input type="number" formControlName="inputPrice" name="price" class="form-control">
                         </div>
+                        <div class="col-12 form-group">
+                            <label>Extras</label>
+                            <input type="text" formControlName="inputExtra" name="color" class="form-control">
+                        </div>
                     </div>
-                    <div class="row ">
-                        <div class="col-12 form-group pt-3">
+                    <div class="row">
+                        <div class="col-6">
+                            <app-uploader [parentFormGroup]="formEditVehicle"></app-uploader>
+                        </div>
+                        <div class="col-6 form-group pt-3">
                             <p-checkbox class="p-1" formControlName="chkActiveCarrousel" label="Mostrar en Carrusel" [binary]="true"></p-checkbox>
                             <p-checkbox class="p-1 pl-3" formControlName="chkActiveStatus" label="Registros Activos" [binary]="true"></p-checkbox>
                         </div>
                     </div>
                 </div>
+
             </div>
         </form>
     </div>

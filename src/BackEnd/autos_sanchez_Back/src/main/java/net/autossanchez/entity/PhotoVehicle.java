@@ -8,7 +8,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.validation.constraints.NotNull;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,10 +20,10 @@ import lombok.NoArgsConstructor;
 public class PhotoVehicle {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private long id;
 	
 	
-	@Column(unique = true,columnDefinition = "varchar(100)")
+	@Column(unique = true,columnDefinition = "varchar(500)")
 	private String imagen;
 	
 	@ManyToOne(fetch = FetchType.EAGER)

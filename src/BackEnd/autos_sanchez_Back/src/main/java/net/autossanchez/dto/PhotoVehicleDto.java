@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class PhotoVehicleDto {
 	
-	public String url;
+	public String imagen;
+	public long vehicleId;
 
 }

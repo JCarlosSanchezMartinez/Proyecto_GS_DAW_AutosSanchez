@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { PhotoVehicleDto } from 'src/app/model/photo-vehicle-dto';
 import { SearchVehicleDto } from 'src/app/model/search-vehicle-dto';
@@ -11,6 +11,7 @@ import { SearchVehicleDtoService } from 'src/app/services/search-vehicle-dto.ser
 })
 export class GalleryVehicleComponent implements OnInit {
 
+  @Input() parentVehicleDto: SearchVehicleDto;
   public vehiclesDto: SearchVehicleDto;
   public images: any[];
   
@@ -19,7 +20,8 @@ export class GalleryVehicleComponent implements OnInit {
     private route: ActivatedRoute,) { }
 
   ngOnInit(): void {
-    this.route.params.subscribe(
+    this.vehiclesDto = this.parentVehicleDto;
+    /*this.route.params.subscribe(
       (params: Params) => {
         if (params.id !== undefined) {
           this.serviceVehicleDto.getVehicle(params.id).subscribe((data:any)=>{ 
@@ -31,7 +33,7 @@ export class GalleryVehicleComponent implements OnInit {
          
           })
           
-      }});
+      }});*/
      
   }
   

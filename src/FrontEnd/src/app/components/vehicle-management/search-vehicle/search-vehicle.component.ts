@@ -8,6 +8,7 @@ import { VehicleCRUDService } from 'src/app/services/vehicle-crud.service';
 import {ConfirmationService} from 'primeng/api';
 import {Message} from 'primeng/api';
 import { FilterVehicle } from 'src/app/interfaces/filter-vehicle.interface';
+import { SearchVehicleDtoService } from 'src/app/services/search-vehicle-dto.service';
 
 @Component({
   selector: 'app-search-vehicle',
@@ -23,6 +24,7 @@ export class SearchVehicleComponent implements OnInit {
   public vehicle: Vehicle = new Vehicle(); 
   public vehicleList: Vehicle[] = [];
   public client : User =  new User();
+  public imagenHead: string;
   public paramSearch: FilterVehicle;
   public SearchVehicle = 'SearchVehicle';
   public SearchClient = 'SearchClient';
@@ -38,7 +40,8 @@ export class SearchVehicleComponent implements OnInit {
   constructor(private serviceVehicle: VehicleCRUDService,
      private router: Router,
      private confirmationService: ConfirmationService,
-     private messageService: MessageService) {
+     private messageService: MessageService,
+     private servicePhotoVehicle: SearchVehicleDtoService) {
     this.columnsTableResult = [
       { field: 'numberPlate', header: 'Matricula' },
       { field: 'imagen', header: 'Imagen' },
@@ -73,6 +76,7 @@ export class SearchVehicleComponent implements OnInit {
 
   }
 
+
   cleanAllControls(){
     this.formSearchVehicle.controls.SearchVehicle.setValue(null);
     this.formSearchVehicle.controls.inputBrand.setValue(null);
@@ -98,6 +102,7 @@ export class SearchVehicleComponent implements OnInit {
           user: resultSearch.user,
           codeStatus: resultSearch.codeStatus}));
         this.vehicleList = vehicleFilterList;
+        
         this.hideLoadingSpinner();
 
       }

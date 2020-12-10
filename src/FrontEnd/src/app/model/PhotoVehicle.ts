@@ -1,7 +1,7 @@
 import { Vehicle } from './Vehicle';
 
 export class PhotoVehicle{    
-    id:number;
-    url:string;
-    vehicle:Vehicle;    
+    id?:number;
+    imagen:string;
+    vehicleId:number;    
     }

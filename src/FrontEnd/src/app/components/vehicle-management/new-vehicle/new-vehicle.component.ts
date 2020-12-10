@@ -6,6 +6,7 @@ import { Fuel } from 'src/app/interfaces/fuel';
 import { PhotoVehicle } from 'src/app/model/PhotoVehicle';
 import { User } from 'src/app/model/User';
 import { Vehicle } from 'src/app/model/Vehicle';
+import { PhotoVehicleService } from 'src/app/services/photo-vehicle.service';
 import { UserCrudService } from 'src/app/services/user-crud.service';
 import { VehicleCRUDService } from 'src/app/services/vehicle-crud.service';
 
@@ -28,11 +29,15 @@ export class NewVehicleComponent implements OnInit {
   public SearchClient = 'SearchClient';
   public imagenList:any[];
   public listFuel : Fuel[];
+  public listPhotoVehicle: PhotoVehicle[] = [];
+  public listPhotoVehicleTemp: PhotoVehicle[];
+
 
   constructor( private serviceVehicle: VehicleCRUDService,
     private serviceUser: UserCrudService,
     private messageService: MessageService,
-    private route: ActivatedRoute,) { 
+    private route: ActivatedRoute,
+    private servicePhotoVehicle: PhotoVehicleService,) { 
     this.listFuel = [
       {name: 'Diesel', code: 'D'},
       {name: 'Gasolina', code: 'G'},
@@ -56,9 +61,9 @@ export class NewVehicleComponent implements OnInit {
     this.formNewVehicle.addControl('inputColor', new FormControl());
     this.formNewVehicle.addControl('inputChasis', new FormControl());
     this.formNewVehicle.addControl('inputPrice', new FormControl());
-   // this.formNewVehicle.addControl('inputExtra', new FormControl());
-    this.formNewVehicle.addControl('chkActiveStatus', new FormControl());
-    this.formNewVehicle.addControl('chkActiveCarrousel', new FormControl());
+    this.formNewVehicle.addControl('inputExtra', new FormControl());
+    this.formNewVehicle.addControl('chkActiveStatus', new FormControl(true));
+    this.formNewVehicle.addControl('chkActiveCarrousel', new FormControl(false));
     this.formNewVehicle.addControl('SearchClient', new FormControl());
     
     
@@ -82,6 +87,38 @@ export class NewVehicleComponent implements OnInit {
 
   saveNewVehicle(){
 
+    this.vehicle.numberPlate = this.formNewVehicle.controls.inputNumberPlate.value.toUpperCase()
+    this.vehicle.vin = this.formNewVehicle.controls.inputVin.value.toUpperCase()
+    this.vehicle.brand = this.formNewVehicle.controls.inputBrand.value.toUpperCase()
+    this.vehicle.model = this.formNewVehicle.controls.inputModel.value.toUpperCase()
+    this.vehicle.sellDate = this.formNewVehicle.controls.selectSellDate.value
+    this.vehicle.engine = this.formNewVehicle.controls.inputEngine.value
+    this.selectFuel = this.formNewVehicle.controls.inputFuel.value
+    this.vehicle.fuel = this.selectFuel.name;
+    this.vehicle.kms = this.formNewVehicle.controls.inputKms.value
+    this.vehicle.color = this.titleCaseWord(this.formNewVehicle.controls.inputColor.value)
+    this.vehicle.chasis = this.formNewVehicle.controls.inputChasis.value.toUpperCase()
+    this.vehicle.price = this.formNewVehicle.controls.inputPrice.value
+    this.vehicle.extra = this.formNewVehicle.controls.inputExtra.value
+    this.vehicle.carrousel = this.formNewVehicle.controls.chkActiveCarrousel.value
+    this.vehicle.codeStatus = this.formNewVehicle.controls.chkActiveStatus.value
+    this.vehicle.userId = this.formNewVehicle.controls.SearchClient.value
+/*
+    if (this.listPhotoVehicleTemp == null || this.listPhotoVehicleTemp == undefined || this.listPhotoVehicleTemp.length < 1) {
+      var photoVehicle: PhotoVehicle = new PhotoVehicle;
+      photoVehicle.id = null;
+      photoVehicle.imagen = 'assets/img/imgEmpty.jpg';
+      photoVehicle.vehicleId = this.formNewVehicle.controls.id.value;
+      this.listPhotoVehicle.push(photoVehicle);
+      this.servicePhotoVehicle.deleteePhotoVehicle(this.formNewVehicle.controls.id.value).subscribe();
+    }
+    this.servicePhotoVehicle.addPhotoVehicle(this.listPhotoVehicle).subscribe(data => {
+      if (data) {
+        
+        this.listPhotoVehicle = [];
+        //this.getPhotoVehicle();
+      }
+    });*/
     this.serviceVehicle.addVehicle(this.vehicle).subscribe(
       data => {
         if (data == null || data == undefined) {
@@ -91,31 +128,8 @@ export class NewVehicleComponent implements OnInit {
         } 
       }
     );
-    
-    this.vehicle.numberPlate = this.formNewVehicle.controls.inputNumberPlate.value.toUpperCase()
-    this.vehicle.vin = this.formNewVehicle.controls.inputVin.value.toUpperCase()
-    this.vehicle.brand = this.formNewVehicle.controls.inputBrand.value.toUpperCase()
-    this.vehicle.model = this.formNewVehicle.controls.inputModel.value.toUpperCase()
-    this.vehicle.sellDate = this.formNewVehicle.controls.selectSellDate.value
-    this.vehicle.engine = this.formNewVehicle.controls.inputEngine.value
-    this.selectFuel = this.formNewVehicle.controls.inputFuel.value 
-    this.vehicle.fuel = this.selectFuel.name;
-    this.vehicle.kms = this.formNewVehicle.controls.inputKms.value
-    this.vehicle.color =  this.titleCaseWord(this.formNewVehicle.controls.inputColor.value)
-    this.vehicle.chasis = this.formNewVehicle.controls.inputChasis.value.toUpperCase()
-    this.vehicle.price = this.formNewVehicle.controls.inputPrice.value
-    //this.vehicle.extra = JSON.parse(this.inputTextArea);
-    this.vehicle.carrousel = this.formNewVehicle.controls.chkActiveCarrousel.value
-    this.vehicle.codeStatus = this.formNewVehicle.controls.chkActiveStatus.value
-    //this.vehicle.photoId = this.listPhone;
-    this.serviceUser.getUserDni(this.formNewVehicle.controls.SearchClient.value.dni).subscribe(data => 
-      {this.userList=data});
-
-    this.vehicle.userId = this.userList[0];
-        
   }
-  
-  
+
   ngOnInit(): void {
     this.buildFrom();
   }
@@ -123,6 +137,12 @@ export class NewVehicleComponent implements OnInit {
   titleCaseWord(word: string) {
     if (!word) return word;
     return word[0].toUpperCase() + word.substr(1).toLowerCase();
+  }
+
+  getUserVehicle(dni:string) {
+    this.serviceUser.getUserDni(dni).subscribe(data => {
+      this.userList = data;
+    });
   }
 
 }
