@@ -1,39 +1,38 @@
-<p-sidebar [style]="{width:'30em'}" [(visible)]="visibleSidebar">
+<p-sidebar [style]="{width:'20em'}" [(visible)]="visibleSidebar">
     <h1 style="font-weight:normal">Left Sidebar</h1>
     <p-button type="button" (click)="visibleSidebar = false" label="Save" styleClass="p-button-success"></p-button>
     <p-button type="button" (click)="visibleSidebar = false" label="Cancel" styleClass="p-button-secondary"></p-button>
 </p-sidebar>
 
-
-
-
+<!--CARD SOLO VISIBLE CON BOTON-->
 <div class="jumbotron bg-dark pt-0 m-3">
-
-
     <p-button type="button" (click)="visibleSidebar = true" icon="pi pi-arrow-right"></p-button>
     <div id="cards_landscape_wrap-2">
-        <div class="row p-0 m-0">
+        <div class="row p-0 m-0 ">
             <div class="col-12 col-md-4 col-lg-3" *ngFor="let vehicle of vehiclesDto">
                 <a (click)="onClickVehicleDetails(vehicle.id)">
-                    <div class="card-flyer">
-                        <div class="text-box">
+                    <div class="card-flyer border rounded">
+                        <div class="text-box ">
                             <div class="image-box">
                                 <img src="{{vehicle.photoHead}}" class="card-img-top" alt="{{vehicle.brand}}" />
                             </div>
-                            <div class="text-container">
-                                <div class="row">
-                                    <div class="col-12">
+                            <div class="text-container ">
+                                <div class="row px-3">
+                                    <div class="col-12 pt-3">
                                         <h5 class="text-left"> {{vehicle.brand}} {{vehicle.model}}</h5>
                                         <hr class="line">
                                         <h4 class="text-right pt-3">{{vehicle.price | currency : 'EUR' : 'symbol' : '1.0-0' }}</h4>
                                         <p class="hidden">{{vehicle.extra}}</p>
-
                                     </div>
-                                    <div class="col-6 p-2">
-                                        <p class="globo p-0 m-0 rounded"><i class="fas fa-gas-pump pr-2"></i>{{vehicle.fuel}}</p>
-                                    </div>
-                                    <div class="col-6 p-2">
-                                        <p class="globo p-0 m-0 rounded"><i class="far fa-calendar-alt pr-2"></i>{{vehicle.sellDate | date:'yyyy'}}</p>
+                                    <div class="col-12">
+                                        <div class="row">
+                                            <div class="col-6 p-2">
+                                                <p class="globo p-0 m-0 rounded"><i class="fas fa-gas-pump pr-2"></i>{{vehicle.fuel}}</p>
+                                            </div>
+                                            <div class="col-6 p-2">
+                                                <p class="globo p-0 m-0 rounded"><i class="far fa-calendar-alt pr-2"></i>{{vehicle.sellDate | date:'yyyy'}}</p>
+                                            </div>
+                                        </div>
                                     </div>
 
                                 </div>
@@ -44,5 +43,35 @@
             </div>
         </div>
 
+    </div>
+</div>
+
+
+<!--TABLA SOLO VISIBLE CON BOTON-->
+<div class="row" ngIf="showTable">
+    <div class="col-12 p-3">
+        <p-table [value]="vehiclesDto" styleClass="p-datatable-responsive-demo" [columns]="columnsTableResult" [paginator]="true" [rows]="5" [showCurrentPageReport]="true" currentPageReportTemplate="Mostrando {last}/{totalRecords} Vehiculos" [rowsPerPageOptions]="[5,10,20]">
+            <ng-template pTemplate="header" let-columns>
+                <tr>
+                    <ng-container *ngFor="let col of columns">
+                        <ng-container [ngSwitch]="col.field">
+                            <th pSortableColumn={{col.field}}>{{col.header}}
+                                <p-sortIcon field={{col.field}}></p-sortIcon>
+                        </ng-container>
+                    </ng-container>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-vehicle>
+                <tr>
+                    <td pTooltip="{{vehiclesDto.brand}}">{{vehiclesDto.brand}}</td>
+                    <td pTooltip="{{vehiclesDto.model}}">{{vehiclesDto.model}}</td>
+                    <td><img src="{{vehiclesDto.photoHead}}" [alt]="vehiclesDto.model" width="100" class="border rounded" /></td>
+                    <td pTooltip="{{vehiclesDto.kms}}">{{vehiclesDto.kms}}</td>
+                    <td pTooltip="{{vehiclesDto.fuel}}">{{vehiclesDto.fuel}}</td>
+                    <td pTooltip="{{vehiclesDto.sellDate}}">{{vehiclesDto.sellDate}}</td>
+                    <td pTooltip="{{vehiclesDto.price}}">{{vehiclesDto.price}}</td>
+                </tr>
+            </ng-template>
+        </p-table>
     </div>
 </div>

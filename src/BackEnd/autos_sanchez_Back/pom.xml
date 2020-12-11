@@ -11,8 +11,8 @@
 	</parent>
 	<groupId>net.autossanchez</groupId>
 	<artifactId>autos_sanchez_Back</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>autos_sanchez_Back</name>
+	<version>1.0</version>
+	<name>autossanchezDES</name>
 	<description>Autos Sanchez</description>
 
 	<properties>

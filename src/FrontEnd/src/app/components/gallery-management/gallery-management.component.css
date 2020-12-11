@@ -1,8 +1,24 @@
+@media (max-width: 360px) {
+    .card-flyer {
+        height: 400px;
+    }
+}
+
+@media (min-width: 767px) {
+    .card-flyer {
+        height: 450px;
+    }
+}
+
 img {
     width: 100% !important;
     height: auto !important;
 }
 
+p {
+    color: black;
+
+}
 h5 {
     color: rgb(0, 0, 50);
     font-weight: bold;
@@ -16,6 +32,7 @@ h4 {
 
 .globo {
     background-color: #0678c4;
+    
 }
 
 #cards_landscape_wrap-2 {
@@ -24,20 +41,6 @@ h4 {
 
 #cards_landscape_wrap-2 .container {
     padding-top: 80px;
-    padding-bottom: 100px;
-}
-
-#cards_landscape_wrap-2 a {
-    text-decoration: none;
-    outline: none;
-}
-
-#cards_landscape_wrap-2 .card-flyer {
-    border-radius: 5px;
-}
-
-.hidden {
-    overflow: hidden;
 }
 
 #cards_landscape_wrap-2 .card-flyer .image-box {
@@ -65,13 +68,7 @@ h4 {
     transform: scale(1.15);
 }
 
-#cards_landscape_wrap-2 .card-flyer .text-box {
-    text-align: center;
-}
 
-#cards_landscape_wrap-2 .card-flyer .text-box .text-container {
-    padding: 30px 18px;
-}
 
 #cards_landscape_wrap-2 .card-flyer {
     background: #FFFFFF;
@@ -95,11 +92,7 @@ h4 {
     margin-top: 50px;
 }
 
-#cards_landscape_wrap-2 .card-flyer .text-box p {
-    margin-top: 10px;
-    margin-bottom: 0px;
-    padding-bottom: 0px;
-    font-size: 14px;
-    letter-spacing: 1px;
-    color: #000000;
-}
+
+
+
+
