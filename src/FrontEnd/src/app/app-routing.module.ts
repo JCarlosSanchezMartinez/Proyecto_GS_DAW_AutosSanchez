@@ -14,6 +14,7 @@ import { NewVehicleComponent } from './components/vehicle-management/new-vehicle
 import { HomeComponent } from './components/home/home.component';
 import { NewUserComponent } from './components/client-management/new-client/new-client.component';
 import { GalleryVehicleComponent } from './components/gallery-management/gallery-vehicle/gallery-vehicle.component';
+import { ContactComponent } from './components/contact/contact.component';
 
 
 const routes: Routes = [ 
@@ -21,7 +22,7 @@ const routes: Routes = [
 
       {path: 'home', component: HomeComponent},
       {path: 'historia', component: HistoriaComponent},
-      {path: 'contacto', component: ManagementComponent ,canActivate: [guard], data: { expectedRol: ['admin', 'user'] } },
+      {path: 'contacto', component: ContactComponent},
       {path: 'login', component: LoginComponent},
       {path: 'vehicleDetails/:id', component: GalleryVehicleComponent},
       {path: 'vehicle', component: SearchVehicleComponent ,canActivate: [guard], data: { expectedRol: ['admin'] } },

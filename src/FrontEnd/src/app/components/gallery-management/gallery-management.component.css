@@ -103,3 +103,7 @@ h4 {
     letter-spacing: 1px;
     color: #000000;
 }
+
+.p-dialog {
+    display: none;
+}

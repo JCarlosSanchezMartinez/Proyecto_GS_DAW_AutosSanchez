@@ -9,7 +9,6 @@ export class HeaderComponent implements OnInit {
 
   constructor() { }
 
-  colorPrimary = "blue";
 
   ngOnInit() {
   }

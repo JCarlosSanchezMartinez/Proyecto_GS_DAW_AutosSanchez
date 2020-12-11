@@ -2,7 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { DialogService } from 'primeng/dynamicdialog';
 import { RegisterComponent } from 'src/app/auth/register/register.component';
 import { Vehicle } from 'src/app/model/Vehicle';
+import { SearchVehicleDtoService } from 'src/app/services/search-vehicle-dto.service';
 import { VehicleCRUDService } from 'src/app/services/vehicle-crud.service';
+import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
+import { PhotoVehicleDto } from 'src/app/model/photo-vehicle-dto';
+import { SearchVehicleDto } from 'src/app/model/search-vehicle-dto';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -10,30 +15,47 @@ import { VehicleCRUDService } from 'src/app/services/vehicle-crud.service';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+  public loading = false;
 
-  public vehicleList: Vehicle[] = [];
-  responsiveOptions: any[];
-  public imagen: String[]
+  public images: PhotoVehicleDto[] = [];
+  vehiclesDto:SearchVehicleDto[];
 
 
-  constructor(private serviceVehicle: VehicleCRUDService) { 
-    this.responsiveOptions = [
-      
-      {
-          breakpoint: '560px',
-          numVisible: 1,
-          numScroll: 1
-      }
-  ];
+ 
+
+
+  constructor(private serviceVehicleDto: SearchVehicleDtoService,
+    private serviceVehicle:SearchVehicleDtoService,
+    private router: Router,
+    ) { 
+
   }
 
   ngOnInit(): void {
-    this.serviceVehicle.getVehicleCarrousel().subscribe((data:any)=>{this.vehicleList=data});
-    for (let index = 0; index < this.vehicleList.length; index++) {
-      this.imagen.push();
+    this.showLoadingSpinner();
+    this.serviceVehicleDto.getVehicleCarrousel().subscribe( data=>{
+      this.vehiclesDto=data
+
       
-    }
+      
+    });
+    console.log(this.images)
+    this.hideLoadingSpinner();
+    
+  }
+  onClickVehicleDetails(vehicleId: number){
+    /* const ref = this.dialogService.open(GalleryVehicleComponent, {
+       width: '80%'});*/
+       
+   
+     this.router.navigate(['/vehicleDetails',vehicleId]);
+   }
+  showLoadingSpinner() {
+    this.loading = true;
   }
 
+  hideLoadingSpinner() {
+    this.loading = false;
+  }
 
 }

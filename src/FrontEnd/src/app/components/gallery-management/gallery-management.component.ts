@@ -44,12 +44,16 @@ export class GalleryManagementComponent implements OnInit {
     }   
   }
 
-  onClickVehicleDetails(vehicleId: number){
-   /* const ref = this.dialogService.open(GalleryVehicleComponent, {
-      width: '80%'});*/
+  onClickVehicleDetails(vehicleId: any){
+    this.service.getVehicle(vehicleId).subscribe((data:any)=>{
+      sessionStorage.setItem("vehicleId" ,JSON.stringify(data))
+      const ref = this.dialogService.open(GalleryVehicleComponent, {
+        width: '80%', showHeader: false,contentStyle: {  overflow: 'auto'}});
+    });
+  
       
   
-    this.router.navigate(['/vehicleDetails',vehicleId]);
+    //this.router.navigate(['/vehicleDetails',vehicleId]);
   }
 
 

@@ -1,7 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
 import { PhotoVehicleDto } from 'src/app/model/photo-vehicle-dto';
 import { SearchVehicleDto } from 'src/app/model/search-vehicle-dto';
+import { PhotoVehicleService } from 'src/app/services/photo-vehicle.service';
 import { SearchVehicleDtoService } from 'src/app/services/search-vehicle-dto.service';
 
 @Component({
@@ -11,31 +11,25 @@ import { SearchVehicleDtoService } from 'src/app/services/search-vehicle-dto.ser
 })
 export class GalleryVehicleComponent implements OnInit {
 
-  @Input() parentVehicleDto: SearchVehicleDto;
-  public vehiclesDto: SearchVehicleDto;
-  public images: any[];
   
+  public vehiclesDto: SearchVehicleDto;
+  public photoVehicleDtoList: PhotoVehicleDto[];
+  public images: any[] = [];
 
-  constructor(private serviceVehicleDto: SearchVehicleDtoService,
-    private route: ActivatedRoute,) { }
+
+  constructor() { }
 
   ngOnInit(): void {
-    this.vehiclesDto = this.parentVehicleDto;
-    /*this.route.params.subscribe(
-      (params: Params) => {
-        if (params.id !== undefined) {
-          this.serviceVehicleDto.getVehicle(params.id).subscribe((data:any)=>{ 
-            this.vehiclesDto = data;
-            this.images = this.vehiclesDto.photoVehicleDto;
-          
-          console.log(this.images)
-          console.log(this.vehiclesDto)
-         
-          })
-          
-      }});*/
-     
+    
+
+    this.vehiclesDto = JSON.parse(sessionStorage.getItem('vehicleId'));
+    this.photoVehicleDtoList = this.vehiclesDto.photoVehicleDto;
+
+    
+    
+    
+    sessionStorage.removeItem("vehicleId");
   }
-  
- 
+
+
 }

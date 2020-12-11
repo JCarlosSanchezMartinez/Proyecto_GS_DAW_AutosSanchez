@@ -53,7 +53,8 @@ import { UploaderComponent } from './components/uploader/uploader.component'
 //FIREBASE
 import { AngularFireStorageModule} from '@angular/fire/storage'
 import { AngularFireModule} from '@angular/fire';
-import { AngularFireDatabaseModule} from '@angular/fire/database'
+import { AngularFireDatabaseModule} from '@angular/fire/database';
+import { ContactComponent } from './components/contact/contact.component'
 
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -92,6 +93,7 @@ const firebaseConfig = {
     NoticeComponent,
     GalleryVehicleComponent,
     UploaderComponent,
+    ContactComponent,
   
   ],
   imports: [

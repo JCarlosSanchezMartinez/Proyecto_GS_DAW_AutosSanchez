@@ -120,24 +120,9 @@ public class SearchVehicleController {
 				dto.setExtra(vehicle.getExtra());
 				dto.setCarrousel(vehicle.isCarrousel());
 				dto.setCodeStatus(vehicle.isCodeStatus());
-
-				List<PhotoVehicle> photoListTemp = photoVehicleService.getListByVehicle(vehicle);
-				List<PhotoVehicleDto> photoList = new ArrayList<>();
-				if (!photoListTemp.isEmpty()) {	
-					for (PhotoVehicle photoVehicle : photoListTemp) {
-						PhotoVehicleDto dtoTemp = new PhotoVehicleDto();
-						dtoTemp.setImagen(photoVehicle.getImagen());
-						photoList.add(dtoTemp);
-					}
-					dto.setPhotoHead(photoList.get(0).imagen.toString());
-					dto.setPhotoVehicleDto(photoList);
-				} else {
-					dto.setPhotoHead("assets/img/imgEmpty.jpg");
-					PhotoVehicleDto dtoTemp = new PhotoVehicleDto();
-					dtoTemp.setImagen(dto.getPhotoHead());
-					photoList.add(dtoTemp);
-					dto.setPhotoVehicleDto(photoList);
-				}
+				dto.setPhotoHead(vehicle.getPhotoHead());
+				
+				
 				restDto.add(dto);
 			}
 
