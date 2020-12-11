@@ -32,12 +32,12 @@ export class GalleryManagementComponent implements OnInit {
   
   ngOnInit() {
 
-    
+    this.service.readVehicleALL().subscribe((data:any)=>{this.vehiclesDto=data});
 
 
     if(this.seriveToken.getToken()){
       this.isLogged = true;
-      this.service.readVehicleALL().subscribe((data:any)=>{this.vehiclesDto=data});
+      
       
     }else {
       this.isLogged = false;
@@ -46,14 +46,16 @@ export class GalleryManagementComponent implements OnInit {
 
   onClickVehicleDetails(vehicleId: any){
     this.service.getVehicle(vehicleId).subscribe((data:any)=>{
-      sessionStorage.setItem("vehicleId" ,JSON.stringify(data))
+      sessionStorage.setItem("vehicleId" ,JSON.stringify(data));
+
       const ref = this.dialogService.open(GalleryVehicleComponent, {
-        width: '80%', showHeader: false,contentStyle: {  overflow: 'auto'}});
+        width: '80%', 
+        showHeader: true,
+        closable:true,
+        contentStyle: { "overflow": "auto"}});
+
     });
-  
-      
-  
-    //this.router.navigate(['/vehicleDetails',vehicleId]);
+    
   }
 
 

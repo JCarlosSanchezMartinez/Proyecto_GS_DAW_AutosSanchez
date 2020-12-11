@@ -21,6 +21,12 @@ h4 {
     font-weight: bold;
 }
 
+.navContact {
+    color: white;
+    font-style: italic;
+    font-size: 1em;
+}
+
 img {
     width: 100% !important;
     height: auto !important;
@@ -115,6 +121,41 @@ img {
     }
 }
 
-.p-link {
-    background-color: black;
+.carousel-caption {
+    position: absolute;
+    top: 80%;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.70) !important;
+}
+
+.wrapper {
+    position: relative;
+    height: 0;
+    padding-top: 55%;
+    /* Keep ratio for 900x500 images */
+}
+
+.wrapper>img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
+.map-container {
+    overflow: hidden;
+    padding-bottom: 10px;
+    position: relative;
+    height: 0;
+}
+
+.map-container iframe {
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    position: absolute;
 }

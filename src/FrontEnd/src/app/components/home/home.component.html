@@ -1,16 +1,46 @@
-<div class="row px-5 ">
-    <div class="col-12">
-        <p-galleria [(value)]="vehiclesDto" [circular]="true" [autoPlay]="true" [transitionInterval]="6000" [showThumbnails]="false" [showItemNavigators]="true" [containerStyle]="{'max-width': '100%'}" [numVisible]="1">
-            <ng-template pTemplate="item" let-item>
-                <img [src]="item.photoHead" style="width: 100%;" class="border rounded" />
+<div class="row px-0">
+    <div class="col-12 col-md-9 p-0 carrousel">
+        <ngb-carousel *ngIf="vehiclesDto">
+            <ng-template ngbSlide *ngFor="let vehicle of vehiclesDto">
+                <div class="row">
+                    <div class="col-12 wrapper">
+                        <img src="{{vehicle.photoHead}}" class="img-fluid" (click)="onClickVehicleDetails(vehicle.id)" alt="Random first slide">
+                    </div>
+                    <div class="carousel-caption">
+                        <h2 class="text-right px-5">{{vehicle.brand}} {{vehicle.model}}</h2>
+                        <hr class="line">
+                        <h3 class="text-left pb-3 px-5">{{vehicle.price | currency : 'EUR' : 'symbol' : '1.0-0' }}</h3>
+                    </div>
+                </div>
             </ng-template>
-            <ng-template pTemplate="caption" let-item>
-                <h2 class="text-right">{{item.brand}} {{item.model}}</h2>
-                <hr class="line">
-                <h3 class="text-left">{{item.price | currency : 'EUR' : 'symbol' : '1.0-0' }}</h3>
-            </ng-template>
-        </p-galleria>
-
+        </ngb-carousel>
+    </div>
+    <div class="col-3 d-none d-md-block  bg-dark p-0">
+        <div class="row navContact">
+            <div class="col-12">
+                <img src="assets/img/header.png" width="250" class="img-fluid px-5 pt-3">
+            </div>
+            <div class="col-12 p-5">
+                <!--Google map-->
+                <div id="map-container-google-1" class="z-depth-1-half map-container  border rounded" style="height: 200px">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d25373.786401059628!2d-6.034842147284152!3d37.349058959690524!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd126da05d3852f9%3A0xb6fa1e76b0048c95!2sAutos%20Sanchez!5e0!3m2!1ses!2ses!4v1607648974077!5m2!1ses!2ses"
+                        frameborder="0" style="border:0" allowfullscreen></iframe>
+                </div>
+            </div>
+            <div class="col-12 text-center px-5">
+                <div class="col-12 d-flex px-3">
+                    <i class="fas fa-phone-alt pr-3"></i>
+                    <p class="navContact">610 12 80 54</p>
+                </div>
+                <div class="col-12 d-flex px-3">
+                    <i class="fas fa-envelope pr-3"></i>
+                    <p class="navContact">autossanchez@autossanchez.com</p>
+                </div>
+                <div class="col-12">
+                    <p class="navContact pt-3">Autos Sanchez Martinez S.L.<br> Calle el Río, 1, 41120 Gelves, Sevilla</p>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="col-12">
@@ -28,4 +58,6 @@
 
         </p-carousel>
     </div>
+
+
 </div>

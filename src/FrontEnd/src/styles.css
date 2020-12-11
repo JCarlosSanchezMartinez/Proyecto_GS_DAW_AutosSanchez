@@ -87,3 +87,7 @@
     border: solid 1px #0678c4;
     margin: 0;
 }
+
+.p-dialog-header {
+    height: 1px;
+}
