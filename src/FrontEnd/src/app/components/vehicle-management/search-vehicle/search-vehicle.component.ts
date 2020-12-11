@@ -5,8 +5,8 @@ import { MessageService, SortEvent } from 'primeng/api';
 import { User } from 'src/app/model/User';
 import { Vehicle } from 'src/app/model/Vehicle';
 import { VehicleCRUDService } from 'src/app/services/vehicle-crud.service';
-import {ConfirmationService} from 'primeng/api';
-import {Message} from 'primeng/api';
+import { ConfirmationService } from 'primeng/api';
+import { Message } from 'primeng/api';
 import { FilterVehicle } from 'src/app/interfaces/filter-vehicle.interface';
 import { SearchVehicleDtoService } from 'src/app/services/search-vehicle-dto.service';
 
@@ -18,12 +18,12 @@ import { SearchVehicleDtoService } from 'src/app/services/search-vehicle-dto.ser
 })
 export class SearchVehicleComponent implements OnInit {
 
-  public formSearchVehicle : FormGroup;
+  public formSearchVehicle: FormGroup;
   public columnsTableResult: any[]; // array de columnas
 
-  public vehicle: Vehicle = new Vehicle(); 
+  public vehicle: Vehicle = new Vehicle();
   public vehicleList: Vehicle[] = [];
-  public client : User =  new User();
+  public client: User = new User();
   public imagenHead: string;
   public paramSearch: FilterVehicle;
   public SearchVehicle = 'SearchVehicle';
@@ -38,10 +38,10 @@ export class SearchVehicleComponent implements OnInit {
   isLogged = false;
 
   constructor(private serviceVehicle: VehicleCRUDService,
-     private router: Router,
-     private confirmationService: ConfirmationService,
-     private messageService: MessageService,
-     private servicePhotoVehicle: SearchVehicleDtoService) {
+    private router: Router,
+    private confirmationService: ConfirmationService,
+    private messageService: MessageService,
+    private servicePhotoVehicle: SearchVehicleDtoService) {
     this.columnsTableResult = [
       { field: 'numberPlate', header: 'Matricula' },
       { field: 'imagen', header: 'Imagen' },
@@ -53,17 +53,17 @@ export class SearchVehicleComponent implements OnInit {
       { field: 'action', header: 'Acciones' },
 
     ];
-   }
+  }
 
-  private buildFrom(){
+  private buildFrom() {
     this.formSearchVehicle = new FormGroup({});
     this.formSearchVehicle.addControl('SearchVehicle', new FormControl());
-    this.formSearchVehicle.addControl('SearchClient', new FormControl()); 
+    this.formSearchVehicle.addControl('SearchClient', new FormControl());
     this.formSearchVehicle.addControl('inputBrand', new FormControl('', Validators.required));
     this.formSearchVehicle.addControl('inputModel', new FormControl('', Validators.required));
     this.formSearchVehicle.addControl('chkActiveStatus', new FormControl(true));
-    
-    
+
+
   }
 
   onChangeChkActiveStatus() {
@@ -77,7 +77,7 @@ export class SearchVehicleComponent implements OnInit {
   }
 
 
-  cleanAllControls(){
+  cleanAllControls() {
     this.formSearchVehicle.controls.SearchVehicle.setValue(null);
     this.formSearchVehicle.controls.inputBrand.setValue(null);
     this.formSearchVehicle.controls.inputModel.setValue(null);
@@ -86,143 +86,148 @@ export class SearchVehicleComponent implements OnInit {
   }
 
 
-  searchVehicle(){
+  searchVehicle() {
     this.showLoadingSpinner();
     this.paramSearch = this.getParamsSearchVehicle();
     this.serviceVehicle.getListVehicleByFilter(this.paramSearch).subscribe(vehicleFilterList => {
-      if (vehicleFilterList === null  || vehicleFilterList.length === 0) {        
+      if (vehicleFilterList === null || vehicleFilterList.length === 0) {
         this.hideLoadingSpinner();
-        this.messageService.add({severity:'error', summary:'Error!', detail:'No data found.'});
-        this.vehicleList = [];  
-      } else {  
-        vehicleFilterList.map(resultSearch => ({numberPlate: resultSearch.numberPlate,
+        this.messageService.add({ severity: 'error', summary: 'Error!', detail: 'No data found.' });
+        this.vehicleList = [];
+      } else {
+        vehicleFilterList.map(resultSearch => ({
+          numberPlate: resultSearch.numberPlate,
           vin: resultSearch.vin,
           brand: resultSearch.brand,
           model: resultSearch.model,
           user: resultSearch.user,
-          codeStatus: resultSearch.codeStatus}));
+          codeStatus: resultSearch.codeStatus
+        }));
         this.vehicleList = vehicleFilterList;
-        
+
         this.hideLoadingSpinner();
 
       }
     }, error => {
       if (error.status === 403) {
         this.hideLoadingSpinner();
-        this.messageService.add({severity:'error', summary:'Error!', detail:'You have insufficient privileges to perform this action'});
+        this.messageService.add({ severity: 'error', summary: 'Error!', detail: 'No tienes privilegios suficientes para realizar esta acción' });
       } else if (error.status === 401) {
         this.hideLoadingSpinner();
-        this.messageService.add({severity:'error', summary:'Error!', detail:'Access is denied'});
+        this.messageService.add({ severity: 'error', summary: 'Error!', detail: 'Acceso denegado' });
       } else if (error.status === 404) {
         this.hideLoadingSpinner();
-        this.messageService.add({severity:'error', summary:'Error!', detail:'No data found.'});
+        this.messageService.add({ severity: 'error', summary: 'Error!', detail: 'Datos no encontrados' });
+      } else if (error.status === 400) {
+        this.hideLoadingSpinner();
+        this.messageService.add({ severity: 'error', summary: 'Error!', detail: error.error.message });
       } else {
         this.hideLoadingSpinner();
-        this.messageService.add({severity:'error', summary:'Error!', detail:'An error occurred, try again later and if the error persists contact the System Administrator'});
+        this.messageService.add({ severity: 'error', summary: 'Error!', detail: 'Se produjo un error, inténtelo de nuevo más tarde y si el error persiste, comuníquese con el administrador del sistema' });
       }
     });
 
 
-   /* var search = this.formSearchVehicle.value;
-    this.serviceVehicle.getVehicleNumberPlate(search.inputNumberPlate).subscribe((data:any)=>{this.vehicleList=data});    
-      
-   /* this.serviceVehicle.getVehicleNumberPlate(event.query).subscribe(data => {
-      this.vehicleList = data;});*/  
- 
+    /* var search = this.formSearchVehicle.value;
+     this.serviceVehicle.getVehicleNumberPlate(search.inputNumberPlate).subscribe((data:any)=>{this.vehicleList=data});    
+       
+    /* this.serviceVehicle.getVehicleNumberPlate(event.query).subscribe(data => {
+       this.vehicleList = data;});*/
+
   }
 
   getParamsSearchVehicle(): FilterVehicle {
     return {
-      vehicle : this.formSearchVehicle.controls.SearchVehicle.value !== ''
-      && this.formSearchVehicle.controls.SearchVehicle.value !==undefined ? 
-      this.formSearchVehicle.controls.SearchVehicle.value : null,
-      brand : this.formSearchVehicle.controls.inputBrand.value !== ''
-      && this.formSearchVehicle.controls.inputBrand.value !==undefined ? 
-      this.formSearchVehicle.controls.inputBrand.value : null,
-      model : this.formSearchVehicle.controls.inputModel.value !== ''
-      && this.formSearchVehicle.controls.inputModel.value !==undefined ? 
-      this.formSearchVehicle.controls.inputModel.value : null,
-      user : this.formSearchVehicle.controls.SearchClient.value !== ''
-      && this.formSearchVehicle.controls.SearchClient.value !==undefined ? 
-      this.formSearchVehicle.controls.SearchClient.value : null,
-      codeStatus : this.formSearchVehicle.controls.chkActiveStatus.value === true ? true : null,
-      
+      vehicle: this.formSearchVehicle.controls.SearchVehicle.value !== ''
+        && this.formSearchVehicle.controls.SearchVehicle.value !== undefined ?
+        this.formSearchVehicle.controls.SearchVehicle.value : null,
+      brand: this.formSearchVehicle.controls.inputBrand.value !== ''
+        && this.formSearchVehicle.controls.inputBrand.value !== undefined ?
+        this.formSearchVehicle.controls.inputBrand.value : null,
+      model: this.formSearchVehicle.controls.inputModel.value !== ''
+        && this.formSearchVehicle.controls.inputModel.value !== undefined ?
+        this.formSearchVehicle.controls.inputModel.value : null,
+      user: this.formSearchVehicle.controls.SearchClient.value !== ''
+        && this.formSearchVehicle.controls.SearchClient.value !== undefined ?
+        this.formSearchVehicle.controls.SearchClient.value : null,
+      codeStatus: this.formSearchVehicle.controls.chkActiveStatus.value === true ? true : null,
+
     };
   }
 
-  onClickEditVehicle(vehicleId: number){
-    this.router.navigate(['/vehicle',vehicleId]);
+  onClickEditVehicle(vehicleId: number) {
+    this.router.navigate(['/vehicle', vehicleId]);
   }
-  
+
 
   confirm() {
     this.confirmationService.confirm({
-        message: 'Are you sure that you want to perform this action?',
-        accept: () => {
-            //Actual logic to perform a confirmation
-        }
+      message: 'Are you sure that you want to perform this action?',
+      accept: () => {
+        //Actual logic to perform a confirmation
+      }
     });
-}
+  }
   // ORDENACION DE COLUMNAS
   customSort(event: SortEvent) {
     event.data.sort((data1, data2) => {
-        let value1 = data1[event.field];
-        let value2 = data2[event.field];
-        let result = null;
+      let value1 = data1[event.field];
+      let value2 = data2[event.field];
+      let result = null;
 
-        if (value1 == null && value2 != null)
-            result = -1;
-        else if (value1 != null && value2 == null)
-            result = 1;
-        else if (value1 == null && value2 == null)
-            result = 0;
-        else if (typeof value1 === 'string' && typeof value2 === 'string')
-            result = value1.localeCompare(value2);
-        else
-            result = (value1 < value2) ? -1 : (value1 > value2) ? 1 : 0;
+      if (value1 == null && value2 != null)
+        result = -1;
+      else if (value1 != null && value2 == null)
+        result = 1;
+      else if (value1 == null && value2 == null)
+        result = 0;
+      else if (typeof value1 === 'string' && typeof value2 === 'string')
+        result = value1.localeCompare(value2);
+      else
+        result = (value1 < value2) ? -1 : (value1 > value2) ? 1 : 0;
 
-        return (event.order * result);
+      return (event.order * result);
     });
-}
-delete(id: number) {
-  this.serviceVehicle.deleteVehicle(id).subscribe(
-    data => {alert('Usuario Desactivado');  }
+  }
+  delete(id: number) {
+    this.serviceVehicle.deleteVehicle(id).subscribe(
+      data => { alert('Usuario Desactivado'); }
     );
-}
+  }
 
-reactivate(id: number) {
-  this.serviceVehicle.reactivateVehicle(id).subscribe(
-    data => {alert('Usuario Reactivado');  }
-    );    
+  reactivate(id: number) {
+    this.serviceVehicle.reactivateVehicle(id).subscribe(
+      data => { alert('Usuario Reactivado'); }
+    );
 
-}
+  }
 
-showModalConfirmDelete(id: number) {
-  
-  this.confirmationService.confirm({
-    message: '¿Desea Borrar el Vehiculo?',
-    header: 'Confirmacion Reactivacion',
-    icon: 'fas fa-question-circle',
-    accept: () => { this.delete(id);}
-  });
-  
-}
+  showModalConfirmDelete(id: number) {
 
-showModalConfirmReactivate(id: number) {
-  this.confirmationService.confirm({
-    message: '¿Desea Reactivar el Vehiculo?',
-    header: 'Confirmacion Eliminar',
-    icon: 'fas fa-question-circle',
-    accept: () => { this.reactivate(id);}
-  });
-}
+    this.confirmationService.confirm({
+      message: '¿Desea Borrar el Vehiculo?',
+      header: 'Confirmacion Reactivacion',
+      icon: 'fas fa-question-circle',
+      accept: () => { this.delete(id); }
+    });
 
-showLoadingSpinner() {
-  this.loading = true;
-}
+  }
 
-hideLoadingSpinner() {
-  this.loading = false;
-}
+  showModalConfirmReactivate(id: number) {
+    this.confirmationService.confirm({
+      message: '¿Desea Reactivar el Vehiculo?',
+      header: 'Confirmacion Eliminar',
+      icon: 'fas fa-question-circle',
+      accept: () => { this.reactivate(id); }
+    });
+  }
+
+  showLoadingSpinner() {
+    this.loading = true;
+  }
+
+  hideLoadingSpinner() {
+    this.loading = false;
+  }
 
 }

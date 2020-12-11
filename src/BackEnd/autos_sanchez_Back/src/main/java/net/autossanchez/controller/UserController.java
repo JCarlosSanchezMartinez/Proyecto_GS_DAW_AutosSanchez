@@ -129,7 +129,7 @@ public class UserController {
 		return (ResponseEntity<Object>) ResponseEntity.notFound();
 	}
 	
-	/* Eliminamos USUARIO COMPLETO */
+	/* Creamos USUARIO COMPLETO */
 	@PostMapping("/addUser")
 	public ResponseEntity<?> nuevo(@Valid @RequestBody User user, BindingResult bindingResult ){
 		if(bindingResult.hasErrors())
@@ -138,8 +138,10 @@ public class UserController {
 			return new ResponseEntity(new Message("El nombre de usuario ya existe"), HttpStatus.BAD_REQUEST);
 		if(userService.existsByEmail(user.getEmail()))
 			return new ResponseEntity(new Message("El Email ya existe"), HttpStatus.BAD_REQUEST);
+		if(userService.existsByDni(user.getDni()))
+			return new ResponseEntity(new Message("El DNI ya existe"), HttpStatus.BAD_REQUEST);
 		
-		
+		user.setPassword(passwordEncoder.encode(user.getPassword()));
 		Set<Rol> roles = new HashSet<>();
 		roles.add(rolService.getByRolName(RolName.ROLE_USER).get());
 		if(user.getRoles().contains("admin"))
@@ -187,29 +189,21 @@ public class UserController {
 	@SuppressWarnings("null")
 	@PostMapping("/search")
 	public ResponseEntity<?> searchUser(@RequestBody FilterUser filter) {
-
-		
-		
 		try {
 			List<User> rest = userService.getALL();
 			
 			if (filter.isCodeStatus()) {
 				rest = userService.getByCodeStatus(filter.isCodeStatus());
 			}
-			if (filter.getUser() != null) {
-				
+			if (filter.getUser() != null) {				
 				rest.clear();
 				rest.add(filter.getUser());
 			}
-			if (filter.getVehicle() != null) {
-				
+			if (filter.getVehicle() != null) {				
 				User user = userService.getById(filter.getVehicle().getUserId().getId()).orElse(null);;
 				rest.clear();
-				rest.add(user);
-				
-				
+				rest.add(user);				
 			}
-
 			if (filter.getMunicipality() != null) {								
 				rest = userService.getByMunicipality(filter.getMunicipality());
 			}

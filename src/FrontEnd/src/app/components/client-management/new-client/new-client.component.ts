@@ -20,7 +20,7 @@ export class NewUserComponent implements OnInit {
  
   public formNewUser: FormGroup;
   public columnsTableResult: any[]; // array de columnas
-
+  public loading = false;
   public vehicle: Vehicle = new Vehicle(); 
   public vehicleList: Vehicle[] = [];
   public chkActiveStatus = true;
@@ -38,8 +38,8 @@ export class NewUserComponent implements OnInit {
     this.formNewUser.addControl('inputFirstName', new FormControl(''));
     this.formNewUser.addControl('inputLastName', new FormControl(''));
     this.formNewUser.addControl('inputAddress', new FormControl(''));
-    this.formNewUser.addControl('selectProvince', new FormControl());
-    this.formNewUser.addControl('selectMunicipality', new FormControl());
+    this.formNewUser.addControl('selectProvince', new FormControl('', [Validators.required]));
+    this.formNewUser.addControl('selectMunicipality', new FormControl('', [Validators.required]));
     this.formNewUser.addControl('inputPhone', new FormControl(''));
     this.formNewUser.addControl('inputEmail', new FormControl('', [Validators.required, Validators.email, Validators.maxLength(100)]));
     this.formNewUser.addControl('inputUserName', new FormControl('',[Validators.required]));
@@ -73,12 +73,27 @@ export class NewUserComponent implements OnInit {
 
     console.log(this.formNewUser.value)
 
-    this.serviceUser.addUser(this.user).subscribe(data=>{
-      if (data == null || data == undefined) {
-        this.messageService.add({severity:'error', summary:'Error!', detail:'Se ha producido un error.'});
+    this.serviceUser.addUser(this.user).subscribe(data=>{{
+      this.messageService.add({severity:'success', summary:'Exito!', detail:'Se ha creado el Usuario correctamente.'});
+        this.hideLoadingSpinner();  
+      }
+    }, error => {
+      if (error.status === 403) {
+        this.hideLoadingSpinner();
+        this.messageService.add({severity:'error', summary:'Error!', detail:'No tienes privilegios suficientes para realizar esta acción'});
+      } else if (error.status === 401) {
+        this.hideLoadingSpinner();
+        this.messageService.add({severity:'error', summary:'Error!', detail:'Acceso denegado'});
+      } else if (error.status === 400) {
+        this.hideLoadingSpinner();          
+        this.messageService.add({severity:'error', summary:'Error!', detail: error.error.message});
+      } else if (error.status === 404) {
+        this.hideLoadingSpinner();
+        this.messageService.add({severity:'error', summary:'Error!', detail:'Datos no encontrados'});
       } else {
-        this.messageService.add({severity:'success', summary:'Exito!', detail:'Se ha creado el Usuario correctamente.'});
-      }    
+        this.hideLoadingSpinner();
+        this.messageService.add({severity:'error', summary:'Error!', detail:'Se produjo un error, inténtelo de nuevo más tarde y si el error persiste, comuníquese con el administrador del sistema'});
+      }
     });
     
   }
@@ -135,4 +150,11 @@ export class NewUserComponent implements OnInit {
     });
   }
 
+  showLoadingSpinner() {
+    this.loading = true;
+  }
+
+  hideLoadingSpinner() {
+    this.loading = false;
+  }
 }

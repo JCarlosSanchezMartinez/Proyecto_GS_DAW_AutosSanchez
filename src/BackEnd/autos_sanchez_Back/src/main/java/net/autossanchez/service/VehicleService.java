@@ -46,6 +46,9 @@ public class VehicleService  {
 	public boolean existByNumberPlate(String numberPlate) {
 		return vehicleRepository.existsByNumberPlate(numberPlate);
 	}
+	public boolean existByVin(String vin) {
+		return vehicleRepository.existsByVin(vin);
+	}
 	public boolean existByUser_Id(User user) {
 		return vehicleRepository.existsByUserId(user);
 	}

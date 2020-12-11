@@ -23,7 +23,7 @@
                     </div>
                     <div class="form-group px-0 col-12 col-md-4 ">
                         <div class="col-12">
-                            <label>Ciudad</label>
+                            <label>Ciudad <b class="text-danger">*</b></label>
                         </div>
                         <div class="col-12">
                             <p-dropdown styleClass="p-dropdown-width" [options]="provincesList" [(ngModel)]="selectedActiveProvince" autoWidth="false" placeholder="Seleciona Ciudad" [showClear]="true" formControlName="selectProvince" optionLabel="province" (onChange)="onChangeProvinces(this)"></p-dropdown>
@@ -31,7 +31,7 @@
                     </div>
                     <div class="form-group px-0 col-12 col-md-4">
                         <div class="col-12">
-                            <label>Municipio</label>
+                            <label>Municipio <b class="text-danger">*</b></label>
                         </div>
                         <div class="col-12">
                             <p-dropdown styleClass="p-dropdown-width" [options]="municipalityList" [(ngModel)]="selectedActiveMunicipality" placeholder="Seleciona Municipio" [showClear]="true" formControlName="selectMunicipality" optionLabel="municipio"></p-dropdown>

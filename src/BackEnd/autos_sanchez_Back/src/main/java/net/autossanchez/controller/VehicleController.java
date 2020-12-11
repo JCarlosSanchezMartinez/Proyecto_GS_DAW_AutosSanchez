@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import java.util.List;
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -138,7 +140,13 @@ public class VehicleController {
 	/* Creamos VEHICULO */
 	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping("/addVehicle")
-	public ResponseEntity<?> create(@RequestBody Vehicle vehicle) {		
+	public ResponseEntity<?> create(@Valid @RequestBody Vehicle vehicle, BindingResult bindingResult ) {
+		if(bindingResult.hasErrors())
+			return new ResponseEntity(new Message("Campos erroneos"), HttpStatus.BAD_REQUEST);
+		if(vehicleService.existByNumberPlate(vehicle.getNumberPlate()))
+			return new ResponseEntity(new Message("La Matricula ya existe"), HttpStatus.BAD_REQUEST);
+		if(vehicleService.existByVin(vehicle.getVin()))
+			return new ResponseEntity(new Message("El Numero de Bastidor ya existe"), HttpStatus.BAD_REQUEST);
 		
 		try {		
 			Vehicle rest = vehicleService.save(vehicle);			

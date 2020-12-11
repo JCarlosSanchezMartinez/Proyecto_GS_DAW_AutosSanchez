@@ -123,16 +123,19 @@ export class SearchClientComponent implements OnInit {
     }, error => {
       if (error.status === 403) {
         this.hideLoadingSpinner();
-        this.messageService.add({ severity: 'error', summary: 'Error!', detail: 'You have insufficient privileges to perform this action' });
+        this.messageService.add({ severity: 'error', summary: 'Error!', detail: 'No tienes privilegios suficientes para realizar esta acción' });
       } else if (error.status === 401) {
         this.hideLoadingSpinner();
-        this.messageService.add({ severity: 'error', summary: 'Error!', detail: 'Access is denied' });
+        this.messageService.add({ severity: 'error', summary: 'Error!', detail: 'Acceso denegado' });
       } else if (error.status === 404) {
         this.hideLoadingSpinner();
-        this.messageService.add({ severity: 'error', summary: 'Error!', detail: 'No data found.' });
+        this.messageService.add({ severity: 'error', summary: 'Error!', detail: 'Datos no encontrados' });
+      } else if (error.status === 400) {
+        this.hideLoadingSpinner();
+        this.messageService.add({ severity: 'error', summary: 'Error!', detail: error.error.message });
       } else {
         this.hideLoadingSpinner();
-        this.messageService.add({ severity: 'error', summary: 'Error!', detail: 'An error occurred, try again later and if the error persists contact the System Administrator' });
+        this.messageService.add({ severity: 'error', summary: 'Error!', detail: 'Se produjo un error, inténtelo de nuevo más tarde y si el error persiste, comuníquese con el administrador del sistema' });
       }
     });
 
@@ -141,11 +144,11 @@ export class SearchClientComponent implements OnInit {
 
     return {
 
-      user : this.formSearchUser.controls.SearchClient.value !== ''
-        && this.formSearchUser.controls.SearchClient.value !==undefined ? 
+      user: this.formSearchUser.controls.SearchClient.value !== ''
+        && this.formSearchUser.controls.SearchClient.value !== undefined ?
         this.formSearchUser.controls.SearchClient.value : null,
-      vehicle : this.formSearchUser.controls.SearchVehicle.value !== ''
-        && this.formSearchUser.controls.SearchVehicle.value !==undefined ? 
+      vehicle: this.formSearchUser.controls.SearchVehicle.value !== ''
+        && this.formSearchUser.controls.SearchVehicle.value !== undefined ?
         this.formSearchUser.controls.SearchVehicle.value : null,
       province: this.formSearchUser.controls.selectProvince.value !== ''
         && this.formSearchUser.controls.selectProvince.value !== undefined ?

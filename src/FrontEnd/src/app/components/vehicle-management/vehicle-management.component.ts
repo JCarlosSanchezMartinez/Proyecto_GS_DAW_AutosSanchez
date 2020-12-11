@@ -36,6 +36,7 @@ export class VehiculeManagementComponent implements OnInit {
   public selectFuel: Fuel;
   public dateValue: Date;
   public SearchClient = 'SearchClient';
+  public loading = false;
 
 
   //REVISAR
@@ -92,7 +93,7 @@ export class VehiculeManagementComponent implements OnInit {
         if (params.id !== undefined) {
           this.serviceVehicle.getVehicle(params.id).subscribe(resp => {
             this.formEditVehicle.controls.id.setValue(resp.id);
-            sessionStorage.setItem("id",resp.id);
+            sessionStorage.setItem("id", resp.id);
             this.formEditVehicle.controls.inputNumberPlate.setValue(resp.numberPlate);
             this.formEditVehicle.controls.inputVin.setValue(resp.vin);
             this.formEditVehicle.controls.inputBrand.setValue(resp.brand);
@@ -110,7 +111,7 @@ export class VehiculeManagementComponent implements OnInit {
             this.formEditVehicle.controls.SearchClient.setValue(resp.userId);
             this.getUserVehicle();
             this.getPhotoVehicle();
-            
+
           });
         }
       }
@@ -184,7 +185,7 @@ export class VehiculeManagementComponent implements OnInit {
     }
     this.servicePhotoVehicle.addPhotoVehicle(this.listPhotoVehicle).subscribe(data => {
       if (data) {
-        
+
         this.listPhotoVehicle = [];
         this.getPhotoVehicle();
       }
@@ -194,17 +195,31 @@ export class VehiculeManagementComponent implements OnInit {
 
     this.route.params.subscribe(
       (params: Params) => {
-        this.serviceVehicle.updateVehicle(params.id, this.vehicle).subscribe(
-          data => {
-            if (data == null || data == undefined) {
-              this.messageService.add({ severity: 'error', summary: 'Error!', detail: 'Se ha producido un error.' });
-            } else {
-              this.messageService.add({ severity: 'success', summary: 'Exito!', detail: 'El Vehiculo se Actualizo correctamente.' });
-            }
-
+        this.serviceVehicle.updateVehicle(params.id, this.vehicle).subscribe(data => {
+          {
+            this.messageService.add({ severity: 'success', summary: 'Exito!', detail: 'Se ha creado el Vehiculo correctamente.' });
+            this.hideLoadingSpinner();
           }
-        );
+        }, error => {
+          if (error.status === 403) {
+            this.hideLoadingSpinner();
+            this.messageService.add({ severity: 'error', summary: 'Error!', detail: 'No tienes privilegios suficientes para realizar esta acción' });
+          } else if (error.status === 401) {
+            this.hideLoadingSpinner();
+            this.messageService.add({ severity: 'error', summary: 'Error!', detail: 'Acceso denegado' });
+          } else if (error.status === 400) {
+            this.hideLoadingSpinner();
+            this.messageService.add({ severity: 'error', summary: 'Error!', detail: error.error.message });
+          } else if (error.status === 404) {
+            this.hideLoadingSpinner();
+            this.messageService.add({ severity: 'error', summary: 'Error!', detail: 'Datos no encontrados' });
+          } else {
+            this.hideLoadingSpinner();
+            this.messageService.add({ severity: 'error', summary: 'Error!', detail: 'Se produjo un error, inténtelo de nuevo más tarde y si el error persiste, comuníquese con el administrador del sistema' });
+          }
+        })
       });
+
   }
 
   delete() {
@@ -235,9 +250,17 @@ export class VehiculeManagementComponent implements OnInit {
 
   getPhotoVehicle() {
     this.servicePhotoVehicle.getVehicleImagenList(this.formEditVehicle.controls.id.value).subscribe(data => {
-      
+
       this.listPhotoVehicleTemp = data;
     });
+  }
+
+  showLoadingSpinner() {
+    this.loading = true;
+  }
+
+  hideLoadingSpinner() {
+    this.loading = false;
   }
 
 }

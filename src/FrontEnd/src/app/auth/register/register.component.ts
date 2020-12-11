@@ -60,6 +60,7 @@ export class RegisterComponent implements OnInit {
 
   }
   onRegister(): void {  
+    this.showLoadingSpinner();
     this.user.firstName =  this.formNewUser.controls.inputFirstName.value
     this.user.email =  this.formNewUser.controls.inputEmail.value
     this.user.username =  this.formNewUser.controls.inputUserName.value
@@ -67,28 +68,25 @@ export class RegisterComponent implements OnInit {
 
     this.common.getMunicipality(this.formNewUser.controls.selectMunicipality.value.id).subscribe((data:any)=>{this.municipalityList=data})
     this.user.municipality =  this.selectedActiveMunicipality;
-    
-    
-    
+
     this.authService.addUser(this.user).subscribe(
       data => {{
         this.messageService.add({severity:'success', summary:'Exito!', detail:'Se ha creado el Usuario correctamente.'});
-          this.hideLoadingSpinner();
-  
+          this.hideLoadingSpinner();  
         }
       }, error => {
         if (error.status === 403) {
           this.hideLoadingSpinner();
-          this.messageService.add({severity:'error', summary:'Error!', detail:'You have insufficient privileges to perform this action'});
+          this.messageService.add({severity:'error', summary:'Error!', detail:'No tienes privilegios suficientes para realizar esta acción'});
         } else if (error.status === 401) {
           this.hideLoadingSpinner();
-          this.messageService.add({severity:'error', summary:'Error!', detail:'Access is denied'});
+          this.messageService.add({severity:'error', summary:'Error!', detail:'Acceso denegado'});
         } else if (error.status === 400) {
           this.hideLoadingSpinner();          
           this.messageService.add({severity:'error', summary:'Error!', detail: error.error.message});
         } else if (error.status === 404) {
           this.hideLoadingSpinner();
-          this.messageService.add({severity:'error', summary:'Error!', detail:'No data found.'});
+          this.messageService.add({severity:'error', summary:'Error!', detail:'Datos no encontrados'});
         } else {
           this.hideLoadingSpinner();
           this.messageService.add({severity:'error', summary:'Error!', detail:'An error occurred, try again later and if the error persists contact the System Administrator'});

@@ -20,6 +20,7 @@ public interface VehicleRepository extends JpaRepository<Vehicle, Long> {
 	List<Vehicle> findByUserId(User userOK);
 	boolean existsByUserId(User user);
 	boolean existsByNumberPlate(String numberPlate);
+	boolean existsByVin(String vin);
 
 
 }

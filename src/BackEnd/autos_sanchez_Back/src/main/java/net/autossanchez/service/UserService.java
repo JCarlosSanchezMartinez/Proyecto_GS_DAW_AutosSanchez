@@ -43,6 +43,9 @@ public class UserService {
 	    public boolean existsByEmail(String email){
 	        return UserRepository.existsByEmail(email);
 	    }
+	    public boolean existsByDni(String dni){
+	        return UserRepository.existsByDni(dni);
+	    }
 
 	    public void save(User user){
 	    	UserRepository.save(user);

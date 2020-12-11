@@ -20,7 +20,7 @@ export class ClientManagementComponent implements OnInit {
  
   public formEditUser: FormGroup;
   public columnsTableResult: any[]; // array de columnas
-
+public loading = false;
   public vehicle: Vehicle = new Vehicle();
  
   public vehicleList: Vehicle[] = [];
@@ -80,16 +80,28 @@ export class ClientManagementComponent implements OnInit {
            
     this.route.params.subscribe(
       (params: Params) => {
-        this.serviceUser.updateUser(params.id,this.user).subscribe(
-          data => {
-            if (data == null || data == undefined) {
-              this.messageService.add({severity:'error', summary:'Error!', detail:'Se ha producido un error.'});
-            } else {
-              this.messageService.add({severity:'success', summary:'Exito!', detail:'El Usuario se Actualizo correctamente.'});
-            }    
+        this.serviceUser.updateUser(params.id,this.user).subscribe(data=>{{
+          this.messageService.add({severity:'success', summary:'Exito!', detail:'Se ha creado el Usuario correctamente.'});
+            this.hideLoadingSpinner();  
           }
-        );
-    });
+        }, error => {
+          if (error.status === 403) {
+            this.hideLoadingSpinner();
+            this.messageService.add({severity:'error', summary:'Error!', detail:'No tienes privilegios suficientes para realizar esta acción'});
+          } else if (error.status === 401) {
+            this.hideLoadingSpinner();
+            this.messageService.add({severity:'error', summary:'Error!', detail:'Acceso denegado'});
+          } else if (error.status === 400) {
+            this.hideLoadingSpinner();          
+            this.messageService.add({severity:'error', summary:'Error!', detail: error.error.message});
+          } else if (error.status === 404) {
+            this.hideLoadingSpinner();
+            this.messageService.add({severity:'error', summary:'Error!', detail:'Datos no encontrados'});
+          } else {
+            this.hideLoadingSpinner();
+            this.messageService.add({severity:'error', summary:'Error!', detail:'Se produjo un error, inténtelo de nuevo más tarde y si el error persiste, comuníquese con el administrador del sistema'});
+          }
+        })});
   }
   
     
@@ -151,14 +163,18 @@ export class ClientManagementComponent implements OnInit {
   loadCombos(){
     this.common.getProvinceList().subscribe(provinces => {
       this.provincesList = provinces.map(province => ({id: province.id,  province: province.province}))
-      //this.formEditUser.controls.selectProvince.setValue(this.provincesList); 
-    
-      
       console.log(this.selectedActiveProvince);
       this.common.getMunicipalityProvince(this.selectedActiveProvince.id)
     .subscribe(municipality => {this.municipalityList = municipality.map(municipio =>
        ({id: municipio.id,  municipio: municipio.municipio, provinceId: municipio.provinceId}) )});
-      //this.formEditUser.controls.selectMunicipality.setValue(this.municipalityList);
     });
+  }
+
+  showLoadingSpinner() {
+    this.loading = true;
+  }
+
+  hideLoadingSpinner() {
+    this.loading = false;
   }
 }
