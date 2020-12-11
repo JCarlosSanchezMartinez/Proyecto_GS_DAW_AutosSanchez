@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { Fuel } from 'src/app/interfaces/fuel';
@@ -50,21 +50,21 @@ export class NewVehicleComponent implements OnInit {
 
   private buildFrom(){
     this.formNewVehicle = new FormGroup({});
-    this.formNewVehicle.addControl('inputNumberPlate', new FormControl());   
-    this.formNewVehicle.addControl('inputVin', new FormControl());
-    this.formNewVehicle.addControl('inputBrand', new FormControl());
-    this.formNewVehicle.addControl('inputModel', new FormControl());
-    this.formNewVehicle.addControl('selectSellDate', new FormControl());
-    this.formNewVehicle.addControl('inputEngine', new FormControl());
-    this.formNewVehicle.addControl('inputFuel', new FormControl());
-    this.formNewVehicle.addControl('inputKms', new FormControl());
-    this.formNewVehicle.addControl('inputColor', new FormControl());
-    this.formNewVehicle.addControl('inputChasis', new FormControl());
-    this.formNewVehicle.addControl('inputPrice', new FormControl());
-    this.formNewVehicle.addControl('inputExtra', new FormControl());
-    this.formNewVehicle.addControl('chkActiveStatus', new FormControl(true));
-    this.formNewVehicle.addControl('chkActiveCarrousel', new FormControl(false));
-    this.formNewVehicle.addControl('SearchClient', new FormControl());
+    this.formNewVehicle.addControl('inputNumberPlate', new FormControl('',[Validators.required]));  
+    this.formNewVehicle.addControl('inputVin', new FormControl('',[Validators.required]));  
+    this.formNewVehicle.addControl('inputBrand', new FormControl('',[Validators.required]));  
+    this.formNewVehicle.addControl('inputModel', new FormControl('',[Validators.required]));  
+    this.formNewVehicle.addControl('selectSellDate', new FormControl('',[Validators.required]));  
+    this.formNewVehicle.addControl('inputEngine', new FormControl('',[Validators.required]));  
+    this.formNewVehicle.addControl('inputFuel', new FormControl('',[Validators.required]));  
+    this.formNewVehicle.addControl('inputKms', new FormControl('',[Validators.required]));  
+    this.formNewVehicle.addControl('inputColor', new FormControl('',[Validators.required]));  
+    this.formNewVehicle.addControl('inputChasis', new FormControl('',[Validators.required]));  
+    this.formNewVehicle.addControl('inputPrice', new FormControl('',[Validators.required]));  
+    this.formNewVehicle.addControl('inputExtra', new FormControl('',[Validators.required]));  
+    this.formNewVehicle.addControl('chkActiveStatus', new FormControl(true,[Validators.required]));  
+    this.formNewVehicle.addControl('chkActiveCarrousel', new FormControl(false,[Validators.required]));  
+    this.formNewVehicle.addControl('SearchClient', new FormControl('',[Validators.required]));  
     
     
   }

@@ -19,12 +19,12 @@ import { UserCrudService } from 'src/app/services/user-crud.service';
 })
 export class SearchClientComponent implements OnInit {
 
-  public formSearchUser : FormGroup;
+  public formSearchUser: FormGroup;
   public columnsTableResult: any[]; // array de columnas
 
-  public vehicle: Vehicle = new Vehicle(); 
+  public vehicle: Vehicle = new Vehicle();
   public vehicleList: Vehicle[] = [];
-  public user: User = new User(); 
+  public user: User = new User();
   public userList: User[] = [];
   public loading = null;
   public paramSearch: FilterUser;
@@ -34,17 +34,18 @@ export class SearchClientComponent implements OnInit {
   public selectedActiveMunicipality: Municipality;
   public countryActive = false;
   public SearchClient = 'SearchClient';
-  public chkActiveStatus;
+  public SearchVehicle = 'SearchVehicle';
+  public chkActiveStatus = true;
 
   isLogged = false;
 
   constructor(private serviceUser: UserCrudService,
-     private router: Router,
-     private confirmationService: ConfirmationService,
-     private messageService: MessageService,
-     private common: CommonCrudService,
+    private router: Router,
+    private confirmationService: ConfirmationService,
+    private messageService: MessageService,
+    private common: CommonCrudService,
 
-     ) {
+  ) {
     this.columnsTableResult = [
       { field: 'dni', header: 'DNI' },
       { field: 'nameComplete', header: 'Nombre' },
@@ -54,28 +55,29 @@ export class SearchClientComponent implements OnInit {
       { field: 'action', header: 'Acciones' },
 
     ];
-   }
+  }
 
-  private buildFrom(){
+  private buildFrom() {
     this.formSearchUser = new FormGroup({});
-    this.formSearchUser.addControl('SearchClient', new FormControl()); 
+    this.formSearchUser.addControl('SearchClient', new FormControl(null));
+    this.formSearchUser.addControl('SearchVehicle', new FormControl(null));
     this.formSearchUser.addControl('inputNumberPlate', new FormControl(''));
     this.formSearchUser.addControl('selectProvince', new FormControl(''));
     this.formSearchUser.addControl('selectMunicipality', new FormControl(''));
     this.formSearchUser.addControl('chkActiveStatus', new FormControl(true));
-     
+
   }
 
   delete(id: number) {
     this.serviceUser.deleteUser(id).subscribe(
-      data => { this.messageService.add({severity:'success', summary:'Exito!', detail:'Se ha BORRADO el Usuario correctamente.'}); }
-      );
+      data => { this.messageService.add({ severity: 'success', summary: 'Exito!', detail: 'Se ha BORRADO el Usuario correctamente.' }); }
+    );
   }
 
   reactivate(id: number) {
     this.serviceUser.reactivateUser(id).subscribe(
-      data => {this.messageService.add({severity:'success', summary:'Exito!', detail:'Se ha ACTIVADO el Usuario correctamente.'}); }
-      );    
+      data => { this.messageService.add({ severity: 'success', summary: 'Exito!', detail: 'Se ha ACTIVADO el Usuario correctamente.' }); }
+    );
 
   }
 
@@ -83,35 +85,37 @@ export class SearchClientComponent implements OnInit {
 
     this.buildFrom();
     this.loadCombos();
-    this.serviceUser.getUserList().subscribe((data:any)=>{this.userList=data})
+    this.serviceUser.getUserList().subscribe((data: any) => { this.userList = data })
 
   }
 
-  cleanAllControls(event:any){
-    this.formSearchUser.controls.inputFullName.setValue(null);
-    this.formSearchUser.controls.inputNumberPlate.setValue(null);
-    this.formSearchUser.controls.selectProvince.setValue(null);
-    this.formSearchUser.controls.selectMunicipality.setValue(null);
+  cleanAllControls() {
+    this.formSearchUser.controls.SearchClient.setValue(null);
+    this.formSearchUser.controls.SearchVehicle.setValue(null);
+    this.selectedActiveProvince = null;
+    this.selectedActiveMunicipality = null;
     this.formSearchUser.controls.chkActiveStatus.setValue(true);
 
   }
 
 
-  searchDni(){
+  searchUser() {
     this.showLoadingSpinner();
     this.paramSearch = this.getParamsSearchUser();
-    console.log( this.getParamsSearchUser())
+    console.log(this.getParamsSearchUser())
     this.serviceUser.getListUserByFilter(this.paramSearch).subscribe(UserFilterList => {
-      if (UserFilterList === null  || UserFilterList.length === 0) {        
+      if (UserFilterList === null || UserFilterList.length === 0) {
         this.hideLoadingSpinner();
-        this.messageService.add({severity:'error', summary:'Error!', detail:'No data found.'});
-        this.userList = [];  
-      } else {  
-        UserFilterList.map(resultSearch => ({dni: resultSearch.dni,
+        this.messageService.add({ severity: 'error', summary: 'Error!', detail: 'No data found.' });
+        this.userList = [];
+      } else {
+        UserFilterList.map(resultSearch => ({
+          dni: resultSearch.dni,
           firstName: resultSearch.firstName,
           lastName: resultSearch.lastName,
           city: resultSearch.city,
-          codeStatus: resultSearch.codeStatus}));
+          codeStatus: resultSearch.codeStatus
+        }));
         this.userList = UserFilterList;
         this.hideLoadingSpinner();
 
@@ -119,52 +123,52 @@ export class SearchClientComponent implements OnInit {
     }, error => {
       if (error.status === 403) {
         this.hideLoadingSpinner();
-        this.messageService.add({severity:'error', summary:'Error!', detail:'You have insufficient privileges to perform this action'});
+        this.messageService.add({ severity: 'error', summary: 'Error!', detail: 'You have insufficient privileges to perform this action' });
       } else if (error.status === 401) {
         this.hideLoadingSpinner();
-        this.messageService.add({severity:'error', summary:'Error!', detail:'Access is denied'});
+        this.messageService.add({ severity: 'error', summary: 'Error!', detail: 'Access is denied' });
       } else if (error.status === 404) {
         this.hideLoadingSpinner();
-        this.messageService.add({severity:'error', summary:'Error!', detail:'No data found.'});
+        this.messageService.add({ severity: 'error', summary: 'Error!', detail: 'No data found.' });
       } else {
         this.hideLoadingSpinner();
-        this.messageService.add({severity:'error', summary:'Error!', detail:'An error occurred, try again later and if the error persists contact the System Administrator'});
+        this.messageService.add({ severity: 'error', summary: 'Error!', detail: 'An error occurred, try again later and if the error persists contact the System Administrator' });
       }
     });
- 
+
   }
   getParamsSearchUser(): FilterUser {
-   
+
     return {
-      
-      dni : this.formSearchUser.controls.SearchClient.value !== ''
-      && this.formSearchUser.controls.SearchClient.value !==undefined ? 
-      this.formSearchUser.controls.SearchClient.value : null,
-      numberPlate : this.formSearchUser.controls.inputNumberPlate.value !== ''
-      && this.formSearchUser.controls.inputNumberPlate.value !==undefined ? 
-      this.formSearchUser.controls.inputNumberPlate.value : null,
-      province : this.formSearchUser.controls.selectProvince.value !== ''
-      && this.formSearchUser.controls.selectProvince.value !==undefined ? 
-      this.formSearchUser.controls.selectProvince.value : null,
-      municipality : this.formSearchUser.controls.selectMunicipality.value !== ''
-      && this.formSearchUser.controls.selectMunicipality.value !==undefined ? 
-      this.formSearchUser.controls.selectMunicipality.value : null,
-      codeStatus : this.formSearchUser.controls.chkActiveStatus.value === true ? true : null,
-      
+
+      user : this.formSearchUser.controls.SearchClient.value !== ''
+        && this.formSearchUser.controls.SearchClient.value !==undefined ? 
+        this.formSearchUser.controls.SearchClient.value : null,
+      vehicle : this.formSearchUser.controls.SearchVehicle.value !== ''
+        && this.formSearchUser.controls.SearchVehicle.value !==undefined ? 
+        this.formSearchUser.controls.SearchVehicle.value : null,
+      province: this.formSearchUser.controls.selectProvince.value !== ''
+        && this.formSearchUser.controls.selectProvince.value !== undefined ?
+        this.formSearchUser.controls.selectProvince.value : null,
+      municipality: this.formSearchUser.controls.selectMunicipality.value !== ''
+        && this.formSearchUser.controls.selectMunicipality.value !== undefined ?
+        this.formSearchUser.controls.selectMunicipality.value : null,
+      codeStatus: this.formSearchUser.controls.chkActiveStatus.value === true ? true : null,
+
     };
   }
 
-  onClickEditUser(userId: number){
-    this.router.navigate(['/user',userId]);
+  onClickEditUser(userId: number) {
+    this.router.navigate(['/user', userId]);
   }
-  
+
   showModalConfirmDelete(id: number) {
     this.showLoadingSpinner();
     this.confirmationService.confirm({
       message: '¿Desea Borrar el Usuario?',
       header: 'Confirmacion Reactivacion',
       icon: 'fas fa-question-circle',
-      accept: () => { this.delete(id);/* window.location.reload();*/  }
+      accept: () => { this.delete(id);/* window.location.reload();*/ }
     });
     this.hideLoadingSpinner();
   }
@@ -183,24 +187,24 @@ export class SearchClientComponent implements OnInit {
   // ORDENACION DE COLUMNAS
   customSort(event: SortEvent) {
     event.data.sort((data1, data2) => {
-        let value1 = data1[event.field];
-        let value2 = data2[event.field];
-        let result = null;
+      let value1 = data1[event.field];
+      let value2 = data2[event.field];
+      let result = null;
 
-        if (value1 == null && value2 != null)
-            result = -1;
-        else if (value1 != null && value2 == null)
-            result = 1;
-        else if (value1 == null && value2 == null)
-            result = 0;
-        else if (typeof value1 === 'string' && typeof value2 === 'string')
-            result = value1.localeCompare(value2);
-        else
-            result = (value1 < value2) ? -1 : (value1 > value2) ? 1 : 0;
+      if (value1 == null && value2 != null)
+        result = -1;
+      else if (value1 != null && value2 == null)
+        result = 1;
+      else if (value1 == null && value2 == null)
+        result = 0;
+      else if (typeof value1 === 'string' && typeof value2 === 'string')
+        result = value1.localeCompare(value2);
+      else
+        result = (value1 < value2) ? -1 : (value1 > value2) ? 1 : 0;
 
-        return (event.order * result);
+      return (event.order * result);
     });
-}
+  }
 
   showLoadingSpinner() {
     this.loading = true;
@@ -209,20 +213,23 @@ export class SearchClientComponent implements OnInit {
   hideLoadingSpinner() {
     this.loading = false;
   }
-  onChangeProvinces(event: any){
 
-    this.common.getMunicipalityProvince(this.formSearchUser.controls.selectProvince.value.id)
-    .subscribe(municipality => {this.municipalityList = municipality.map(municipio =>
-       ({id: municipio.id,  municipio: municipio.municipio}) )});
-     
+  onChangeProvinces(event: any) {
+    if (this.formSearchUser.controls.selectProvince.value != null) {
+      this.common.getMunicipalityProvince(this.formSearchUser.controls.selectProvince.value.id)
+        .subscribe(municipality => {
+          this.municipalityList = municipality.map(municipio =>
+            ({ id: municipio.id, municipio: municipio.municipio }))
+        });
+    }
   }
 
-  loadCombos(){
+  loadCombos() {
     this.common.getProvinceList().subscribe(provinces => {
-      this.provincesList = provinces.map(province => ({id: province.id,  province: province.province}));
-      
-    
-     
+      this.provincesList = provinces.map(province => ({ id: province.id, province: province.province }));
+
+
+
     });
   }
 

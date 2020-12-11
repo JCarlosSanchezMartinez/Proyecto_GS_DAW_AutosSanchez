@@ -96,12 +96,14 @@ export class RegisterComponent implements OnInit {
       });
   }
 
-  onChangeProvinces(event: any){
-
-    this.common.getMunicipalityProvince(this.formNewUser.controls.selectProvince.value.id)
-    .subscribe(municipality => {this.municipalityList = municipality.map(municipio =>
-       ({id: municipio.id,  municipio: municipio.municipio}) )});
-      
+  onChangeProvinces(event: any) {
+    if (this.formNewUser.controls.selectProvince.value != null) {
+      this.common.getMunicipalityProvince(this.formNewUser.controls.selectProvince.value.id)
+        .subscribe(municipality => {
+          this.municipalityList = municipality.map(municipio =>
+            ({ id: municipio.id, municipio: municipio.municipio }))
+        });
+    }
   }
 
   loadCombos(){

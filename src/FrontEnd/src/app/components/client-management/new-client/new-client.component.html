@@ -17,18 +17,26 @@
                         <label>Apellidos</label>
                         <input maxlength="50" type="text" formControlName="inputLastName" class="form-control ">
                     </div>
-                    <div class="form-group col-12 col-md-8">
+                    <div class="form-group col-12 col-md-4">
                         <label>Direccion</label>
                         <input maxlength="100" type="text" formControlName="inputAddress" class="form-control ">
                     </div>
-                    <!--   <div class="form-group col-12 col-md-4">
-                        <label>Ciudad</label>
-                        <p-dropdown [options]="listFuel" formControlName="inputProvince" optionLabel="name"></p-dropdown>
+                    <div class="form-group px-0 col-12 col-md-4 ">
+                        <div class="col-12">
+                            <label>Ciudad</label>
+                        </div>
+                        <div class="col-12">
+                            <p-dropdown styleClass="p-dropdown-width" [options]="provincesList" [(ngModel)]="selectedActiveProvince" autoWidth="false" placeholder="Seleciona Ciudad" [showClear]="true" formControlName="selectProvince" optionLabel="province" (onChange)="onChangeProvinces(this)"></p-dropdown>
+                        </div>
                     </div>
-                    <div class="form-group col-12 col-md-4">
-                        <label>Municipio</label>
-                        <p-dropdown [options]="listFuel" formControlName="inputMunicipality" optionLabel="name"></p-dropdown>
-                    </div>-->
+                    <div class="form-group px-0 col-12 col-md-4">
+                        <div class="col-12">
+                            <label>Municipio</label>
+                        </div>
+                        <div class="col-12">
+                            <p-dropdown styleClass="p-dropdown-width" [options]="municipalityList" [(ngModel)]="selectedActiveMunicipality" placeholder="Seleciona Municipio" [showClear]="true" formControlName="selectMunicipality" optionLabel="municipio"></p-dropdown>
+                        </div>
+                    </div>
                     <div class="form-group col-8 ">
                         <label>Email <b class="text-danger">*</b></label>
                         <input maxlength="100" type="text" formControlName="inputEmail" class="form-control ">

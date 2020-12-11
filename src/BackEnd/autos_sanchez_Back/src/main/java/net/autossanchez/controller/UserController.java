@@ -1,14 +1,19 @@
 package net.autossanchez.controller;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,11 +25,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import net.autossanchez.dto.Message;
+import net.autossanchez.dto.UserNew;
 import net.autossanchez.entity.Municipality;
+import net.autossanchez.entity.Rol;
 import net.autossanchez.entity.User;
 import net.autossanchez.entity.Vehicle;
+import net.autossanchez.enums.RolName;
 import net.autossanchez.filter.FilterUser;
+import net.autossanchez.jwt.JwtProvider;
 import net.autossanchez.service.MunicipalityService;
+import net.autossanchez.service.RolService;
 import net.autossanchez.service.UserService;
 import net.autossanchez.service.VehicleService;
 
@@ -45,6 +55,12 @@ public class UserController {
 	
 	@Autowired
 	PasswordEncoder passwordEncoder;
+	
+	@Autowired
+	RolService rolService;
+	
+	@Autowired
+	JwtProvider jwtProvider;
 
 	/* Obtenemos todos los USUARIOS */
 	@PreAuthorize("hasRole('ADMIN')")
@@ -112,6 +128,27 @@ public class UserController {
 		}
 		return (ResponseEntity<Object>) ResponseEntity.notFound();
 	}
+	
+	/* Eliminamos USUARIO COMPLETO */
+	@PostMapping("/addUser")
+	public ResponseEntity<?> nuevo(@Valid @RequestBody User user, BindingResult bindingResult ){
+		if(bindingResult.hasErrors())
+			return new ResponseEntity(new Message("ERROR en campos o email"), HttpStatus.BAD_REQUEST);
+		if(userService.existsByUsername(user.getUsername()))
+			return new ResponseEntity(new Message("El nombre de usuario ya existe"), HttpStatus.BAD_REQUEST);
+		if(userService.existsByEmail(user.getEmail()))
+			return new ResponseEntity(new Message("El Email ya existe"), HttpStatus.BAD_REQUEST);
+		
+		
+		Set<Rol> roles = new HashSet<>();
+		roles.add(rolService.getByRolName(RolName.ROLE_USER).get());
+		if(user.getRoles().contains("admin"))
+			roles.add(rolService.getByRolName(RolName.ROLE_ADMIN).get());
+		user.setRoles(roles);
+		userService.save(user);
+		return new ResponseEntity(new Message("Usuario Guardado"), HttpStatus.CREATED);
+		
+	}
 
 	/* Eliminamos USUARIO */
 	@PreAuthorize("hasRole('ADMIN')")
@@ -151,21 +188,26 @@ public class UserController {
 	@PostMapping("/search")
 	public ResponseEntity<?> searchUser(@RequestBody FilterUser filter) {
 
+		
+		
 		try {
 			List<User> rest = userService.getALL();
 			
 			if (filter.isCodeStatus()) {
 				rest = userService.getByCodeStatus(filter.isCodeStatus());
 			}
-			if (filter.getDni() != null) {
-				rest.clear();;
-				rest.add(filter.getDni());
+			if (filter.getUser() != null) {
+				
+				rest.clear();
+				rest.add(filter.getUser());
 			}
-			if (filter.getNumberPlate() != null) {
-				List<Vehicle> vehicleList = vehicleService.getByNumberPlate(filter.getNumberPlate());
-				Vehicle vehicle = vehicleList.get(0);
-				Optional<User> user = userService.getById(vehicle.getUserId().getId());
-				rest.contains(user);
+			if (filter.getVehicle() != null) {
+				
+				User user = userService.getById(filter.getVehicle().getUserId().getId()).orElse(null);;
+				rest.clear();
+				rest.add(user);
+				
+				
 			}
 
 			if (filter.getMunicipality() != null) {								

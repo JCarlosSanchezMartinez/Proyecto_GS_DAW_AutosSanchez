@@ -20,10 +20,10 @@ export class UserCrudService {
     return this.http.get(this.Url + "/getUserList");
   }
 
-  addUser(user: User): Observable<any> {  
+  // Añade un Usuario
+  public addUser(user: User): Observable<any> {  
     return this.http.post(this.Url + "/addUser", user);  
-  } 
-
+  }
   getUserId(id: number): Observable<any>{
     return this.http.get(this.Url + "/" + id); 
   }

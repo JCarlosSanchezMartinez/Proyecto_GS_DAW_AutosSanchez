@@ -137,13 +137,16 @@ export class ClientManagementComponent implements OnInit {
 
   }
 
-  onChangeProvinces(event: any){
-
-    this.common.getMunicipalityProvince(this.formEditUser.controls.selectProvince.value.id)
-    .subscribe(municipality => {this.municipalityList = municipality.map(municipio =>
-       ({id: municipio.id,  municipio: municipio.municipio, }) )});
-     
+  onChangeProvinces(event: any) {
+    if (this.formEditUser.controls.selectProvince.value != null) {
+      this.common.getMunicipalityProvince(this.formEditUser.controls.selectProvince.value.id)
+        .subscribe(municipality => {
+          this.municipalityList = municipality.map(municipio =>
+            ({ id: municipio.id, municipio: municipio.municipio }))
+        });
+    }
   }
+ 
 
   loadCombos(){
     this.common.getProvinceList().subscribe(provinces => {
@@ -158,8 +161,4 @@ export class ClientManagementComponent implements OnInit {
       //this.formEditUser.controls.selectMunicipality.setValue(this.municipalityList);
     });
   }
-  onSubmit(){
-  
-  } 
-
 }

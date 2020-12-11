@@ -2,7 +2,7 @@ package net.autossanchez.entity;
 
 import java.util.Date;
 
-
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -31,7 +31,8 @@ public class Vehicle {
 	private Long id;
 	
 	private String vin;
-
+	
+	@Column(unique = true,nullable = false, columnDefinition = "varchar(8)")
 	private String numberPlate;
 	
 	private String brand;
@@ -54,6 +55,7 @@ public class Vehicle {
 	
 	private String chasis;
 	
+	@Column(nullable = false, columnDefinition = "varchar(120)")
 	private String extra;
 	
 	private String photoHead;

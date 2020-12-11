@@ -9,28 +9,28 @@
                 <div class="col-12 col-md-7 pt-3 pt-md-0">
                     <div class="row">
                         <div class="col-6 form-group">
-                            <label>Matricula</label>
-                            <input type="text" formControlName="inputNumberPlate" name="number_plate" class="form-control">
+                            <label>Matricula <b class="text-danger">*</b></label>
+                            <input type="text" maxlength="8" formControlName="inputNumberPlate" name="number_plate" class="form-control">
                         </div>
                         <div class="col-6 form-group">
-                            <label>Bastidor</label>
-                            <input type="text" formControlName="inputVin" name="vin" class="form-control">
+                            <label>Bastidor <b class="text-danger">*</b></label>
+                            <input type="text" maxlength="17" formControlName="inputVin" name="vin" class="form-control">
                         </div>
                         <div class="col-6 form-group">
-                            <label>Marca</label>
+                            <label>Marca <b class="text-danger">*</b></label>
                             <input type="text" formControlName="inputBrand" name="brand" class="form-control">
                         </div>
                         <div class="col-6 form-group">
-                            <label>Modelo</label>
+                            <label>Modelo <b class="text-danger">*</b></label>
                             <input type="" formControlName="inputModel" name="model" class="form-control">
                         </div>
                         <div class="col-7 form-group">
-                            <label>Cliente</label>
+                            <label>Cliente <b class="text-danger">*</b></label>
                             <app-auto-user [parentFormGroup]="formNewVehicle" [controlName]='SearchClient'></app-auto-user>
                         </div>
                         <div class="col-5 form-group px-0">
                             <div class="col-12">
-                                <label>Año</label>
+                                <label>Año <b class="text-danger">*</b></label>
                             </div>
                             <div class="col-12">
                                 <p-calendar [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}" [(ngModel)]="dateValue" dateFormat="dd/mm/yy" formControlName="selectSellDate" [showIcon]="true" inputId="icon"></p-calendar>
@@ -43,32 +43,32 @@
                 <div class="col-12">
                     <div class="row">
                         <div class="col-5 form-group">
-                            <label>Motor</label>
+                            <label>Motor <b class="text-danger">*</b></label>
                             <input type="text" formControlName="inputEngine" name="engine" class="form-control">
                         </div>
                         <div class="col-3 form-group">
-                            <label>Kms</label>
-                            <input type="number" formControlName="inputKms" name="kms" class="form-control">
+                            <label>Kms <b class="text-danger">*</b></label>
+                            <input type="number" maxlength="10" formControlName="inputKms" name="kms" class="form-control">
                         </div>
                         <div class="col-4 form-group">
-                            <label>Combustible</label>
+                            <label>Combustible <b class="text-danger">*</b></label>
                             <p-dropdown [style]="{'width':'100%'}" [(ngModel)]="selectFuel" [options]="listFuel" formControlName="inputFuel" optionLabel="name"></p-dropdown>
                         </div>
                         <div class="col-4 form-group">
-                            <label>Color</label>
+                            <label>Color <b class="text-danger">*</b></label>
                             <input type="text" formControlName="inputColor" name="color" class="form-control">
                         </div>
                         <div class="col-3 form-group">
-                            <label>Chasis</label>
+                            <label>Chasis <b class="text-danger">*</b></label>
                             <input type="text" formControlName="inputChasis" name="color" class="form-control">
                         </div>
                         <div class="col-5 form-group">
-                            <label>Precio</label>
-                            <input type="number" formControlName="inputPrice" name="price" class="form-control">
+                            <label>Precio <b class="text-danger">*</b></label>
+                            <input type="number" maxlength="6" formControlName="inputPrice" name="price" class="form-control">
                         </div>
                         <div class="col-12 form-group">
-                            <label>Extras</label>
-                            <input type="text" formControlName="inputExtra" name="color" class="form-control">
+                            <label>Extras <b class="text-danger">*</b></label>
+                            <input type="text" maxlength="120" formControlName="inputExtra" name="color" class="form-control">
                         </div>
                     </div>
                     <div class="row">
@@ -89,7 +89,7 @@
         <div class="col-12 col-sm-auto">
             <div class="form-row">
                 <div class="col">
-                    <button pButton icon="fas fa-save" type="button" label="Guardar" (click)="saveNewVehicle()" class="p-button m-1"></button>
+                    <button pButton [disabled]="formNewVehicle.invalid" icon="fas fa-save" type="button" label="Guardar" (click)="saveNewVehicle()" class="p-button m-1"></button>
                     <button pButton icon="fas fa-broom" type="button" label="Limpiar" (click)="cleanAllControls()" class="p-button-outlined m-1"></button>
                 </div>
             </div>

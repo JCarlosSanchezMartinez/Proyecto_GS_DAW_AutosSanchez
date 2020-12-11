@@ -15,7 +15,7 @@
 
                             <div class="col-12 col-md-3 form-group">
                                 <label>Matricula - Bastidor</label>
-                                <input type="text" placeholder="Insertar Matricula o Bastidor del Vehiculo" formControlName="inputNumberPlate" class="form-control">
+                                <app-auto-vehicle [parentFormGroup]="formSearchUser" [controlName]='SearchVehicle'></app-auto-vehicle>
                             </div>
                             <div class="col-12 col-md-2 px-0 form-group">
                                 <div class="col-12">
@@ -47,8 +47,8 @@
                             <div class="col-12 col-sm-auto">
                                 <div class="form-row">
                                     <div class="col">
-                                        <button pButton icon="fas fa-search" type="button" label="Buscar" (click)="searchDni()" class="p-button-outlined m-1"></button>
-                                        <button pButton icon="fas fa-broom" type="button" label="Limpiar" class="p-button-outlined m-1"></button>
+                                        <button pButton icon="fas fa-search" type="button" label="Buscar" (click)="searchUser()" class="p-button-outlined m-1"></button>
+                                        <button pButton icon="fas fa-broom" type="button" label="Limpiar" (click)="cleanAllControls()" class="p-button-outlined m-1"></button>
                                     </div>
                                 </div>
                             </div>
@@ -67,7 +67,7 @@
 
             <div class="row">
                 <div class="col-12 p-3">
-                    <p-table [value]="userList" styleClass="p-datatable-responsive-demo" [columns]="columnsTableResult" [paginator]="true" [rows]="5" [showCurrentPageReport]="true" currentPageReportTemplate="Mostrando {last}/{totalRecords} Clientes" [rowsPerPageOptions]="[10,25,50]">
+                    <p-table [value]="userList" styleClass="p-datatable-responsive-demo" [columns]="columnsTableResult" [paginator]="true" [rows]="5" [showCurrentPageReport]="true" currentPageReportTemplate="Mostrando {last}/{totalRecords} Clientes" [rowsPerPageOptions]="[5,10,20]">
                         <ng-template pTemplate="header" let-columns>
                             <tr>
                                 <ng-container *ngFor="let col of columns">
