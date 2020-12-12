@@ -11,6 +11,7 @@
 	</parent>
 	<groupId>net.autossanchez</groupId>
 	<artifactId>autossanchezDES</artifactId>
+	<packaging>war</packaging>
 	<version>1.0</version>
 	<name>autossanchezDES</name>
 	<description>Autos Sanchez</description>
