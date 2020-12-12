@@ -8,27 +8,27 @@
                 </div>
                 <div class="col-12 col-md-7 pt-3 pt-md-0">
                     <div class="row">
-                        <div class="col-6 form-group">
+                        <div class="col-12 col-md-6 form-group">
                             <label>Matricula <b class="text-danger">*</b></label>
                             <input type="text" maxlength="8" formControlName="inputNumberPlate" name="number_plate" class="form-control">
                         </div>
-                        <div class="col-6 form-group">
+                        <div class="col-12 col-md-6 form-group">
                             <label>Bastidor <b class="text-danger">*</b></label>
                             <input type="text" maxlength="17" formControlName="inputVin" name="vin" class="form-control">
                         </div>
-                        <div class="col-6 form-group">
+                        <div class="col-12 col-md-6 form-group">
                             <label>Marca <b class="text-danger">*</b></label>
                             <input type="text" formControlName="inputBrand" name="brand" class="form-control">
                         </div>
-                        <div class="col-6 form-group">
+                        <div class="col-12 col-md-6 form-group">
                             <label>Modelo <b class="text-danger">*</b></label>
                             <input type="" formControlName="inputModel" name="model" class="form-control">
                         </div>
-                        <div class="col-7 form-group">
+                        <div class="col-12 col-md-7 form-group">
                             <label>Cliente <b class="text-danger">*</b></label>
                             <app-auto-user [parentFormGroup]="formNewVehicle" [controlName]='SearchClient'></app-auto-user>
                         </div>
-                        <div class="col-5 form-group px-0">
+                        <div class="col-12 col-md-5 form-group px-0">
                             <div class="col-12">
                                 <label>Año <b class="text-danger">*</b></label>
                             </div>
@@ -42,27 +42,27 @@
             <div class="row pt-3">
                 <div class="col-12">
                     <div class="row">
-                        <div class="col-5 form-group">
+                        <div class="col-12 col-md-5 form-group">
                             <label>Motor <b class="text-danger">*</b></label>
                             <input type="text" formControlName="inputEngine" name="engine" class="form-control">
                         </div>
-                        <div class="col-3 form-group">
+                        <div class="col-12 col-md-3 form-group">
                             <label>Kms <b class="text-danger">*</b></label>
                             <input type="number" maxlength="10" formControlName="inputKms" name="kms" class="form-control">
                         </div>
-                        <div class="col-4 form-group">
+                        <div class="col-12 col-md-4 form-group">
                             <label>Combustible <b class="text-danger">*</b></label>
                             <p-dropdown [style]="{'width':'100%'}" [(ngModel)]="selectFuel" [options]="listFuel" formControlName="inputFuel" optionLabel="name"></p-dropdown>
                         </div>
-                        <div class="col-4 form-group">
+                        <div class="col-12 col-md-4 form-group">
                             <label>Color <b class="text-danger">*</b></label>
                             <input type="text" formControlName="inputColor" name="color" class="form-control">
                         </div>
-                        <div class="col-3 form-group">
+                        <div class="col-12 col-md-3 form-group">
                             <label>Chasis <b class="text-danger">*</b></label>
                             <input type="text" formControlName="inputChasis" name="color" class="form-control">
                         </div>
-                        <div class="col-5 form-group">
+                        <div class="col-12 col-md-5 form-group">
                             <label>Precio <b class="text-danger">*</b></label>
                             <input type="number" maxlength="6" formControlName="inputPrice" name="price" class="form-control">
                         </div>

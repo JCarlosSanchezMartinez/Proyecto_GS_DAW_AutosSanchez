@@ -15,18 +15,18 @@ import net.autossanchez.repository.MunicipalityRepository;
 @Transactional
 public class MunicipalityService {
 
-	 @Autowired
-	 MunicipalityRepository municipalityRepository;
-	 
-	 public List<Municipality> getALL(){
-			return municipalityRepository.findAll();
-		}
-		
-     public Optional<Municipality> getById(int id){
-        return municipalityRepository.findById((long) id);
-     }
-    
-     public List<Municipality> getByProvinceId(Provinces provinceId){
-        return municipalityRepository.getByProvinceId(provinceId);
-     }
+	@Autowired
+	MunicipalityRepository municipalityRepository;
+
+	public List<Municipality> getALL() {
+		return municipalityRepository.findAll();
+	}
+
+	public Optional<Municipality> getById(int id) {
+		return municipalityRepository.findById((long) id);
+	}
+
+	public List<Municipality> getByProvinceId(Provinces provinceId) {
+		return municipalityRepository.getByProvinceId(provinceId);
+	}
 }

@@ -65,7 +65,7 @@
                                     <tr>
                                         <ng-container *ngFor="let col of columns">
                                             <ng-container [ngSwitch]="col.field">
-                                                <th pSortableColumn={{col.field}}>{{col.header}}
+                                                <th class="text-center" pSortableColumn={{col.field}}>{{col.header}}
                                                     <p-sortIcon field={{col.field}}></p-sortIcon>
                                             </ng-container>
                                         </ng-container>
@@ -73,9 +73,9 @@
                                 </ng-template>
                                 <ng-template pTemplate="body" let-vehicle>
                                     <tr>
-                                        <td pTooltip="{{vehicle.numberPlate}}">{{vehicle.numberPlate}}</td>
-                                        <td pTooltip="{{vehicle.brand}}">{{vehicle.brand}}</td>
-                                        <td pTooltip="{{vehicle.model}}">{{vehicle.model}}</td>
+                                        <td class="text-center" pTooltip="{{vehicle.numberPlate}}">{{vehicle.numberPlate}}</td>
+                                        <td class="text-center" pTooltip="{{vehicle.brand}}">{{vehicle.brand}}</td>
+                                        <td class="text-center" pTooltip="{{vehicle.model}}">{{vehicle.model}}</td>
                                     </tr>
                                 </ng-template>
                             </p-table>

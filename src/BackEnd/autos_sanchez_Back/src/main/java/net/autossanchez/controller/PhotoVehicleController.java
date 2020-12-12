@@ -28,13 +28,13 @@ import net.autossanchez.service.VehicleService;
 @RequestMapping("/photoVehicle")
 @CrossOrigin(origins = "*")
 public class PhotoVehicleController {
-	
+
 	@Autowired
 	PhotoVehicleService photoVehicleService;
-	
+
 	@Autowired
 	VehicleService vehicleService;
-	
+
 	/* Obtenemos todas las IMAGENES de un PHOTOVEHICLE */
 
 	@GetMapping("/getVehicleImagenList/{id}")
@@ -57,53 +57,53 @@ public class PhotoVehicleController {
 			return (ResponseEntity<PhotoVehicleDto>) ResponseEntity.notFound();
 		}
 	}
-	
+
 	/* Creamos PHOTOVEHICLE */
 
 	@PostMapping("/addPhotoVehicle")
-	public ResponseEntity<?> create(@RequestBody List<PhotoVehicleDto> photoVehicleList) {		
-		
+	public ResponseEntity<?> create(@RequestBody List<PhotoVehicleDto> photoVehicleList) {
+
 		try {
 			PhotoVehicleDto restDto = new PhotoVehicleDto();
 			PhotoVehicle rest = new PhotoVehicle();
 			for (PhotoVehicleDto photoVehicleDto : photoVehicleList) {
-				PhotoVehicle photoVehicle = new PhotoVehicle();				
+				PhotoVehicle photoVehicle = new PhotoVehicle();
 				Vehicle vehicle = vehicleService.getByID(photoVehicleDto.getVehicleId()).orElse(null);
-				
+
 				photoVehicle.setImagen(photoVehicleDto.getImagen());
 				photoVehicle.setVehicle(vehicle);
 				vehicle.setPhotoHead(photoVehicleDto.getImagen());
-				
+
 				vehicleService.save(vehicle);
-				photoVehicleService.save(photoVehicle);	
+				photoVehicleService.save(photoVehicle);
 			}
-			
-					
+
 			return ResponseEntity.status(HttpStatus.CREATED).body(rest);
 		} catch (Exception e) {
 			return new ResponseEntity(new Message(e.toString()), HttpStatus.NOT_FOUND);
 		}
 	}
+
 	/* Eliminamos PHOTOVEHICLE */
 	@PreAuthorize("hasRole('ADMIN')")
 	@DeleteMapping("/deletePhotoVehicle/{vehicleId}")
 	public ResponseEntity<?> delete(@PathVariable long vehicleId) {
-		
+
 		try {
-			
+
 			Vehicle vehicle = vehicleService.getByID(vehicleId).orElse(null);
-			
+
 			List<PhotoVehicle> photoVehicleList = photoVehicleService.getALL();
-			
+
 			for (PhotoVehicle photoVehicle : photoVehicleList) {
-				if (photoVehicle.getVehicle() == vehicle ) {
+				if (photoVehicle.getVehicle() == vehicle) {
 					photoVehicleService.deleteById(photoVehicle.getId());
-				}			
-			}			
-			
+				}
+			}
+
 		} catch (Exception e) {
 			return new ResponseEntity(new Message("producto eliminado"), HttpStatus.OK);
 		}
-			return ResponseEntity.noContent().build();
+		return ResponseEntity.noContent().build();
 	}
 }

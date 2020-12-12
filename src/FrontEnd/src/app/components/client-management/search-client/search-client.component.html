@@ -72,7 +72,7 @@
                             <tr>
                                 <ng-container *ngFor="let col of columns">
                                     <ng-container [ngSwitch]="col.field">
-                                        <th pSortableColumn={{col.field}}>{{col.header}}
+                                        <th class="text-center" pSortableColumn={{col.field}}>{{col.header}}
                                             <p-sortIcon field={{col.field}}></p-sortIcon>
                                     </ng-container>
                                 </ng-container>
@@ -80,12 +80,12 @@
                         </ng-template>
                         <ng-template pTemplate="body" let-user>
                             <tr>
-                                <td pTooltip="{{user.dni}}">{{user.dni}}</td>
-                                <td pTooltip="{{user.firstName}} {{user.lastName}}">{{user.firstName}} {{user.lastName}}</td>
-                                <td pTooltip="{{user.address}}">{{user.address}}</td>
-                                <td pTooltip="{{user.phone}}">{{user.phone}}</td>
-                                <td pTooltip="{{user.email}}">{{user.email}}</td>
-                                <td>
+                                <td class="text-center" pTooltip="{{user.dni}}">{{user.dni}}</td>
+                                <td class="text-center" pTooltip="{{user.firstName}} {{user.lastName}}">{{user.firstName}} {{user.lastName}}</td>
+                                <td class="text-center" pTooltip="{{user.address}}">{{user.address}}</td>
+                                <td class="text-center" pTooltip="{{user.phone}}">{{user.phone}}</td>
+                                <td class="text-center" pTooltip="{{user.email}}">{{user.email}}</td>
+                                <td class="text-center">
                                     <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-outlined m-1" *ngIf="user.codeStatus == true" (click)="onClickEditUser(user.id)"></button>
                                     <button pButton pRipple icon="fas fa-trash" class="p-button-rounded p-button-outlined m-1" *ngIf="user.codeStatus == true" (click)="showModalConfirmDelete(user.id)"></button>
                                     <button pButton pRipple icon="pi pi-eye" class="p-button-rounded p-button-outlined m-1" *ngIf="user.codeStatus == false" (click)="delete(user.id)"></button>

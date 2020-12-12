@@ -9,7 +9,7 @@ import { MessageService } from 'primeng/api';
   providers: [MessageService]
 })
 export class AppComponent {
-  title = 'AngularUltimo';
+  title = 'autossanchez';
 
   constructor(private router:Router,
     private messageService: MessageService){}

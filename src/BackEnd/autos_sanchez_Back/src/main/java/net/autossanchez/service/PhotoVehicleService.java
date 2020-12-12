@@ -15,20 +15,21 @@ import net.autossanchez.repository.PhotoVehicleRepository;
 @Transactional
 public class PhotoVehicleService {
 
-	
 	@Autowired
 	PhotoVehicleRepository photoVehicleRepository;
-	
+
 	public List<PhotoVehicle> getALL() {
 		return photoVehicleRepository.findAll();
 	}
 
 	public Optional<PhotoVehicle> getById(long id) {
-		return photoVehicleRepository.findById( id);
+		return photoVehicleRepository.findById(id);
 	}
+
 	public List<PhotoVehicle> getListByVehicle(Vehicle vehicle) {
 		return photoVehicleRepository.getListByVehicle(vehicle);
 	}
+
 	public List<PhotoVehicle> getListByVehicleId(long vehicleId) {
 		return photoVehicleRepository.getListByVehicleId(vehicleId);
 	}
@@ -36,6 +37,7 @@ public class PhotoVehicleService {
 	public PhotoVehicle save(PhotoVehicle photoVehicle) {
 		return photoVehicleRepository.save(photoVehicle);
 	}
+
 	public PhotoVehicle deleteById(long id) {
 		return photoVehicleRepository.deleteById(id);
 	}

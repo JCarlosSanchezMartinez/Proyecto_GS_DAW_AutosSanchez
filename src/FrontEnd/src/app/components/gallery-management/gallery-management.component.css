@@ -1,12 +1,39 @@
 @media (max-width: 360px) {
-    .card-flyer {
-        height: 400px;
+    h4 {
+        font-size: 22px;
+        color: rgb(0, 0, 50);
+        font-weight: bold;
+        font-style: italic;
+    }
+    h3 {
+        font-size: 26px !important;
+        font-weight: bold;
     }
 }
 
-@media (min-width: 767px) {
-    .card-flyer {
-        height: 450px;
+@media (max-width: 767px) {
+    h4 {
+        font-size: 26px;
+        color: rgb(0, 0, 50);
+        font-weight: bold;
+        font-style: italic;
+    }
+    h3 {
+        font-size: 18px !important;
+        font-weight: bold;
+    }
+}
+
+@media (max-width: 996px) {
+    h4 {
+        font-size: 18px;
+        color: rgb(0, 0, 50);
+        font-weight: bold;
+        font-style: italic;
+    }
+    h3 {
+        font-size: 20px !important;
+        font-weight: bold;
     }
 }
 
@@ -17,22 +44,43 @@ img {
 
 p {
     color: black;
-
 }
+
+h3 {
+    font-size: 26px !important;
+    font-weight: bold;
+}
+
+h4 {
+    font-size: 28px;
+    color: rgb(0, 0, 50);
+    font-weight: bold;
+    font-style: italic;
+}
+
 h5 {
     color: rgb(0, 0, 50);
     font-weight: bold;
     font-style: italic;
 }
 
-h4 {
+h6 {
     color: rgb(0, 0, 50);
     font-weight: bold;
 }
 
+.contado {
+    color: red;
+    font-style: normal;
+}
+
+.financiado {
+    color: rgb(0, 0, 50);
+    font-style: normal;
+}
+
 .globo {
     background-color: #0678c4;
-    
 }
 
 #cards_landscape_wrap-2 {
@@ -68,8 +116,6 @@ h4 {
     transform: scale(1.15);
 }
 
-
-
 #cards_landscape_wrap-2 .card-flyer {
     background: #FFFFFF;
     margin-top: 50px;
@@ -91,8 +137,3 @@ h4 {
     transition: all 0.2s ease-in;
     margin-top: 50px;
 }
-
-
-
-
-

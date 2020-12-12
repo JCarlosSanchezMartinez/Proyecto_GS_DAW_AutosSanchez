@@ -3,7 +3,6 @@ package net.autossanchez.controller;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
 import javax.validation.Valid;
@@ -25,11 +24,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import net.autossanchez.dto.Message;
-import net.autossanchez.dto.UserNew;
-import net.autossanchez.entity.Municipality;
 import net.autossanchez.entity.Rol;
 import net.autossanchez.entity.User;
-import net.autossanchez.entity.Vehicle;
 import net.autossanchez.enums.RolName;
 import net.autossanchez.filter.FilterUser;
 import net.autossanchez.jwt.JwtProvider;
@@ -52,13 +48,13 @@ public class UserController {
 
 	@Autowired
 	MunicipalityService municipalityService;
-	
+
 	@Autowired
 	PasswordEncoder passwordEncoder;
-	
+
 	@Autowired
 	RolService rolService;
-	
+
 	@Autowired
 	JwtProvider jwtProvider;
 
@@ -128,28 +124,28 @@ public class UserController {
 		}
 		return (ResponseEntity<Object>) ResponseEntity.notFound();
 	}
-	
+
 	/* Creamos USUARIO COMPLETO */
 	@PostMapping("/addUser")
-	public ResponseEntity<?> nuevo(@Valid @RequestBody User user, BindingResult bindingResult ){
-		if(bindingResult.hasErrors())
+	public ResponseEntity<?> nuevo(@Valid @RequestBody User user, BindingResult bindingResult) {
+		if (bindingResult.hasErrors())
 			return new ResponseEntity(new Message("ERROR en campos o email"), HttpStatus.BAD_REQUEST);
-		if(userService.existsByUsername(user.getUsername()))
+		if (userService.existsByUsername(user.getUsername()))
 			return new ResponseEntity(new Message("El nombre de usuario ya existe"), HttpStatus.BAD_REQUEST);
-		if(userService.existsByEmail(user.getEmail()))
+		if (userService.existsByEmail(user.getEmail()))
 			return new ResponseEntity(new Message("El Email ya existe"), HttpStatus.BAD_REQUEST);
-		if(userService.existsByDni(user.getDni()))
+		if (userService.existsByDni(user.getDni()))
 			return new ResponseEntity(new Message("El DNI ya existe"), HttpStatus.BAD_REQUEST);
-		
+
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
 		Set<Rol> roles = new HashSet<>();
 		roles.add(rolService.getByRolName(RolName.ROLE_USER).get());
-		if(user.getRoles().contains("admin"))
+		if (user.getRoles().contains("admin"))
 			roles.add(rolService.getByRolName(RolName.ROLE_ADMIN).get());
 		user.setRoles(roles);
 		userService.save(user);
 		return new ResponseEntity(new Message("Usuario Guardado"), HttpStatus.CREATED);
-		
+
 	}
 
 	/* Eliminamos USUARIO */
@@ -165,7 +161,7 @@ public class UserController {
 		} catch (Exception e) {
 			return (ResponseEntity<Object>) ResponseEntity.notFound();
 		}
-		return new ResponseEntity( HttpStatus.OK);
+		return new ResponseEntity(HttpStatus.OK);
 	}
 
 	/* Reactivamos USUARIO */
@@ -181,7 +177,7 @@ public class UserController {
 		} catch (Exception e) {
 			return (ResponseEntity<Object>) ResponseEntity.notFound();
 		}
-		return new ResponseEntity( HttpStatus.OK);
+		return new ResponseEntity(HttpStatus.OK);
 	}
 
 	/* Buscamos USUARIOS por FILTER */
@@ -191,30 +187,31 @@ public class UserController {
 	public ResponseEntity<?> searchUser(@RequestBody FilterUser filter) {
 		try {
 			List<User> rest = userService.getALL();
-			
+
 			if (filter.isCodeStatus()) {
 				rest = userService.getByCodeStatus(filter.isCodeStatus());
 			}
-			if (filter.getUser() != null) {				
+			if (filter.getUser() != null) {
 				rest.clear();
 				rest.add(filter.getUser());
 			}
-			if (filter.getVehicle() != null) {				
-				User user = userService.getById(filter.getVehicle().getUserId().getId()).orElse(null);;
+			if (filter.getVehicle() != null) {
+				User user = userService.getById(filter.getVehicle().getUserId().getId()).orElse(null);
+				;
 				rest.clear();
-				rest.add(user);				
+				rest.add(user);
 			}
-			if (filter.getMunicipality() != null) {								
+			if (filter.getMunicipality() != null) {
 				rest = userService.getByMunicipality(filter.getMunicipality());
 			}
 			if (filter.getProvince() != null) {
-				List<User> userList = new ArrayList<>(); 
+				List<User> userList = new ArrayList<>();
 				for (int i = 0; i < rest.size(); i++) {
 					if (rest.get(i).getMunicipality().getProvinceId().getId() == filter.getProvince().getId()) {
 						userList.add(rest.get(i));
 						System.out.println(rest.get(i));
 					}
-				}				
+				}
 				rest = userList;
 			}
 

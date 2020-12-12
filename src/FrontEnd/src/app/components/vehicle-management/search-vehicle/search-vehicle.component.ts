@@ -1,14 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { MessageService, SortEvent } from 'primeng/api';
+import { ConfirmationService, MessageService, SortEvent } from 'primeng/api';
+import { FilterVehicle } from 'src/app/interfaces/filter-vehicle.interface';
 import { User } from 'src/app/model/User';
 import { Vehicle } from 'src/app/model/Vehicle';
-import { VehicleCRUDService } from 'src/app/services/vehicle-crud.service';
-import { ConfirmationService } from 'primeng/api';
-import { Message } from 'primeng/api';
-import { FilterVehicle } from 'src/app/interfaces/filter-vehicle.interface';
 import { SearchVehicleDtoService } from 'src/app/services/search-vehicle-dto.service';
+import { VehicleCRUDService } from 'src/app/services/vehicle-crud.service';
 
 @Component({
   selector: 'app-search-vehicle',
@@ -24,7 +22,7 @@ export class SearchVehicleComponent implements OnInit {
   public vehicle: Vehicle = new Vehicle();
   public vehicleList: Vehicle[] = [];
   public client: User = new User();
-  public imagenHead: string;
+
   public paramSearch: FilterVehicle;
   public SearchVehicle = 'SearchVehicle';
   public SearchClient = 'SearchClient';
@@ -40,8 +38,7 @@ export class SearchVehicleComponent implements OnInit {
   constructor(private serviceVehicle: VehicleCRUDService,
     private router: Router,
     private confirmationService: ConfirmationService,
-    private messageService: MessageService,
-    private servicePhotoVehicle: SearchVehicleDtoService) {
+    private messageService: MessageService,) {
     this.columnsTableResult = [
       { field: 'numberPlate', header: 'Matricula' },
       { field: 'imagen', header: 'Imagen' },
@@ -55,36 +52,30 @@ export class SearchVehicleComponent implements OnInit {
     ];
   }
 
+  ngOnInit(): void {
+    this.buildFrom();
+    this.searchVehicle();
+  }
+
   private buildFrom() {
     this.formSearchVehicle = new FormGroup({});
     this.formSearchVehicle.addControl('SearchVehicle', new FormControl());
     this.formSearchVehicle.addControl('SearchClient', new FormControl());
-    this.formSearchVehicle.addControl('inputBrand', new FormControl('', Validators.required));
-    this.formSearchVehicle.addControl('inputModel', new FormControl('', Validators.required));
+    this.formSearchVehicle.addControl('inputBrand', new FormControl());
+    this.formSearchVehicle.addControl('inputModel', new FormControl());
     this.formSearchVehicle.addControl('chkActiveStatus', new FormControl(true));
-
-
   }
 
   onChangeChkActiveStatus() {
     this.chkActiveStatus === false ? this.chkActiveStatus = true : this.chkActiveStatus = false;
   }
 
-  ngOnInit(): void {
-    this.buildFrom();
-    this.searchVehicle();
-
-  }
-
-
   cleanAllControls() {
     this.formSearchVehicle.controls.SearchVehicle.setValue(null);
     this.formSearchVehicle.controls.inputBrand.setValue(null);
     this.formSearchVehicle.controls.inputModel.setValue(null);
     this.formSearchVehicle.controls.SearchClient.setValue(null);
-
   }
-
 
   searchVehicle() {
     this.showLoadingSpinner();
@@ -104,9 +95,7 @@ export class SearchVehicleComponent implements OnInit {
           codeStatus: resultSearch.codeStatus
         }));
         this.vehicleList = vehicleFilterList;
-
         this.hideLoadingSpinner();
-
       }
     }, error => {
       if (error.status === 403) {
@@ -126,14 +115,6 @@ export class SearchVehicleComponent implements OnInit {
         this.messageService.add({ severity: 'error', summary: 'Error!', detail: 'Se produjo un error, inténtelo de nuevo más tarde y si el error persiste, comuníquese con el administrador del sistema' });
       }
     });
-
-
-    /* var search = this.formSearchVehicle.value;
-     this.serviceVehicle.getVehicleNumberPlate(search.inputNumberPlate).subscribe((data:any)=>{this.vehicleList=data});    
-       
-    /* this.serviceVehicle.getVehicleNumberPlate(event.query).subscribe(data => {
-       this.vehicleList = data;});*/
-
   }
 
   getParamsSearchVehicle(): FilterVehicle {
@@ -151,14 +132,12 @@ export class SearchVehicleComponent implements OnInit {
         && this.formSearchVehicle.controls.SearchClient.value !== undefined ?
         this.formSearchVehicle.controls.SearchClient.value : null,
       codeStatus: this.formSearchVehicle.controls.chkActiveStatus.value === true ? true : null,
-
     };
   }
 
   onClickEditVehicle(vehicleId: number) {
     this.router.navigate(['/vehicle', vehicleId]);
   }
-
 
   confirm() {
     this.confirmationService.confirm({
@@ -191,26 +170,23 @@ export class SearchVehicleComponent implements OnInit {
   }
   delete(id: number) {
     this.serviceVehicle.deleteVehicle(id).subscribe(
-      data => { alert('Usuario Desactivado'); }
+      data => { this.messageService.add({ severity: 'success', summary: 'Exito!', detail: 'Se ha DESACTIVADO el Vehiculo correctamente.' });  }
     );
   }
 
   reactivate(id: number) {
     this.serviceVehicle.reactivateVehicle(id).subscribe(
-      data => { alert('Usuario Reactivado'); }
+      data => { this.messageService.add({ severity: 'success', summary: 'Exito!', detail: 'Se ha REACTIVADO el Vehiculo correctamente.' });  }
     );
-
   }
 
   showModalConfirmDelete(id: number) {
-
     this.confirmationService.confirm({
       message: '¿Desea Borrar el Vehiculo?',
       header: 'Confirmacion Reactivacion',
       icon: 'fas fa-question-circle',
       accept: () => { this.delete(id); }
     });
-
   }
 
   showModalConfirmReactivate(id: number) {

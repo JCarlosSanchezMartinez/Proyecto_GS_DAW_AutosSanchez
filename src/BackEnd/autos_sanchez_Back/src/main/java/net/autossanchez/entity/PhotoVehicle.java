@@ -21,14 +21,12 @@ public class PhotoVehicle {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	
-	
-	@Column(unique = true,columnDefinition = "varchar(500)")
+
+	@Column(unique = true, columnDefinition = "varchar(500)")
 	private String imagen;
-	
+
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "vehicle_Id")
 	private Vehicle vehicle;
-
 
 }

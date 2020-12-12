@@ -1,15 +1,9 @@
 package net.autossanchez.controller;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,14 +20,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import lombok.RequiredArgsConstructor;
 import net.autossanchez.dto.Message;
-import net.autossanchez.dto.VehicleDto;
-import net.autossanchez.entity.PhotoVehicle;
 import net.autossanchez.entity.User;
 import net.autossanchez.entity.Vehicle;
 import net.autossanchez.filter.FilterVehicle;
-import net.autossanchez.repository.VehicleRepository;
 import net.autossanchez.service.PhotoVehicleService;
 import net.autossanchez.service.UserService;
 import net.autossanchez.service.VehicleService;
@@ -52,7 +42,6 @@ public class VehicleController {
 
 	@Autowired
 	PhotoVehicleService photoVehicleService;
-	
 
 	/* Obtenemos todos los VEHICULOS */
 	@GetMapping("/getVehicleList")
@@ -78,7 +67,7 @@ public class VehicleController {
 					rest.add(vehicle);
 				}
 			}
-			
+
 			return new ResponseEntity(rest, HttpStatus.OK);
 		} catch (Exception e) {
 			return (ResponseEntity<Vehicle>) ResponseEntity.notFound();
@@ -140,16 +129,16 @@ public class VehicleController {
 	/* Creamos VEHICULO */
 	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping("/addVehicle")
-	public ResponseEntity<?> create(@Valid @RequestBody Vehicle vehicle, BindingResult bindingResult ) {
-		if(bindingResult.hasErrors())
+	public ResponseEntity<?> create(@Valid @RequestBody Vehicle vehicle, BindingResult bindingResult) {
+		if (bindingResult.hasErrors())
 			return new ResponseEntity(new Message("Campos erroneos"), HttpStatus.BAD_REQUEST);
-		if(vehicleService.existByNumberPlate(vehicle.getNumberPlate()))
+		if (vehicleService.existByNumberPlate(vehicle.getNumberPlate()))
 			return new ResponseEntity(new Message("La Matricula ya existe"), HttpStatus.BAD_REQUEST);
-		if(vehicleService.existByVin(vehicle.getVin()))
+		if (vehicleService.existByVin(vehicle.getVin()))
 			return new ResponseEntity(new Message("El Numero de Bastidor ya existe"), HttpStatus.BAD_REQUEST);
-		
-		try {		
-			Vehicle rest = vehicleService.save(vehicle);			
+
+		try {
+			Vehicle rest = vehicleService.save(vehicle);
 			return ResponseEntity.status(HttpStatus.CREATED).body(rest);
 		} catch (Exception e) {
 			return new ResponseEntity(new Message(e.toString()), HttpStatus.NOT_FOUND);
@@ -164,7 +153,6 @@ public class VehicleController {
 		try {
 			Vehicle rest = vehicleService.getByID(id).get();
 
-			
 			rest.setVin(vehicle.getVin());
 			rest.setNumberPlate(vehicle.getNumberPlate());
 			rest.setBrand(vehicle.getBrand());
@@ -180,7 +168,7 @@ public class VehicleController {
 			rest.setCarrousel(vehicle.isCarrousel());
 			rest.setCodeStatus(vehicle.isCodeStatus());
 			rest.setUserId(vehicle.getUserId());
-			
+
 			System.out.println(rest);
 			return ResponseEntity.ok(vehicleService.save(rest));
 		} catch (Exception e) {
@@ -193,41 +181,41 @@ public class VehicleController {
 	@PreAuthorize("hasRole('ADMIN')")
 	@DeleteMapping("/deleteVehicle/{id}")
 	public ResponseEntity<?> delete(@PathVariable long id) {
-		
+
 		try {
 			Vehicle vehicle = vehicleService.getByID(id).orElse(null);
 			vehicle.setCodeStatus(false);
 			vehicleService.save(vehicle);
-			
+
 		} catch (Exception e) {
 			return (ResponseEntity<Object>) ResponseEntity.notFound();
 		}
-			return ResponseEntity.noContent().build();
+		return ResponseEntity.noContent().build();
 	}
-	
+
 	/* Reactivamos VEHICULO */
 	@PreAuthorize("hasRole('ADMIN')")
 	@DeleteMapping("/reactivateVehicle/{id}")
 	public ResponseEntity<?> reactivate(@PathVariable long id) {
-		
+
 		try {
 			Vehicle vehicle = vehicleService.getByID(id).orElse(null);
 			vehicle.setCodeStatus(true);
 			vehicleService.save(vehicle);
-			
+
 		} catch (Exception e) {
 			return (ResponseEntity<Object>) ResponseEntity.notFound();
 		}
-			return ResponseEntity.noContent().build();
+		return ResponseEntity.noContent().build();
 	}
-	
+
 	/* Buscamos VEHICULOS por FILTER */
 	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping("/search")
 	public ResponseEntity<?> searchVehicle(@RequestBody FilterVehicle filter) {
 
 		try {
-			List<Vehicle> rest =  vehicleService.getALL();			
+			List<Vehicle> rest = vehicleService.getALL();
 			if (filter.isCodeStatus()) {
 				rest = vehicleService.getByCodeStatus(filter.isCodeStatus());
 			}
@@ -244,9 +232,9 @@ public class VehicleController {
 			if (filter.getUser() != null) {
 				rest = vehicleService.getVehiclesByUserId(filter.getUser());
 			}
-		
-			return ResponseEntity.status(HttpStatus.CREATED).body(rest);			
-			
+
+			return ResponseEntity.status(HttpStatus.CREATED).body(rest);
+
 		} catch (Exception e) {
 			return new ResponseEntity(new Message(e.toString()), HttpStatus.NOT_FOUND);
 		}

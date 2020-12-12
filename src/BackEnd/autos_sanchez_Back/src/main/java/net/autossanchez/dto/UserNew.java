@@ -10,9 +10,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import net.autossanchez.entity.Municipality;
 
-@Data @NoArgsConstructor @AllArgsConstructor
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class UserNew {
-	
+
 	@NotBlank
 	private String firstName;
 	@NotBlank
@@ -20,9 +22,8 @@ public class UserNew {
 	@NotBlank
 	private String email;
 	@NotBlank
-	private String password;	
+	private String password;
 	private Set<String> roles = new HashSet<>();
-	
-	
+
 	private Municipality municipality;
 }

@@ -1,21 +1,21 @@
 <div class="row px-0">
     <div class="col-12 col-md-9 p-0 carrousel">
-        <ngb-carousel *ngIf="vehiclesDto">
+        <ngb-carousel *ngIf="vehiclesDto" pauseOnFocus="true">
             <ng-template ngbSlide *ngFor="let vehicle of vehiclesDto">
                 <div class="row">
                     <div class="col-12 wrapper">
                         <img src="{{vehicle.photoHead}}" class="img-fluid" (click)="onClickVehicleDetails(vehicle.id)" alt="Random first slide">
                     </div>
                     <div class="carousel-caption">
-                        <h2 class="text-right px-5">{{vehicle.brand}} {{vehicle.model}}</h2>
+                        <h2 class="text-right px-5 pt-0">{{vehicle.brand}} {{vehicle.model}}</h2>
                         <hr class="line">
-                        <h3 class="text-left pb-3 px-5">{{vehicle.price | currency : 'EUR' : 'symbol' : '1.0-0' }}</h3>
+                        <h3 class="text-left py-3 px-5">{{vehicle.price | currency : 'EUR' : 'symbol' : '1.0-0' }}</h3>
                     </div>
                 </div>
             </ng-template>
         </ngb-carousel>
     </div>
-    <div class="col-3 d-none d-md-block  bg-dark p-0">
+    <div class="col-3 d-none d-lg-block  bg-dark p-0">
         <div class="row navContact">
             <div class="col-12">
                 <img src="assets/img/header.png" width="250" class="img-fluid px-5 pt-3">

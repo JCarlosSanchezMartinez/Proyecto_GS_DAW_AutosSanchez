@@ -11,7 +11,7 @@ public class AutosSanchezBackApplication extends SpringBootServletInitializer {
 	public static void main(String[] args) {
 		SpringApplication.run(AutosSanchezBackApplication.class, args);
 	}
-	
+
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
 		return application.sources(AutosSanchezBackApplication.class);

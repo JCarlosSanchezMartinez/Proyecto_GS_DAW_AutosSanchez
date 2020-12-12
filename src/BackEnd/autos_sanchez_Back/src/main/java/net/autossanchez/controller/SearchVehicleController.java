@@ -1,25 +1,17 @@
 package net.autossanchez.controller;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.tomcat.jni.File;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
-import net.autossanchez.dto.Message;
 import net.autossanchez.dto.PhotoVehicleDto;
 import net.autossanchez.dto.SearchVehicleDto;
 import net.autossanchez.entity.PhotoVehicle;
@@ -67,7 +59,7 @@ public class SearchVehicleController {
 
 				List<PhotoVehicle> photoListTemp = photoVehicleService.getListByVehicle(vehicle);
 				List<PhotoVehicleDto> photoList = new ArrayList<>();
-				if (!photoListTemp.isEmpty()) {	
+				if (!photoListTemp.isEmpty()) {
 					for (PhotoVehicle photoVehicle : photoListTemp) {
 						PhotoVehicleDto dtoTemp = new PhotoVehicleDto();
 						dtoTemp.setImagen(photoVehicle.getImagen());
@@ -121,8 +113,7 @@ public class SearchVehicleController {
 				dto.setCarrousel(vehicle.isCarrousel());
 				dto.setCodeStatus(vehicle.isCodeStatus());
 				dto.setPhotoHead(vehicle.getPhotoHead());
-				
-				
+
 				restDto.add(dto);
 			}
 
@@ -154,7 +145,7 @@ public class SearchVehicleController {
 			dto.setCodeStatus(vehicle.isCodeStatus());
 			List<PhotoVehicle> photoListTemp = photoVehicleService.getListByVehicle(vehicle);
 			List<PhotoVehicleDto> photoList = new ArrayList<>();
-			if (!photoListTemp.isEmpty()) {	
+			if (!photoListTemp.isEmpty()) {
 				for (PhotoVehicle photoVehicle : photoListTemp) {
 					PhotoVehicleDto dtoTemp = new PhotoVehicleDto();
 					dtoTemp.setImagen(photoVehicle.getImagen());
@@ -169,7 +160,6 @@ public class SearchVehicleController {
 				photoList.add(dtoTemp);
 				dto.setPhotoVehicleDto(photoList);
 			}
-			
 
 			if (dto == null) {
 

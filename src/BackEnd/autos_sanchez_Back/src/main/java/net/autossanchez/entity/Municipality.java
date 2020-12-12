@@ -1,6 +1,5 @@
 package net.autossanchez.entity;
 
-
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -19,17 +18,16 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Entity
 public class Municipality {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	
+
 	@NotNull
-	private String municipio;	
-		
-	
-	 @ManyToOne(fetch = FetchType.EAGER,optional = false)
-	 @JoinColumn(name = "province_id",nullable = false)
+	private String municipio;
+
+	@ManyToOne(fetch = FetchType.EAGER, optional = false)
+	@JoinColumn(name = "province_id", nullable = false)
 	private Provinces provinceId;
 
 }

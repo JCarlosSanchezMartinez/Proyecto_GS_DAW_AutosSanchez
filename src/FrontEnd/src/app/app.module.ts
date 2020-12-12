@@ -34,6 +34,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { NewUserComponent } from './components/client-management/new-client/new-client.component';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
+//PRIMENG
 import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
 import { DialogModule } from 'primeng/dialog';
@@ -49,6 +50,7 @@ import { NoticeComponent } from './components/notice/notice.component';
 import { SidebarModule } from 'primeng/sidebar';
 import { GalleryVehicleComponent } from './components/gallery-management/gallery-vehicle/gallery-vehicle.component';
 import { UploaderComponent } from './components/uploader/uploader.component'
+import { InputSwitchModule } from 'primeng/inputswitch';
 
 //FIREBASE
 import { AngularFireStorageModule} from '@angular/fire/storage'
@@ -126,6 +128,7 @@ const firebaseConfig = {
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireStorageModule,
     AngularFireDatabaseModule,
+    InputSwitchModule
     
     
 

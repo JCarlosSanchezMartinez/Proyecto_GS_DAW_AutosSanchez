@@ -82,11 +82,9 @@ export class SearchClientComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
     this.buildFrom();
     this.loadCombos();
-    this.serviceUser.getUserList().subscribe((data: any) => { this.userList = data })
-
+    this.serviceUser.getUserList().subscribe((data: any) => { this.userList = data });
   }
 
   cleanAllControls() {
@@ -95,9 +93,7 @@ export class SearchClientComponent implements OnInit {
     this.selectedActiveProvince = null;
     this.selectedActiveMunicipality = null;
     this.formSearchUser.controls.chkActiveStatus.setValue(true);
-
   }
-
 
   searchUser() {
     this.showLoadingSpinner();
@@ -118,7 +114,6 @@ export class SearchClientComponent implements OnInit {
         }));
         this.userList = UserFilterList;
         this.hideLoadingSpinner();
-
       }
     }, error => {
       if (error.status === 403) {
@@ -141,9 +136,7 @@ export class SearchClientComponent implements OnInit {
 
   }
   getParamsSearchUser(): FilterUser {
-
     return {
-
       user: this.formSearchUser.controls.SearchClient.value !== ''
         && this.formSearchUser.controls.SearchClient.value !== undefined ?
         this.formSearchUser.controls.SearchClient.value : null,
@@ -157,12 +150,7 @@ export class SearchClientComponent implements OnInit {
         && this.formSearchUser.controls.selectMunicipality.value !== undefined ?
         this.formSearchUser.controls.selectMunicipality.value : null,
       codeStatus: this.formSearchUser.controls.chkActiveStatus.value === true ? true : null,
-
     };
-  }
-
-  onClickEditUser(userId: number) {
-    this.router.navigate(['/user', userId]);
   }
 
   showModalConfirmDelete(id: number) {
@@ -209,14 +197,6 @@ export class SearchClientComponent implements OnInit {
     });
   }
 
-  showLoadingSpinner() {
-    this.loading = true;
-  }
-
-  hideLoadingSpinner() {
-    this.loading = false;
-  }
-
   onChangeProvinces(event: any) {
     if (this.formSearchUser.controls.selectProvince.value != null) {
       this.common.getMunicipalityProvince(this.formSearchUser.controls.selectProvince.value.id)
@@ -230,10 +210,18 @@ export class SearchClientComponent implements OnInit {
   loadCombos() {
     this.common.getProvinceList().subscribe(provinces => {
       this.provincesList = provinces.map(province => ({ id: province.id, province: province.province }));
-
-
-
     });
   }
 
+  onClickEditUser(userId: number) {
+    this.router.navigate(['/user', userId]);
+  }
+
+  showLoadingSpinner() {
+    this.loading = true;
+  }
+
+  hideLoadingSpinner() {
+    this.loading = false;
+  }
 }

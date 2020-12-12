@@ -64,7 +64,7 @@
                             <tr>
                                 <ng-container *ngFor="let col of columns">
                                     <ng-container [ngSwitch]="col.field">
-                                        <th pSortableColumn={{col.field}}>{{col.header}}
+                                        <th class="text-center" pSortableColumn={{col.field}}>{{col.header}}
                                             <p-sortIcon field={{col.field}}></p-sortIcon>
                                     </ng-container>
                                 </ng-container>
@@ -72,14 +72,14 @@
                         </ng-template>
                         <ng-template pTemplate="body" let-vehicle>
                             <tr>
-                                <td pTooltip="{{vehicle.numberPlate}}">{{vehicle.numberPlate}}</td>
+                                <td class="text-center" pTooltip="{{vehicle.numberPlate}}">{{vehicle.numberPlate}}</td>
                                 <td><img src="{{vehicle.photoHead}}" [alt]="vehicle.name" width="100" class="border rounded" /></td>
-                                <td pTooltip="{{vehicle.brand}}">{{vehicle.brand}}</td>
-                                <td pTooltip="{{vehicle.model}}">{{vehicle.model}}</td>
-                                <td pTooltip="{{vehicle.color}}">{{vehicle.color}}</td>
-                                <td pTooltip="{{vehicle.userId.firstName}}">{{vehicle.userId.firstName}} {{vehicle.userId.lastName}}</td>
-                                <td pTooltip="{{vehicle.price}}">{{vehicle.price}}</td>
-                                <td>
+                                <td class="text-center" pTooltip="{{vehicle.brand}}">{{vehicle.brand}}</td>
+                                <td class="text-center" pTooltip="{{vehicle.model}}">{{vehicle.model}}</td>
+                                <td class="text-center" pTooltip="{{vehicle.color}}">{{vehicle.color}}</td>
+                                <td class="text-center" pTooltip="{{vehicle.userId.firstName}}">{{vehicle.userId.firstName}} {{vehicle.userId.lastName}}</td>
+                                <td class="text-center" pTooltip="{{vehicle.price}}">{{vehicle.price}}</td>
+                                <td class="text-center">
                                     <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-outlined m-1" *ngIf="vehicle.codeStatus == true" (click)="onClickEditVehicle(vehicle.id)"></button>
                                     <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-outlined m-1" *ngIf="vehicle.codeStatus == true" (click)="showModalConfirmDelete(vehicle.id)"></button>
                                     <button pButton pRipple icon="pi pi-eye" class="p-button-rounded p-button-outlined m-1" *ngIf="vehicle.codeStatus == false"></button>

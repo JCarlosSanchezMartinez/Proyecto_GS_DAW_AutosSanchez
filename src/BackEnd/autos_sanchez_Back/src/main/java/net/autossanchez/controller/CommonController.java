@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 import net.autossanchez.entity.Municipality;
 import net.autossanchez.entity.PhotoVehicle;
 import net.autossanchez.entity.Provinces;
-import net.autossanchez.entity.User;
 import net.autossanchez.service.MunicipalityService;
 import net.autossanchez.service.PhotoVehicleService;
 import net.autossanchez.service.ProvincesService;
@@ -26,13 +25,13 @@ public class CommonController {
 
 	@Autowired
 	PhotoVehicleService photoVehicleService;
-	
+
 	@Autowired
 	ProvincesService provincesService;
-	
+
 	@Autowired
 	MunicipalityService municipalityService;
-	
+
 	/* Obtenemos todos las FOTOS de los VEHICULOS */
 
 	@GetMapping("/getPhotoList")
@@ -41,7 +40,7 @@ public class CommonController {
 
 		return new ResponseEntity(rest, HttpStatus.OK);
 	}
-	
+
 	/* Obtenemos todos las FOTOS de los VEHICULOS por ID */
 	@GetMapping("/photo/{id}")
 	public ResponseEntity<Object> getPhotoVehicleById(@PathVariable int id) {
@@ -57,7 +56,7 @@ public class CommonController {
 			return (ResponseEntity<Object>) ResponseEntity.notFound();
 		}
 	}
-	
+
 	/* Obtenemos todos las PROVINCIAS */
 	@GetMapping("/getProvinceList")
 	public ResponseEntity<Provinces> getProvincesList() {
@@ -65,7 +64,7 @@ public class CommonController {
 
 		return new ResponseEntity(rest, HttpStatus.OK);
 	}
-	
+
 	/* Obtenemos todos las PROVINCIAS por ID */
 	@GetMapping("/province/{id}")
 	public ResponseEntity<Object> getProvincesById(@PathVariable int id) {
@@ -81,7 +80,7 @@ public class CommonController {
 			return (ResponseEntity<Object>) ResponseEntity.notFound();
 		}
 	}
-		
+
 	/* Obtenemos todos las MUNICIPIOS */
 	@GetMapping("/getMunicipalityList")
 	public ResponseEntity<Municipality> getMunicipalityList() {
@@ -89,7 +88,7 @@ public class CommonController {
 
 		return new ResponseEntity(rest, HttpStatus.OK);
 	}
-	
+
 	/* Obtenemos todos las MUNICIPIOS por ID */
 	@GetMapping("/getMunicipality/{id}")
 	public ResponseEntity<Object> getMunicipalityById(@PathVariable int id) {
@@ -105,12 +104,12 @@ public class CommonController {
 			return (ResponseEntity<Object>) ResponseEntity.notFound();
 		}
 	}
-	
+
 	/* Obtenemos todos las MUNICIPIOS por ID de PROVINCIA */
 	@GetMapping("/getMunicipalityProvince/{id}")
 	public ResponseEntity<Object> getMunicipalityByProvinceId(@PathVariable int id) {
 		try {
-			
+
 			Provinces province = provincesService.getById(id).orElse(null);
 			List<Municipality> rest = municipalityService.getByProvinceId(province);
 
