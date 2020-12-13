@@ -72,13 +72,14 @@ export class SearchClientComponent implements OnInit {
     this.serviceUser.deleteUser(id).subscribe(
       data => { this.messageService.add({ severity: 'success', summary: 'Exito!', detail: 'Se ha BORRADO el Usuario correctamente.' }); }
     );
+    window.location.reload();
   }
 
   reactivate(id: number) {
     this.serviceUser.reactivateUser(id).subscribe(
       data => { this.messageService.add({ severity: 'success', summary: 'Exito!', detail: 'Se ha ACTIVADO el Usuario correctamente.' }); }
     );
-
+    window.location.reload();
   }
 
   ngOnInit(): void {

@@ -38,6 +38,7 @@ export class GalleryManagementComponent implements OnInit {
       { field: 'fuel', header: 'Combustible' },
       { field: 'sellDate', header: 'Matriculacion' },
       { field: 'price', header: 'Precio' },
+      { field: 'action', header: 'Acciones' },
     ];
   }
 

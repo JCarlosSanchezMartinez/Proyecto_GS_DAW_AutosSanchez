@@ -172,12 +172,14 @@ export class SearchVehicleComponent implements OnInit {
     this.serviceVehicle.deleteVehicle(id).subscribe(
       data => { this.messageService.add({ severity: 'success', summary: 'Exito!', detail: 'Se ha DESACTIVADO el Vehiculo correctamente.' });  }
     );
+    window.location.reload();
   }
 
   reactivate(id: number) {
     this.serviceVehicle.reactivateVehicle(id).subscribe(
       data => { this.messageService.add({ severity: 'success', summary: 'Exito!', detail: 'Se ha REACTIVADO el Vehiculo correctamente.' });  }
     );
+    window.location.reload();
   }
 
   showModalConfirmDelete(id: number) {

@@ -2,35 +2,40 @@
     <div class="row">
         <div class="col-lg-6">
             <div class="well well-sm">
-                <form class="" method="post">
+                <form [formGroup]="formContact" method="post">
                     <fieldset>
                         <legend class="text-xs-center header">Contactar</legend>
                         <div class="form-group">
                             <div class="col-md-10 offset-md-1">
-                                <input id="fname" name="name" type="text" placeholder="Nombre" class="form-control">
+                                <label>Nombre</label>
+                                <input formControlName="inputFirstName" id="fname" name="name" type="text" placeholder="Nombre" class="form-control">
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-md-10 offset-md-1">
-                                <input id="lname" name="name" type="text" placeholder="Apellidos" class="form-control">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-10 offset-md-1">
-                                <input id="email" name="email" type="text" placeholder="Email" class="form-control">
+                                <label>Apellidos</label>
+                                <input formControlName="inputLastName" id="lname" name="name" type="text" placeholder="Apellidos" class="form-control">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <div class="col-md-10 offset-md-1">
-                                <input id="phone" name="phone" type="text" placeholder="Telefono" class="form-control">
+                                <label>Email</label>
+                                <input formControlName="inputEmail" id="email" name="email" type="email" placeholder="Email" class="form-control">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <div class="col-md-10 offset-md-1">
-                                <textarea class="form-control" id="message" name="message" placeholder="Ingrese su mensaje aqui, nos pondremos en contacto con usted en la mayor brevedad" rows="7"></textarea>
+                                <label>Telefono</label>
+                                <input formControlName="inputPhone" id="phone" name="phone" type="text" placeholder="Telefono" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-10 offset-md-1">
+                                <label>Mensaje</label>
+                                <textarea formControlName="inputMessage" class="form-control" id="message" name="message" placeholder="Ingrese su mensaje aqui, nos pondremos en contacto con usted en la mayor brevedad" rows="7"></textarea>
                             </div>
                         </div>
                     </fieldset>
@@ -68,7 +73,7 @@
 
             <div class="form-group">
                 <div class="col-md-12 text-xs-center">
-                    <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+                    <button [disabled]="formContact.invalid" (click)="Mail()" class="btn btn-primary btn-lg">Enviar</button>
                 </div>
             </div>
         </div>

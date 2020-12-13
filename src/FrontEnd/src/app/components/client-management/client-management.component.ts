@@ -37,17 +37,17 @@ public loading = false;
 
   private buildFrom(){
     this.formEditUser = new FormGroup({});
-    this.formEditUser.addControl('inputDni', new FormControl('', Validators.required));
-    this.formEditUser.addControl('inputFirstName', new FormControl('', Validators.required));
-    this.formEditUser.addControl('inputLastName', new FormControl('', Validators.required));
-    this.formEditUser.addControl('inputAddress', new FormControl('', Validators.required));
-    this.formEditUser.addControl('selectProvince', new FormControl());
-    this.formEditUser.addControl('selectMunicipality', new FormControl());
-    this.formEditUser.addControl('inputPhone', new FormControl('', Validators.required));
-    this.formEditUser.addControl('inputEmail', new FormControl('', Validators.required));
-    this.formEditUser.addControl('inputUserName', new FormControl('', Validators.required));
-    this.formEditUser.addControl('inputPassWord', new FormControl('', Validators.required));
-    this.formEditUser.addControl('chkActiveStatus', new FormControl(''));
+    this.formEditUser.addControl('inputDni', new FormControl('',[Validators.required,Validators.maxLength(9)]));
+    this.formEditUser.addControl('inputFirstName', new FormControl(''));
+    this.formEditUser.addControl('inputLastName', new FormControl(''));
+    this.formEditUser.addControl('inputAddress', new FormControl(''));
+    this.formEditUser.addControl('selectProvince', new FormControl('', [Validators.required]));
+    this.formEditUser.addControl('selectMunicipality', new FormControl('', [Validators.required]));
+    this.formEditUser.addControl('inputPhone', new FormControl(''));
+    this.formEditUser.addControl('inputEmail', new FormControl('', [Validators.required, Validators.email, Validators.maxLength(100)]));
+    this.formEditUser.addControl('inputUserName', new FormControl('',[Validators.required]));
+    this.formEditUser.addControl('inputPassWord', new FormControl('',[Validators.required]));
+    this.formEditUser.addControl('chkActiveStatus', new FormControl(true));
   }
 
   constructor(private formBuilder: FormBuilder,

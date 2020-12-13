@@ -67,21 +67,21 @@ export class VehiculeManagementComponent implements OnInit {
   private buildFrom() {
     this.formEditVehicle = new FormGroup({});
     this.formEditVehicle.addControl('id', new FormControl());
-    this.formEditVehicle.addControl('inputNumberPlate', new FormControl());
-    this.formEditVehicle.addControl('inputVin', new FormControl());
-    this.formEditVehicle.addControl('inputBrand', new FormControl());
-    this.formEditVehicle.addControl('inputModel', new FormControl());
-    this.formEditVehicle.addControl('selectSellDate', new FormControl());
-    this.formEditVehicle.addControl('inputEngine', new FormControl());
-    this.formEditVehicle.addControl('inputFuel', new FormControl());
-    this.formEditVehicle.addControl('inputKms', new FormControl());
-    this.formEditVehicle.addControl('inputColor', new FormControl());
-    this.formEditVehicle.addControl('inputChasis', new FormControl());
-    this.formEditVehicle.addControl('inputPrice', new FormControl());
-    this.formEditVehicle.addControl('inputExtra', new FormControl());
-    this.formEditVehicle.addControl('chkActiveStatus', new FormControl());
-    this.formEditVehicle.addControl('chkActiveCarrousel', new FormControl());
-    this.formEditVehicle.addControl('SearchClient', new FormControl());
+    this.formEditVehicle.addControl('inputNumberPlate', new FormControl('', [Validators.required, Validators.maxLength(9)]));
+    this.formEditVehicle.addControl('inputVin', new FormControl('', [Validators.required , Validators.maxLength(17)]));
+    this.formEditVehicle.addControl('inputBrand', new FormControl('', [Validators.required]));
+    this.formEditVehicle.addControl('inputModel', new FormControl('', [Validators.required]));
+    this.formEditVehicle.addControl('selectSellDate', new FormControl('', [Validators.required]));
+    this.formEditVehicle.addControl('inputEngine', new FormControl('', [Validators.required]));
+    this.formEditVehicle.addControl('inputFuel', new FormControl('', [Validators.required]));
+    this.formEditVehicle.addControl('inputKms', new FormControl('', [Validators.required]));
+    this.formEditVehicle.addControl('inputColor', new FormControl('', [Validators.required]));
+    this.formEditVehicle.addControl('inputChasis', new FormControl('', [Validators.required]));
+    this.formEditVehicle.addControl('inputPrice', new FormControl('', [Validators.required]));
+    this.formEditVehicle.addControl('inputExtra', new FormControl('', [Validators.required, Validators.maxLength(120)]));
+    this.formEditVehicle.addControl('chkActiveStatus', new FormControl(true, [Validators.required]));
+    this.formEditVehicle.addControl('chkActiveCarrousel', new FormControl(false, [Validators.required]));
+    this.formEditVehicle.addControl('SearchClient', new FormControl('', [Validators.required]));
 
   }
 

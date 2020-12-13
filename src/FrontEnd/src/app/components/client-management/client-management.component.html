@@ -87,7 +87,7 @@
                 <div class="col-12 col-sm-auto">
                     <div class="form-row">
                         <div class="col">
-                            <button pButton icon="fas fa-save" type="button" label="Guardar" (click)="updateUser()" class="p-button m-1"></button>
+                            <button pButton [disabled]="formEditUser.invalid" icon="fas fa-save" type="button" label="Guardar" (click)="updateUser()" class="p-button m-1"></button>
                             <button pButton icon="fas fa-broom" type="button" label="Limpiar" (click)="cleanAllControls()" class="p-button-outlined m-1"></button>
                         </div>
                     </div>
