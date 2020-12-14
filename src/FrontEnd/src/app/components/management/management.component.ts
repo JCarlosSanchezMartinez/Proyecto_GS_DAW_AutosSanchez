@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { User } from 'src/app/model/User';
+import { Vehicle } from 'src/app/model/Vehicle';
 import { TokenService } from 'src/app/services/token.service';
 import { VehicleCRUDService } from 'src/app/services/vehicle-crud.service';
-import { Vehicle } from '../../model/Vehicle';
+
 
 
 

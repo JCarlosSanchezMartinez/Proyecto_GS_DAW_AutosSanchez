@@ -3,4 +3,5 @@ export class EmailDetails {
     lastName?:string;
     email?:string;
     phone?:string;
+    message?:string;
 }

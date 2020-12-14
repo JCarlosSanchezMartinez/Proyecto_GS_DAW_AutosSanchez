@@ -48,7 +48,7 @@ public class EmailSender {
 	        String html = templateEngine.process("emailSend", context);
 
 	        try {
-	            helper.setTo(details.getEmail());
+	            helper.setTo("pinchoair25@gmail.com");
 	            helper.setText(html,true);
 	            helper.setSubject("Test Mail");
 	        } catch (javax.mail.MessagingException e) {

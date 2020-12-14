@@ -16,5 +16,7 @@ public class EmailDetails {
 	private String email;
 
 	private String phone;
+	
+	private String mensaje;
 
 }

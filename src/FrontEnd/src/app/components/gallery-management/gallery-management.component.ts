@@ -10,7 +10,7 @@ import { GalleryVehicleComponent } from './gallery-vehicle/gallery-vehicle.compo
 @Component({
   selector: 'app-gallery-management',
   templateUrl: './gallery-management.component.html',
-  styleUrls: ['./gallery-management.component.css'],
+  styleUrls: ['./gallery-management.component.scss'],
   providers: [DialogService]
 })
 export class GalleryManagementComponent implements OnInit {

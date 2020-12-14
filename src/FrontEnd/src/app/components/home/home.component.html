@@ -1,5 +1,5 @@
-<div class="row px-0">
-    <div class="col-12 col-md-9 p-0 carrousel">
+<div class="row">
+    <div class="col-12 col-xl-9 p-0 carrousel">
         <ngb-carousel *ngIf="vehiclesDto" pauseOnFocus="true">
             <ng-template ngbSlide *ngFor="let vehicle of vehiclesDto">
                 <div class="row">
@@ -15,7 +15,7 @@
             </ng-template>
         </ngb-carousel>
     </div>
-    <div class="col-3 d-none d-lg-block  bg-dark p-0">
+    <div class="col-3 d-none d-xl-block  bg-dark p-0">
         <div class="row navContact">
             <div class="col-12">
                 <img src="assets/img/header.png" width="250" class="img-fluid px-5 pt-3">
@@ -44,7 +44,7 @@
     </div>
 
     <div class="col-12">
-        <p-carousel [value]="vehiclesDto" [numVisible]="8" [numScroll]="1" [circular]="true">
+        <p-carousel [value]="vehiclesDto" [responsiveOptions]="responsiveOptions" [numVisible]="4" [numScroll]="1" [circular]="true">
 
             <ng-template let-product pTemplate="item">
                 <div class="product-item p-1 ">

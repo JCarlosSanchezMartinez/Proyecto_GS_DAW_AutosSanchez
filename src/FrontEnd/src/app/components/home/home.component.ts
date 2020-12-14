@@ -18,7 +18,7 @@ import { GalleryVehicleComponent } from '../gallery-management/gallery-vehicle/g
 })
 export class HomeComponent implements OnInit {
   public loading = false;
-
+  public responsiveOptions;
   public images: PhotoVehicleDto[] = [];
   vehiclesDto:SearchVehicleDto[];
 
@@ -30,7 +30,23 @@ export class HomeComponent implements OnInit {
     private serviceVehicle:SearchVehicleDtoService,
     private router: Router,
     public dialogService: DialogService,
-    ) { 
+    ) {  this.responsiveOptions = [
+      {
+          breakpoint: '1024px',
+          numVisible: 6,
+          numScroll: 6
+      },
+      {
+          breakpoint: '768px',
+          numVisible: 6,
+          numScroll: 6
+      },
+      {
+          breakpoint: '560px',
+          numVisible: 4,
+          numScroll: 4
+      }
+  ];
 
   }
 

@@ -39,9 +39,10 @@ export class ContactComponent implements OnInit {
     this.dataset.lastName = this.formContact.controls.inputLastName.value;
     this.dataset.email = this.formContact.controls.inputEmail.value;
     this.dataset.phone = this.formContact.controls.inputPhone.value;
+    this.dataset.message = this.formContact.controls.inputMessage.value;
 
     this.serviceEmail.getdetails(this.dataset).subscribe(data => {
-      this.messageService.add({severity:'success', summary:'Exito!', detail:'Se ha creado el Usuario correctamente.'});
+      this.messageService.add({severity:'info', summary:'Exito!', detail:'Se ha Enviado el correo correctamente.'});
     });
 
   }

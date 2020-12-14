@@ -27,7 +27,7 @@
                     <configuration>
                         <path>/${project.build.finalName}</path>
                         <update>true</update>
-                        <url>http://localhost:8080/manager/text</url>
+                        <url>http://iesalixar.ddns.net:9094/autossanchezDES-1.0/manager/text</url>
                         <username>tomcat</username>
                         <password>tomcat321</password>
                     </configuration>
