@@ -12,7 +12,7 @@ export class EmailSendService {
 
   constructor(private http:HttpClient) { }
 
-  Url='http://localhost:8080/email/';
+  Url='http://localhost:8080/autossanchezDES-1.0/email/';
 
   // Devuelve todos los vehiculos
   getdetails(emailDetails:EmailDetails):Observable<EmailDetails>{

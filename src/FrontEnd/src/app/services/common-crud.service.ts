@@ -9,7 +9,7 @@ export class CommonCrudService {
 
   constructor(private http:HttpClient) { }
 
-  Url='http://localhost:8080/common';
+  Url='http://localhost:8080/autossanchezDES-1.0/common';
 
 
   //Municipios y Provincias

@@ -13,7 +13,7 @@ export class UserCrudService {
   user:User[];
   constructor(private http:HttpClient) { }
 
-  Url='http://localhost:8080/user';
+  Url='http://localhost:8080/autossanchezDES-1.0/user';
 
   getUserList(): Observable<any>{
 

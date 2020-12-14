@@ -9,7 +9,7 @@ import { User } from '../model/User';
   providedIn: 'root'
 })
 export class AuthService {
-  authURL='http://localhost:8080/auth';
+  authURL='http://localhost:8080/autossanchezDES-1.0/auth';
 
   constructor(private http:HttpClient) { }
 

@@ -8,7 +8,7 @@ import { PhotoVehicle } from '../model/PhotoVehicle';
 })
 export class PhotoVehicleService {
 
-  Url='http://localhost:8080/photoVehicle/';
+  Url='http://localhost:8080/autossanchezDES-1.0/photoVehicle/';
 
   constructor(private http:HttpClient) { }
 
